@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ruleset name="Voucher Manager">
+	<description>WordPress Coding Standards for Voucher Manager.</description>
+	<file>voucher-manager.php</file><file>src</file><file>tests</file>
+	<arg name="basepath" value="."/><arg name="colors"/><arg name="extensions" value="php"/><arg value="sp"/>
+	<rule ref="WordPress-Core"/><rule ref="WordPress-Docs"/><rule ref="WordPress-Extra"/>
+	<rule ref="PHPCompatibilityWP"><properties><property name="testVersion" value="8.1-"/></properties></rule>
+	<exclude-pattern>vendor/*</exclude-pattern>
+</ruleset>
