@@ -5,14 +5,14 @@ Professional management and distribution of unique voucher codes for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Early development  
-**Current milestone:** `0.1.0-alpha`  
+**Current milestone:** `0.1.0-alpha.2`  
 **Language:** English source strings with German translations planned from the start.
 
 ## Vision
 
 Voucher Manager will import, manage, distribute, monitor, and audit unique codes such as voucher and discount codes, licence keys, activation keys, download codes, and other one-time codes.
 
-## Sprint 1A
+## Sprint 1B
 
 This repository foundation includes a WordPress bootstrap, namespaced PHP classes, Composer autoloading, quality tooling, GitHub Actions, project documentation, and an initial admin dashboard placeholder.
 
