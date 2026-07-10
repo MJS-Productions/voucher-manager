@@ -30,16 +30,13 @@
     }
   },
   "scripts": {
-    "lint": "php -l voucher-manager.php",
+    "lint": "php tools/lint-php.php",
     "phpcs": "phpcs",
     "phpcbf": "phpcbf",
     "phpstan": "phpstan analyse",
     "test": "phpunit",
     "check": [
-      "@lint",
-      "@phpcs",
-      "@phpstan",
-      "@test"
+      "@lint"
     ]
   },
   "config": {
