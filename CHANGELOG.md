@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.4.0-alpha - The First Distribution
+
+### Added
+- Manual code distribution from active pools.
+- Atomic code claiming to prevent duplicate distribution.
+- Distribution logging and remaining-code count.
+- Distribution admin screen.
+- Bug Stories.
+
+### Fixed
+- WordPress update package identity.
+- Release package no longer requires missing Composer dependencies at runtime.
+
+# Changelog
+
 ## 0.3.0-alpha - The First Import
 
 ### Added

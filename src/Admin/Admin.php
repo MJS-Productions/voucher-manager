@@ -15,6 +15,7 @@ final class Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		( new PoolAdmin() )->register();
 		( new ImportAdmin() )->register();
+		( new DistributionAdmin() )->register();
 	}
 
 	public function register_menu(): void {

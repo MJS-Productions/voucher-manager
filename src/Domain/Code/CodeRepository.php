@@ -8,4 +8,7 @@ interface CodeRepository {
 	public function insert_batch( int $pool_id, int $import_id, array $codes ): int;
 	public function delete_available_by_import( int $import_id ): int;
 	public function count_assigned_by_import( int $import_id ): int;
+	/** @return array{id:int,code:string}|null */
+	public function claim_next_available( int $pool_id ): ?array;
+	public function count_available( int $pool_id ): int;
 }

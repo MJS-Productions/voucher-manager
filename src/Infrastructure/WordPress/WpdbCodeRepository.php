@@ -42,4 +42,54 @@ final class WpdbCodeRepository implements CodeRepository {
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE import_id = %d AND status != %s", $import_id, 'available' ) );
 	}
+
+	public function claim_next_available( int $pool_id ): ?array {
+		global $wpdb;
+		$table = $this->table();
+
+		// Keep selection and state transition in one transaction so concurrent
+		// requests cannot successfully claim the same available row.
+		$wpdb->query( 'START TRANSACTION' );
+		try {
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$row = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT id, code FROM {$table} WHERE pool_id = %d AND status = %s ORDER BY id ASC LIMIT 1 FOR UPDATE",
+					$pool_id,
+					'available'
+				),
+				ARRAY_A
+			);
+			if ( ! is_array( $row ) ) {
+				$wpdb->query( 'COMMIT' );
+				return null;
+			}
+
+			$updated = $wpdb->update(
+				$table,
+				array( 'status' => 'assigned', 'assigned_at' => current_time( 'mysql', true ) ),
+				array( 'id' => (int) $row['id'], 'status' => 'available' ),
+				array( '%s', '%s' ),
+				array( '%d', '%s' )
+			);
+			if ( 1 !== $updated ) {
+				$wpdb->query( 'ROLLBACK' );
+				return null;
+			}
+			$wpdb->query( 'COMMIT' );
+			return array( 'id' => (int) $row['id'], 'code' => (string) $row['code'] );
+		} catch ( \Throwable $exception ) {
+			$wpdb->query( 'ROLLBACK' );
+			throw $exception;
+		}
+	}
+
+	public function count_available( int $pool_id ): int {
+		global $wpdb;
+		$table = $this->table();
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return (int) $wpdb->get_var(
+			$wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE pool_id = %d AND status = %s", $pool_id, 'available' )
+		);
+	}
 }
