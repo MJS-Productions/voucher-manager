@@ -23,3 +23,15 @@ WordPress installed the first 0.4.0 package beside the existing plugin.
 The update package expected `vendor/autoload.php`, but the release ZIP did not contain Composer dependencies.
 
 **Lesson:** A release artifact must be self-contained and tested as an artifact, not only as source code.
+
+
+## VM-004 - The Quality Gate
+
+**Version:** 0.4.1-alpha
+
+**Status:** In progress
+
+The project introduced additional release discipline after the first distribution release.
+
+Lesson:
+A stable product needs repeatable release processes.

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.1-alpha - The Quality Patch
+
+### Added
+- Release hardening documentation.
+- Additional quality checks.
+
+### Fixed
+- Improved release preparation after 0.4.0-alpha.1 lessons.
+
+# Changelog
+
 ## 0.4.0-alpha - The First Distribution
 
 ### Added
