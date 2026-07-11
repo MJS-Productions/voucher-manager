@@ -128,3 +128,10 @@
 .voucher-manager__badge.is-active { background: #edfaef; color: #087a28; }
 .voucher-manager__badge.is-inactive { background: #f0f0f1; color: #50575e; }
 .voucher-manager__delete { color: #b32d2e; }
+
+.voucher-manager__metrics--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.voucher-manager__section-title { margin-top: 28px; }
+.voucher-manager__form select { min-width: 320px; }
+.voucher-manager__form input[type="file"] { display: block; margin-top: 8px; }
+@media (max-width: 960px) { .voucher-manager__metrics--four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 782px) { .voucher-manager__metrics--four { grid-template-columns: 1fr; } }

@@ -1,6 +1,6 @@
 {
   "name": "mjs512/voucher-manager",
-  "description": "Professional management and distribution of unique voucher codes for WordPress.",
+  "description": "Professional management and distribution of unique codes for WordPress.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
   "authors": [
@@ -45,5 +45,5 @@
     },
     "sort-packages": true
   },
-  "version": "0.2.0-alpha.1"
+  "version": "0.3.0-alpha"
 }

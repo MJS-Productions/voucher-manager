@@ -9,23 +9,15 @@ declare(strict_types=1);
 
 namespace VoucherManager\Database;
 
-/**
- * Produces WordPress-compatible SQL statements for dbDelta().
- */
 final class Schema {
-
-	/**
-	 * Return all table creation statements.
-	 *
-	 * @return array<string>
-	 */
+	/** @return array<string> */
 	public function statements(): array {
 		global $wpdb;
-
 		$charset_collate = $wpdb->get_charset_collate();
-		$pools            = $wpdb->prefix . 'vm_pools';
-		$codes            = $wpdb->prefix . 'vm_codes';
-		$logs             = $wpdb->prefix . 'vm_logs';
+		$pools   = $wpdb->prefix . 'vm_pools';
+		$imports = $wpdb->prefix . 'vm_imports';
+		$codes   = $wpdb->prefix . 'vm_codes';
+		$logs    = $wpdb->prefix . 'vm_logs';
 
 		return array(
 			"CREATE TABLE {$pools} (
@@ -41,9 +33,26 @@ final class Schema {
 				UNIQUE KEY slug (slug),
 				KEY status (status)
 			) {$charset_collate};",
+			"CREATE TABLE {$imports} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				pool_id bigint(20) unsigned NOT NULL,
+				filename varchar(255) NOT NULL,
+				file_type varchar(20) NOT NULL,
+				status varchar(20) NOT NULL DEFAULT 'processing',
+				total_rows int(10) unsigned NOT NULL DEFAULT 0,
+				imported_rows int(10) unsigned NOT NULL DEFAULT 0,
+				skipped_rows int(10) unsigned NOT NULL DEFAULT 0,
+				invalid_rows int(10) unsigned NOT NULL DEFAULT 0,
+				created_at datetime NOT NULL,
+				completed_at datetime NULL,
+				PRIMARY KEY  (id),
+				KEY pool_created (pool_id,created_at),
+				KEY status (status)
+			) {$charset_collate};",
 			"CREATE TABLE {$codes} (
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				pool_id bigint(20) unsigned NOT NULL,
+				import_id bigint(20) unsigned NULL,
 				code_hash char(64) NOT NULL,
 				code longtext NOT NULL,
 				status varchar(20) NOT NULL DEFAULT 'available',
@@ -52,6 +61,7 @@ final class Schema {
 				PRIMARY KEY  (id),
 				UNIQUE KEY pool_code (pool_id,code_hash),
 				KEY pool_status (pool_id,status),
+				KEY import_id (import_id),
 				KEY assigned_at (assigned_at)
 			) {$charset_collate};",
 			"CREATE TABLE {$logs} (
