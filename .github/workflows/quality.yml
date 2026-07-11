@@ -47,7 +47,7 @@ jobs:
 
       - name: Upload validated release artifact
         if: matrix.php == '8.4'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: voucher-manager-${{ github.sha }}
           path: dist/voucher-manager.zip
