@@ -1,55 +1,40 @@
 <?php
-/**
- * Recursively checks the syntax of project PHP files.
- *
- * @package VoucherManager
- */
-
 declare(strict_types=1);
 
-$project_root = dirname(__DIR__);
-$excluded     = array(
-	$project_root . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR,
-);
-
+$root = dirname(__DIR__);
 $iterator = new RecursiveIteratorIterator(
-	new RecursiveDirectoryIterator(
-		$project_root,
-		FilesystemIterator::SKIP_DOTS
-	)
+    new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS)
 );
 
-$failed  = false;
-$checked = 0;
+$failed = false;
+$count = 0;
 
 foreach ($iterator as $file) {
-	if (!$file instanceof SplFileInfo || 'php' !== strtolower($file->getExtension())) {
-		continue;
-	}
+    if (!$file instanceof SplFileInfo || 'php' !== strtolower($file->getExtension())) {
+        continue;
+    }
 
-	$path = $file->getPathname();
+    $path = $file->getPathname();
 
-	foreach ($excluded as $excluded_path) {
-		if (str_starts_with($path, $excluded_path)) {
-			continue 2;
-		}
-	}
+    if (str_contains($path, DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR)
+        || str_contains($path, DIRECTORY_SEPARATOR . 'dist' . DIRECTORY_SEPARATOR)) {
+        continue;
+    }
 
-	++$checked;
+    ++$count;
+    $command = escapeshellarg(PHP_BINARY) . ' -l ' . escapeshellarg($path);
+    exec($command, $output, $exitCode);
 
-	$command = escapeshellarg(PHP_BINARY) . ' -l ' . escapeshellarg($path);
-	exec($command, $output, $exit_code);
+    if (0 !== $exitCode) {
+        $failed = true;
+        fwrite(STDERR, implode(PHP_EOL, $output) . PHP_EOL);
+    }
 
-	if (0 !== $exit_code) {
-		$failed = true;
-		fwrite(STDERR, implode(PHP_EOL, $output) . PHP_EOL);
-	}
-
-	$output = array();
+    $output = [];
 }
 
 if ($failed) {
-	exit(1);
+    exit(1);
 }
 
-fwrite(STDOUT, sprintf("Syntax OK: %d PHP files checked.%s", $checked, PHP_EOL));
+fwrite(STDOUT, sprintf("PHP syntax OK: %d files checked.%s", $count, PHP_EOL));

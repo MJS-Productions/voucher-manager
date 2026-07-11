@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- Sprint 5 Part 2 quality workflow integration.
+- PHP 8.4 CI coverage.
+- Autoload, structure, header and release-artifact validation.
+- Validated release ZIP as a GitHub Actions artifact.
+
 ## 0.4.1-alpha - The Quality Patch
 
 ### Added
@@ -10,6 +18,14 @@
 - Improved release preparation after 0.4.0-alpha.1 lessons.
 
 # Changelog
+
+## Unreleased
+
+### Added
+- Sprint 5 Part 2 quality workflow integration.
+- PHP 8.4 CI coverage.
+- Autoload, structure, header and release-artifact validation.
+- Validated release ZIP as a GitHub Actions artifact.
 
 ## 0.4.0-alpha - The First Distribution
 
@@ -25,6 +41,14 @@
 - Release package no longer requires missing Composer dependencies at runtime.
 
 # Changelog
+
+## Unreleased
+
+### Added
+- Sprint 5 Part 2 quality workflow integration.
+- PHP 8.4 CI coverage.
+- Autoload, structure, header and release-artifact validation.
+- Validated release ZIP as a GitHub Actions artifact.
 
 ## 0.3.0-alpha - The First Import
 

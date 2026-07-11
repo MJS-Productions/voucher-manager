@@ -11,8 +11,8 @@ permissions:
   contents: read
 
 jobs:
-  syntax:
-    name: PHP syntax (${{ matrix.php }})
+  quality:
+    name: PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -22,6 +22,7 @@ jobs:
           - "8.1"
           - "8.2"
           - "8.3"
+          - "8.4"
 
     steps:
       - name: Check out repository
@@ -32,10 +33,23 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+          extensions: zip
           tools: composer:v2
 
       - name: Validate Composer metadata
-        run: composer validate --no-check-publish
+        run: composer validate --strict --no-check-publish
 
-      - name: Check PHP syntax
-        run: php tools/lint-php.php
+      - name: Install development dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Run quality gate
+        run: composer quality
+
+      - name: Upload validated release artifact
+        if: matrix.php == '8.4'
+        uses: actions/upload-artifact@v4
+        with:
+          name: voucher-manager-${{ github.sha }}
+          path: dist/voucher-manager.zip
+          if-no-files-found: error
+          retention-days: 14
