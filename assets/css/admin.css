@@ -116,3 +116,15 @@
 		gap: 6px;
 	}
 }
+
+
+.voucher-manager__table-card { margin-top: 18px; padding: 0; overflow: hidden; }
+.voucher-manager__table-card table { border: 0; }
+.voucher-manager__form { max-width: 720px; margin-top: 20px; }
+.voucher-manager__form label strong { display: block; margin-bottom: 7px; }
+.voucher-manager__form input[type="text"], .voucher-manager__form textarea { width: 100%; }
+.voucher-manager__form input[type="number"] { display: block; width: 140px; margin-bottom: 5px; }
+.voucher-manager__badge { display: inline-block; padding: 4px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.voucher-manager__badge.is-active { background: #edfaef; color: #087a28; }
+.voucher-manager__badge.is-inactive { background: #f0f0f1; color: #50575e; }
+.voucher-manager__delete { color: #b32d2e; }
