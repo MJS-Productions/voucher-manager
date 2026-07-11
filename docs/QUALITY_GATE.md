@@ -9,8 +9,9 @@ Voucher Manager must pass the quality gate before a release is considered publis
 3. Required plugin structure
 4. Plugin header and internal version consistency
 5. Autoload smoke test for critical classes
-6. Release ZIP build
-7. Release ZIP content and root-folder validation
+6. Golden path domain integration test
+7. Release ZIP build
+8. Release ZIP content and root-folder validation
 
 The validated ZIP is uploaded as a GitHub Actions artifact from the PHP 8.4 job.
 

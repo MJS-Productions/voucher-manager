@@ -25,3 +25,19 @@ Before publishing:
 6. Test TXT/CSV import.
 7. Test code distribution.
 8. Confirm no fatal errors or PHP warnings.
+
+## Golden path integration test
+
+The framework-free integration test runs with in-memory repositories and validates:
+
+```text
+pool creation -> TXT import -> duplicate handling -> two unique distributions -> empty-pool failure -> logs -> protected rollback
+```
+
+Run it directly:
+
+```bash
+php tests/Integration/GoldenPathTest.php
+```
+
+This test covers domain behaviour. It does not replace the manual WordPress upgrade and activation smoke test.

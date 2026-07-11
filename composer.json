@@ -28,9 +28,11 @@
       "@validate:structure",
       "@validate:header",
       "@test:autoload",
+      "@test:golden-path",
       "@build",
       "@validate:artifact"
-    ]
+    ],
+    "test:golden-path": "php tests/Integration/GoldenPathTest.php"
   },
   "config": {
     "sort-packages": true

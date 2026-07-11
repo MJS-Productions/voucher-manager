@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- Sprint 5 Part 3 golden path integration test.
+- Failure strategy for recoverable and unexpected errors.
+- Automated validation of import, distribution, logging and rollback protection.
 - Sprint 5 Part 2 quality workflow integration.
 - PHP 8.4 CI coverage.
 - Autoload, structure, header and release-artifact validation.
