@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.5.0-alpha - 2026-07-13
+
+**The Stable Foundation**
 
 ### Added
 - Sprint 5 Part 5 error boundaries and operational logging.

@@ -35,3 +35,39 @@ The project introduced additional release discipline after the first distributio
 
 Lesson:
 A stable product needs repeatable release processes.
+
+
+---
+
+## VM-007 — The Test That Remembered the Old Name
+
+**Status:** Fixed  
+**Discovered in:** Sprint 5 Part 5
+
+### Story
+
+Operational logging moved from the legacy event names `code_distributed` and
+`distribution_empty` to the stable vocabulary `distribution.completed` and
+`distribution.empty`.
+
+The application moved on. The Golden Path test did not.
+
+The Quality Gate stopped every supported PHP job with:
+
+`Golden path assertion failed: Each successful distribution must be logged.`
+
+### Root cause
+
+The production service used the new operational event vocabulary while the
+integration test still asserted the legacy event names.
+
+### Fix
+
+The Golden Path expectations were updated to the stable operational event names.
+
+### Lesson
+
+When a machine-readable vocabulary changes, application code and tests must move
+together. A green syntax check cannot detect semantic drift; an integration test can.
+
+> The application moved on. The test did not.
