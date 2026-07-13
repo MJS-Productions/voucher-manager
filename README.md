@@ -57,7 +57,8 @@ Official WordPress smoke tests should use the `voucher-manager.zip` artifact bui
 - `CHANGELOG.md` — release and unreleased development changes;
 - `BUG_STORIES.md` — notable project failures and lessons learned;
 - `docs/` — current technical and experience documentation;
-- `docs/adr/` — architecture decision records.
+- `docs/adr/` — architecture decision records;
+- `docs/SPRINT_6_RELEASE_READINESS.md` — Sprint 6 quality boundary, smoke-test matrix and release-review gate.
 
 ## Credits
 

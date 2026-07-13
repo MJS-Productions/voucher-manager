@@ -22,9 +22,12 @@
 - Automated pool experience test, ADR 0011 and pool experience documentation.
 - Sprint 6 Part 1 navigation, dashboard metrics, quick actions and recent operational activity.
 - Automated dashboard experience test, ADR 0010 and dashboard documentation.
+- Sprint 6 final hardening coverage for event-vocabulary presentation, documentation consistency and release-readiness boundaries.
+- Sprint 6 release-readiness documentation and smoke-test matrix.
 
 ### Changed
 - Renamed the duplicated Voucher Manager submenu item to Dashboard.
+- Consolidated the changelog into one chronological document without duplicated headings or stale Unreleased sections.
 
 ### Fixed
 - Dashboard Recent Activity loading now preserves dots in stable event names so human-readable labels resolve correctly.
@@ -42,21 +45,12 @@
 - Privacy-aware context sanitization.
 - Automated operational logging integration test.
 - ADR 0009 and operational logging documentation.
-
-
-### Added
 - Sprint 5 Part 4 centralized code-state model.
-- CodeStateMachine with explicit allowed transitions.
-- Automated state-integrity test.
-- ADR 0008 and state-model documentation.
-
-
-### Added
-- Sprint 5 Part 3 golden path integration test.
-- Failure strategy for recoverable and unexpected errors.
-- Automated validation of import, distribution, logging and rollback protection.
+- `CodeStateMachine` with explicit allowed transitions.
+- Automated state-integrity test and ADR 0008.
+- Sprint 5 Part 3 Golden Path integration coverage for pool, import, distribution, logging and protected rollback.
 - Sprint 5 Part 2 quality workflow integration.
-- PHP 8.4 CI coverage.
+- PHP 8.4 CI coverage in addition to PHP 8.1–8.3.
 - Autoload, structure, header and release-artifact validation.
 - Validated release ZIP as a GitHub Actions artifact.
 
@@ -67,17 +61,7 @@
 - Additional quality checks.
 
 ### Fixed
-- Improved release preparation after 0.4.0-alpha.1 lessons.
-
-# Changelog
-
-## Unreleased
-
-### Added
-- Sprint 5 Part 2 quality workflow integration.
-- PHP 8.4 CI coverage.
-- Autoload, structure, header and release-artifact validation.
-- Validated release ZIP as a GitHub Actions artifact.
+- Improved release preparation after the 0.4.0-alpha lessons.
 
 ## 0.4.0-alpha - The First Distribution
 
@@ -92,37 +76,19 @@
 - WordPress update package identity.
 - Release package no longer requires missing Composer dependencies at runtime.
 
-# Changelog
-
-## Unreleased
-
-### Added
-- Sprint 5 Part 2 quality workflow integration.
-- PHP 8.4 CI coverage.
-- Autoload, structure, header and release-artifact validation.
-- Validated release ZIP as a GitHub Actions artifact.
-
 ## 0.3.0-alpha - The First Import
 
 ### Added
-
 - Streaming TXT import with one code per line.
 - CSV import using the first column with common delimiter detection.
 - Duplicate prevention inside files and existing pools.
 - Bounded database batches for large imports.
-- Import history, statistics, logging, and reversible imports.
+- Import history, statistics, logging and reversible imports.
 - Database schema version 2 with import records.
 - Import dashboard metric and administration page.
 - Import architecture and branding ADRs.
 
 ## 0.2.0-alpha.1 - The First Pool
 
+### Added
 - Pool administration and database lifecycle.
-
-## Unreleased — Sprint 6 Part 3
-
-- Fixed Dashboard Recent Activity labels for pool lifecycle events and added privacy-safe import result details.
-- Added guided TXT/CSV import instructions and destination-pool inventory context.
-- Added clearer import result summaries and centralized import-history presentation.
-- Replaced GET/browser-confirm rollback with a dedicated review page and confirmed POST execution.
-- Added Import Experience integration coverage to the Quality Gate.
