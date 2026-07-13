@@ -1,0 +1,56 @@
+<?php
+/**
+ * Distribution presentation rules.
+ *
+ * @package VoucherManager
+ */
+
+declare(strict_types=1);
+
+namespace VoucherManager\Admin;
+
+use VoucherManager\Domain\Pool\Pool;
+
+/**
+ * Keeps manual-distribution guidance and inventory presentation out of templates.
+ */
+final class DistributionViewModel {
+
+	/**
+	 * @param array{pool:Pool,total:int,available:int,assigned:int} $row Pool inventory row.
+	 */
+	public function pool_option_label( array $row ): string {
+		return sprintf(
+			__( '%1$s — %2$d available, %3$d total', 'voucher-manager' ),
+			$row['pool']->name(),
+			$row['available'],
+			$row['total']
+		);
+	}
+
+	/**
+	 * @param array{pool:Pool,total:int,available:int,assigned:int} $row Pool inventory row.
+	 */
+	public function can_distribute( array $row ): bool {
+		return $row['pool']->is_active() && 0 < $row['available'];
+	}
+
+	public function remaining_message( int $remaining ): string {
+		if ( 0 === $remaining ) {
+			return __( 'This pool is now empty. Import more codes before the next distribution.', 'voucher-manager' );
+		}
+
+		if ( 1 === $remaining ) {
+			return __( '1 code remains available in this pool.', 'voucher-manager' );
+		}
+
+		return sprintf(
+			__( '%d codes remain available in this pool.', 'voucher-manager' ),
+			$remaining
+		);
+	}
+
+	public function result_tone( int $remaining ): string {
+		return 0 === $remaining ? 'warning' : 'success';
+	}
+}

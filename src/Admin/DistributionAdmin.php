@@ -25,6 +25,8 @@ final class DistributionAdmin {
 	private WpdbPoolRepository $pools;
 	private DistributionService $service;
 	private ErrorBoundary $boundary;
+	private PoolOverviewData $overview;
+	private DistributionViewModel $view;
 
 	public function __construct() {
 		$logger         = new OperationalLogger( new WpdbLogRepository() );
@@ -35,6 +37,8 @@ final class DistributionAdmin {
 			$logger
 		);
 		$this->boundary = new ErrorBoundary( $logger );
+		$this->overview = new PoolOverviewData();
+		$this->view     = new DistributionViewModel();
 	}
 
 	public function register(): void {
@@ -56,11 +60,13 @@ final class DistributionAdmin {
 	public function render(): void {
 		$this->guard();
 
-		$pools = $this->boundary->execute(
-			fn(): array => array_values(
-				array_filter(
-					$this->pools->all(),
-					static fn( $pool ): bool => $pool->is_active()
+		$pool_rows = $this->boundary->execute(
+			fn(): array => $this->overview->rows(
+				array_values(
+					array_filter(
+						$this->pools->all(),
+						static fn( $pool ): bool => $pool->is_active()
+					)
 				)
 			),
 			array(),
@@ -69,6 +75,7 @@ final class DistributionAdmin {
 				'source' => 'manual',
 			)
 		);
+		$view = $this->view;
 
 		$template = VOUCHER_MANAGER_PATH . 'templates/admin/distribution.php';
 
@@ -106,6 +113,7 @@ final class DistributionAdmin {
 				'code'      => $result->code(),
 				'message'   => $result->message(),
 				'remaining' => $result->remaining(),
+				'pool_id'   => $pool_id,
 			),
 			MINUTE_IN_SECONDS
 		);

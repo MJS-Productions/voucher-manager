@@ -1,40 +1,32 @@
 # Changelog
-- Fixed Dashboard Recent Activity event loading so stable dotted event names retain their dots and resolve to human-readable labels.
 
 ## Unreleased
 
-### Fixed
-- Added the missing dedicated confirmation step before deleting available codes.
-- Added regression coverage that rejects direct or unacknowledged available-code deletion.
-
 ### Added
+- Sprint 6 Part 4 distribution experience with inventory-aware pool selection.
+- One-time distribution result presentation with an explicit copy action and remaining-inventory guidance.
+- Guided empty-inventory state linking administrators back to Import.
+- Automated distribution experience test, ADR 0014 and distribution experience documentation.
+- Sprint 6 Part 3 guided import experience, human-readable result summaries and safe rollback review.
+- Automated import experience test, ADR 0013 and import experience documentation.
 - Sprint 6 Part 2.1 pool lifecycle and dedicated Danger Zone.
 - Scoped deletion of available codes with privacy-safe operational logging.
 - Atomic full pool deletion for pool, codes and import records with rollback on failure.
 - Exact pool-name confirmation for permanent full deletion.
 - Automated pool lifecycle integrity test and ADR 0012.
-
-
-### Added
-- Sprint 6 Part 2 pool experience.
-- Pool inventory overview with available, distributed and total code counts.
-- Ready, low-stock, empty and inactive pool presentation states.
-- Context-aware pool actions and a guided empty state.
-- Automated pool experience test.
-- ADR 0011 and pool experience documentation.
-
-
-### Added
-- Sprint 6 Part 1 navigation and dashboard experience.
-- Dashboard inventory metrics for available and distributed codes.
-- Quick actions for pool creation, import and distribution.
-- Human-readable recent operational activity.
-- Automated dashboard experience test.
-- ADR 0010 and dashboard documentation.
+- Sprint 6 Part 2 pool experience with inventory overview and centralized presentation states.
+- Automated pool experience test, ADR 0011 and pool experience documentation.
+- Sprint 6 Part 1 navigation, dashboard metrics, quick actions and recent operational activity.
+- Automated dashboard experience test, ADR 0010 and dashboard documentation.
 
 ### Changed
 - Renamed the duplicated Voucher Manager submenu item to Dashboard.
 
+### Fixed
+- Dashboard Recent Activity loading now preserves dots in stable event names so human-readable labels resolve correctly.
+- Dashboard activity mappings now cover pool lifecycle events and privacy-safe import result details.
+- Added the missing dedicated confirmation step before deleting available codes.
+- Added regression coverage that rejects direct or unacknowledged available-code deletion.
 
 ## 0.5.0-alpha - 2026-07-13
 
