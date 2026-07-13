@@ -41,3 +41,11 @@ php tests/Integration/GoldenPathTest.php
 ```
 
 This test covers domain behaviour. It does not replace the manual WordPress upgrade and activation smoke test.
+
+## State integrity
+
+```bash
+composer test:state-integrity
+```
+
+This verifies allowed and forbidden code lifecycle transitions.

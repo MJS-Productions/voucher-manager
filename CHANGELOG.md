@@ -3,6 +3,13 @@
 ## Unreleased
 
 ### Added
+- Sprint 5 Part 4 centralized code-state model.
+- CodeStateMachine with explicit allowed transitions.
+- Automated state-integrity test.
+- ADR 0008 and state-model documentation.
+
+
+### Added
 - Sprint 5 Part 3 golden path integration test.
 - Failure strategy for recoverable and unexpected errors.
 - Automated validation of import, distribution, logging and rollback protection.

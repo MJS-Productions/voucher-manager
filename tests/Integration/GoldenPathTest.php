@@ -8,6 +8,8 @@
 declare(strict_types=1);
 
 use VoucherManager\Domain\Code\CodeRepository;
+use VoucherManager\Domain\Code\CodeStateMachine;
+use VoucherManager\Domain\Code\CodeStatus;
 use VoucherManager\Domain\Distribution\DistributionService;
 use VoucherManager\Domain\Import\ImportRecord;
 use VoucherManager\Domain\Import\ImportRepository;
@@ -137,7 +139,7 @@ final class MemoryCodeRepository implements CodeRepository {
                 if ($existing['code'] === $code) { continue 2; }
             }
             $id = $this->nextId++;
-            $this->codes[$id] = compact('id', 'pool_id', 'import_id', 'code') + ['status' => 'available'];
+            $this->codes[$id] = compact('id', 'pool_id', 'import_id', 'code') + ['status' => CodeStatus::AVAILABLE->value];
             ++$inserted;
         }
         return $inserted;
@@ -146,7 +148,7 @@ final class MemoryCodeRepository implements CodeRepository {
     public function delete_available_by_import(int $import_id): int {
         $deleted = 0;
         foreach ($this->codes as $id => $row) {
-            if ($row['import_id'] === $import_id && 'available' === $row['status']) {
+            if ($row['import_id'] === $import_id && CodeStatus::AVAILABLE->value === $row['status']) {
                 unset($this->codes[$id]);
                 ++$deleted;
             }
@@ -157,14 +159,16 @@ final class MemoryCodeRepository implements CodeRepository {
     public function count_assigned_by_import(int $import_id): int {
         return count(array_filter(
             $this->codes,
-            static fn(array $row): bool => $row['import_id'] === $import_id && 'assigned' === $row['status']
+            static fn(array $row): bool => $row['import_id'] === $import_id && CodeStatus::ASSIGNED->value === $row['status']
         ));
     }
 
     public function claim_next_available(int $pool_id): ?array {
+        (new CodeStateMachine())->assert_transition(CodeStatus::AVAILABLE, CodeStatus::ASSIGNED);
+
         foreach ($this->codes as $id => $row) {
-            if ($row['pool_id'] === $pool_id && 'available' === $row['status']) {
-                $this->codes[$id]['status'] = 'assigned';
+            if ($row['pool_id'] === $pool_id && CodeStatus::AVAILABLE->value === $row['status']) {
+                $this->codes[$id]['status'] = CodeStatus::ASSIGNED->value;
                 return ['id' => $id, 'code' => $row['code']];
             }
         }
@@ -174,7 +178,7 @@ final class MemoryCodeRepository implements CodeRepository {
     public function count_available(int $pool_id): int {
         return count(array_filter(
             $this->codes,
-            static fn(array $row): bool => $row['pool_id'] === $pool_id && 'available' === $row['status']
+            static fn(array $row): bool => $row['pool_id'] === $pool_id && CodeStatus::AVAILABLE->value === $row['status']
         ));
     }
 }

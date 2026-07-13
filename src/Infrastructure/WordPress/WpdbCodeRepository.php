@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace VoucherManager\Infrastructure\WordPress;
 
 use VoucherManager\Domain\Code\CodeRepository;
+use VoucherManager\Domain\Code\CodeStateMachine;
+use VoucherManager\Domain\Code\CodeStatus;
 
 final class WpdbCodeRepository implements CodeRepository {
 	private function table(): string { global $wpdb; return $wpdb->prefix . 'vm_codes'; }
@@ -20,7 +22,7 @@ final class WpdbCodeRepository implements CodeRepository {
 			$args[] = $import_id;
 			$args[] = hash( 'sha256', $code );
 			$args[] = $code;
-			$args[] = 'available';
+			$args[] = CodeStatus::AVAILABLE->value;
 			$args[] = $now;
 		}
 		$table = $this->table();
@@ -32,7 +34,7 @@ final class WpdbCodeRepository implements CodeRepository {
 
 	public function delete_available_by_import( int $import_id ): int {
 		global $wpdb;
-		$result = $wpdb->delete( $this->table(), array( 'import_id' => $import_id, 'status' => 'available' ), array( '%d', '%s' ) );
+		$result = $wpdb->delete( $this->table(), array( 'import_id' => $import_id, 'status' => CodeStatus::AVAILABLE->value ), array( '%d', '%s' ) );
 		return false === $result ? 0 : (int) $result;
 	}
 
@@ -40,10 +42,12 @@ final class WpdbCodeRepository implements CodeRepository {
 		global $wpdb;
 		$table = $this->table();
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE import_id = %d AND status != %s", $import_id, 'available' ) );
+		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE import_id = %d AND status != %s", $import_id, CodeStatus::AVAILABLE->value ) );
 	}
 
 	public function claim_next_available( int $pool_id ): ?array {
+		( new CodeStateMachine() )->assert_transition( CodeStatus::AVAILABLE, CodeStatus::ASSIGNED );
+
 		global $wpdb;
 		$table = $this->table();
 
@@ -56,7 +60,7 @@ final class WpdbCodeRepository implements CodeRepository {
 				$wpdb->prepare(
 					"SELECT id, code FROM {$table} WHERE pool_id = %d AND status = %s ORDER BY id ASC LIMIT 1 FOR UPDATE",
 					$pool_id,
-					'available'
+					CodeStatus::AVAILABLE->value
 				),
 				ARRAY_A
 			);
@@ -67,8 +71,8 @@ final class WpdbCodeRepository implements CodeRepository {
 
 			$updated = $wpdb->update(
 				$table,
-				array( 'status' => 'assigned', 'assigned_at' => current_time( 'mysql', true ) ),
-				array( 'id' => (int) $row['id'], 'status' => 'available' ),
+				array( 'status' => CodeStatus::ASSIGNED->value, 'assigned_at' => current_time( 'mysql', true ) ),
+				array( 'id' => (int) $row['id'], 'status' => CodeStatus::AVAILABLE->value ),
 				array( '%s', '%s' ),
 				array( '%d', '%s' )
 			);
@@ -89,7 +93,7 @@ final class WpdbCodeRepository implements CodeRepository {
 		$table = $this->table();
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		return (int) $wpdb->get_var(
-			$wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE pool_id = %d AND status = %s", $pool_id, 'available' )
+			$wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE pool_id = %d AND status = %s", $pool_id, CodeStatus::AVAILABLE->value )
 		);
 	}
 }
