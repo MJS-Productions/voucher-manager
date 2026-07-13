@@ -32,6 +32,7 @@ final class InventoryAdmin {
 
 	public function register(): void {
 		add_action( 'admin_menu', array( $this, 'register_page' ) );
+		add_action( 'admin_head', array( $this, 'hide_menu_entry' ) );
 		add_filter( 'parent_file', array( $this, 'highlight_parent_menu' ) );
 		add_filter( 'submenu_file', array( $this, 'highlight_pools_submenu' ), 10, 2 );
 	}
@@ -45,10 +46,22 @@ final class InventoryAdmin {
 			'voucher-manager-inventory',
 			array( $this, 'render' )
 		);
-
-		remove_submenu_page( 'voucher-manager', 'voucher-manager-inventory' );
 	}
 
+
+
+	/**
+	 * Hide the registered Inventory submenu entry without removing page access.
+	 */
+	public function hide_menu_entry(): void {
+		?>
+		<style>
+			#toplevel_page_voucher-manager .wp-submenu a[href="admin.php?page=voucher-manager-inventory"] {
+				display: none;
+			}
+		</style>
+		<?php
+	}
 
 	/**
 	 * Keep the Voucher Manager menu expanded on the hidden Inventory detail page.

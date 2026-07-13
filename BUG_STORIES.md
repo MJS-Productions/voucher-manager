@@ -147,7 +147,7 @@ Pool Inventory was correctly registered as a hidden WordPress administration det
 
 ### Fix
 
-The Inventory page now registers under the real Voucher Manager parent, is immediately removed from the visible submenu, and retains the Pools highlight through the standard WordPress menu filters. WordPress therefore knows the page hierarchy even though the detail page remains hidden.
+The Inventory page now remains registered under the real Voucher Manager parent so WordPress access checks succeed. Its submenu link is hidden visually instead of being removed from the registered menu structure, while the Pools highlight remains controlled through the standard menu filters.
 
 ### Lesson
 

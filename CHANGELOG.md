@@ -3,7 +3,7 @@
 ## Unreleased
 
 ### Fixed
-- Kept the Voucher Manager menu expanded and Pools highlighted by registering Inventory under its real parent before hiding the submenu entry.
+- Kept Inventory accessible while preserving Voucher Manager → Pools context by hiding its registered submenu link visually instead of removing the page registration.
 
 ### Added
 - Sprint 7 Part 2 read-only Pool Inventory screen.
