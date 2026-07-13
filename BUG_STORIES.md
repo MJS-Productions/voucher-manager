@@ -128,3 +128,27 @@ The fix preserves the stable dotted vocabulary with `sanitize_text_field()` and 
 Lesson:
 
 > A correct mapping cannot recognize a name that was changed before it arrived.
+
+
+---
+
+## VM-012 — The Inventory That Left the Menu
+
+**Status:** Fixed  
+**Discovered in:** Sprint 7 Part 2 WordPress smoke test
+
+### Story
+
+Pool Inventory was correctly registered as a hidden WordPress administration detail page. When an administrator opened it through `View inventory`, WordPress no longer knew that the screen belonged to Voucher Manager → Pools. The parent menu collapsed and the current section lost its highlight.
+
+### Root cause
+
+`add_submenu_page( null, ... )` intentionally hid the Inventory page, but no `parent_file` or `submenu_file` mapping restored its logical menu context.
+
+### Fix
+
+The hidden Inventory page now maps itself to the Voucher Manager parent and the Pools submenu through the standard WordPress menu filters. Inventory remains hidden while navigation context stays visible.
+
+### Lesson
+
+A hidden detail page still needs a visible home in the administration information architecture.

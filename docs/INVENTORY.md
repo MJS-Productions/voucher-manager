@@ -52,3 +52,14 @@ Inventory uses 50 rows per page and deterministic newest-first ordering by inter
 ## Quality protection
 
 `tests/Integration/InventoryExperienceTest.php` protects pool scoping, filter allowlisting, pagination bounds, masking, template privacy and the no-migration decision.
+
+
+## WordPress navigation context
+
+Inventory is registered as a hidden administration detail page, so it does not add another permanent submenu item.
+
+While Inventory is open:
+
+- the Voucher Manager parent menu remains expanded;
+- Pools remains highlighted as the logical parent section;
+- the Inventory page remains reachable only through pool-specific `View inventory` links.

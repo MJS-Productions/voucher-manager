@@ -32,6 +32,8 @@ final class InventoryAdmin {
 
 	public function register(): void {
 		add_action( 'admin_menu', array( $this, 'register_page' ) );
+		add_filter( 'parent_file', array( $this, 'highlight_parent_menu' ) );
+		add_filter( 'submenu_file', array( $this, 'highlight_pools_submenu' ), 10, 2 );
 	}
 
 	public function register_page(): void {
@@ -43,6 +45,31 @@ final class InventoryAdmin {
 			'voucher-manager-inventory',
 			array( $this, 'render' )
 		);
+	}
+
+
+	/**
+	 * Keep the Voucher Manager menu expanded on the hidden Inventory detail page.
+	 */
+	public function highlight_parent_menu( string $parent_file ): string {
+		global $plugin_page;
+
+		return 'voucher-manager-inventory' === $plugin_page
+			? 'voucher-manager'
+			: $parent_file;
+	}
+
+	/**
+	 * Keep Pools highlighted while viewing a hidden pool Inventory detail page.
+	 */
+	public function highlight_pools_submenu( ?string $submenu_file, string $parent_file ): ?string {
+		global $plugin_page;
+
+		unset( $parent_file );
+
+		return 'voucher-manager-inventory' === $plugin_page
+			? 'voucher-manager-pools'
+			: $submenu_file;
 	}
 
 	public function render(): void {

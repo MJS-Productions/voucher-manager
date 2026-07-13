@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Fixed
+- Kept the Voucher Manager menu expanded and Pools highlighted on hidden Pool Inventory detail pages.
+
 ### Added
 - Sprint 7 Part 2 read-only Pool Inventory screen.
 - Pool-scoped masked references, state and import provenance visibility.
