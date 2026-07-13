@@ -32,3 +32,10 @@ Rules:
 ## Release response
 
 A failed quality-gate check blocks release. A failed manual WordPress smoke test blocks the GitHub release even when CI is green.
+
+## Technical error boundaries
+
+Unexpected exceptions at WordPress administrative entry points are handled by
+`ErrorBoundary`. The user receives a safe message, while a sanitized operational
+event is recorded. Logging failures are contained and never replace the
+original controlled response with another fatal error.

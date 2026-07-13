@@ -13,6 +13,7 @@ use RuntimeException;
 use Throwable;
 use VoucherManager\Domain\Code\CodeRepository;
 use VoucherManager\Domain\Log\LogRepository;
+use VoucherManager\Domain\Log\OperationalEvent;
 use VoucherManager\Support\CodeFileParser;
 
 final class ImportService {
@@ -62,7 +63,7 @@ final class ImportService {
 			$skipped = max( 0, $total - $invalid - $imported );
 			$this->imports->complete( $import_id, $total, $imported, $skipped, $invalid );
 			$this->logs->add(
-				'import.completed',
+				OperationalEvent::IMPORT_COMPLETED->value,
 				'Code import completed.',
 				array( 'import_id' => $import_id, 'pool_id' => $pool_id, 'imported' => $imported, 'skipped' => $skipped, 'invalid' => $invalid )
 			);
@@ -70,7 +71,7 @@ final class ImportService {
 		} catch ( Throwable $exception ) {
 			$skipped = max( 0, $total - $invalid - $imported );
 			$this->imports->fail( $import_id, $total, $imported, $skipped, $invalid );
-			$this->logs->add( 'import.failed', 'Code import failed.', array( 'import_id' => $import_id, 'pool_id' => $pool_id ) );
+			$this->logs->add( OperationalEvent::IMPORT_FAILED->value, 'Code import failed.', array( 'import_id' => $import_id, 'pool_id' => $pool_id ) );
 			throw $exception;
 		}
 	}
@@ -81,7 +82,7 @@ final class ImportService {
 		}
 		$deleted = $this->codes->delete_available_by_import( $import_id );
 		$this->imports->mark_rolled_back( $import_id );
-		$this->logs->add( 'import.rolled_back', 'Code import rolled back.', array( 'import_id' => $import_id, 'deleted' => $deleted ) );
+		$this->logs->add( OperationalEvent::IMPORT_ROLLED_BACK->value, 'Code import rolled back.', array( 'import_id' => $import_id, 'deleted' => $deleted ) );
 		return $deleted;
 	}
 }

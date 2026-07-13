@@ -5,6 +5,7 @@ namespace VoucherManager\Domain\Distribution;
 
 use VoucherManager\Domain\Code\CodeRepository;
 use VoucherManager\Domain\Log\LogRepository;
+use VoucherManager\Domain\Log\OperationalEvent;
 use VoucherManager\Domain\Pool\PoolRepository;
 
 final class DistributionService {
@@ -22,13 +23,13 @@ final class DistributionService {
 
 		$claimed = $this->codes->claim_next_available( $pool_id );
 		if ( null === $claimed ) {
-			$this->logs->add( 'distribution_empty', 'No available code could be distributed.', array( 'pool_id' => $pool_id ) );
+			$this->logs->add( OperationalEvent::DISTRIBUTION_EMPTY->value, 'No available code could be distributed.', array( 'pool_id' => $pool_id ) );
 			return new DistributionResult( false, null, 'No available codes remain in this pool.', 0 );
 		}
 
 		$remaining = $this->codes->count_available( $pool_id );
 		$this->logs->add(
-			'code_distributed',
+			OperationalEvent::DISTRIBUTION_COMPLETED->value,
 			'An available code was distributed.',
 			array( 'pool_id' => $pool_id, 'code_id' => $claimed['id'], 'remaining' => $remaining )
 		);

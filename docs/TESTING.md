@@ -49,3 +49,12 @@ composer test:state-integrity
 ```
 
 This verifies allowed and forbidden code lifecycle transitions.
+
+## Operational logging and error boundaries
+
+```bash
+composer test:operational-logging
+```
+
+This verifies privacy-safe context, controlled exception handling and resilient
+logging.

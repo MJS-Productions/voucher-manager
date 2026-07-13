@@ -30,11 +30,13 @@
       "@test:autoload",
       "@test:golden-path",
       "@test:state-integrity",
+      "@test:operational-logging",
       "@build",
       "@validate:artifact"
     ],
     "test:golden-path": "php tests/Integration/GoldenPathTest.php",
-    "test:state-integrity": "php tests/Integration/CodeStateIntegrityTest.php"
+    "test:state-integrity": "php tests/Integration/CodeStateIntegrityTest.php",
+    "test:operational-logging": "php tests/Integration/OperationalLoggingTest.php"
   },
   "config": {
     "sort-packages": true

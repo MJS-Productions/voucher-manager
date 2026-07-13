@@ -3,6 +3,14 @@
 ## Unreleased
 
 ### Added
+- Sprint 5 Part 5 error boundaries and operational logging.
+- Stable operational event and severity vocabularies.
+- Privacy-aware context sanitization.
+- Automated operational logging integration test.
+- ADR 0009 and operational logging documentation.
+
+
+### Added
 - Sprint 5 Part 4 centralized code-state model.
 - CodeStateMachine with explicit allowed transitions.
 - Automated state-integrity test.
