@@ -33,6 +33,7 @@
       "@test:operational-logging",
       "@test:dashboard-experience",
       "@test:pool-experience",
+      "@test:pool-lifecycle-integrity",
       "@build",
       "@validate:artifact"
     ],
@@ -40,7 +41,8 @@
     "test:state-integrity": "php tests/Integration/CodeStateIntegrityTest.php",
     "test:operational-logging": "php tests/Integration/OperationalLoggingTest.php",
     "test:dashboard-experience": "php tests/Integration/DashboardExperienceTest.php",
-    "test:pool-experience": "php tests/Integration/PoolExperienceTest.php"
+    "test:pool-experience": "php tests/Integration/PoolExperienceTest.php",
+    "test:pool-lifecycle-integrity": "php tests/Integration/PoolLifecycleIntegrityTest.php"
   },
   "config": {
     "sort-packages": true

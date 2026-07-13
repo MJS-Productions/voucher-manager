@@ -26,7 +26,7 @@ $messages = array(
 	'status'         => __( 'Pool status updated.', 'voucher-manager' ),
 	'invalid'        => __( 'Please enter a pool name.', 'voucher-manager' ),
 	'error'          => __( 'The operation could not be completed.', 'voucher-manager' ),
-	'delete_blocked' => __( 'This pool cannot be deleted while it contains codes.', 'voucher-manager' ),
+	'available_deleted' => __( 'Available codes permanently deleted.', 'voucher-manager' ),
 );
 
 $view_model = new PoolViewModel();
@@ -43,7 +43,7 @@ $view_model = new PoolViewModel();
 	</header>
 
 	<?php if ( isset( $messages[ $notice ] ) ) : ?>
-		<div class="notice <?php echo in_array( $notice, array( 'invalid', 'error', 'delete_blocked' ), true ) ? 'notice-error' : 'notice-success'; ?> is-dismissible">
+		<div class="notice <?php echo in_array( $notice, array( 'invalid', 'error' ), true ) ? 'notice-error' : 'notice-success'; ?> is-dismissible">
 			<p><?php echo esc_html( $messages[ $notice ] ); ?></p>
 		</div>
 	<?php endif; ?>
@@ -96,16 +96,7 @@ $view_model = new PoolViewModel();
 					),
 					'voucher_manager_toggle_pool_' . $pool_id
 				);
-				$delete_url = wp_nonce_url(
-					add_query_arg(
-						array(
-							'action'  => 'voucher_manager_delete_pool',
-							'pool_id' => $pool_id,
-						),
-						admin_url( 'admin-post.php' )
-					),
-					'voucher_manager_delete_pool_' . $pool_id
-				);
+				$danger_url = add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'danger-zone', 'pool_id' => $pool_id ), admin_url( 'admin.php' ) );
 				?>
 				<article class="voucher-manager__pool-card voucher-manager__pool-card--<?php echo esc_attr( $state ); ?>">
 					<div class="voucher-manager__pool-card-header">
@@ -158,12 +149,7 @@ $view_model = new PoolViewModel();
 							<a href="<?php echo esc_url( $toggle_url ); ?>">
 								<?php echo esc_html( $pool->is_active() ? __( 'Deactivate', 'voucher-manager' ) : __( 'Activate', 'voucher-manager' ) ); ?>
 							</a>
-							<?php if ( 0 === $row['total'] ) : ?>
-								<span aria-hidden="true">·</span>
-								<a class="voucher-manager__delete" href="<?php echo esc_url( $delete_url ); ?>" onclick="return confirm('<?php echo esc_js( __( 'Delete this empty pool?', 'voucher-manager' ) ); ?>');">
-									<?php echo esc_html__( 'Delete', 'voucher-manager' ); ?>
-								</a>
-							<?php endif; ?>
+							<a class="button-link-delete" href="<?php echo esc_url( $danger_url ); ?>"><?php echo esc_html__( 'Danger Zone', 'voucher-manager' ); ?></a>
 						</div>
 					</div>
 				</article>

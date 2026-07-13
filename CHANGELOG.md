@@ -3,6 +3,14 @@
 ## Unreleased
 
 ### Added
+- Sprint 6 Part 2.1 pool lifecycle and dedicated Danger Zone.
+- Scoped deletion of available codes with privacy-safe operational logging.
+- Atomic full pool deletion for pool, codes and import records with rollback on failure.
+- Exact pool-name confirmation for permanent full deletion.
+- Automated pool lifecycle integrity test and ADR 0012.
+
+
+### Added
 - Sprint 6 Part 2 pool experience.
 - Pool inventory overview with available, distributed and total code counts.
 - Ready, low-stock, empty and inactive pool presentation states.
