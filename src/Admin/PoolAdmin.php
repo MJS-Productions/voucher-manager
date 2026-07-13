@@ -16,10 +16,12 @@ use VoucherManager\Infrastructure\WordPress\WpdbPoolRepository;
 final class PoolAdmin {
 	private WpdbPoolRepository $repository;
 	private PoolService $service;
+	private PoolOverviewData $overview;
 
 	public function __construct() {
 		$this->repository = new WpdbPoolRepository();
 		$this->service = new PoolService( $this->repository );
+		$this->overview = new PoolOverviewData();
 	}
 
 	public function register(): void {
@@ -49,6 +51,7 @@ final class PoolAdmin {
 			$template = VOUCHER_MANAGER_PATH . 'templates/admin/pool-form.php';
 		} else {
 			$pools = $this->repository->all();
+			$pool_rows = $this->overview->rows( $pools );
 			$template = VOUCHER_MANAGER_PATH . 'templates/admin/pools.php';
 		}
 		if ( is_readable( $template ) ) { require $template; }

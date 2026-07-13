@@ -3,6 +3,15 @@
 ## Unreleased
 
 ### Added
+- Sprint 6 Part 2 pool experience.
+- Pool inventory overview with available, distributed and total code counts.
+- Ready, low-stock, empty and inactive pool presentation states.
+- Context-aware pool actions and a guided empty state.
+- Automated pool experience test.
+- ADR 0011 and pool experience documentation.
+
+
+### Added
 - Sprint 6 Part 1 navigation and dashboard experience.
 - Dashboard inventory metrics for available and distributed codes.
 - Quick actions for pool creation, import and distribution.

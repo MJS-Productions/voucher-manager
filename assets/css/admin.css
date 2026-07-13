@@ -254,3 +254,166 @@
 		text-align: left;
 	}
 }
+
+.voucher-manager__pool-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 16px;
+	margin-top: 20px;
+}
+
+.voucher-manager__pool-card {
+	padding: 20px;
+	border: 1px solid #dcdcde;
+	border-top: 4px solid #8c8f94;
+	border-radius: 4px;
+	background: #fff;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.voucher-manager__pool-card--ready {
+	border-top-color: #00a32a;
+}
+
+.voucher-manager__pool-card--low,
+.voucher-manager__pool-card--empty {
+	border-top-color: #dba617;
+}
+
+.voucher-manager__pool-card--inactive {
+	border-top-color: #8c8f94;
+}
+
+.voucher-manager__pool-card-header {
+	display: flex;
+	justify-content: space-between;
+	gap: 16px;
+	align-items: flex-start;
+}
+
+.voucher-manager__pool-card-header h2 {
+	margin: 0 0 6px;
+	font-size: 18px;
+}
+
+.voucher-manager__pool-card-header h2 a {
+	text-decoration: none;
+}
+
+.voucher-manager__pool-card-header p {
+	margin: 0;
+	color: #50575e;
+}
+
+.voucher-manager__inventory-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 8px;
+	border-radius: 999px;
+	background: #f0f0f1;
+	font-size: 12px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.voucher-manager__inventory-badge--ready {
+	background: #edfaef;
+	color: #006b1b;
+}
+
+.voucher-manager__inventory-badge--low,
+.voucher-manager__inventory-badge--empty {
+	background: #fcf0c3;
+	color: #674e00;
+}
+
+.voucher-manager__pool-inventory {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1px;
+	margin: 20px 0 12px;
+	background: #dcdcde;
+	border: 1px solid #dcdcde;
+}
+
+.voucher-manager__pool-inventory div {
+	padding: 14px;
+	background: #fff;
+	text-align: center;
+}
+
+.voucher-manager__pool-inventory strong,
+.voucher-manager__pool-inventory span {
+	display: block;
+}
+
+.voucher-manager__pool-inventory strong {
+	font-size: 22px;
+	line-height: 1.2;
+}
+
+.voucher-manager__pool-inventory span {
+	margin-top: 4px;
+	color: #646970;
+	font-size: 12px;
+}
+
+.voucher-manager__pool-hint {
+	min-height: 20px;
+	margin: 0 0 18px;
+	color: #50575e;
+}
+
+.voucher-manager__pool-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+	padding-top: 16px;
+	border-top: 1px solid #f0f0f1;
+}
+
+.voucher-manager__pool-secondary-actions {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+	margin-left: auto;
+}
+
+.voucher-manager__pool-empty {
+	max-width: 680px;
+	margin-top: 20px;
+	padding: 40px;
+	text-align: center;
+}
+
+.voucher-manager__pool-empty .dashicons {
+	width: 48px;
+	height: 48px;
+	font-size: 48px;
+	color: #646970;
+}
+
+.voucher-manager__pool-empty h2 {
+	margin-top: 14px;
+}
+
+@media (max-width: 782px) {
+	.voucher-manager__pool-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.voucher-manager__pool-card-header {
+		flex-direction: column;
+	}
+
+	.voucher-manager__pool-secondary-actions {
+		width: 100%;
+		margin-left: 0;
+		padding-top: 4px;
+	}
+
+	.voucher-manager__pool-inventory div {
+		padding: 10px 6px;
+	}
+}
