@@ -417,3 +417,14 @@
 		padding: 10px 6px;
 	}
 }
+
+/* Sprint 6 Part 3: Import Experience */
+.voucher-manager__import-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: 20px; align-items: start; margin-top: 20px; }
+.voucher-manager__import-grid .voucher-manager__form { margin-top: 0; max-width: none; }
+.voucher-manager__guidance-list { margin: 0; padding-left: 20px; }
+.voucher-manager__guidance-list li { margin-bottom: 10px; }
+.voucher-manager__badge--success { background: #edfaef; color: #087a28; }
+.voucher-manager__badge--error { background: #fcf0f1; color: #b32d2e; }
+.voucher-manager__badge--neutral { background: #f0f0f1; color: #50575e; }
+.voucher-manager__danger-review .notice.inline { margin: 18px 0; }
+@media (max-width: 960px) { .voucher-manager__import-grid { grid-template-columns: 1fr; } }

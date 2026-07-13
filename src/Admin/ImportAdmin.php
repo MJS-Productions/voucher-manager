@@ -33,6 +33,7 @@ final class ImportAdmin {
 	private ImportService $service;
 	private OperationalLogger $logger;
 	private ErrorBoundary $boundary;
+	private ImportViewModel $view_model;
 
 	public function __construct() {
 		$this->logger   = new OperationalLogger( new WpdbLogRepository() );
@@ -44,7 +45,8 @@ final class ImportAdmin {
 			$this->logger,
 			new CodeFileParser()
 		);
-		$this->boundary = new ErrorBoundary( $this->logger );
+		$this->boundary   = new ErrorBoundary( $this->logger );
+		$this->view_model = new ImportViewModel();
 	}
 
 	public function register(): void {
@@ -67,6 +69,12 @@ final class ImportAdmin {
 	public function render(): void {
 		$this->guard();
 
+		$action = isset( $_GET['action'] ) ? sanitize_key( wp_unslash( $_GET['action'] ) ) : '';
+		if ( 'confirm-rollback' === $action ) {
+			$this->render_rollback_confirmation();
+			return;
+		}
+
 		$pools = $this->boundary->execute(
 			fn(): array => $this->pools->all(),
 			array(),
@@ -83,6 +91,13 @@ final class ImportAdmin {
 				'source' => 'manual',
 			)
 		);
+
+		$pool_rows = $this->boundary->execute(
+			fn(): array => ( new PoolOverviewData() )->rows( $pools ),
+			array(),
+			array( 'action' => 'import.render_pool_inventory', 'source' => 'manual' )
+		);
+		$view_model = $this->view_model;
 
 		$template = VOUCHER_MANAGER_PATH . 'templates/admin/import.php';
 
@@ -140,8 +155,13 @@ final class ImportAdmin {
 	public function rollback(): void {
 		$this->guard();
 
-		$import_id = isset( $_GET['import_id'] ) ? absint( $_GET['import_id'] ) : 0;
+		$import_id = isset( $_POST['import_id'] ) ? absint( $_POST['import_id'] ) : 0;
 		check_admin_referer( 'voucher_manager_rollback_import_' . $import_id );
+
+		$acknowledged = isset( $_POST['confirm_rollback'] ) && '1' === sanitize_text_field( wp_unslash( $_POST['confirm_rollback'] ) );
+		if ( ! $acknowledged ) {
+			$this->redirect( array( 'vm_notice' => 'rollback_confirmation_required' ) );
+		}
 
 		$deleted = $this->boundary->execute(
 			fn(): int => $this->service->rollback( $import_id ),
@@ -157,20 +177,30 @@ final class ImportAdmin {
 			$this->logger->warning(
 				OperationalEvent::IMPORT_ROLLBACK_BLOCKED,
 				'Import rollback was blocked or failed.',
-				array(
-					'import_id' => $import_id,
-					'source'    => 'manual',
-				)
+				array( 'import_id' => $import_id, 'source' => 'manual' )
 			);
 			$this->redirect( array( 'vm_notice' => 'rollback_blocked' ) );
 		}
 
-		$this->redirect(
-			array(
-				'vm_notice' => 'rolled_back',
-				'deleted'   => $deleted,
-			)
+		$this->redirect( array( 'vm_notice' => 'rolled_back', 'deleted' => $deleted ) );
+	}
+
+	private function render_rollback_confirmation(): void {
+		$import_id = isset( $_GET['import_id'] ) ? absint( $_GET['import_id'] ) : 0;
+		$import = $this->boundary->execute(
+			fn() => $this->imports->find( $import_id ),
+			null,
+			array( 'action' => 'import.render_rollback_confirmation', 'import_id' => $import_id, 'source' => 'manual' )
 		);
+
+		if ( ! $import instanceof \VoucherManager\Domain\Import\ImportRecord || ! $this->view_model->can_review_rollback( $import ) ) {
+			$this->redirect( array( 'vm_notice' => 'rollback_unavailable' ) );
+		}
+
+		$template = VOUCHER_MANAGER_PATH . 'templates/admin/import-rollback-confirmation.php';
+		if ( is_readable( $template ) ) {
+			require $template;
+		}
 	}
 
 	/**

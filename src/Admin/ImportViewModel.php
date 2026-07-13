@@ -1,0 +1,47 @@
+<?php
+/**
+ * Import administration presentation rules.
+ *
+ * @package VoucherManager
+ */
+
+declare(strict_types=1);
+
+namespace VoucherManager\Admin;
+
+use VoucherManager\Domain\Import\ImportRecord;
+
+final class ImportViewModel {
+	public function status_label( ImportRecord $import ): string {
+		return match ( $import->status() ) {
+			'completed'   => __( 'Completed', 'voucher-manager' ),
+			'rolled_back' => __( 'Rolled back', 'voucher-manager' ),
+			'failed'      => __( 'Failed', 'voucher-manager' ),
+			'processing'  => __( 'Processing', 'voucher-manager' ),
+			default       => ucwords( str_replace( '_', ' ', $import->status() ) ),
+		};
+	}
+
+	public function status_tone( ImportRecord $import ): string {
+		return match ( $import->status() ) {
+			'completed' => 'success',
+			'failed'    => 'error',
+			default     => 'neutral',
+		};
+	}
+
+	public function result_summary( ImportRecord $import ): string {
+		return sprintf(
+			/* translators: 1: imported rows, 2: skipped rows, 3: invalid rows, 4: total rows. */
+			__( '%1$d added, %2$d skipped, %3$d invalid — %4$d rows processed', 'voucher-manager' ),
+			$import->imported_rows(),
+			$import->skipped_rows(),
+			$import->invalid_rows(),
+			$import->total_rows()
+		);
+	}
+
+	public function can_review_rollback( ImportRecord $import ): bool {
+		return 'completed' === $import->status() && 0 < $import->imported_rows();
+	}
+}

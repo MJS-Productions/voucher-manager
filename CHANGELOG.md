@@ -121,3 +121,10 @@
 ## 0.2.0-alpha.1 - The First Pool
 
 - Pool administration and database lifecycle.
+
+## Unreleased — Sprint 6 Part 3
+
+- Added guided TXT/CSV import instructions and destination-pool inventory context.
+- Added clearer import result summaries and centralized import-history presentation.
+- Replaced GET/browser-confirm rollback with a dedicated review page and confirmed POST execution.
+- Added Import Experience integration coverage to the Quality Gate.
