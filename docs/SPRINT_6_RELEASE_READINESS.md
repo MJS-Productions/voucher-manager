@@ -67,6 +67,7 @@ Use the `voucher-manager.zip` artifact built and validated by GitHub Actions.
 
 ### Import
 
+- Starting Import Codes from a Pool card preselects that pool while leaving the destination dropdown changeable.
 - TXT import accepts one code per line.
 - CSV import reads codes from the first column.
 - Result summaries correctly report added, skipped, invalid and processed rows.

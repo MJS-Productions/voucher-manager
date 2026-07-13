@@ -97,7 +97,9 @@ final class ImportAdmin {
 			array(),
 			array( 'action' => 'import.render_pool_inventory', 'source' => 'manual' )
 		);
-		$view_model = $this->view_model;
+		$view_model        = $this->view_model;
+		$requested_pool_id = isset( $_GET['pool_id'] ) ? absint( $_GET['pool_id'] ) : 0;
+		$selected_pool_id  = $view_model->selected_pool_id( $requested_pool_id, $pool_rows );
 
 		$template = VOUCHER_MANAGER_PATH . 'templates/admin/import.php';
 

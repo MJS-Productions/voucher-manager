@@ -3,6 +3,7 @@
 /** @var array<int,array{pool:\VoucherManager\Domain\Pool\Pool,total:int,available:int,assigned:int}> $pool_rows */
 /** @var array<\VoucherManager\Domain\Import\ImportRecord> $imports */
 /** @var \VoucherManager\Admin\ImportViewModel $view_model */
+/** @var int $selected_pool_id */
 declare(strict_types=1);
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_notice'] ) ) : '';
@@ -48,7 +49,7 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 				<p><label for="vm-pool"><strong><?php echo esc_html__( 'Destination pool', 'voucher-manager' ); ?></strong></label>
 				<select id="vm-pool" name="pool_id" required>
 					<?php foreach ( $pool_rows as $row ) : $pool = $row['pool']; ?>
-					<option value="<?php echo esc_attr( (string) $pool->id() ); ?>"><?php echo esc_html( sprintf( __( '%1$s — %2$d available, %3$d total', 'voucher-manager' ), $pool->name(), $row['available'], $row['total'] ) ); ?></option>
+					<option value="<?php echo esc_attr( (string) $pool->id() ); ?>" <?php selected( $selected_pool_id, (int) $pool->id() ); ?>><?php echo esc_html( sprintf( __( '%1$s — %2$d available, %3$d total', 'voucher-manager' ), $pool->name(), $row['available'], $row['total'] ) ); ?></option>
 					<?php endforeach; ?>
 				</select></p>
 				<p><label for="vm-code-file"><strong><?php echo esc_html__( 'TXT or CSV file', 'voucher-manager' ); ?></strong></label><input id="vm-code-file" type="file" name="code_file" accept=".txt,.csv,text/plain,text/csv" required></p>

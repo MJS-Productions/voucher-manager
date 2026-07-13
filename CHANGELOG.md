@@ -34,6 +34,7 @@ No unreleased changes.
 - Consolidated the changelog into one chronological document without duplicated headings or stale Unreleased sections.
 
 ### Fixed
+- Preserved the originating pool as a validated, changeable destination preselection when starting an import from a Pool card.
 - Dashboard Recent Activity loading now preserves dots in stable event names so human-readable labels resolve correctly.
 - Dashboard activity mappings now cover pool lifecycle events and privacy-safe import result details.
 - Added the missing dedicated confirmation step before deleting available codes.

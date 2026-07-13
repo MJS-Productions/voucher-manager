@@ -44,4 +44,23 @@ final class ImportViewModel {
 	public function can_review_rollback( ImportRecord $import ): bool {
 		return 'completed' === $import->status() && 0 < $import->imported_rows();
 	}
+	/**
+	 * Return a requested destination pool only when it exists in the loaded inventory rows.
+	 *
+	 * @param array<int,array{pool:\VoucherManager\Domain\Pool\Pool,total:int,available:int,assigned:int}> $pool_rows Pool inventory rows.
+	 */
+	public function selected_pool_id( int $requested_pool_id, array $pool_rows ): int {
+		if ( 0 >= $requested_pool_id ) {
+			return 0;
+		}
+
+		foreach ( $pool_rows as $row ) {
+			if ( $requested_pool_id === (int) $row['pool']->id() ) {
+				return $requested_pool_id;
+			}
+		}
+
+		return 0;
+	}
+
 }

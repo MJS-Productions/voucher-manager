@@ -8,6 +8,7 @@ Sprint 6 turns the stable technical foundation into a coherent WordPress adminis
 - Inventory-oriented Pool Experience.
 - Dedicated Pool Danger Zone with reviewed destructive actions.
 - Guided TXT and CSV import with clear result summaries.
+- Pool-to-Import context preservation that preselects the originating pool while keeping the destination changeable.
 - Protected import rollback review.
 - Inventory-aware manual distribution with a one-time voucher result and Copy code action.
 - Dedicated filtered and paginated Operational Activity history.
