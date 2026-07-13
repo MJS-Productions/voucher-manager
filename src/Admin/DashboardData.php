@@ -75,7 +75,7 @@ final class DashboardData {
 				$context = json_decode( (string) ( $row['context'] ?? '' ), true );
 
 				$activity[] = array(
-					'event_type' => sanitize_key( (string) ( $row['event_type'] ?? '' ) ),
+					'event_type' => sanitize_text_field( (string) ( $row['event_type'] ?? '' ) ),
 					'message'    => sanitize_text_field( (string) ( $row['message'] ?? '' ) ),
 					'context'    => is_array( $context ) ? $context : array(),
 					'created_at' => (string) ( $row['created_at'] ?? '' ),

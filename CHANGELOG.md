@@ -1,4 +1,5 @@
 # Changelog
+- Fixed Dashboard Recent Activity event loading so stable dotted event names retain their dots and resolve to human-readable labels.
 
 ## Unreleased
 

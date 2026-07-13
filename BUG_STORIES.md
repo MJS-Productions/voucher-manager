@@ -118,3 +118,13 @@ The Dashboard now presents human-readable labels and appropriate tones for avail
 ### Lesson
 
 A stable event vocabulary is only operationally useful when every consuming presentation layer moves with it. Unknown-event fallbacks are safety nets, not finished user experiences.
+
+## VM-010 — The Dots That Disappeared
+
+The Dashboard view model contained the correct human-readable mappings, but `DashboardData` passed stored event names through WordPress `sanitize_key()`. That sanitizer removes dots, turning `pool.deleted` into `pooldeleted` and forcing every dotted operational event into the generic fallback label.
+
+The fix preserves the stable dotted vocabulary with `sanitize_text_field()` and adds a regression assertion for the data-loading boundary.
+
+Lesson:
+
+> A correct mapping cannot recognize a name that was changed before it arrived.

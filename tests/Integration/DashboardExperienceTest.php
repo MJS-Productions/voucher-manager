@@ -128,6 +128,15 @@ $assert(
 	'Unknown events should degrade gracefully.'
 );
 
+
+$data_source = file_get_contents( $root . '/src/Admin/DashboardData.php' );
+$assert(
+	is_string( $data_source )
+	&& str_contains( $data_source, "'event_type' => sanitize_text_field" )
+	&& ! str_contains( $data_source, "'event_type' => sanitize_key" ),
+	'Dashboard data loading must preserve dots in stable event names.'
+);
+
 $admin_source = file_get_contents( $root . '/src/Admin/Admin.php' );
 $template_source = file_get_contents( $root . '/templates/admin/dashboard.php' );
 
