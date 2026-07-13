@@ -71,3 +71,27 @@ When a machine-readable vocabulary changes, application code and tests must move
 together. A green syntax check cannot detect semantic drift; an integration test can.
 
 > The application moved on. The test did not.
+
+---
+
+## VM-008 — The Danger Zone Side Door
+
+**Status:** Fixed  
+**Discovered in:** Sprint 6 Part 2.1 WordPress smoke test
+
+### Story
+
+The Danger Zone correctly used a dedicated confirmation flow for full pool deletion, but the narrower `Delete available codes` button submitted the destructive POST immediately. Nonce and capability checks were present, yet the approved proportional confirmation step was missing.
+
+### Root cause
+
+The lifecycle integrity test verified POST, nonce, capability and full-deletion confirmation, but did not assert that available-code deletion first passed through its own confirmation view.
+
+### Fix
+
+The Danger Zone now links to a dedicated available-code deletion confirmation page. The administrator must explicitly acknowledge the displayed affected count, and the admin boundary rejects an unconfirmed POST. Regression assertions protect both layers.
+
+### Lesson
+
+Technical request security does not replace deliberate destructive-action UX. A nonce proves intent to submit a form; it does not prove the administrator was shown the consequences first.
+

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+- Added the missing dedicated confirmation step before deleting available codes.
+- Added regression coverage that rejects direct or unacknowledged available-code deletion.
+
 ### Added
 - Sprint 6 Part 2.1 pool lifecycle and dedicated Danger Zone.
 - Scoped deletion of available codes with privacy-safe operational logging.

@@ -21,9 +21,12 @@ $assert(!$repo->pool && []===$repo->codes && []===$repo->imports,'Full deletion 
 $repo=new LifecycleMemoryRepository(); $repo->fail=true; $service=new VoucherManager\Domain\Pool\PoolLifecycleService($repo,new VoucherManager\Domain\Log\OperationalLogger($logs)); try{$service->delete_pool(7);}catch(RuntimeException){}
 $assert($repo->pool && 2===count($repo->codes) && 2===count($repo->imports),'A failed full deletion must roll back all destructive changes.');
 $events=array_column($logs->entries,'event_type'); $assert(in_array('pool.deleted',$events,true) && in_array('pool.delete_failed',$events,true),'Lifecycle event vocabulary must include success and failure.');
-$admin=file_get_contents($root.'/src/Admin/PoolAdmin.php'); $template=file_get_contents($root.'/templates/admin/pool-danger-zone.php'); $pools=file_get_contents($root.'/templates/admin/pools.php');
+$admin=file_get_contents($root.'/src/Admin/PoolAdmin.php'); $template=file_get_contents($root.'/templates/admin/pool-danger-zone.php'); $confirmation=file_get_contents($root.'/templates/admin/pool-delete-available-confirmation.php'); $pools=file_get_contents($root.'/templates/admin/pools.php');
 $assert(str_contains($admin,"current_user_can( 'manage_options' )") && str_contains($admin,'check_admin_referer'),'Destructive admin actions must retain capability and nonce protection.');
-$assert(str_contains($admin,"isset( \$_POST['pool_id'] )") && str_contains($template,'method="post"'),'Destructive execution must use POST.');
+$assert(str_contains($admin,"isset( \$_POST['pool_id'] )") && str_contains($confirmation,'method="post"'),'Destructive execution must use POST.');
+$assert(str_contains($template,"'confirm-delete-available'") && !str_contains($template,'name="action" value="voucher_manager_delete_available_codes"'),'Danger Zone must route available-code deletion through a dedicated confirmation view.');
+$assert(str_contains($confirmation,'confirm_delete_available') && str_contains($confirmation,'required'),'Available-code deletion must require explicit acknowledgement.');
+$assert(str_contains($admin,"! \$confirmed") && str_contains($admin,"'confirmation_required'"),'The admin boundary must reject an unconfirmed available-code deletion POST.');
 $assert(str_contains($template,'pool_name_confirmation'),'Full deletion must require exact pool-name confirmation.');
 $assert(str_contains($pools,'Danger Zone') && !str_contains($pools,'delete_blocked'),'Pool overview must expose the Danger Zone instead of hiding deletion.');
-fwrite(STDOUT,"Pool lifecycle integrity OK: scoped deletion, atomic rollback, security boundary and privacy-safe events verified.".PHP_EOL);
+fwrite(STDOUT,"Pool lifecycle integrity OK: scoped deletion, confirmation boundary, atomic rollback and privacy-safe events verified.".PHP_EOL);
