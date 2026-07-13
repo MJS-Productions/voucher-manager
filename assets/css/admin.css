@@ -593,3 +593,49 @@
 	.voucher-manager__activity-entry time { white-space: normal; }
 	.voucher-manager__activity-header-actions { align-items: flex-start; }
 }
+
+
+/* Sprint 7 Part 2: Pool Inventory */
+.voucher-manager__inventory-filters {
+	margin: 20px 0;
+}
+.voucher-manager__inventory-filters form {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+	align-items: flex-end;
+}
+.voucher-manager__inventory-filters form > div {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.voucher-manager__inventory-filters .submit {
+	margin: 0;
+	padding: 0;
+}
+.voucher-manager__inventory-table-header {
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+	padding: 20px 22px 14px;
+}
+.voucher-manager__inventory-table-header h2 {
+	margin-bottom: 4px;
+}
+.voucher-manager__inventory-table-header p {
+	margin: 0;
+	color: #646970;
+}
+.voucher-manager__masked-reference {
+	font-weight: 600;
+	letter-spacing: .04em;
+}
+.voucher-manager__inventory-pagination {
+	padding: 18px 22px;
+}
+@media (max-width: 782px) {
+	.voucher-manager__inventory-table-header {
+		flex-direction: column;
+	}
+}

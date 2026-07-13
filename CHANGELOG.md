@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-No unreleased changes.
+### Added
+- Sprint 7 Part 2 read-only Pool Inventory screen.
+- Pool-scoped masked references, state and import provenance visibility.
+- Inventory state/import filters and 50-row pagination.
+- Automated Inventory Experience test, ADR 0017 and Inventory documentation.
 
 ## 0.6.0-alpha - 2026-07-13 — The First Experience
 

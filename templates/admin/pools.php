@@ -86,6 +86,13 @@ $view_model = new PoolViewModel();
 					),
 					admin_url( 'admin.php' )
 				);
+				$inventory_url = add_query_arg(
+					array(
+						'page'    => 'voucher-manager-inventory',
+						'pool_id' => $pool_id,
+					),
+					admin_url( 'admin.php' )
+				);
 				$toggle_url = wp_nonce_url(
 					add_query_arg(
 						array(
@@ -142,6 +149,9 @@ $view_model = new PoolViewModel();
 								<?php echo esc_html__( 'Import Codes', 'voucher-manager' ); ?>
 							</a>
 						<?php endif; ?>
+						<a class="button" href="<?php echo esc_url( $inventory_url ); ?>">
+							<?php echo esc_html__( 'View inventory', 'voucher-manager' ); ?>
+						</a>
 						<a class="button" href="<?php echo esc_url( $edit_url ); ?>">
 							<?php echo esc_html__( 'Edit', 'voucher-manager' ); ?>
 						</a>
