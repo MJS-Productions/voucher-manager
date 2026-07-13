@@ -129,10 +129,10 @@ $assert(
 
 $assert(
 	is_string( $readme )
-	&& str_contains( $readme, 'Latest published release:** `0.5.0-alpha`' )
-	&& str_contains( $readme, 'Current development:** Sprint 6 — The First Experience' )
-	&& str_contains( $readme, 'next release version will be selected during the Sprint 6 release review' ),
-	'README must distinguish published version from unreleased Sprint 6 development.'
+	&& str_contains( $readme, 'Release candidate:** `0.6.0-alpha` — The First Experience' )
+	&& str_contains( $readme, 'Previous published release:** `0.5.0-alpha` — The Stable Foundation' )
+	&& str_contains( $readme, 'version identity was selected during the Sprint 6 release review' ),
+	'README must distinguish the reviewed 0.6.0-alpha candidate from the previous published release.'
 );
 
 $assert(
@@ -151,8 +151,8 @@ $assert(
 $assert(
 	is_string( $release_doc )
 	&& str_contains( $release_doc, 'Manual WordPress smoke-test matrix' )
-	&& str_contains( $release_doc, 'Release review gate' ),
-	'Sprint 6 release-readiness documentation must preserve smoke-test and release-review gates.'
+	&& str_contains( $release_doc, 'Final release gate' ),
+	'Sprint 6 release-readiness documentation must preserve smoke-test and final release gates.'
 );
 
 $assert(

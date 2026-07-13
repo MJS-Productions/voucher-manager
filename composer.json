@@ -38,6 +38,7 @@
       "@test:distribution-experience",
       "@test:operational-visibility",
       "@test:sprint6-release-readiness",
+      "@test:release-identity",
       "@build",
       "@validate:artifact"
     ],
@@ -50,7 +51,8 @@
     "test:import-experience": "php tests/Integration/ImportExperienceTest.php",
     "test:distribution-experience": "php tests/Integration/DistributionExperienceTest.php",
     "test:operational-visibility": "php tests/Integration/OperationalVisibilityTest.php",
-    "test:sprint6-release-readiness": "php tests/Integration/Sprint6ReleaseReadinessTest.php"
+    "test:sprint6-release-readiness": "php tests/Integration/Sprint6ReleaseReadinessTest.php",
+    "test:release-identity": "php tests/Integration/ReleaseIdentityTest.php"
   },
   "config": {
     "sort-packages": true

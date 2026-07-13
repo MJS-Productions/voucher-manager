@@ -5,10 +5,10 @@ Professional management and distribution of unique voucher codes for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Alpha development  
-**Latest published release:** `0.5.0-alpha`  
-**Current development:** Sprint 6 — The First Experience
+**Release candidate:** `0.6.0-alpha` — The First Experience  
+**Previous published release:** `0.5.0-alpha` — The Stable Foundation
 
-Sprint 6 contains unreleased development changes on top of the published `0.5.0-alpha` foundation. The next release version will be selected during the Sprint 6 release review.
+Sprint 6 is development-complete and has entered final release validation. The `0.6.0-alpha` version identity was selected during the Sprint 6 release review because the milestone delivers a coherent new administration experience across the existing Golden Path without introducing a database migration.
 
 ## Current capabilities
 

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+No unreleased changes.
+
+## 0.6.0-alpha - 2026-07-13 — The First Experience
+
 ### Added
 - Sprint 6 Part 5 operational visibility with a dedicated filtered and paginated Activity screen.
 - Actionable guidance for operational warnings and failures without exposing raw log context.

@@ -3,7 +3,7 @@
  * Plugin Name:       Voucher Manager
  * Plugin URI:        https://github.com/mjs512/voucher-manager
  * Description:       Manage and distribute unique voucher codes securely in WordPress.
- * Version:           0.5.0-alpha
+ * Version:           0.6.0-alpha
  * Requires at least: 6.5
  * Requires PHP:      8.1
  * Author:            MJS-Productions e.U.
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'VOUCHER_MANAGER_VERSION', '0.5.0-alpha' );
+define( 'VOUCHER_MANAGER_VERSION', '0.6.0-alpha' );
 define( 'VOUCHER_MANAGER_DATABASE_VERSION', '2' );
 define( 'VOUCHER_MANAGER_FILE', __FILE__ );
 define( 'VOUCHER_MANAGER_PATH', plugin_dir_path( __FILE__ ) );

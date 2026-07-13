@@ -2,7 +2,7 @@
 
 Sprint 6 — **The First Experience** is complete at the development level.
 
-The release version is intentionally not selected by this document. Version identity remains `0.5.0-alpha` until the dedicated Sprint 6 release review chooses the next release version and updates all version-bearing files together.
+The Sprint 6 release review selected `0.6.0-alpha` — **The First Experience**. The minor alpha increment reflects a coherent new administration experience across the existing Golden Path. No database schema migration is introduced.
 
 ## Completed experience areas
 
@@ -81,17 +81,17 @@ Use the `voucher-manager.zip` artifact built and validated by GitHub Actions.
 - Remaining inventory guidance is correct.
 - The final distribution changes to empty-inventory guidance.
 
-## Release review gate
+## Final release gate
 
-Before selecting and publishing the next version:
+Before publishing `0.6.0-alpha`:
 
 1. Complete `composer quality`.
 2. Confirm all GitHub PHP jobs are green.
 3. Install the validated GitHub Actions artifact in WordPress.
 4. Complete the smoke-test matrix.
 5. Review `CHANGELOG.md`, `README.md`, release notes and version-bearing files.
-6. Select the next version deliberately.
-7. Update version identity consistently.
-8. Re-run the complete Quality Gate.
-9. Build and smoke-test the final versioned artifact.
+6. Confirm version identity is consistently `0.6.0-alpha` in the plugin header, version constant, README, changelog and release notes.
+7. Re-run the complete Quality Gate.
+8. Build and smoke-test the final versioned artifact.
+9. Confirm WordPress reports `0.6.0-alpha` after the update.
 10. Publish the GitHub Release only after the final artifact passes.
