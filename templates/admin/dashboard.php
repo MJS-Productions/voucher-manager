@@ -88,17 +88,22 @@ $metrics = array(
 					</h2>
 					<p><?php echo esc_html__( 'The latest operational events, without personal data.', 'voucher-manager' ); ?></p>
 				</div>
-				<span class="voucher-manager__muted">
-					<?php
-					echo esc_html(
-						sprintf(
-							/* translators: %s: total number of operational log entries */
-							__( '%s total events', 'voucher-manager' ),
-							number_format_i18n( $data['counts']['logs'] )
-						)
-					);
-					?>
-				</span>
+				<div class="voucher-manager__activity-header-actions">
+					<span class="voucher-manager__muted">
+						<?php
+						echo esc_html(
+							sprintf(
+								/* translators: %s: total number of operational log entries */
+								__( '%s total events', 'voucher-manager' ),
+								number_format_i18n( $data['counts']['logs'] )
+							)
+						);
+						?>
+					</span>
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-activity' ) ); ?>">
+						<?php echo esc_html__( 'View all activity', 'voucher-manager' ); ?>
+					</a>
+				</div>
 			</div>
 
 			<?php if ( empty( $data['activity'] ) ) : ?>

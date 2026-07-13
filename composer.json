@@ -36,6 +36,7 @@
       "@test:pool-lifecycle-integrity",
       "@test:import-experience",
       "@test:distribution-experience",
+      "@test:operational-visibility",
       "@build",
       "@validate:artifact"
     ],
@@ -46,7 +47,8 @@
     "test:pool-experience": "php tests/Integration/PoolExperienceTest.php",
     "test:pool-lifecycle-integrity": "php tests/Integration/PoolLifecycleIntegrityTest.php",
     "test:import-experience": "php tests/Integration/ImportExperienceTest.php",
-    "test:distribution-experience": "php tests/Integration/DistributionExperienceTest.php"
+    "test:distribution-experience": "php tests/Integration/DistributionExperienceTest.php",
+    "test:operational-visibility": "php tests/Integration/OperationalVisibilityTest.php"
   },
   "config": {
     "sort-packages": true

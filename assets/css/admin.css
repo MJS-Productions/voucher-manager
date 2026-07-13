@@ -487,3 +487,109 @@
 	.voucher-manager__code-result { align-items: stretch; flex-direction: column; }
 	.voucher-manager__code-result .button { align-self: flex-start; }
 }
+
+
+/* Sprint 6 Part 5: Operational Visibility */
+.voucher-manager__metrics--three {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.voucher-manager__activity-header-actions {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 6px;
+}
+.voucher-manager__activity-filters {
+	margin-top: 20px;
+}
+.voucher-manager__activity-filters form {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+	align-items: flex-end;
+}
+.voucher-manager__activity-filters form > div {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.voucher-manager__activity-filters .submit {
+	margin: 0;
+	padding: 0;
+}
+.voucher-manager__activity-history {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.voucher-manager__activity-entry {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 20px;
+	padding: 18px 0 18px 18px;
+	border-top: 1px solid #dcdcde;
+	border-left: 4px solid #c3c4c7;
+}
+.voucher-manager__activity-entry:first-child {
+	border-top: 0;
+}
+.voucher-manager__activity-entry--success { border-left-color: #00a32a; }
+.voucher-manager__activity-entry--warning { border-left-color: #dba617; }
+.voucher-manager__activity-entry--error { border-left-color: #d63638; }
+.voucher-manager__activity-entry-heading {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 9px;
+}
+.voucher-manager__activity-entry-main p {
+	margin: 6px 0;
+}
+.voucher-manager__activity-guidance {
+	color: #3c434a;
+	font-weight: 600;
+}
+.voucher-manager__activity-badge {
+	display: inline-flex;
+	padding: 2px 8px;
+	border-radius: 999px;
+	background: #f0f0f1;
+	font-size: 11px;
+	font-weight: 600;
+}
+.voucher-manager__activity-badge--success { background: #edfaef; color: #007017; }
+.voucher-manager__activity-badge--warning { background: #fcf3cf; color: #6e5500; }
+.voucher-manager__activity-badge--error { background: #fcf0f1; color: #b32d2e; }
+.voucher-manager__event-name {
+	display: inline-block;
+	margin-top: 5px;
+	color: #646970;
+	font-size: 11px;
+}
+.voucher-manager__activity-entry time {
+	color: #646970;
+	white-space: nowrap;
+}
+.voucher-manager__pagination {
+	padding-top: 18px;
+	border-top: 1px solid #dcdcde;
+}
+.voucher-manager__pagination .page-numbers {
+	display: inline-block;
+	margin-right: 4px;
+	padding: 5px 9px;
+	border: 1px solid #c3c4c7;
+	background: #fff;
+	text-decoration: none;
+}
+.voucher-manager__pagination .current {
+	border-color: #2271b1;
+	background: #2271b1;
+	color: #fff;
+}
+@media (max-width: 782px) {
+	.voucher-manager__metrics--three { grid-template-columns: 1fr; }
+	.voucher-manager__activity-entry { grid-template-columns: 1fr; }
+	.voucher-manager__activity-entry time { white-space: normal; }
+	.voucher-manager__activity-header-actions { align-items: flex-start; }
+}

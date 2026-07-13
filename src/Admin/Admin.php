@@ -16,6 +16,7 @@ final class Admin {
 		( new PoolAdmin() )->register();
 		( new ImportAdmin() )->register();
 		( new DistributionAdmin() )->register();
+		( new OperationalActivityAdmin() )->register();
 	}
 
 	public function register_menu(): void {

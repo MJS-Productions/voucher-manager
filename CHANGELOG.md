@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- Sprint 6 Part 5 operational visibility with a dedicated filtered and paginated Activity screen.
+- Actionable guidance for operational warnings and failures without exposing raw log context.
+- Dashboard path from Recent Activity to the complete operational history.
+- Automated operational visibility test, ADR 0015 and operational visibility documentation.
 - Sprint 6 Part 4 distribution experience with inventory-aware pool selection.
 - One-time distribution result presentation with an explicit copy action and remaining-inventory guidance.
 - Guided empty-inventory state linking administrators back to Import.
