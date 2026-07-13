@@ -7,7 +7,6 @@
 
 declare(strict_types=1);
 
-use RuntimeException;
 use VoucherManager\Domain\Log\LogRepository;
 use VoucherManager\Domain\Log\OperationalEvent;
 use VoucherManager\Domain\Log\OperationalLogger;

@@ -233,8 +233,8 @@ try {
 
     $eventTypes = array_column($logs->entries, 'event_type');
     $assert(in_array('import.completed', $eventTypes, true), 'Import completion must be logged.');
-    $assert(2 === count(array_filter($eventTypes, static fn(string $type): bool => 'code_distributed' === $type)), 'Each successful distribution must be logged.');
-    $assert(in_array('distribution_empty', $eventTypes, true), 'Empty distribution must be logged.');
+    $assert(2 === count(array_filter($eventTypes, static fn(string $type): bool => 'distribution.completed' === $type)), 'Each successful distribution must be logged.');
+    $assert(in_array('distribution.empty', $eventTypes, true), 'Empty distribution must be logged.');
 
     $rollbackBlocked = false;
     try {
