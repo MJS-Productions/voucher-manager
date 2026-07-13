@@ -38,13 +38,15 @@ final class InventoryAdmin {
 
 	public function register_page(): void {
 		add_submenu_page(
-			null,
+			'voucher-manager',
 			__( 'Pool Inventory', 'voucher-manager' ),
 			__( 'Pool Inventory', 'voucher-manager' ),
 			'manage_options',
 			'voucher-manager-inventory',
 			array( $this, 'render' )
 		);
+
+		remove_submenu_page( 'voucher-manager', 'voucher-manager-inventory' );
 	}
 
 

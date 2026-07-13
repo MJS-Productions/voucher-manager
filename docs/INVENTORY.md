@@ -56,7 +56,7 @@ Inventory uses 50 rows per page and deterministic newest-first ordering by inter
 
 ## WordPress navigation context
 
-Inventory is registered as a hidden administration detail page, so it does not add another permanent submenu item.
+Inventory is registered under Voucher Manager so WordPress retains the real parent relationship, then removed from the visible submenu so it does not add another permanent menu item.
 
 While Inventory is open:
 

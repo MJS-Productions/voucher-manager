@@ -21,8 +21,9 @@ $composer     = file_get_contents( $root . '/composer.json' );
 
 $assert(
 	is_string( $admin_source )
-	&& str_contains( $admin_source, "add_submenu_page(\n\t\t\tnull," ),
-	'Inventory must remain a hidden detail page rather than becoming a duplicate submenu item.'
+	&& str_contains( $admin_source, "add_submenu_page(\n\t\t\t'voucher-manager'," )
+	&& str_contains( $admin_source, "remove_submenu_page( 'voucher-manager', 'voucher-manager-inventory' )" ),
+	'Inventory must register under Voucher Manager for parent context and then be removed from the visible submenu.'
 );
 
 $assert(
