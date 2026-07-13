@@ -111,17 +111,15 @@ $metrics = array(
 					<?php foreach ( $data['activity'] as $activity ) : ?>
 						<?php
 						$event_type = (string) $activity['event_type'];
+						$context    = is_array( $activity['context'] ) ? $activity['context'] : array();
 						$tone       = $view_model->activity_tone( $event_type );
-						$detail     = $view_model->activity_detail(
-							$event_type,
-							is_array( $activity['context'] ) ? $activity['context'] : array()
-						);
+						$detail     = $view_model->activity_detail( $event_type, $context );
 						$timestamp  = strtotime( (string) $activity['created_at'] );
 						?>
 						<li class="voucher-manager__activity voucher-manager__activity--<?php echo esc_attr( $tone ); ?>">
 							<span class="voucher-manager__activity-marker" aria-hidden="true"></span>
 							<div>
-								<strong><?php echo esc_html( $view_model->activity_label( $event_type ) ); ?></strong>
+								<strong><?php echo esc_html( $view_model->activity_label( $event_type, $context ) ); ?></strong>
 								<?php if ( '' !== $detail ) : ?>
 									<span><?php echo esc_html( $detail ); ?></span>
 								<?php endif; ?>

@@ -95,3 +95,26 @@ The Danger Zone now links to a dedicated available-code deletion confirmation pa
 
 Technical request security does not replace deliberate destructive-action UX. A nonce proves intent to submit a form; it does not prove the administrator was shown the consequences first.
 
+
+---
+
+## VM-009 — The Activity That Forgot Its Name
+
+**Status:** Fixed  
+**Discovered in:** Sprint 6 Part 3 WordPress visual review
+
+### Story
+
+Pool lifecycle operations were logged with stable event names, but the Dashboard view model still knew only the older import and distribution vocabulary. Recent Activity therefore rendered several valid lifecycle events as the generic fallback `Voucher Manager activity`.
+
+### Root cause
+
+The lifecycle event vocabulary and its integrity tests were extended in Sprint 6 Part 2.1, while the earlier Dashboard presentation mapping and Dashboard Experience test were not extended with the same events.
+
+### Fix
+
+The Dashboard now presents human-readable labels and appropriate tones for available-code deletion, pool deletion and failed pool deletion. Available-code deletion includes the privacy-safe affected count, completed imports show a concise result summary, and regression assertions cover the lifecycle mappings and context-aware rendering boundary.
+
+### Lesson
+
+A stable event vocabulary is only operationally useful when every consuming presentation layer moves with it. Unknown-event fallbacks are safety nets, not finished user experiences.

@@ -124,6 +124,7 @@
 
 ## Unreleased — Sprint 6 Part 3
 
+- Fixed Dashboard Recent Activity labels for pool lifecycle events and added privacy-safe import result details.
 - Added guided TXT/CSV import instructions and destination-pool inventory context.
 - Added clearer import result summaries and centralized import-history presentation.
 - Replaced GET/browser-confirm rollback with a dedicated review page and confirmed POST execution.

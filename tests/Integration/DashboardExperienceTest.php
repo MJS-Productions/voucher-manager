@@ -85,6 +85,44 @@ $assert(
 	),
 	'Pool-related events should identify the internal pool.'
 );
+
+$assert(
+	'Deleted 4 available codes' === $view->activity_label(
+		'pool.available_codes_deleted',
+		array( 'deleted_available_count' => 4, 'code' => 'MUST-NOT-APPEAR' )
+	),
+	'Available-code deletion should show the affected count without exposing voucher values.'
+);
+$assert(
+	'Pool deleted' === $view->activity_label( 'pool.deleted' ),
+	'Pool deletion should have a readable label.'
+);
+$assert(
+	'Pool deletion failed' === $view->activity_label( 'pool.delete_failed' ),
+	'Failed pool deletion should have a readable label.'
+);
+$assert(
+	'warning' === $view->activity_tone( 'pool.deleted' ),
+	'Successful destructive lifecycle events should have a warning tone.'
+);
+$assert(
+	'error' === $view->activity_tone( 'pool.delete_failed' ),
+	'Failed destructive lifecycle events should have an error tone.'
+);
+$assert(
+	'Pool #6 · 5 codes added · 3 skipped · 2 invalid' === $view->activity_detail(
+		'import.completed',
+		array(
+			'pool_id'  => 6,
+			'imported' => 5,
+			'skipped'  => 3,
+			'invalid'  => 2,
+			'code'     => 'MUST-NOT-APPEAR',
+		)
+	),
+	'Completed imports should show a concise privacy-safe result summary.'
+);
+
 $assert(
 	'Voucher Manager activity' === $view->activity_label( 'future.event' ),
 	'Unknown events should degrade gracefully.'
@@ -104,6 +142,10 @@ $assert(
 $assert(
 	is_string( $template_source ) && str_contains( $template_source, 'Recent activity' ),
 	'The dashboard should include recent operational activity.'
+);
+$assert(
+	is_string( $template_source ) && str_contains( $template_source, 'activity_label( $event_type, $context )' ),
+	'The dashboard should pass sanitized event context into context-aware activity labels.'
 );
 
 fwrite(

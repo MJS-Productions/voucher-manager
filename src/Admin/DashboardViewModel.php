@@ -16,18 +16,37 @@ final class DashboardViewModel {
 
 	/**
 	 * Return a translated label for an operational event.
+	 *
+	 * @param array<string,mixed> $context Operational context.
 	 */
-	public function activity_label( string $event_type ): string {
+	public function activity_label( string $event_type, array $context = array() ): string {
+		if ( 'pool.available_codes_deleted' === $event_type ) {
+			$deleted = isset( $context['deleted_available_count'] )
+				? absint( $context['deleted_available_count'] )
+				: null;
+
+			if ( null !== $deleted ) {
+				return sprintf(
+					/* translators: %d: number of permanently deleted available codes */
+					_n( 'Deleted %d available code', 'Deleted %d available codes', $deleted, 'voucher-manager' ),
+					$deleted
+				);
+			}
+		}
+
 		return match ( $event_type ) {
-			'import.completed'         => __( 'Import completed', 'voucher-manager' ),
-			'import.failed'            => __( 'Import failed', 'voucher-manager' ),
-			'import.rolled_back'       => __( 'Import rolled back', 'voucher-manager' ),
-			'import.rollback_blocked'  => __( 'Import rollback blocked', 'voucher-manager' ),
-			'distribution.completed'   => __( 'Code distributed', 'voucher-manager' ),
-			'distribution.empty'       => __( 'Pool has no available codes', 'voucher-manager' ),
-			'distribution.failed'      => __( 'Distribution failed', 'voucher-manager' ),
-			'admin.action_failed'      => __( 'Administrative action failed', 'voucher-manager' ),
-			default                    => __( 'Voucher Manager activity', 'voucher-manager' ),
+			'import.completed'             => __( 'Import completed', 'voucher-manager' ),
+			'import.failed'                => __( 'Import failed', 'voucher-manager' ),
+			'import.rolled_back'           => __( 'Import rolled back', 'voucher-manager' ),
+			'import.rollback_blocked'      => __( 'Import rollback blocked', 'voucher-manager' ),
+			'distribution.completed'       => __( 'Code distributed', 'voucher-manager' ),
+			'distribution.empty'           => __( 'Pool has no available codes', 'voucher-manager' ),
+			'distribution.failed'          => __( 'Distribution failed', 'voucher-manager' ),
+			'admin.action_failed'          => __( 'Administrative action failed', 'voucher-manager' ),
+			'pool.available_codes_deleted' => __( 'Available codes deleted', 'voucher-manager' ),
+			'pool.deleted'                 => __( 'Pool deleted', 'voucher-manager' ),
+			'pool.delete_failed'           => __( 'Pool deletion failed', 'voucher-manager' ),
+			default                        => __( 'Voucher Manager activity', 'voucher-manager' ),
 		};
 	}
 
@@ -40,10 +59,13 @@ final class DashboardViewModel {
 			'import.rolled_back',
 			'distribution.completed' => 'success',
 			'distribution.empty',
-			'import.rollback_blocked' => 'warning',
+			'import.rollback_blocked',
+			'pool.available_codes_deleted',
+			'pool.deleted' => 'warning',
 			'import.failed',
 			'distribution.failed',
-			'admin.action_failed' => 'error',
+			'admin.action_failed',
+			'pool.delete_failed' => 'error',
 			default => 'neutral',
 		};
 	}
@@ -64,6 +86,39 @@ final class DashboardViewModel {
 				_n( '%d code remains available.', '%d codes remain available.', $remaining, 'voucher-manager' ),
 				$remaining
 			);
+		}
+
+		if ( 'import.completed' === $event_type ) {
+			$imported = isset( $context['imported'] ) ? absint( $context['imported'] ) : 0;
+			$skipped  = isset( $context['skipped'] ) ? absint( $context['skipped'] ) : 0;
+			$invalid  = isset( $context['invalid'] ) ? absint( $context['invalid'] ) : 0;
+			$parts    = array();
+
+			if ( 0 < $pool_id ) {
+				$parts[] = sprintf(
+					/* translators: %d: internal pool ID */
+					__( 'Pool #%d', 'voucher-manager' ),
+					$pool_id
+				);
+			}
+
+			$parts[] = sprintf(
+				/* translators: %d: number of imported codes */
+				_n( '%d code added', '%d codes added', $imported, 'voucher-manager' ),
+				$imported
+			);
+			$parts[] = sprintf(
+				/* translators: %d: number of skipped rows */
+				_n( '%d skipped', '%d skipped', $skipped, 'voucher-manager' ),
+				$skipped
+			);
+			$parts[] = sprintf(
+				/* translators: %d: number of invalid rows */
+				_n( '%d invalid', '%d invalid', $invalid, 'voucher-manager' ),
+				$invalid
+			);
+
+			return implode( ' · ', $parts );
 		}
 
 		if ( 0 < $pool_id ) {
