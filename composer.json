@@ -31,12 +31,14 @@
       "@test:golden-path",
       "@test:state-integrity",
       "@test:operational-logging",
+      "@test:dashboard-experience",
       "@build",
       "@validate:artifact"
     ],
     "test:golden-path": "php tests/Integration/GoldenPathTest.php",
     "test:state-integrity": "php tests/Integration/CodeStateIntegrityTest.php",
-    "test:operational-logging": "php tests/Integration/OperationalLoggingTest.php"
+    "test:operational-logging": "php tests/Integration/OperationalLoggingTest.php",
+    "test:dashboard-experience": "php tests/Integration/DashboardExperienceTest.php"
   },
   "config": {
     "sort-packages": true

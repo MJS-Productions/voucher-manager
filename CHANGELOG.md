@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- Sprint 6 Part 1 navigation and dashboard experience.
+- Dashboard inventory metrics for available and distributed codes.
+- Quick actions for pool creation, import and distribution.
+- Human-readable recent operational activity.
+- Automated dashboard experience test.
+- ADR 0010 and dashboard documentation.
+
+### Changed
+- Renamed the duplicated Voucher Manager submenu item to Dashboard.
+
+
 ## 0.5.0-alpha - 2026-07-13
 
 **The Stable Foundation**

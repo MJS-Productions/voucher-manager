@@ -28,6 +28,15 @@ final class Admin {
 			'dashicons-tickets-alt',
 			58
 		);
+
+		add_submenu_page(
+			'voucher-manager',
+			__( 'Voucher Manager Dashboard', 'voucher-manager' ),
+			__( 'Dashboard', 'voucher-manager' ),
+			'manage_options',
+			'voucher-manager',
+			array( $this, 'render_dashboard' )
+		);
 	}
 
 	public function enqueue_assets( string $hook_suffix ): void {
