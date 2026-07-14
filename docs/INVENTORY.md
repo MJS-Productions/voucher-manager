@@ -63,3 +63,27 @@ While Inventory is open:
 - the Voucher Manager parent menu remains expanded;
 - Pools remains highlighted as the logical parent section;
 - the Inventory page remains reachable only through pool-specific `View inventory` links.
+
+
+## Filter and pagination experience
+
+The Inventory screen distinguishes pool-wide totals from filtered results.
+
+When filters are active, it shows a readable summary such as:
+
+`Available · Import #12 — codes.csv`
+
+Pagination explains the visible range:
+
+`Showing 51–100 of 120 matching records`
+
+Empty states are contextual:
+
+- an empty pool guides the administrator to Import Codes;
+- an empty state filter explains that no records match that state;
+- an empty import filter explains that no records match the selected import;
+- filtered emptiness prioritizes Reset filters rather than suggesting unrelated actions.
+
+The Reset filters action appears only while a filter is active.
+
+The five-column inventory table uses a horizontal-scroll container on narrow screens so timestamps and provenance are not hidden.

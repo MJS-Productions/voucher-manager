@@ -43,6 +43,8 @@ final class InventoryData {
 		$pages = max( 1, (int) ceil( $total / $per_page ) );
 		$page  = min( $page, $pages );
 
+		$counts = $this->repository->counts( $pool_id );
+
 		return array(
 			'records'        => $this->repository->search(
 				$pool_id,
@@ -51,7 +53,8 @@ final class InventoryData {
 				$per_page,
 				( $page - 1 ) * $per_page
 			),
-			'counts'         => $this->repository->counts( $pool_id ),
+			'counts'         => $counts,
+			'pool_empty'     => 0 === $counts['total'],
 			'import_options' => $import_options,
 			'filters'        => array(
 				'state'     => $state,

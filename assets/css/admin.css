@@ -639,3 +639,32 @@
 		flex-direction: column;
 	}
 }
+
+
+/* Sprint 7 Part 3: Inventory filter and pagination experience */
+.voucher-manager__inventory-totals-title {
+	margin-bottom: 10px;
+}
+.voucher-manager__inventory-result-meta {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 5px;
+	text-align: right;
+}
+.voucher-manager__table-scroll {
+	width: 100%;
+	overflow-x: auto;
+}
+.voucher-manager__table-scroll table {
+	min-width: 760px;
+}
+.voucher-manager__empty-state .button {
+	margin: 14px 4px 0;
+}
+@media (max-width: 782px) {
+	.voucher-manager__inventory-result-meta {
+		align-items: flex-start;
+		text-align: left;
+	}
+}

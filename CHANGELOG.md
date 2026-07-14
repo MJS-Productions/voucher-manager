@@ -6,6 +6,9 @@
 - Kept Inventory accessible while preserving Voucher Manager → Pools context by hiding its registered submenu link visually instead of removing the page registration.
 
 ### Added
+- Sprint 7 Part 3 contextual Inventory filters, result ranges and pagination guidance.
+- Filter-aware empty states and responsive Inventory table presentation.
+- ADR 0018 and expanded Inventory Experience regression coverage.
 - Sprint 7 Part 2 read-only Pool Inventory screen.
 - Pool-scoped masked references, state and import provenance visibility.
 - Inventory state/import filters and 50-row pagination.

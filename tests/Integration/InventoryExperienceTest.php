@@ -69,6 +69,16 @@ $assert( 'all' === $view->normalized_state( 'reserved' ), 'Prepared states must 
 $assert( CodeStatus::AVAILABLE === $view->state_from_request( 'available' ), 'Available filter must map to the active workflow state.' );
 $assert( CodeStatus::ASSIGNED === $view->state_from_request( 'assigned' ), 'Assigned filter must map to the active workflow state.' );
 $assert( null === $view->state_from_request( 'all' ), 'All-state filtering must use the repository public-state scope.' );
+$assert( ! $view->has_active_filters( 'all', null ), 'Default inventory view must not show a redundant Reset action.' );
+$assert( $view->has_active_filters( 'available', null ), 'State filtering must activate Reset guidance.' );
+$assert( $view->has_active_filters( 'all', 12 ), 'Import filtering must activate Reset guidance.' );
+$assert( 'Available · Import #12 — codes.csv' === $view->active_filter_summary( 'available', 12, array( array( 'id' => 12, 'filename' => 'codes.csv' ) ) ), 'Combined filters need a readable summary.' );
+$assert( 'Showing 51–100 of 120 matching records' === $view->result_range( 2, 50, 120 ), 'Pagination must explain the visible result range.' );
+$assert( '0 matching records' === $view->result_range( 1, 50, 0 ), 'Empty filtered results need an explicit zero count.' );
+$assert( 'This pool has no inventory yet.' === $view->empty_state_title( true, 'all', null ), 'Empty pools need pool-level guidance.' );
+$assert( 'No assigned codes match this filter.' === $view->empty_state_title( false, 'assigned', null ), 'Assigned-only emptiness must describe the selected filter.' );
+$assert( 'No codes match this import filter.' === $view->empty_state_title( false, 'all', 12 ), 'Import-filter emptiness must be contextual.' );
+
 
 $repository = new class() implements CodeInventoryRepository {
 	/** @var array<string,mixed> */
@@ -137,6 +147,12 @@ $assert(
 $assert(
 	is_string( $template_source )
 	&& str_contains( $template_source, 'References are masked' )
+	&& str_contains( $template_source, 'Pool totals' )
+	&& str_contains( $template_source, 'result_range' )
+	&& str_contains( $template_source, 'active_filter_summary' )
+	&& str_contains( $template_source, 'empty_state_title' )
+	&& str_contains( $template_source, 'Reset filters' )
+	&& str_contains( $template_source, 'voucher-manager__table-scroll' )
 	&& ! str_contains( $template_source, 'Copy code' )
 	&& ! str_contains( $template_source, 'Reveal' )
 	&& ! str_contains( $template_source, 'voucher_code' ),

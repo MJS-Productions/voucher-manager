@@ -22,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-pools' ) ); ?>"><?php echo esc_html__( 'Back to Pools', 'voucher-manager' ); ?></a>
 	</header>
 
+	<h2 class="voucher-manager__section-title voucher-manager__inventory-totals-title"><?php echo esc_html__( 'Pool totals', 'voucher-manager' ); ?></h2>
 	<section class="voucher-manager__metrics voucher-manager__metrics--three" aria-label="<?php echo esc_attr__( 'Pool inventory summary', 'voucher-manager' ); ?>">
 		<article class="voucher-manager__metric">
 			<span><?php echo esc_html__( 'Total codes', 'voucher-manager' ); ?></span>
@@ -67,7 +68,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 
 			<?php submit_button( __( 'Filter inventory', 'voucher-manager' ), 'secondary', '', false ); ?>
-			<a class="button" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-inventory', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Reset', 'voucher-manager' ); ?></a>
+			<?php if ( $view->has_active_filters( $data['filters']['state'], $data['filters']['import_id'] ) ) : ?>
+				<a class="button" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-inventory', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Reset filters', 'voucher-manager' ); ?></a>
+			<?php endif; ?>
 		</form>
 	</div>
 
@@ -77,18 +80,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<h2><?php echo esc_html__( 'Code inventory', 'voucher-manager' ); ?></h2>
 				<p><?php echo esc_html__( 'References are masked. Complete voucher values are only shown in the one-time Distribution result.', 'voucher-manager' ); ?></p>
 			</div>
-			<span class="voucher-manager__muted">
-				<?php echo esc_html( sprintf( __( '%s matching records', 'voucher-manager' ), number_format_i18n( $data['total'] ) ) ); ?>
-			</span>
+			<div class="voucher-manager__inventory-result-meta">
+				<?php $filter_summary = $view->active_filter_summary( $data['filters']['state'], $data['filters']['import_id'], $data['import_options'] ); ?>
+				<?php if ( '' !== $filter_summary ) : ?>
+					<strong><?php echo esc_html( $filter_summary ); ?></strong>
+				<?php endif; ?>
+				<span class="voucher-manager__muted"><?php echo esc_html( $view->result_range( $data['page'], $data['per_page'], $data['total'] ) ); ?></span>
+			</div>
 		</div>
 
 		<?php if ( empty( $data['records'] ) ) : ?>
 			<div class="voucher-manager__empty-state">
-				<strong><?php echo esc_html__( 'No matching inventory found.', 'voucher-manager' ); ?></strong>
-				<p><?php echo esc_html__( 'Change the filters or import codes into this pool.', 'voucher-manager' ); ?></p>
-				<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-import', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Import Codes', 'voucher-manager' ); ?></a>
+				<strong><?php echo esc_html( $view->empty_state_title( $data['pool_empty'], $data['filters']['state'], $data['filters']['import_id'] ) ); ?></strong>
+				<p><?php echo esc_html( $view->empty_state_message( $data['pool_empty'], $data['filters']['state'], $data['filters']['import_id'] ) ); ?></p>
+				<?php if ( $view->has_active_filters( $data['filters']['state'], $data['filters']['import_id'] ) ) : ?>
+					<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-inventory', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Reset filters', 'voucher-manager' ); ?></a>
+				<?php endif; ?>
+				<?php if ( $data['pool_empty'] || 0 === $data['counts']['available'] ) : ?>
+					<a class="button<?php echo $view->has_active_filters( $data['filters']['state'], $data['filters']['import_id'] ) ? '' : ' button-primary'; ?>" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-import', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Import Codes', 'voucher-manager' ); ?></a>
+				<?php endif; ?>
 			</div>
 		<?php else : ?>
+			<div class="voucher-manager__table-scroll">
 			<table class="widefat striped">
 				<thead>
 					<tr>
@@ -111,6 +124,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php endforeach; ?>
 				</tbody>
 			</table>
+			</div>
 
 			<?php if ( 1 < $data['pages'] ) : ?>
 				<div class="voucher-manager__pagination voucher-manager__inventory-pagination">
