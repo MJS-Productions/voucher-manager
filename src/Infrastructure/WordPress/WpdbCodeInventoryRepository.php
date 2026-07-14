@@ -41,11 +41,19 @@ final class WpdbCodeInventoryRepository implements CodeInventoryRepository {
 		$args[]         = max( 1, min( 100, $limit ) );
 		$args[]         = max( 0, $offset );
 		$table          = $this->codes_table();
+		$imports        = $this->imports_table();
 
-		$sql = "SELECT id, pool_id, import_id, CASE WHEN CHAR_LENGTH(code) > 4 THEN RIGHT(code, 4) ELSE '' END AS code_suffix, status, imported_at, assigned_at
-			FROM {$table}
-			WHERE {$where}
-			ORDER BY id DESC
+		$sql = "SELECT c.id, c.pool_id, c.import_id, i.filename AS import_filename,
+				CASE WHEN CHAR_LENGTH(c.code) > 4 THEN RIGHT(c.code, 4) ELSE '' END AS code_suffix,
+				c.status, c.imported_at, c.assigned_at
+			FROM {$table} c
+			LEFT JOIN {$imports} i ON i.id = c.import_id AND i.pool_id = c.pool_id
+			WHERE " . str_replace(
+				array( 'pool_id', 'status', 'import_id' ),
+				array( 'c.pool_id', 'c.status', 'c.import_id' ),
+				$where
+			) . "
+			ORDER BY c.id DESC
 			LIMIT %d OFFSET %d";
 
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -62,6 +70,7 @@ final class WpdbCodeInventoryRepository implements CodeInventoryRepository {
 				(int) $row['id'],
 				(int) $row['pool_id'],
 				null === $row['import_id'] ? null : (int) $row['import_id'],
+				empty( $row['import_filename'] ) ? null : sanitize_file_name( (string) $row['import_filename'] ),
 				(string) ( $row['code_suffix'] ?? '' ),
 				$status_value,
 				(string) $row['imported_at'],

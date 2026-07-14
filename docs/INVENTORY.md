@@ -87,3 +87,27 @@ Empty states are contextual:
 The Reset filters action appears only while a filter is active.
 
 The five-column inventory table uses a horizontal-scroll container on narrow screens so timestamps and provenance are not hidden.
+
+
+## Provenance and lifecycle visibility
+
+Inventory rows now include sanitized source provenance such as `Import #12 — codes.csv`.
+
+Missing relations remain visible through defensive fallbacks:
+
+- `Import unavailable`
+- `Import #12 unavailable`
+
+Timestamp presentation is centralized and converted from stored UTC to the WordPress site timezone.
+
+Lifecycle rules:
+
+- Available with no assignment timestamp: healthy, shown as `Not assigned`
+- Assigned with assignment timestamp: healthy
+- Assigned without assignment timestamp: attention
+- Available with assignment timestamp: attention
+- Invalid timestamps: attention
+
+Contradictory records remain read-only and display:
+
+`Lifecycle data is inconsistent. No automatic change was made.`

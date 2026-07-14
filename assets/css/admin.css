@@ -668,3 +668,15 @@
 		text-align: left;
 	}
 }
+
+
+/* Sprint 7 Part 4: Provenance and lifecycle visibility */
+.voucher-manager__inventory-row--attention td:first-child {
+	border-left: 4px solid #dba617;
+}
+.voucher-manager__integrity-note {
+	max-width: 320px;
+	margin: 8px 0 0;
+	color: #6e5500;
+	font-size: 12px;
+}

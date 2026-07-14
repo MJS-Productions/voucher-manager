@@ -7,6 +7,9 @@
 - Kept Inventory accessible while preserving Voucher Manager → Pools context by hiding its registered submenu link visually instead of removing the page registration.
 
 ### Added
+- Sprint 7 Part 4 import provenance and lifecycle-integrity visibility in Pool Inventory.
+- Defensive timestamp and missing-import fallbacks without automatic data repair.
+- ADR 0019 and expanded Inventory Experience regression coverage.
 - Sprint 7 Part 3 contextual Inventory filters, result ranges and pagination guidance.
 - Filter-aware empty states and responsive Inventory table presentation.
 - ADR 0018 and expanded Inventory Experience regression coverage.

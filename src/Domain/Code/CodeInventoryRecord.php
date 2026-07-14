@@ -18,6 +18,7 @@ final class CodeInventoryRecord {
 		private readonly int $id,
 		private readonly int $pool_id,
 		private readonly ?int $import_id,
+		private readonly ?string $import_filename,
 		private readonly string $code_suffix,
 		private readonly CodeStatus $status,
 		private readonly string $imported_at,
@@ -28,6 +29,7 @@ final class CodeInventoryRecord {
 	public function id(): int { return $this->id; }
 	public function pool_id(): int { return $this->pool_id; }
 	public function import_id(): ?int { return $this->import_id; }
+	public function import_filename(): ?string { return $this->import_filename; }
 	public function code_suffix(): string { return $this->code_suffix; }
 	public function status(): CodeStatus { return $this->status; }
 	public function imported_at(): string { return $this->imported_at; }

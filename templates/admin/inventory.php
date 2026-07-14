@@ -114,12 +114,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</thead>
 				<tbody>
 					<?php foreach ( $data['records'] as $record ) : ?>
-						<tr>
-							<td><code class="voucher-manager__masked-reference"><?php echo esc_html( $view->reference( $record ) ); ?></code><br><small><?php echo esc_html( sprintf( __( 'Code #%d', 'voucher-manager' ), $record->id() ) ); ?></small></td>
+						<?php
+						$integrity = $view->lifecycle_integrity( $record );
+						$note      = $view->lifecycle_note( $record );
+						?>
+						<tr class="voucher-manager__inventory-row voucher-manager__inventory-row--<?php echo esc_attr( $integrity ); ?>">
+							<td>
+								<code class="voucher-manager__masked-reference"><?php echo esc_html( $view->reference( $record ) ); ?></code><br>
+								<small><?php echo esc_html( sprintf( __( 'Code #%d', 'voucher-manager' ), $record->id() ) ); ?></small>
+								<?php if ( '' !== $note ) : ?>
+									<p class="voucher-manager__integrity-note"><strong><?php echo esc_html__( 'Attention:', 'voucher-manager' ); ?></strong> <?php echo esc_html( $note ); ?></p>
+								<?php endif; ?>
+							</td>
 							<td><span class="voucher-manager__badge voucher-manager__badge--<?php echo esc_attr( $view->status_tone( $record->status() ) ); ?>"><?php echo esc_html( $view->status_label( $record->status() ) ); ?></span></td>
-							<td><?php echo null === $record->import_id() ? '—' : esc_html( sprintf( __( 'Import #%d', 'voucher-manager' ), $record->import_id() ) ); ?></td>
-							<td><?php echo esc_html( mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $record->imported_at() . ' UTC', true ) ); ?></td>
-							<td><?php echo null === $record->assigned_at() ? '—' : esc_html( mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $record->assigned_at() . ' UTC', true ) ); ?></td>
+							<td><?php echo esc_html( $view->import_reference( $record ) ); ?></td>
+							<td><?php echo esc_html( $view->formatted_imported_at( $record ) ); ?></td>
+							<td><?php echo esc_html( $view->formatted_assigned_at( $record ) ); ?></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>

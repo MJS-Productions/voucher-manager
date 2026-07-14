@@ -19,6 +19,16 @@ if ( ! function_exists( '__' ) ) {
 		return $text;
 	}
 }
+if ( ! function_exists( 'get_option' ) ) {
+	function get_option( string $name ): string {
+		return 'date_format' === $name ? 'Y-m-d' : 'H:i';
+	}
+}
+if ( ! function_exists( 'wp_date' ) ) {
+	function wp_date( string $format, int $timestamp ): string {
+		return gmdate( $format, $timestamp );
+	}
+}
 
 $root = dirname( __DIR__, 2 );
 
@@ -47,6 +57,7 @@ $record = new CodeInventoryRecord(
 	101,
 	7,
 	12,
+	'codes.csv',
 	'7X4P',
 	CodeStatus::AVAILABLE,
 	'2026-07-13 10:00:00',
@@ -59,12 +70,31 @@ $short = new CodeInventoryRecord(
 	102,
 	7,
 	12,
+	null,
 	'',
 	CodeStatus::AVAILABLE,
 	'2026-07-13 10:00:00',
 	null
 );
 $assert( 'Code #102' === $view->reference( $short ), 'Short or unavailable suffixes must fall back to an internal reference.' );
+$assert( 'Import #12 — codes.csv' === $view->import_reference( $record ), 'Healthy import provenance must include ID and sanitized filename.' );
+$assert( 'Import #12 unavailable' === $view->import_reference( $short ), 'Missing import rows must remain visible with a defensive fallback.' );
+
+$assigned = new CodeInventoryRecord( 103, 7, 12, 'codes.csv', 'A91K', CodeStatus::ASSIGNED, '2026-07-13 10:00:00', '2026-07-13 11:00:00' );
+$assigned_missing_time = new CodeInventoryRecord( 104, 7, 12, 'codes.csv', 'B91K', CodeStatus::ASSIGNED, '2026-07-13 10:00:00', null );
+$available_with_time = new CodeInventoryRecord( 105, 7, null, null, 'C91K', CodeStatus::AVAILABLE, '2026-07-13 10:00:00', '2026-07-13 11:00:00' );
+$invalid_import_time = new CodeInventoryRecord( 106, 7, null, null, 'D91K', CodeStatus::AVAILABLE, 'not-a-time', null );
+
+$assert( 'healthy' === $view->lifecycle_integrity( $record ), 'Available records without assignment timestamps must be healthy.' );
+$assert( 'healthy' === $view->lifecycle_integrity( $assigned ), 'Assigned records with assignment timestamps must be healthy.' );
+$assert( 'attention' === $view->lifecycle_integrity( $assigned_missing_time ), 'Assigned records without assignment timestamps need attention.' );
+$assert( 'attention' === $view->lifecycle_integrity( $available_with_time ), 'Available records with assignment timestamps need attention.' );
+$assert( 'Not assigned' === $view->formatted_assigned_at( $record ), 'Healthy available records need explicit Not assigned language.' );
+$assert( 'Assignment time unavailable' === $view->formatted_assigned_at( $assigned_missing_time ), 'Missing assignment timestamps need a defensive fallback.' );
+$assert( 'Unexpected assignment timestamp' === $view->formatted_assigned_at( $available_with_time ), 'Contradictory available records need an explicit warning.' );
+$assert( 'Import time unavailable' === $view->formatted_imported_at( $invalid_import_time ), 'Invalid import timestamps need a defensive fallback.' );
+$assert( str_contains( $view->lifecycle_note( $assigned_missing_time ), 'No automatic change was made' ), 'Integrity warnings must remain read-only.' );
+
 $assert( 'all' === $view->normalized_state( 'reserved' ), 'Prepared states must not become public filters.' );
 $assert( CodeStatus::AVAILABLE === $view->state_from_request( 'available' ), 'Available filter must map to the active workflow state.' );
 $assert( CodeStatus::ASSIGNED === $view->state_from_request( 'assigned' ), 'Assigned filter must map to the active workflow state.' );
@@ -127,7 +157,9 @@ $composer_source   = file_get_contents( $root . '/composer.json' );
 
 $assert(
 	is_string( $repository_source )
-	&& str_contains( $repository_source, "CASE WHEN CHAR_LENGTH(code) > 4 THEN RIGHT(code, 4) ELSE '' END AS code_suffix" )
+	&& str_contains( $repository_source, 'LEFT JOIN {$imports} i ON i.id = c.import_id AND i.pool_id = c.pool_id' )
+	&& str_contains( $repository_source, 'i.filename AS import_filename' )
+	&& str_contains( $repository_source, "CASE WHEN CHAR_LENGTH(c.code) > 4 THEN RIGHT(c.code, 4) ELSE '' END AS code_suffix" )
 	&& ! str_contains( $repository_source, 'SELECT id, pool_id, import_id, code,' ),
 	'Repository must never hydrate the complete voucher value for inventory presentation.'
 );
@@ -153,6 +185,11 @@ $assert(
 	&& str_contains( $template_source, 'empty_state_title' )
 	&& str_contains( $template_source, 'Reset filters' )
 	&& str_contains( $template_source, 'voucher-manager__table-scroll' )
+	&& str_contains( $template_source, 'import_reference' )
+	&& str_contains( $template_source, 'formatted_imported_at' )
+	&& str_contains( $template_source, 'formatted_assigned_at' )
+	&& str_contains( $template_source, 'lifecycle_integrity' )
+	&& str_contains( $template_source, 'lifecycle_note' )
 	&& ! str_contains( $template_source, 'Copy code' )
 	&& ! str_contains( $template_source, 'Reveal' )
 	&& ! str_contains( $template_source, 'voucher_code' ),

@@ -159,4 +159,95 @@ final class InventoryViewModel {
 		};
 	}
 
+	public function import_reference( CodeInventoryRecord $record ): string {
+		$import_id = $record->import_id();
+		$filename  = $record->import_filename();
+
+		if ( null === $import_id ) {
+			return __( 'Import unavailable', 'voucher-manager' );
+		}
+
+		if ( null === $filename || '' === trim( $filename ) ) {
+			return sprintf(
+				/* translators: %d: import ID */
+				__( 'Import #%d unavailable', 'voucher-manager' ),
+				$import_id
+			);
+		}
+
+		return sprintf(
+			/* translators: 1: import ID, 2: sanitized source filename */
+			__( 'Import #%1$d — %2$s', 'voucher-manager' ),
+			$import_id,
+			$filename
+		);
+	}
+
+	public function formatted_imported_at( CodeInventoryRecord $record ): string {
+		return $this->formatted_utc_time(
+			$record->imported_at(),
+			__( 'Import time unavailable', 'voucher-manager' )
+		);
+	}
+
+	public function formatted_assigned_at( CodeInventoryRecord $record ): string {
+		if ( CodeStatus::AVAILABLE === $record->status() && null === $record->assigned_at() ) {
+			return __( 'Not assigned', 'voucher-manager' );
+		}
+
+		if ( CodeStatus::ASSIGNED === $record->status() && null === $record->assigned_at() ) {
+			return __( 'Assignment time unavailable', 'voucher-manager' );
+		}
+
+		if ( CodeStatus::AVAILABLE === $record->status() && null !== $record->assigned_at() ) {
+			return __( 'Unexpected assignment timestamp', 'voucher-manager' );
+		}
+
+		return $this->formatted_utc_time(
+			(string) $record->assigned_at(),
+			__( 'Assignment time unavailable', 'voucher-manager' )
+		);
+	}
+
+	public function lifecycle_integrity( CodeInventoryRecord $record ): string {
+		if (
+			( CodeStatus::AVAILABLE === $record->status() && null !== $record->assigned_at() )
+			|| ( CodeStatus::ASSIGNED === $record->status() && null === $record->assigned_at() )
+			|| ! $this->is_valid_utc_time( $record->imported_at() )
+			|| ( null !== $record->assigned_at() && ! $this->is_valid_utc_time( $record->assigned_at() ) )
+		) {
+			return 'attention';
+		}
+
+		return 'healthy';
+	}
+
+	public function lifecycle_note( CodeInventoryRecord $record ): string {
+		return 'attention' === $this->lifecycle_integrity( $record )
+			? __( 'Lifecycle data is inconsistent. No automatic change was made.', 'voucher-manager' )
+			: '';
+	}
+
+	private function formatted_utc_time( string $value, string $fallback ): string {
+		if ( ! $this->is_valid_utc_time( $value ) ) {
+			return $fallback;
+		}
+
+		$timestamp = strtotime( $value . ' UTC' );
+
+		return wp_date(
+			get_option( 'date_format' ) . ' ' . get_option( 'time_format' ),
+			false === $timestamp ? 0 : $timestamp
+		);
+	}
+
+	private function is_valid_utc_time( ?string $value ): bool {
+		if ( null === $value || '' === trim( $value ) ) {
+			return false;
+		}
+
+		return false !== strtotime( $value . ' UTC' );
+	}
+
+
 }
