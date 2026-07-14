@@ -65,6 +65,10 @@ $assert(
 	'Activity detail must remain privacy-safe.'
 );
 $assert( 'Imports' === $view->family_label( 'import' ), 'Activity families must use readable labels.' );
+$assert( ! $view->has_active_filters( 'all', 'all' ), 'Default Activity view must not show a redundant Reset action.' );
+$assert( $view->has_active_filters( 'import', 'all' ), 'Area filtering must activate Activity Reset guidance.' );
+$assert( $view->has_active_filters( 'all', 'error' ), 'Outcome filtering must activate Activity Reset guidance.' );
+
 
 $data_source      = file_get_contents( $root . '/src/Admin/OperationalActivityData.php' );
 $admin_source     = file_get_contents( $root . '/src/Admin/OperationalActivityAdmin.php' );
@@ -88,6 +92,8 @@ $assert(
 );
 $assert(
 	str_contains( $template_source, 'Filter activity' )
+	&& str_contains( $template_source, 'has_active_filters' )
+	&& str_contains( $template_source, 'Reset filters' )
 	&& str_contains( $template_source, 'Activity history' )
 	&& str_contains( $template_source, 'activity-guidance' ),
 	'The activity page must provide filters, history and action guidance.'

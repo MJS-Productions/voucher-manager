@@ -70,7 +70,9 @@ $tones    = array(
 				</select>
 			</div>
 			<?php submit_button( __( 'Filter activity', 'voucher-manager' ), 'secondary', '', false ); ?>
-			<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-activity' ) ); ?>"><?php echo esc_html__( 'Reset', 'voucher-manager' ); ?></a>
+			<?php if ( $view->has_active_filters( $data['filters']['family'], $data['filters']['tone'] ) ) : ?>
+				<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-activity' ) ); ?>"><?php echo esc_html__( 'Reset filters', 'voucher-manager' ); ?></a>
+			<?php endif; ?>
 		</form>
 	</div>
 

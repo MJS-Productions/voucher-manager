@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Fixed
+- Aligned Activity filter reset behavior with Pool Inventory by showing `Reset filters` only when Area or Outcome filtering is active.
 - Kept Inventory accessible while preserving Voucher Manager → Pools context by hiding its registered submenu link visually instead of removing the page registration.
 
 ### Added

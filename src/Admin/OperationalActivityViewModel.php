@@ -64,6 +64,11 @@ final class OperationalActivityViewModel {
 		};
 	}
 
+
+	public function has_active_filters( string $family, string $tone ): bool {
+		return 'all' !== $family || 'all' !== $tone;
+	}
+
 	public function family_label( string $family ): string {
 		return match ( $family ) {
 			'import'       => __( 'Imports', 'voucher-manager' ),

@@ -51,3 +51,12 @@ The dashboard continues to show the five newest events and now links to the comp
 ## Quality protection
 
 `tests/Integration/OperationalVisibilityTest.php` protects filtering, pagination, administrator access, actionable guidance and the no-raw-context presentation boundary.
+
+
+## Filter reset behavior
+
+The Activity filter bar follows the same interaction rule as Pool Inventory:
+
+- no Reset action is shown while Area and Outcome both use their default values;
+- `Reset filters` appears as soon as either filter is active;
+- resetting returns to the complete Activity history.
