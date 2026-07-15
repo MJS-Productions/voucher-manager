@@ -5,15 +5,17 @@ Professional management and distribution of unique voucher codes for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Alpha development  
-**Release candidate:** `0.6.0-alpha` — The First Experience  
-**Previous published release:** `0.5.0-alpha` — The Stable Foundation
+**Release candidate:** `0.7.0-alpha` — The Visible Inventory  
+**Previous published release:** `0.6.0-alpha` — The First Experience
 
-Sprint 6 is development-complete and has entered final release validation. The `0.6.0-alpha` version identity was selected during the Sprint 6 release review because the milestone delivers a coherent new administration experience across the existing Golden Path without introducing a database migration.
+Sprint 7 is development-complete and has entered final release validation. The `0.7.0-alpha` candidate adds a privacy-safe, pool-scoped Inventory experience with filters, pagination, import provenance and read-only lifecycle-integrity visibility without introducing a database migration.
 
 ## Current capabilities
 
 - dashboard metrics, quick actions and privacy-safe recent operational activity;
 - pool creation, editing, activation and inventory-oriented status presentation;
+- privacy-safe, pool-scoped Inventory with masked references, filters, pagination and import provenance;
+- read-only lifecycle-integrity visibility for contradictory Inventory timestamps;
 - pool lifecycle Danger Zone for scoped available-code deletion and atomic full pool deletion;
 - TXT and CSV voucher-code imports with result summaries and protected rollback;
 - atomic manual distribution from `available` to `assigned`;
@@ -42,7 +44,7 @@ composer install
 composer quality
 ```
 
-The Quality Gate validates PHP syntax, plugin structure, version consistency, autoloading, the core Golden Path, code-state integrity, operational logging and the current Sprint 6 administration experiences. It also builds and validates `dist/voucher-manager.zip`.
+The Quality Gate validates PHP syntax, plugin structure, version consistency, autoloading, the core Golden Path, code-state integrity, operational logging and the current Sprint 7 Inventory and administration experiences. It also builds and validates `dist/voucher-manager.zip`.
 
 Official WordPress smoke tests should use the `voucher-manager.zip` artifact built and validated by GitHub Actions rather than a manually packed source archive.
 
@@ -58,7 +60,7 @@ Official WordPress smoke tests should use the `voucher-manager.zip` artifact bui
 - `BUG_STORIES.md` — notable project failures and lessons learned;
 - `docs/` — current technical and experience documentation;
 - `docs/adr/` — architecture decision records;
-- `docs/SPRINT_6_RELEASE_READINESS.md` — Sprint 6 quality boundary, smoke-test matrix and release-review gate.
+- `docs/SPRINT_7_RELEASE_READINESS.md` — Sprint 7 Inventory boundary, smoke-test matrix and release-review gate.
 
 ## Credits
 

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.7.0-alpha - 2026-07-15 — The Visible Inventory
+
 ### Fixed
 - Aligned Activity filter reset behavior with Pool Inventory by showing `Reset filters` only when Area or Outcome filtering is active.
 - Kept Inventory accessible while preserving Voucher Manager → Pools context by hiding its registered submenu link visually instead of removing the page registration.
