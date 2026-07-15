@@ -70,6 +70,12 @@ $assert(
 );
 
 $assert(
+	str_contains( $uninstall, 'DISTRIBUTION_INTENT_OPTION_PREFIX' )
+	&& str_contains( $uninstall, 'DELETE FROM {$wpdb->options} WHERE option_name LIKE %s' ),
+	'Uninstall must always remove ephemeral Distribution intent options without touching preserved business settings.'
+);
+
+$assert(
 	str_contains( $uninstall, 'if ( $delete_data )' )
 	&& str_contains( $uninstall, 'foreach ( UninstallDataBoundary::tables( $wpdb->prefix ) as $table )' )
 	&& str_contains( $uninstall, 'DROP TABLE IF EXISTS {$table}' )

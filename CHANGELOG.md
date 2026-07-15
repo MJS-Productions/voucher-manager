@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- Sprint 8 Part 5.2 one-use Distribution intent idempotency.
+- Owner-scoped, ten-minute opaque intent tokens with affected-row replay protection.
+- Bounded stale-intent cleanup and uninstall cleanup for runtime intent options.
+- Distribution Intent Idempotency regression coverage, documentation and ADR 0024.
 - Sprint 8 Part 5.1 Distribution Claim Outcome hardening.
 - Nullable remaining-inventory state for post-claim metadata failures.
 - Failure-contained post-claim Activity and inventory refresh boundaries.

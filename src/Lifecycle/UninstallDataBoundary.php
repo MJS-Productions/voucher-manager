@@ -18,6 +18,7 @@ final class UninstallDataBoundary {
 	public const VERSION_OPTION = 'voucher_manager_version';
 	public const DATABASE_VERSION_OPTION = 'voucher_manager_database_version';
 	public const ACTIVITY_CRON_HOOK = 'voucher_manager_cleanup_activity';
+	public const DISTRIBUTION_INTENT_OPTION_PREFIX = 'voucher_manager_distribution_intent_';
 
 	/**
 	 * @return array<int,string>

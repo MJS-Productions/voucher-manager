@@ -12,6 +12,7 @@ namespace VoucherManager\Admin;
 use VoucherManager\Domain\Distribution\DistributionResult;
 use VoucherManager\Domain\Distribution\DistributionService;
 use VoucherManager\Domain\Log\OperationalLogger;
+use VoucherManager\Infrastructure\WordPress\WpDistributionIntentStore;
 use VoucherManager\Infrastructure\WordPress\WpdbCodeRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbLogRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbPoolRepository;
@@ -27,6 +28,7 @@ final class DistributionAdmin {
 	private ErrorBoundary $boundary;
 	private PoolOverviewData $overview;
 	private DistributionViewModel $view;
+	private WpDistributionIntentStore $intents;
 
 	public function __construct() {
 		$logger         = new OperationalLogger( new WpdbLogRepository() );
@@ -39,6 +41,7 @@ final class DistributionAdmin {
 		$this->boundary = new ErrorBoundary( $logger );
 		$this->overview = new PoolOverviewData();
 		$this->view     = new DistributionViewModel();
+		$this->intents  = new WpDistributionIntentStore();
 	}
 
 	public function register(): void {
@@ -76,6 +79,14 @@ final class DistributionAdmin {
 			)
 		);
 		$view = $this->view;
+		$intent_token = $this->boundary->execute(
+			fn(): string => $this->intents->create( get_current_user_id() ),
+			'',
+			array(
+				'action' => 'distribution.intent_create',
+				'source' => 'manual',
+			)
+		);
 
 		$template = VOUCHER_MANAGER_PATH . 'templates/admin/distribution.php';
 
@@ -89,6 +100,23 @@ final class DistributionAdmin {
 		check_admin_referer( 'voucher_manager_distribute_code' );
 
 		$pool_id = isset( $_POST['pool_id'] ) ? absint( $_POST['pool_id'] ) : 0;
+		$intent_token = isset( $_POST['distribution_intent'] )
+			? sanitize_text_field( wp_unslash( $_POST['distribution_intent'] ) )
+			: '';
+
+		if ( ! $this->intents->consume( $intent_token, get_current_user_id() ) ) {
+			$this->store_result(
+				new DistributionResult(
+					false,
+					null,
+					__( 'This distribution request has already been used or expired. Reload Distribution and try again.', 'voucher-manager' ),
+					null
+				),
+				$pool_id
+			);
+			$this->redirect( false );
+		}
+
 		$fallback = new DistributionResult(
 			false,
 			null,
@@ -106,6 +134,12 @@ final class DistributionAdmin {
 			)
 		);
 
+		$this->store_result( $result, $pool_id );
+		$this->redirect( $result->success() );
+	}
+
+
+	private function store_result( DistributionResult $result, int $pool_id ): void {
 		set_transient(
 			'voucher_manager_distribution_' . get_current_user_id(),
 			array(
@@ -117,12 +151,14 @@ final class DistributionAdmin {
 			),
 			MINUTE_IN_SECONDS
 		);
+	}
 
+	private function redirect( bool $success ): void {
 		wp_safe_redirect(
 			add_query_arg(
 				array(
 					'page'      => 'voucher-manager-distribution',
-					'vm_notice' => $result->success() ? 'distributed' : 'failed',
+					'vm_notice' => $success ? 'distributed' : 'failed',
 				),
 				admin_url( 'admin.php' )
 			)

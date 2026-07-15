@@ -25,9 +25,14 @@ $delete_data  = is_array( $raw_settings )
 
 wp_clear_scheduled_hook( UninstallDataBoundary::ACTIVITY_CRON_HOOK );
 
-if ( $delete_data ) {
-	global $wpdb;
+global $wpdb;
 
+$intent_like = $wpdb->esc_like( UninstallDataBoundary::DISTRIBUTION_INTENT_OPTION_PREFIX ) . '%';
+// Runtime-only Distribution intents never survive uninstall.
+// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $intent_like ) );
+
+if ( $delete_data ) {
 	foreach ( UninstallDataBoundary::tables( $wpdb->prefix ) as $table ) {
 		// Table names are generated only from the active site's trusted prefix
 		// and the fixed Voucher Manager ownership allowlist above.

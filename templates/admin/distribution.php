@@ -91,9 +91,12 @@ foreach ( $distributable_rows as $row ) {
 					<p><?php echo esc_html__( 'Active pools currently have no available inventory. Import codes before trying again.', 'voucher-manager' ); ?></p>
 					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-import' ) ); ?>"><?php echo esc_html__( 'Import Codes', 'voucher-manager' ); ?></a>
 				</div>
+			<?php elseif ( '' === $intent_token ) : ?>
+				<div class="notice notice-error inline"><p><?php echo esc_html__( 'A secure distribution request could not be prepared. Reload this page and try again.', 'voucher-manager' ); ?></p></div>
 			<?php else : ?>
 				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 					<input type="hidden" name="action" value="voucher_manager_distribute_code">
+					<input type="hidden" name="distribution_intent" value="<?php echo esc_attr( $intent_token ); ?>">
 					<?php wp_nonce_field( 'voucher_manager_distribute_code' ); ?>
 					<p>
 						<label for="vm-distribution-pool"><strong><?php echo esc_html__( 'Pool', 'voucher-manager' ); ?></strong></label>
