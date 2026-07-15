@@ -54,6 +54,13 @@ $assert( is_string( $admin ) && str_contains( $admin, 'PoolOverviewData' ) && st
 $assert( is_string( $template ) && str_contains( $template, 'Your assigned code' ) && str_contains( $template, 'shown only in this one-time result' ), 'Success state must clearly present the one-time voucher result.' );
 $assert( str_contains( $template, 'vm-copy-distributed-code' ) && str_contains( $template, 'navigator.clipboard.writeText' ), 'Success state must provide an explicit copy action.' );
 $assert( str_contains( $template, 'array_filter' ) && str_contains( $template, 'can_distribute' ), 'Pool choices must be filtered through centralized distribution presentation rules.' );
+$assert(
+	str_contains( $template, "\$_GET['pool_id']" )
+	&& str_contains( $template, 'absint( wp_unslash' )
+	&& str_contains( $template, '$requested_pool_id === (int) $row[\'pool\']->id()' )
+	&& str_contains( $template, 'selected( $selected_pool_id, (int) $row[\'pool\']->id() )' ),
+	'Pool context from the Pools overview must preselect only a currently distributable Pool.'
+);
 $assert( str_contains( $template, 'No codes are ready to distribute' ) && str_contains( $template, 'voucher-manager-import' ), 'Empty inventory must show a guided import action.' );
 $assert( str_contains( $template, 'Every distribution requires a new POST action' ), 'Distribution safety guidance must explain refresh behavior.' );
 $assert( ! str_contains( $template, 'get_transient( $key );' ) || str_contains( $template, 'delete_transient( $key );' ), 'One-time result must be consumed after reading.' );

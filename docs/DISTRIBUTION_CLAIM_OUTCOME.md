@@ -57,3 +57,12 @@ The repository retains:
 ## Database
 
 No schema migration is introduced. Database version remains `2`.
+
+
+## Pool-context preselection
+
+When an administrator opens Distribution through a Pool card's `Distribute Code` action, the requested `pool_id` is used only as a presentation preference.
+
+The Pool is preselected only when it is still present in the current distributable rows: active and with available inventory. Invalid, inactive or empty Pool context falls back to the normal first available option.
+
+The administrator can always change the selection before submitting. No claim occurs from the GET request.

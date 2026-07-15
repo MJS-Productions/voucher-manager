@@ -25,6 +25,18 @@ $distributable_rows = array_values(
 		static fn( array $row ): bool => $view->can_distribute( $row )
 	)
 );
+
+$requested_pool_id = isset( $_GET['pool_id'] )
+	? absint( wp_unslash( $_GET['pool_id'] ) )
+	: 0;
+
+$selected_pool_id = 0;
+foreach ( $distributable_rows as $row ) {
+	if ( $requested_pool_id === (int) $row['pool']->id() ) {
+		$selected_pool_id = $requested_pool_id;
+		break;
+	}
+}
 ?>
 <div class="wrap voucher-manager">
 	<h1><?php echo esc_html__( 'Distribution', 'voucher-manager' ); ?></h1>
@@ -87,7 +99,7 @@ $distributable_rows = array_values(
 						<label for="vm-distribution-pool"><strong><?php echo esc_html__( 'Pool', 'voucher-manager' ); ?></strong></label>
 						<select id="vm-distribution-pool" name="pool_id" required>
 							<?php foreach ( $distributable_rows as $row ) : ?>
-								<option value="<?php echo esc_attr( (string) $row['pool']->id() ); ?>"><?php echo esc_html( $view->pool_option_label( $row ) ); ?></option>
+								<option value="<?php echo esc_attr( (string) $row['pool']->id() ); ?>" <?php selected( $selected_pool_id, (int) $row['pool']->id() ); ?>><?php echo esc_html( $view->pool_option_label( $row ) ); ?></option>
 							<?php endforeach; ?>
 						</select>
 					</p>
