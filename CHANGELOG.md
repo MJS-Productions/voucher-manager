@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Added
+- Sprint 8 Part 2 minimal Settings foundation for Activity retention and opt-in uninstall deletion.
+- Single normalized, non-autoloaded `voucher_manager_settings` option with safe defaults.
+- Explicit OFF-to-ON confirmation for destructive uninstall consent.
+- Settings Foundation regression coverage, documentation and ADR 0020.
+
 ## 0.7.0-alpha - 2026-07-15 — The Visible Inventory
 
 ### Fixed

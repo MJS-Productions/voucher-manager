@@ -18,6 +18,7 @@ final class Admin {
 		( new DistributionAdmin() )->register();
 		( new OperationalActivityAdmin() )->register();
 		( new InventoryAdmin() )->register();
+		( new SettingsAdmin() )->register();
 	}
 
 	public function register_menu(): void {

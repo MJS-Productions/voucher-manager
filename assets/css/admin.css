@@ -680,3 +680,30 @@
 	color: #6e5500;
 	font-size: 12px;
 }
+
+
+/* Sprint 8 Part 2: Settings foundation */
+.voucher-manager__settings-section {
+	max-width: 900px;
+	margin-top: 20px;
+}
+.voucher-manager__settings-section select {
+	min-width: 220px;
+	margin-top: 6px;
+}
+.voucher-manager__settings-checkbox {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	margin: 14px 0;
+	font-weight: 600;
+}
+.voucher-manager__settings-checkbox input {
+	margin-top: 2px;
+}
+.voucher-manager__settings-confirmation {
+	padding: 12px;
+	border: 1px solid #dba617;
+	background: #fcf9e8;
+	font-weight: 400;
+}

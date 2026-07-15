@@ -41,6 +41,7 @@
       "@test:release-identity",
       "@test:inventory-experience",
       "@test:inventory-navigation",
+      "@test:settings-foundation",
       "@build",
       "@validate:artifact"
     ],
@@ -57,7 +58,8 @@
     "test:release-identity": "php tests/Integration/ReleaseIdentityTest.php",
     "test:inventory-experience": "php tests/Integration/InventoryExperienceTest.php",
     "test:inventory-navigation": "php tests/Integration/InventoryNavigationTest.php",
-    "test:sprint7-release-readiness": "php tests/Integration/Sprint7ReleaseReadinessTest.php"
+    "test:sprint7-release-readiness": "php tests/Integration/Sprint7ReleaseReadinessTest.php",
+    "test:settings-foundation": "php tests/Integration/SettingsFoundationTest.php"
   },
   "config": {
     "sort-packages": true
