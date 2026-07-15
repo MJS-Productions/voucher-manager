@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+- Sprint 8 Part 5.4 final Distribution Safety Review and lifecycle invariant gate.
+- Keeper concurrency smoke-test matrix covering double-click, spam-click, last-voucher and multi-tab behavior.
+- ADR 0026 defining the complete Distribution safety invariants after VM-014 and VM-015.
 - Sprint 8 Part 5.2 one-use Distribution intent idempotency.
 - Owner-scoped, ten-minute opaque intent tokens with affected-row replay protection.
 - Bounded stale-intent cleanup and uninstall cleanup for runtime intent options.
