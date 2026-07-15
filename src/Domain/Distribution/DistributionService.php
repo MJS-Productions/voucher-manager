@@ -23,16 +23,58 @@ final class DistributionService {
 
 		$claimed = $this->codes->claim_next_available( $pool_id );
 		if ( null === $claimed ) {
-			$this->logs->add( OperationalEvent::DISTRIBUTION_EMPTY->value, 'No available code could be distributed.', array( 'pool_id' => $pool_id ) );
+			$this->log_safely(
+				OperationalEvent::DISTRIBUTION_EMPTY->value,
+				'No available code could be distributed.',
+				array( 'pool_id' => $pool_id )
+			);
 			return new DistributionResult( false, null, 'No available codes remain in this pool.', 0 );
 		}
 
-		$remaining = $this->codes->count_available( $pool_id );
-		$this->logs->add(
+		// Once the atomic claim commits, the successful business outcome is
+		// authoritative. Post-claim metadata must never hide the voucher.
+		$remaining = $this->remaining_safely( $pool_id );
+
+		$this->log_safely(
 			OperationalEvent::DISTRIBUTION_COMPLETED->value,
 			'An available code was distributed.',
-			array( 'pool_id' => $pool_id, 'code_id' => $claimed['id'], 'remaining' => $remaining )
+			array(
+				'pool_id'  => $pool_id,
+				'code_id'  => $claimed['id'],
+				'remaining' => $remaining,
+			)
 		);
+
 		return new DistributionResult( true, $claimed['code'], 'Code distributed.', $remaining );
+	}
+
+	private function remaining_safely( int $pool_id ): ?int {
+		try {
+			return $this->codes->count_available( $pool_id );
+		} catch ( \Throwable $exception ) {
+			$this->report_post_claim_failure( 'remaining_count', $exception );
+			return null;
+		}
+	}
+
+	/**
+	 * @param array<string,mixed> $context
+	 */
+	private function log_safely( string $event_type, string $message, array $context ): void {
+		try {
+			$this->logs->add( $event_type, $message, $context );
+		} catch ( \Throwable $exception ) {
+			$this->report_post_claim_failure( 'activity_log', $exception );
+		}
+	}
+
+	private function report_post_claim_failure( string $stage, \Throwable $exception ): void {
+		error_log(
+			sprintf(
+				'Voucher Manager distribution post-claim failure [%s]: %s',
+				$stage,
+				$exception::class
+			)
+		);
 	}
 }

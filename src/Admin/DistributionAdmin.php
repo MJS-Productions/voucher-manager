@@ -93,7 +93,7 @@ final class DistributionAdmin {
 			false,
 			null,
 			__( 'Distribution could not be completed. Please try again.', 'voucher-manager' ),
-			0
+			null
 		);
 
 		$result = $this->boundary->execute(

@@ -44,6 +44,7 @@
       "@test:settings-foundation",
       "@test:activity-retention",
       "@test:uninstall-boundary",
+      "@test:distribution-claim-outcome",
       "@build",
       "@validate:artifact"
     ],
@@ -63,7 +64,8 @@
     "test:sprint7-release-readiness": "php tests/Integration/Sprint7ReleaseReadinessTest.php",
     "test:settings-foundation": "php tests/Integration/SettingsFoundationTest.php",
     "test:activity-retention": "php tests/Integration/ActivityRetentionTest.php",
-    "test:uninstall-boundary": "php tests/Integration/UninstallBoundaryTest.php"
+    "test:uninstall-boundary": "php tests/Integration/UninstallBoundaryTest.php",
+    "test:distribution-claim-outcome": "php tests/Integration/DistributionClaimOutcomeTest.php"
   },
   "config": {
     "sort-packages": true

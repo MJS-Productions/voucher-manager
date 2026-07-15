@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- Sprint 8 Part 5.1 Distribution Claim Outcome hardening.
+- Nullable remaining-inventory state for post-claim metadata failures.
+- Failure-contained post-claim Activity and inventory refresh boundaries.
+- Distribution Claim Outcome regression coverage, documentation and ADR 0023.
 - Sprint 8 Part 4 consent-aware uninstall data boundary.
 - Preserved-data default with exact site-scoped cleanup for explicit destructive opt-in.
 - Cron cleanup during every uninstall and strict separation from data-preserving deactivation.

@@ -35,7 +35,11 @@ final class DistributionViewModel {
 		return $row['pool']->is_active() && 0 < $row['available'];
 	}
 
-	public function remaining_message( int $remaining ): string {
+	public function remaining_message( ?int $remaining ): string {
+		if ( null === $remaining ) {
+			return __( 'The code was assigned successfully. Remaining inventory could not be refreshed.', 'voucher-manager' );
+		}
+
 		if ( 0 === $remaining ) {
 			return __( 'This pool is now empty. Import more codes before the next distribution.', 'voucher-manager' );
 		}
@@ -50,7 +54,7 @@ final class DistributionViewModel {
 		);
 	}
 
-	public function result_tone( int $remaining ): string {
-		return 0 === $remaining ? 'warning' : 'success';
+	public function result_tone( ?int $remaining ): string {
+		return null === $remaining || 0 === $remaining ? 'warning' : 'success';
 	}
 }

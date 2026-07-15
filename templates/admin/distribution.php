@@ -32,7 +32,7 @@ $distributable_rows = array_values(
 
 	<?php if ( is_array( $result ) ) : ?>
 		<?php if ( ! empty( $result['success'] ) && is_string( $result['code'] ?? null ) ) : ?>
-			<?php $remaining = absint( $result['remaining'] ?? 0 ); ?>
+			<?php $remaining = isset( $result['remaining'] ) ? absint( $result['remaining'] ) : null; ?>
 			<div class="voucher-manager__distribution-result voucher-manager__distribution-result--<?php echo esc_attr( $view->result_tone( $remaining ) ); ?>">
 				<p class="voucher-manager__eyebrow"><?php echo esc_html__( 'Distribution complete', 'voucher-manager' ); ?></p>
 				<h2><?php echo esc_html__( 'Your assigned code', 'voucher-manager' ); ?></h2>
