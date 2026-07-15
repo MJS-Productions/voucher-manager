@@ -90,6 +90,10 @@ $assert(
 $assert(
 	is_string( $scheduler_source )
 	&& str_contains( $scheduler_source, "HOOK = 'voucher_manager_cleanup_activity'" )
+	&& str_contains( $scheduler_source, "add_action( 'plugins_loaded', array( \$this, 'reconcile_from_wordpress' ), 20 )" )
+	&& str_contains( $scheduler_source, 'public function reconcile_from_wordpress(): void' )
+	&& str_contains( $scheduler_source, '$this->reconcile();' )
+	&& ! str_contains( $scheduler_source, "add_action( 'plugins_loaded', array( \$this, 'reconcile' ), 20 )" )
 	&& str_contains( $scheduler_source, "wp_schedule_event( time() + HOUR_IN_SECONDS, 'daily', self::HOOK )" )
 	&& str_contains( $scheduler_source, "false === wp_next_scheduled( self::HOOK )" )
 	&& str_contains( $scheduler_source, 'wp_clear_scheduled_hook( self::HOOK )' )

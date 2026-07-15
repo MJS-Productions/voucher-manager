@@ -152,3 +152,23 @@ The Inventory page now remains registered under the real Voucher Manager parent 
 ### Lesson
 
 A hidden detail page still needs a visible home in the administration information architecture.
+
+
+---
+
+## VM-013 — The Empty String That Crashed Cron
+
+**Status:** Fixed  
+**Discovered in:** Sprint 8 Part 3 WordPress smoke test
+
+### Story
+
+The Activity retention scheduler registered its strictly typed internal `reconcile(?Settings $settings)` method directly on the WordPress `plugins_loaded` action. WordPress actions without explicit arguments may invoke callbacks with an empty string. The typed method therefore received `''` and caused a fatal `TypeError` during WordPress bootstrap.
+
+### Fix
+
+A zero-argument `reconcile_from_wordpress()` bridge now owns the WordPress hook boundary and calls the typed internal `reconcile()` method without passing WordPress hook arguments.
+
+### Lesson
+
+Strictly typed application methods should not be registered directly as WordPress callbacks unless their signatures exactly match WordPress callback behavior.

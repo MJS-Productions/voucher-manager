@@ -52,3 +52,8 @@ A bounded failure writes only the exception class to the PHP error log. It does 
 ## Database
 
 No schema migration is introduced. Database version remains `2`.
+
+
+## WordPress callback boundary
+
+The `plugins_loaded` action uses a dedicated zero-argument bridge method. WordPress may provide an empty string to callbacks for actions without explicit arguments, so the strictly typed internal reconciliation method is never registered directly as the action callback.

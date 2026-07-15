@@ -23,7 +23,17 @@ final class ActivityRetentionScheduler {
 
 	public function register(): void {
 		add_action( self::HOOK, array( $this, 'run' ) );
-		add_action( 'plugins_loaded', array( $this, 'reconcile' ), 20 );
+		add_action( 'plugins_loaded', array( $this, 'reconcile_from_wordpress' ), 20 );
+	}
+
+	/**
+	 * WordPress action bridge.
+	 *
+	 * WordPress may pass an empty string to callbacks for actions without
+	 * explicit arguments, so keep that boundary separate from typed internals.
+	 */
+	public function reconcile_from_wordpress(): void {
+		$this->reconcile();
 	}
 
 	public function reconcile( ?Settings $settings = null ): void {
