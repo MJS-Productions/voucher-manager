@@ -28,7 +28,9 @@ A result token can be displayed only once. Refresh does not redistribute a vouch
 
 The result store keeps a short-lived owner-scoped mapping from the original Distribution intent to its result token.
 
-When a double-click request arrives after the intent was consumed, the controller waits briefly for the first request to finish storing its result and redirects the replay to the same one-time result.
+When a double-click request arrives after the intent was consumed, the controller waits briefly for the first request to finish storing its result. It then creates a separate short-lived delivery token containing the same successful result.
+
+The original redirect and the racing replay therefore never compete to consume the same token.
 
 The replay does not:
 

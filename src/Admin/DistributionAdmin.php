@@ -116,7 +116,7 @@ final class DistributionAdmin {
 			: '';
 
 		if ( ! $this->intents->consume( $intent_token, $user_id ) ) {
-			$existing_result = $this->wait_for_existing_result( $intent_token, $user_id );
+			$existing_result = $this->wait_for_replay_delivery( $intent_token, $user_id );
 
 			if ( null !== $existing_result ) {
 				$this->redirect_to_result( $existing_result );
@@ -151,9 +151,9 @@ final class DistributionAdmin {
 		$this->redirect_to_result( $result_token );
 	}
 
-	private function wait_for_existing_result( string $intent_token, int $user_id ): ?string {
+	private function wait_for_replay_delivery( string $intent_token, int $user_id ): ?string {
 		for ( $attempt = 0; $attempt < 20; ++$attempt ) {
-			$result_token = $this->results->find_token_for_intent( $intent_token, $user_id );
+			$result_token = $this->results->create_delivery_for_intent( $intent_token, $user_id );
 			if ( null !== $result_token ) {
 				return $result_token;
 			}

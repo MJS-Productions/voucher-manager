@@ -43,9 +43,9 @@ final class WpDistributionResultStore implements DistributionResultStore {
 			}
 
 			$map_value = array(
-				'user_id'      => $user_id,
-				'expires_at'   => time() + self::TTL_SECONDS,
-				'result_token' => $result_token,
+				'user_id'    => $user_id,
+				'expires_at' => time() + self::TTL_SECONDS,
+				'payload'    => $payload,
 			);
 
 			if ( add_option( $this->intent_map_option( $intent_token ), $map_value, '', false ) ) {
@@ -102,7 +102,7 @@ final class WpDistributionResultStore implements DistributionResultStore {
 		);
 	}
 
-	public function find_token_for_intent( string $intent_token, int $user_id ): ?string {
+	public function create_delivery_for_intent( string $intent_token, int $user_id ): ?string {
 		if ( 1 > $user_id || ! preg_match( '/^[a-f0-9]{64}$/', $intent_token ) ) {
 			return null;
 		}
@@ -119,9 +119,20 @@ final class WpDistributionResultStore implements DistributionResultStore {
 			return null;
 		}
 
-		$token = $map['result_token'] ?? null;
+		$payload = $map['payload'] ?? null;
+		if ( ! is_array( $payload ) || ! $this->payload_belongs_to_user( $payload, $user_id ) ) {
+			return null;
+		}
 
-		return is_string( $token ) && preg_match( '/^[a-f0-9]{64}$/', $token ) ? $token : null;
+		for ( $attempt = 0; $attempt < 3; ++$attempt ) {
+			$result_token = bin2hex( random_bytes( 32 ) );
+
+			if ( add_option( $this->result_option( $result_token ), $payload, '', false ) ) {
+				return $result_token;
+			}
+		}
+
+		return null;
 	}
 
 	private function result_option( string $token ): string {

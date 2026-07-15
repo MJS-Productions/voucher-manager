@@ -28,6 +28,8 @@
 ## 0.7.0-alpha - 2026-07-15 — The Visible Inventory
 
 ### Fixed
+- Prevented original and replay redirects from racing to consume the same one-time Distribution result token.
+- Give each racing replay an independent short-lived delivery token for the same already claimed voucher.
 - Prevented rapid replay requests from overwriting and hiding a successfully assigned voucher result.
 - Replaced the shared per-user Distribution transient with unique owner-scoped, consume-once result tokens.
 - Added replay recovery, multi-tab result isolation and protected direct presentation when result persistence fails.

@@ -15,7 +15,7 @@ The previous per-user transient allowed a replay rejection or a second tab to ov
 - Redirect with only the opaque result token.
 - Consume each result once through an affected-row checked delete.
 - Keep a short-lived intent-to-result mapping for replay recovery.
-- On replay, wait briefly for the first request and redirect to its successful result when available.
+- On replay, wait briefly for the first request and create an independent consume-once delivery token for the same successful result.
 - Never write a replay failure over a successful result.
 - Isolate multiple tabs through independent result tokens.
 - If result persistence fails after a successful claim, render the voucher directly in the protected POST response.
@@ -24,4 +24,4 @@ The previous per-user transient allowed a replay rejection or a second tab to ov
 
 ## Consequences
 
-A double-click can no longer hide the claimed voucher, multiple tabs cannot overwrite one another, and result-store failure cannot make a committed claim unrecoverable.
+A double-click can no longer hide the claimed voucher or make two redirects race for one consume-once token. Multiple tabs cannot overwrite one another, and result-store failure cannot make a committed claim unrecoverable.

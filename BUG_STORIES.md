@@ -192,3 +192,23 @@ Distribution results now use unique owner-scoped tokens. Replay requests recover
 ### Lesson
 
 Idempotency is incomplete when a rejected replay can still overwrite the successful operation's recovery channel.
+
+
+---
+
+## VM-015 — Two Redirects, One Result Token
+
+**Status:** Fixed  
+**Discovered in:** Sprint 8 Part 5.3 WordPress double-click smoke test
+
+### Story
+
+Replay recovery redirected both the original successful POST and the racing replay POST to the same consume-once result token. Whichever redirected GET consumed the token first displayed the voucher; the other GET showed an empty Distribution screen. Browser navigation order could therefore hide the code even though the claim and replay protection were correct.
+
+### Fix
+
+The intent-to-result mapping now retains the short-lived owner-scoped result payload. Every racing replay receives its own independent consume-once delivery token containing the same already claimed voucher result.
+
+### Lesson
+
+A consume-once recovery token cannot safely be shared by multiple concurrent browser responses.

@@ -102,9 +102,9 @@ $assert(
 	is_int( $consume_position )
 	&& is_int( $service_position )
 	&& $consume_position < $service_position
-	&& str_contains( $admin_source, 'wait_for_existing_result' )
+	&& str_contains( $admin_source, 'wait_for_replay_delivery' )
 	&& str_contains( $admin_source, "redirect_with_notice( 'replayed' )" ),
-	'The controller must consume the intent before any voucher claim and recover an existing successful result for replay.'
+	'The controller must consume the intent before any voucher claim and create an independent delivery for replay.'
 );
 
 $assert(

@@ -36,7 +36,7 @@ $memory = new class() implements DistributionResultStore {
 	private int $sequence = 0;
 	/** @var array<string,array{intent:string,user:int,result:array{success:bool,code:?string,message:string,remaining:?int,pool_id:int}}> */
 	private array $results = array();
-	/** @var array<string,string> */
+	/** @var array<string,array{user:int,result:array{success:bool,code:?string,message:string,remaining:?int,pool_id:int}}> */
 	private array $intent_map = array();
 
 	public function store( string $intent_token, int $user_id, DistributionResult $result, int $pool_id ): ?string {
@@ -52,7 +52,10 @@ $memory = new class() implements DistributionResultStore {
 				'pool_id'   => $pool_id,
 			),
 		);
-		$this->intent_map[ $intent_token . ':' . $user_id ] = $token;
+		$this->intent_map[ $intent_token ] = array(
+			'user'   => $user_id,
+			'result' => $this->results[ $token ]['result'],
+		);
 		return $token;
 	}
 
@@ -65,8 +68,18 @@ $memory = new class() implements DistributionResultStore {
 		return $result;
 	}
 
-	public function find_token_for_intent( string $intent_token, int $user_id ): ?string {
-		return $this->intent_map[ $intent_token . ':' . $user_id ] ?? null;
+	public function create_delivery_for_intent( string $intent_token, int $user_id ): ?string {
+		if ( ! isset( $this->intent_map[ $intent_token ] ) || $user_id !== $this->intent_map[ $intent_token ]['user'] ) {
+			return null;
+		}
+
+		$token = 'result-' . ++$this->sequence;
+		$this->results[ $token ] = array(
+			'intent' => $intent_token,
+			'user'   => $user_id,
+			'result' => $this->intent_map[ $intent_token ]['result'],
+		);
+		return $token;
 	}
 };
 
@@ -74,12 +87,17 @@ $first = $memory->store( str_repeat( 'a', 64 ), 7, new DistributionResult( true,
 $second = $memory->store( str_repeat( 'b', 64 ), 7, new DistributionResult( true, 'CODE-B', 'ok', 3 ), 11 );
 
 $assert( is_string( $first ) && is_string( $second ) && $first !== $second, 'Two successful requests must receive unique result tokens.' );
-$assert( $first === $memory->find_token_for_intent( str_repeat( 'a', 64 ), 7 ), 'Replay recovery must find the result token belonging to its intent.' );
-$assert( null === $memory->find_token_for_intent( str_repeat( 'a', 64 ), 8 ), 'Intent-result mappings must be owner-scoped.' );
+$replay_delivery = $memory->create_delivery_for_intent( str_repeat( 'a', 64 ), 7 );
+$assert( is_string( $replay_delivery ) && $replay_delivery !== $first, 'Replay recovery must create an independent delivery token.' );
+$assert( null === $memory->create_delivery_for_intent( str_repeat( 'a', 64 ), 8 ), 'Intent-result mappings must be owner-scoped.' );
 
 $result_a = $memory->consume( $first, 7 );
-$assert( is_array( $result_a ) && 'CODE-A' === $result_a['code'], 'The owner must receive the correct one-time voucher result.' );
-$assert( null === $memory->consume( $first, 7 ), 'A result token must be consumable only once.' );
+$assert( is_array( $result_a ) && 'CODE-A' === $result_a['code'], 'The original request must receive the correct one-time voucher result.' );
+$assert( null === $memory->consume( $first, 7 ), 'The original result token must be consumable only once.' );
+
+$replay_result = $memory->consume( $replay_delivery, 7 );
+$assert( is_array( $replay_result ) && 'CODE-A' === $replay_result['code'], 'A racing replay must receive its own delivery of the same claimed voucher.' );
+$assert( null === $memory->consume( $replay_delivery, 7 ), 'The replay delivery token must also be consumable only once.' );
 
 $result_b = $memory->consume( $second, 7 );
 $assert( is_array( $result_b ) && 'CODE-B' === $result_b['code'], 'A second tab must retain its own independent voucher result.' );
@@ -110,12 +128,12 @@ $assert(
 
 $assert(
 	is_string( $admin_source )
-	&& str_contains( $admin_source, 'wait_for_existing_result' )
-	&& str_contains( $admin_source, 'find_token_for_intent' )
+	&& str_contains( $admin_source, 'wait_for_replay_delivery' )
+	&& str_contains( $admin_source, 'create_delivery_for_intent' )
 	&& str_contains( $admin_source, 'redirect_to_result' )
 	&& str_contains( $admin_source, 'render_direct_result' )
 	&& ! str_contains( $admin_source, 'set_transient' ),
-	'Replay must recover the successful result and shared per-user transient delivery must be removed.'
+	'Replay must receive an independent successful delivery and shared per-user transient delivery must be removed.'
 );
 
 $store_position = strpos( $admin_source, '$result_token = $this->results->store' );
