@@ -11,6 +11,7 @@ namespace VoucherManager\Core;
 
 use VoucherManager\Admin\Admin;
 use VoucherManager\Database\Migrator;
+use VoucherManager\Lifecycle\ActivityRetentionScheduler;
 
 /** Coordinates plugin services and WordPress hooks. */
 final class Plugin {
@@ -28,6 +29,7 @@ final class Plugin {
 	public function boot(): void {
 		add_action( 'plugins_loaded', array( $this, 'maybe_upgrade_database' ), 5 );
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		( new ActivityRetentionScheduler() )->register();
 		if ( is_admin() ) {
 			( new Admin() )->register();
 		}

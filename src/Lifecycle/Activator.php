@@ -27,5 +27,7 @@ final class Activator {
 		( new Migrator() )->migrate();
 
 		update_option( 'voucher_manager_version', VOUCHER_MANAGER_VERSION, false );
+
+		( new ActivityRetentionScheduler() )->reconcile();
 	}
 }

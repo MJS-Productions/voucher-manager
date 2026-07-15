@@ -11,6 +11,7 @@ namespace VoucherManager\Admin;
 
 use VoucherManager\Domain\Settings\Settings;
 use VoucherManager\Infrastructure\WordPress\WpSettingsRepository;
+use VoucherManager\Lifecycle\ActivityRetentionScheduler;
 
 /**
  * Registers and saves the minimal production-hardening settings.
@@ -82,6 +83,7 @@ final class SettingsAdmin {
 		);
 
 		$this->repository->save( $settings );
+		( new ActivityRetentionScheduler() )->reconcile( $settings );
 		$this->redirect( 'settings_saved' );
 	}
 

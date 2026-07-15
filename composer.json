@@ -42,6 +42,7 @@
       "@test:inventory-experience",
       "@test:inventory-navigation",
       "@test:settings-foundation",
+      "@test:activity-retention",
       "@build",
       "@validate:artifact"
     ],
@@ -59,7 +60,8 @@
     "test:inventory-experience": "php tests/Integration/InventoryExperienceTest.php",
     "test:inventory-navigation": "php tests/Integration/InventoryNavigationTest.php",
     "test:sprint7-release-readiness": "php tests/Integration/Sprint7ReleaseReadinessTest.php",
-    "test:settings-foundation": "php tests/Integration/SettingsFoundationTest.php"
+    "test:settings-foundation": "php tests/Integration/SettingsFoundationTest.php",
+    "test:activity-retention": "php tests/Integration/ActivityRetentionTest.php"
   },
   "config": {
     "sort-packages": true

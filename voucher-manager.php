@@ -46,4 +46,9 @@ register_activation_hook(
 	array( VoucherManager\Lifecycle\Activator::class, 'activate' )
 );
 
+register_deactivation_hook(
+	VOUCHER_MANAGER_FILE,
+	array( VoucherManager\Lifecycle\Deactivator::class, 'deactivate' )
+);
+
 VoucherManager\Core\Plugin::instance()->boot();

@@ -32,7 +32,7 @@ Default:
 
 `90 days`
 
-Part 2 stores the preference only. It does not yet schedule or execute Activity cleanup. That write boundary is reserved for Sprint 8 Part 3.
+Sprint 8 Part 3 applies this preference through bounded daily WordPress Cron cleanup. Saving the setting reconciles the schedule but does not synchronously delete Activity.
 
 ## Uninstall data boundary
 

@@ -3,6 +3,11 @@
 ## Unreleased
 
 ### Added
+- Sprint 8 Part 3 bounded Operational Activity retention through daily WordPress Cron.
+- Idempotent schedule reconciliation on activation, plugin boot and Settings save.
+- Data-preserving deactivation cleanup for the Activity Cron hook.
+- UTC cutoff and maximum 500-row oldest-first deletion limited exclusively to `vm_logs`.
+- Activity Retention regression coverage, documentation and ADR 0021.
 - Sprint 8 Part 2 minimal Settings foundation for Activity retention and opt-in uninstall deletion.
 - Single normalized, non-autoloaded `voucher_manager_settings` option with safe defaults.
 - Explicit OFF-to-ON confirmation for destructive uninstall consent.
