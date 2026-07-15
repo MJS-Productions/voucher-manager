@@ -27,10 +27,18 @@ wp_clear_scheduled_hook( UninstallDataBoundary::ACTIVITY_CRON_HOOK );
 
 global $wpdb;
 
-$intent_like = $wpdb->esc_like( UninstallDataBoundary::DISTRIBUTION_INTENT_OPTION_PREFIX ) . '%';
-// Runtime-only Distribution intents never survive uninstall.
-// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $intent_like ) );
+$runtime_prefixes = array(
+	UninstallDataBoundary::DISTRIBUTION_INTENT_OPTION_PREFIX,
+	UninstallDataBoundary::DISTRIBUTION_RESULT_OPTION_PREFIX,
+	UninstallDataBoundary::DISTRIBUTION_RESULT_INTENT_OPTION_PREFIX,
+);
+
+foreach ( $runtime_prefixes as $runtime_prefix ) {
+	$runtime_like = $wpdb->esc_like( $runtime_prefix ) . '%';
+	// Runtime-only Distribution state never survives uninstall.
+	// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+	$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $runtime_like ) );
+}
 
 if ( $delete_data ) {
 	foreach ( UninstallDataBoundary::tables( $wpdb->prefix ) as $table ) {

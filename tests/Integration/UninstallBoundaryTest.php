@@ -71,8 +71,10 @@ $assert(
 
 $assert(
 	str_contains( $uninstall, 'DISTRIBUTION_INTENT_OPTION_PREFIX' )
+	&& str_contains( $uninstall, 'DISTRIBUTION_RESULT_OPTION_PREFIX' )
+	&& str_contains( $uninstall, 'DISTRIBUTION_RESULT_INTENT_OPTION_PREFIX' )
 	&& str_contains( $uninstall, 'DELETE FROM {$wpdb->options} WHERE option_name LIKE %s' ),
-	'Uninstall must always remove ephemeral Distribution intent options without touching preserved business settings.'
+	'Uninstall must always remove ephemeral Distribution intent and result options without touching preserved business settings.'
 );
 
 $assert(

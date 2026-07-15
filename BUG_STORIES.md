@@ -172,3 +172,23 @@ A zero-argument `reconcile_from_wordpress()` bridge now owns the WordPress hook 
 ### Lesson
 
 Strictly typed application methods should not be registered directly as WordPress callbacks unless their signatures exactly match WordPress callback behavior.
+
+
+---
+
+## VM-014 — The Replay That Hid the Voucher
+
+**Status:** Fixed  
+**Discovered in:** Sprint 8 Part 5.2 WordPress double-click smoke test
+
+### Story
+
+The first POST consumed the one-use intent, claimed a voucher and wrote a successful per-user transient. A rapid replay correctly failed intent consumption but then wrote a failure result into the same transient key. Depending on response order, the administrator saw only the replay error while the successfully assigned voucher was no longer visible.
+
+### Fix
+
+Distribution results now use unique owner-scoped tokens. Replay requests recover and redirect to the first request's result instead of writing a competing failure. Multiple tabs have isolated results, and persistence failure falls back to protected direct presentation.
+
+### Lesson
+
+Idempotency is incomplete when a rejected replay can still overwrite the successful operation's recovery channel.

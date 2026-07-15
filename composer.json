@@ -46,6 +46,7 @@
       "@test:uninstall-boundary",
       "@test:distribution-claim-outcome",
       "@test:distribution-intent-idempotency",
+      "@test:distribution-result-delivery",
       "@build",
       "@validate:artifact"
     ],
@@ -67,7 +68,8 @@
     "test:activity-retention": "php tests/Integration/ActivityRetentionTest.php",
     "test:uninstall-boundary": "php tests/Integration/UninstallBoundaryTest.php",
     "test:distribution-claim-outcome": "php tests/Integration/DistributionClaimOutcomeTest.php",
-    "test:distribution-intent-idempotency": "php tests/Integration/DistributionIntentIdempotencyTest.php"
+    "test:distribution-intent-idempotency": "php tests/Integration/DistributionIntentIdempotencyTest.php",
+    "test:distribution-result-delivery": "php tests/Integration/DistributionResultDeliveryTest.php"
   },
   "config": {
     "sort-packages": true

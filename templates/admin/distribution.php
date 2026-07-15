@@ -12,12 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$key    = 'voucher_manager_distribution_' . get_current_user_id();
-$result = get_transient( $key );
-
-if ( false !== $result ) {
-	delete_transient( $key );
-}
+$notice = isset( $_GET['vm_notice'] )
+	? sanitize_key( wp_unslash( $_GET['vm_notice'] ) )
+	: '';
 
 $distributable_rows = array_values(
 	array_filter(
@@ -41,6 +38,10 @@ foreach ( $distributable_rows as $row ) {
 <div class="wrap voucher-manager">
 	<h1><?php echo esc_html__( 'Distribution', 'voucher-manager' ); ?></h1>
 	<p class="description"><?php echo esc_html__( 'Claim one available voucher code from an active pool. Each successful distribution immediately marks that code as assigned.', 'voucher-manager' ); ?></p>
+
+	<?php if ( 'replayed' === $notice ) : ?>
+		<div class="notice notice-warning inline"><p><?php echo esc_html__( 'This distribution request was already used or expired. No additional code was distributed.', 'voucher-manager' ); ?></p></div>
+	<?php endif; ?>
 
 	<?php if ( is_array( $result ) ) : ?>
 		<?php if ( ! empty( $result['success'] ) && is_string( $result['code'] ?? null ) ) : ?>

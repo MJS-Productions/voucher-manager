@@ -141,8 +141,9 @@ $assert(
 
 $assert(
 	is_string( $admin_source )
-	&& str_contains( $admin_source, "'remaining' => \$result->remaining()" ),
-	'Distribution controller must preserve the nullable remaining state.'
+	&& str_contains( $admin_source, '$this->results->store( $intent_token, $user_id, $result, $pool_id )' )
+	&& str_contains( $admin_source, "'remaining' => \$distribution_result->remaining()" ),
+	'Distribution controller and result store boundary must preserve the nullable remaining state.'
 );
 
 $assert(

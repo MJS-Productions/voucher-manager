@@ -28,6 +28,9 @@
 ## 0.7.0-alpha - 2026-07-15 — The Visible Inventory
 
 ### Fixed
+- Prevented rapid replay requests from overwriting and hiding a successfully assigned voucher result.
+- Replaced the shared per-user Distribution transient with unique owner-scoped, consume-once result tokens.
+- Added replay recovery, multi-tab result isolation and protected direct presentation when result persistence fails.
 - Preselect the originating distributable Pool when opening Distribution from a Pool card while retaining manual selection and safe fallback behavior.
 - Prevented a WordPress bootstrap fatal by separating the zero-argument `plugins_loaded` callback from the typed Activity retention reconciliation method.
 - Aligned Activity filter reset behavior with Pool Inventory by showing `Reset filters` only when Area or Outcome filtering is active.

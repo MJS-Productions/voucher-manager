@@ -63,7 +63,12 @@ $assert(
 );
 $assert( str_contains( $template, 'No codes are ready to distribute' ) && str_contains( $template, 'voucher-manager-import' ), 'Empty inventory must show a guided import action.' );
 $assert( str_contains( $template, 'Every distribution requires a new POST action' ), 'Distribution safety guidance must explain refresh behavior.' );
-$assert( ! str_contains( $template, 'get_transient( $key );' ) || str_contains( $template, 'delete_transient( $key );' ), 'One-time result must be consumed after reading.' );
+$assert(
+	! str_contains( $template, 'get_transient' )
+	&& ! str_contains( $admin, 'set_transient' )
+	&& str_contains( $admin, '$this->results->consume' ),
+	'One-time results must use the unique consume-once result store rather than a shared per-user transient.'
+);
 $assert( str_contains( $admin, 'check_admin_referer' ) && str_contains( $admin, "current_user_can( 'manage_options' )" ), 'Distribution execution must retain nonce and capability protection.' );
 $assert( str_contains( $composer, '@test:distribution-experience' ) && strpos( $composer, '@test:distribution-experience' ) < strpos( $composer, '@build' ), 'Distribution Experience test must run before build.' );
 
