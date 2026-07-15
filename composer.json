@@ -43,6 +43,7 @@
       "@test:inventory-navigation",
       "@test:settings-foundation",
       "@test:activity-retention",
+      "@test:uninstall-boundary",
       "@build",
       "@validate:artifact"
     ],
@@ -61,7 +62,8 @@
     "test:inventory-navigation": "php tests/Integration/InventoryNavigationTest.php",
     "test:sprint7-release-readiness": "php tests/Integration/Sprint7ReleaseReadinessTest.php",
     "test:settings-foundation": "php tests/Integration/SettingsFoundationTest.php",
-    "test:activity-retention": "php tests/Integration/ActivityRetentionTest.php"
+    "test:activity-retention": "php tests/Integration/ActivityRetentionTest.php",
+    "test:uninstall-boundary": "php tests/Integration/UninstallBoundaryTest.php"
   },
   "config": {
     "sort-packages": true

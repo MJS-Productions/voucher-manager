@@ -44,7 +44,7 @@ Enabling the setting requires explicit acknowledgement of permanent deletion. Th
 
 Deactivation never deletes data.
 
-Part 2 does not yet change `uninstall.php`. Actual consent-aware table deletion is reserved for Sprint 8 Part 4.
+Sprint 8 Part 4 applies this preference during uninstall. The default remains data preservation; only explicit opt-in removes all plugin-owned tables and options.
 
 ## Security
 

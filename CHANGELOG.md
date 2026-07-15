@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Added
+- Sprint 8 Part 4 consent-aware uninstall data boundary.
+- Preserved-data default with exact site-scoped cleanup for explicit destructive opt-in.
+- Cron cleanup during every uninstall and strict separation from data-preserving deactivation.
+- Uninstall Boundary regression coverage, documentation and ADR 0022.
 - Sprint 8 Part 3 bounded Operational Activity retention through daily WordPress Cron.
 - Idempotent schedule reconciliation on activation, plugin boot and Settings save.
 - Data-preserving deactivation cleanup for the Activity Cron hook.

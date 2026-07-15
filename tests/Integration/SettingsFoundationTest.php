@@ -108,9 +108,9 @@ $assert(
 
 $assert(
 	is_string( $uninstall )
-	&& ! str_contains( $uninstall, 'DROP TABLE' )
-	&& ! str_contains( $uninstall, 'voucher_manager_settings' ),
-	'Part 2 must not activate destructive uninstall before the dedicated uninstall boundary.'
+	&& str_contains( $uninstall, 'delete_data_on_uninstall' )
+	&& str_contains( $uninstall, 'UninstallDataBoundary' ),
+	'Settings Foundation consent must be consumed only by the dedicated uninstall boundary.'
 );
 
 $assert(
