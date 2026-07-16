@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Added
+- Sprint 10 Part 1 deterministic PO-to-MO compiler exposed through `composer translations`.
+- Translation Artifact Integrity regression gate and ADR 0032.
+- Explicit translation build step in GitHub Actions and direct release builds.
+
+### Changed
+- Release artifacts now require POT, PO and current MO catalogs.
+- README release history now identifies `0.8.0-alpha` as the last publicly published Alpha release.
+
 ### Fixed
 - Polished Dashboard and Activity descriptions, removed the redundant Distribution success eyebrow, corrected rollback confirmation to the all-or-nothing rule and hid Cron guidance for indefinite retention.
 - Polished German administrator-facing language for Pro references, Import rollback, Activity retention and uninstall settings.

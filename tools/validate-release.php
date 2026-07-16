@@ -53,6 +53,9 @@ $required = [
     'voucher-manager/voucher-manager.php',
     'voucher-manager/src/Core/Plugin.php',
     'voucher-manager/src/Lifecycle/Activator.php',
+    'voucher-manager/languages/voucher-manager.pot',
+    'voucher-manager/languages/voucher-manager-de_DE.po',
+    'voucher-manager/languages/voucher-manager-de_DE.mo',
     'voucher-manager/uninstall.php',
 ];
 

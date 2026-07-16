@@ -2,6 +2,15 @@
 declare(strict_types=1);
 
 $root = dirname(__DIR__);
+
+$translationCompiler = $root . '/tools/compile-translations.php';
+$command             = escapeshellarg( PHP_BINARY ) . ' ' . escapeshellarg( $translationCompiler );
+passthru( $command, $translationExitCode );
+
+if ( 0 !== $translationExitCode ) {
+    fwrite( STDERR, "Release build stopped because translation compilation failed." . PHP_EOL );
+    exit( 1 );
+}
 $dist = $root . '/dist';
 $build = $dist . '/voucher-manager';
 $zipPath = $dist . '/voucher-manager.zip';

@@ -24,6 +24,7 @@
     "build": "php tools/build-release.php",
     "validate:artifact": "php tools/validate-release.php",
     "quality": [
+      "@translations",
       "@lint",
       "@validate:structure",
       "@validate:header",
@@ -55,6 +56,7 @@
       "@test:german-translation",
       "@test:german-language-polish",
       "@test:german-experience-polish",
+      "@test:translation-artifact-integrity",
       "@build",
       "@validate:artifact"
     ],
@@ -85,7 +87,9 @@
     "test:translation-readiness": "php tests/Integration/TranslationReadinessTest.php",
     "test:german-translation": "php tests/Integration/GermanTranslationExperienceTest.php",
     "test:german-language-polish": "php tests/Integration/GermanLanguagePolishTest.php",
-    "test:german-experience-polish": "php tests/Integration/GermanExperiencePolishTest.php"
+    "test:german-experience-polish": "php tests/Integration/GermanExperiencePolishTest.php",
+    "translations": "php tools/compile-translations.php",
+    "test:translation-artifact-integrity": "php tests/Integration/TranslationArtifactIntegrityTest.php"
   },
   "config": {
     "sort-packages": true

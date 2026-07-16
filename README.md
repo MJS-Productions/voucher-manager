@@ -6,7 +6,7 @@ Professional management and distribution of unique One-Time Codes for WordPress.
 
 **Status:** Alpha development  
 **Release candidate:** `0.9.3-alpha` — The German Experience  
-**Previous published release:** `0.9.2-alpha` — The Localization Contract
+**Previous published release:** `0.8.0-alpha` — The Hardened Lifecycle
 
 Sprint 9 Part 3.3 delivers the complete bundled German administration experience for `0.9.3-alpha`. The source catalog, editable `de_DE` catalog and compiled runtime catalog follow the approved terminology while all previous Product Language, localization, VM-018 and Distribution safety safeguards remain intact.
 
@@ -43,10 +43,11 @@ The full local project quality chain is:
 
 ```bash
 composer install
+composer translations
 composer quality
 ```
 
-The Quality Gate validates PHP syntax, plugin structure, version consistency, autoloading, the core Golden Path, code-state integrity, operational logging, lifecycle boundaries and the complete Sprint 8 Distribution safety invariants. It also builds and validates `dist/voucher-manager.zip`.
+The translation build deterministically compiles the current German PO catalog into the MO artifact used by WordPress. The Quality Gate then verifies translation freshness, PHP syntax, plugin structure, version consistency, autoloading, the core Golden Path, code-state integrity, operational logging, lifecycle boundaries and the complete Distribution safety invariants. It also builds and validates `dist/voucher-manager.zip`.
 
 Official WordPress smoke tests should use the `voucher-manager.zip` artifact built and validated by GitHub Actions rather than a manually packed source archive.
 
@@ -63,6 +64,7 @@ Official WordPress smoke tests should use the `voucher-manager.zip` artifact bui
 - `docs/` — current technical and experience documentation;
 - `docs/adr/` — architecture decision records;
 - `docs/GERMAN_TRANSLATION.md` — approved German terminology, catalog files and runtime loading.
+- `docs/adr/0032-translation-artifact-integrity.md` — deterministic PO-to-MO build and release boundary.
 - `docs/LOCALIZATION_GUIDE.md` — context, placeholder, plural and escaping rules.
 - `docs/TRANSLATOR_NOTES.md` — product terminology and translation guidance.
 - `docs/INTERNATIONALIZATION_AUDIT.md` — Sprint 9 Part 3.1 runtime string audit and staged localization boundary.
