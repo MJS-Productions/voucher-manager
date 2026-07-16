@@ -234,3 +234,31 @@ Assigned-code protection now returns an explicit blocked result, records only `i
 ### Lesson
 
 An expected domain decision must not be represented as an unexpected technical exception.
+
+
+---
+
+## VM-019 — The All-One-Time-Code Paradox
+
+**Status:** Fixed  
+**Discovered in:** WordPress singular-count test for Pool deletion
+
+### Story
+
+The Pool Danger Zone correctly pluralized `One-Time Code` and `import record`, but inserted both localized count fragments into a sentence containing the fixed word `all`.
+
+That produced the grammatically incorrect text:
+
+`This permanently deletes the pool, all 1 One-Time Code and 1 import record.`
+
+### Fix
+
+The sentence now uses grammar-safe placeholders:
+
+`This permanently deletes the pool, %1$s, and %2$s.`
+
+The independently pluralized count fragments remain unchanged.
+
+### Lesson
+
+Correct plural fragments can still become incorrect when the surrounding sentence imposes an English-only qualifier.

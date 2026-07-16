@@ -10,6 +10,7 @@
 - Translation Readiness regression coverage before release build.
 
 ### Changed
+- Fixed the destructive Pool summary so singular counts no longer render as `all 1 One-Time Code`.
 - Added translator context to ambiguous admin menu, status, filter, form and table labels.
 - Added translator comments and numbered placeholders to dynamic Inventory, Import, Distribution and destructive-flow copy.
 - Added plural-aware Import summaries, rollback messages and Pool deletion confirmations.
