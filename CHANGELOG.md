@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.8.0-alpha - 2026-07-16 — The Hardened Lifecycle
+
 ### Added
 - Sprint 8 Part 5.4 final Distribution Safety Review and lifecycle invariant gate.
 - Keeper concurrency smoke-test matrix covering double-click, spam-click, last-voucher and multi-tab behavior.
@@ -28,8 +30,6 @@
 - Explicit OFF-to-ON confirmation for destructive uninstall consent.
 - Settings Foundation regression coverage, documentation and ADR 0020.
 
-## 0.7.0-alpha - 2026-07-15 — The Visible Inventory
-
 ### Fixed
 - Prevented original and replay redirects from racing to consume the same one-time Distribution result token.
 - Give each racing replay an independent short-lived delivery token for the same already claimed voucher.
@@ -38,6 +38,10 @@
 - Added replay recovery, multi-tab result isolation and protected direct presentation when result persistence fails.
 - Preselect the originating distributable Pool when opening Distribution from a Pool card while retaining manual selection and safe fallback behavior.
 - Prevented a WordPress bootstrap fatal by separating the zero-argument `plugins_loaded` callback from the typed Activity retention reconciliation method.
+
+## 0.7.0-alpha - 2026-07-15 — The Visible Inventory
+
+### Fixed
 - Aligned Activity filter reset behavior with Pool Inventory by showing `Reset filters` only when Area or Outcome filtering is active.
 - Kept Inventory accessible while preserving Voucher Manager → Pools context by hiding its registered submenu link visually instead of removing the page registration.
 

@@ -5,10 +5,10 @@ Professional management and distribution of unique voucher codes for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Alpha development  
-**Release candidate:** `0.7.0-alpha` — The Visible Inventory  
-**Previous published release:** `0.6.0-alpha` — The First Experience
+**Release candidate:** `0.8.0-alpha` — The Hardened Lifecycle  
+**Previous published release:** `0.7.0-alpha` — The Visible Inventory
 
-Sprint 7 is development-complete and has entered final release validation. The `0.7.0-alpha` candidate adds a privacy-safe, pool-scoped Inventory experience with filters, pagination, import provenance and read-only lifecycle-integrity visibility without introducing a database migration.
+Sprint 8 is development-complete and has passed the final Keeper concurrency gate. The `0.8.0-alpha` candidate adds Settings, bounded Activity retention, consent-aware uninstall behavior and hardened manual Distribution with authoritative claim outcomes, replay protection and resilient one-time result delivery.
 
 ## Current capabilities
 
@@ -19,7 +19,9 @@ Sprint 7 is development-complete and has entered final release validation. The `
 - pool lifecycle Danger Zone for scoped available-code deletion and atomic full pool deletion;
 - TXT and CSV voucher-code imports with result summaries and protected rollback;
 - atomic manual distribution from `available` to `assigned`;
-- one-time distribution result presentation with remaining-inventory guidance;
+- one-use Distribution intents that prevent duplicate execution from rapid resubmission;
+- authoritative post-claim outcomes and isolated one-time result delivery under concurrent browser requests;
+- bounded Activity retention and consent-aware uninstall behavior;
 - privacy-aware operational logging with stable dotted event names;
 - centralized code-state transition protection;
 - bounded admin error handling for critical operations;
@@ -44,7 +46,7 @@ composer install
 composer quality
 ```
 
-The Quality Gate validates PHP syntax, plugin structure, version consistency, autoloading, the core Golden Path, code-state integrity, operational logging and the current Sprint 7 Inventory and administration experiences. It also builds and validates `dist/voucher-manager.zip`.
+The Quality Gate validates PHP syntax, plugin structure, version consistency, autoloading, the core Golden Path, code-state integrity, operational logging, lifecycle boundaries and the complete Sprint 8 Distribution safety invariants. It also builds and validates `dist/voucher-manager.zip`.
 
 Official WordPress smoke tests should use the `voucher-manager.zip` artifact built and validated by GitHub Actions rather than a manually packed source archive.
 
@@ -60,7 +62,7 @@ Official WordPress smoke tests should use the `voucher-manager.zip` artifact bui
 - `BUG_STORIES.md` — notable project failures and lessons learned;
 - `docs/` — current technical and experience documentation;
 - `docs/adr/` — architecture decision records;
-- `docs/SPRINT_7_RELEASE_READINESS.md` — Sprint 7 Inventory boundary, smoke-test matrix and release-review gate.
+- `docs/SPRINT_8_PART_5_4_FINAL_DISTRIBUTION_SAFETY_REVIEW.md` — final Distribution invariants and Keeper smoke-test gate.
 
 ## Credits
 
