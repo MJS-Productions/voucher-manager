@@ -68,3 +68,15 @@ Notable decisions:
 - `Operational Activity retention` → `Aufbewahrungsdauer der Aktivitätshistorie`
 - `Uninstall data boundary` → `Verhalten bei der Deinstallation`
 - `business data` → `Daten von Voucher Manager`
+
+
+## Context review revision
+
+A WordPress page-by-page review refined the German experience:
+
+- Dashboard: `Bestand verwalten`
+- Dashboard Activity: `Die letzten Aktivitäten ohne personenbezogene Daten`
+- Activity introduction: `Aktivitäten prüfen und wichtige Vorgänge schnell erkennen`
+- Import rollback: all codes from the import are removed or none are removed
+- Distribution result: the redundant completion eyebrow was removed
+- Indefinite Activity retention: only the permanent-retention explanation remains visible

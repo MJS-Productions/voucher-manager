@@ -57,7 +57,7 @@ $assert( ! str_contains( $template, 'wp_nonce_url' ) && ! str_contains( $templat
 $assert( str_contains( $confirmation, 'method="post"' ) && str_contains( $confirmation, 'confirm_rollback' ) && str_contains( $confirmation, 'required' ), 'Rollback confirmation must use POST and explicit acknowledgement.' );
 $assert( str_contains( $admin, "isset( \$_POST['import_id'] )" ) && str_contains( $admin, 'check_admin_referer' ) && str_contains( $admin, "current_user_can( 'manage_options' )" ), 'Rollback execution must retain POST, nonce and capability protection.' );
 $assert( str_contains( $admin, "isset( \$_POST['confirm_rollback'] )" ) && str_contains( $admin, "'rollback_confirmation_required'" ), 'Server must reject unacknowledged rollback requests.' );
-$assert( str_contains( $confirmation, 'If any code from this import has already been distributed, the rollback is blocked' ), 'Confirmation must explain protected rollback semantics.' );
+$assert( str_contains( $confirmation, 'If any of them has already been distributed, the rollback is blocked' ), 'Confirmation must explain protected rollback semantics.' );
 $assert( str_contains( $composer, '@test:import-experience' ) && strpos( $composer, '@test:import-experience' ) < strpos( $composer, '@build' ), 'Import Experience test must run before build.' );
 
 echo "Import experience OK: guided upload, result clarity, rollback review and security boundary verified.\n";

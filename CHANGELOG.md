@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Fixed
+- Polished Dashboard and Activity descriptions, removed the redundant Distribution success eyebrow, corrected rollback confirmation to the all-or-nothing rule and hid Cron guidance for indefinite retention.
 - Polished German administrator-facing language for Pro references, Import rollback, Activity retention and uninstall settings.
 - Removed implementation jargon from the English and German Distribution guidance.
 - Replaced future-facing Pro wording with the definitive planned Pro-extension wording.

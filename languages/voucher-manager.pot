@@ -133,6 +133,10 @@ msgstr ""
 msgid "Activity history"
 msgstr ""
 
+#: src/Admin/SettingsViewModel.php
+msgid "Activity history entries will be kept indefinitely."
+msgstr ""
+
 #: templates/admin/settings.php
 msgid "Activity is operational history, not a legal or financial audit log."
 msgstr ""
@@ -151,6 +155,10 @@ msgstr ""
 
 #: templates/admin/inventory.php
 msgid "All One-Time Code records in this pool"
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "All One-Time Codes added by this import will be permanently removed. If any of them has already been distributed, the rollback is blocked and no codes are removed."
 msgstr ""
 
 #: src/Admin/OperationalActivityViewModel.php
@@ -246,7 +254,7 @@ msgid "Choose a pool with available inventory. Voucher Manager automatically ass
 msgstr ""
 
 #: templates/admin/settings.php
-msgid "Cleanup runs through WordPress Cron in bounded daily batches. Saving this preference does not delete Activity immediately."
+msgid "Cleanup runs automatically through WordPress Cron. Saving this preference does not delete Activity immediately."
 msgstr ""
 
 #: src/Admin/InventoryViewModel.php templates/admin/inventory.php
@@ -399,10 +407,6 @@ msgstr ""
 msgid "Distribution"
 msgstr ""
 
-#: templates/admin/distribution-direct-result.php templates/admin/distribution.php
-msgid "Distribution complete"
-msgstr ""
-
 #: src/Admin/DistributionAdmin.php
 msgid "Distribution could not be completed. Please try again."
 msgstr ""
@@ -475,15 +479,15 @@ msgstr ""
 msgid "Filter inventory"
 msgstr ""
 
-#: templates/admin/import-rollback-confirmation.php
-msgid "I understand that this may permanently remove up to %d available One-Time Code."
-msgid_plural "I understand that this may permanently remove up to %d available One-Time Codes."
-msgstr[0] ""
-msgstr[1] ""
-
 #: templates/admin/pool-delete-available-confirmation.php
 msgid "I understand that this permanently deletes %d available One-Time Code."
 msgid_plural "I understand that this permanently deletes %d available One-Time Codes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "I understand that this permanently removes all %d One-Time Code added by this import."
+msgid_plural "I understand that this permanently removes all %d One-Time Codes added by this import."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -697,10 +701,6 @@ msgstr ""
 msgid "Only active pools with available inventory can be selected."
 msgstr ""
 
-#: templates/admin/import-rollback-confirmation.php
-msgid "Only codes from this import that are still available will be removed. If any code from this import has already been distributed, the rollback is blocked and no codes are removed."
-msgstr ""
-
 #: src/Admin/OperationalActivityAdmin.php templates/admin/activity.php
 msgid "Operational Activity"
 msgstr ""
@@ -711,10 +711,6 @@ msgstr ""
 
 #: templates/admin/settings.php
 msgid "Operational Activity retention"
-msgstr ""
-
-#: src/Admin/SettingsViewModel.php
-msgid "Operational Activity will not be removed automatically."
 msgstr ""
 
 #: templates/admin/activity.php
@@ -863,10 +859,6 @@ msgstr ""
 msgid "Refreshing the page does not distribute another One-Time Code. Every distribution requires a new form submission."
 msgstr ""
 
-#: templates/admin/import-rollback-confirmation.php
-msgid "Remove still-available One-Time Codes from this import?"
-msgstr ""
-
 #: templates/admin/activity.php templates/admin/inventory.php
 msgid "Reset filters"
 msgstr ""
@@ -889,10 +881,6 @@ msgstr ""
 
 #: templates/admin/pool-danger-zone.php
 msgid "Review available-code deletion"
-msgstr ""
-
-#: templates/admin/import-rollback-confirmation.php
-msgid "Review import rollback"
 msgstr ""
 
 #: templates/admin/inventory.php
@@ -1053,6 +1041,14 @@ msgstr ""
 
 #: templates/admin/pool-danger-zone.php
 msgid "Type “%s” to confirm:"
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "Undo import"
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "Undo this import?"
 msgstr ""
 
 #: src/Admin/InventoryViewModel.php

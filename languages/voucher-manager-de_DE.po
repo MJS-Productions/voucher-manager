@@ -133,6 +133,10 @@ msgstr "Aktive Pools enthalten derzeit keine verfügbaren Einmalcodes. Vor dem n
 msgid "Activity history"
 msgstr "Aktivitätshistorie"
 
+#: src/Admin/SettingsViewModel.php
+msgid "Activity history entries will be kept indefinitely."
+msgstr "Einträge der Aktivitätshistorie werden dauerhaft aufbewahrt."
+
 #: templates/admin/settings.php
 msgid "Activity is operational history, not a legal or financial audit log."
 msgstr "Die Aktivitätshistorie dient der Nachvollziehbarkeit von Vorgängen. Sie ist kein rechtliches oder finanzielles Prüfprotokoll."
@@ -152,6 +156,10 @@ msgstr "Administrative Aktion fehlgeschlagen"
 #: templates/admin/inventory.php
 msgid "All One-Time Code records in this pool"
 msgstr "Alle Einmalcode-Einträge in diesem Pool"
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "All One-Time Codes added by this import will be permanently removed. If any of them has already been distributed, the rollback is blocked and no codes are removed."
+msgstr "Alle durch diesen Import hinzugefügten Einmalcodes werden dauerhaft entfernt. Wurde bereits einer davon ausgegeben, wird der Rollback blockiert und es werden keine Codes entfernt."
 
 #: src/Admin/OperationalActivityViewModel.php
 msgid "All activity"
@@ -246,8 +254,8 @@ msgid "Choose a pool with available inventory. Voucher Manager automatically ass
 msgstr "Einen Pool mit verfügbarem Bestand auswählen. Voucher Manager gibt automatisch den nächsten verfügbaren Einmalcode aus. Gleichzeitige Anfragen erhalten niemals denselben Code."
 
 #: templates/admin/settings.php
-msgid "Cleanup runs through WordPress Cron in bounded daily batches. Saving this preference does not delete Activity immediately."
-msgstr "Die Bereinigung erfolgt automatisch über WordPress-Cron in begrenzten täglichen Schritten. Beim Speichern dieser Einstellung werden keine Aktivitäten sofort gelöscht."
+msgid "Cleanup runs automatically through WordPress Cron. Saving this preference does not delete Activity immediately."
+msgstr "Die Bereinigung erfolgt automatisch über WordPress-Cron. Beim Speichern dieser Einstellung werden keine Aktivitäten sofort gelöscht."
 
 #: src/Admin/InventoryViewModel.php templates/admin/inventory.php
 msgid "Code #%d"
@@ -399,10 +407,6 @@ msgstr "Ausgegebene Codes beibehalten"
 msgid "Distribution"
 msgstr "Ausgabe"
 
-#: templates/admin/distribution-direct-result.php templates/admin/distribution.php
-msgid "Distribution complete"
-msgstr "Ausgabe abgeschlossen"
-
 #: src/Admin/DistributionAdmin.php
 msgid "Distribution could not be completed. Please try again."
 msgstr "Die Ausgabe konnte nicht abgeschlossen werden. Erneut versuchen."
@@ -475,17 +479,17 @@ msgstr "Aktivitäten filtern"
 msgid "Filter inventory"
 msgstr "Bestand filtern"
 
-#: templates/admin/import-rollback-confirmation.php
-msgid "I understand that this may permanently remove up to %d available One-Time Code."
-msgid_plural "I understand that this may permanently remove up to %d available One-Time Codes."
-msgstr[0] "Ich verstehe, dass dadurch bis zu %d verfügbarer Einmalcode dauerhaft entfernt werden kann."
-msgstr[1] "Ich verstehe, dass dadurch bis zu %d verfügbare Einmalcodes dauerhaft entfernt werden können."
-
 #: templates/admin/pool-delete-available-confirmation.php
 msgid "I understand that this permanently deletes %d available One-Time Code."
 msgid_plural "I understand that this permanently deletes %d available One-Time Codes."
 msgstr[0] "Ich verstehe, dass dadurch %d verfügbarer Einmalcode dauerhaft gelöscht wird."
 msgstr[1] "Ich verstehe, dass dadurch %d verfügbare Einmalcodes dauerhaft gelöscht werden."
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "I understand that this permanently removes all %d One-Time Code added by this import."
+msgid_plural "I understand that this permanently removes all %d One-Time Codes added by this import."
+msgstr[0] "Ich verstehe, dass dadurch der eine durch diesen Import hinzugefügte Einmalcode dauerhaft entfernt wird."
+msgstr[1] "Ich verstehe, dass dadurch alle %d durch diesen Import hinzugefügten Einmalcodes dauerhaft entfernt werden."
 
 #: templates/admin/settings.php
 msgid "I understand that uninstalling the plugin will permanently delete all Pools, Imports, Codes and Activity."
@@ -607,7 +611,7 @@ msgstr "Warnschwelle für niedrigen Bestand"
 
 #: templates/admin/dashboard.php
 msgid "Manage One-Time Code inventory and review recent Activity."
-msgstr "Einmalcode-Bestand verwalten und die letzten Aktivitäten prüfen."
+msgstr "Bestand verwalten"
 
 #: templates/admin/import.php
 msgid "Maximum file size: 10 MB."
@@ -697,10 +701,6 @@ msgstr "Einmalcode-Bestand"
 msgid "Only active pools with available inventory can be selected."
 msgstr "Es können nur aktive Pools mit verfügbarem Bestand ausgewählt werden."
 
-#: templates/admin/import-rollback-confirmation.php
-msgid "Only codes from this import that are still available will be removed. If any code from this import has already been distributed, the rollback is blocked and no codes are removed."
-msgstr "Nur Codes aus diesem Import, die noch verfügbar sind, werden entfernt. Wurde bereits ein Code aus diesem Import ausgegeben, wird der Rollback blockiert und es werden keine Codes entfernt."
-
 #: src/Admin/OperationalActivityAdmin.php templates/admin/activity.php
 msgid "Operational Activity"
 msgstr "Aktivitätshistorie"
@@ -712,10 +712,6 @@ msgstr "Einträge der Aktivitätshistorie, die älter als %d Tage sind, werden f
 #: templates/admin/settings.php
 msgid "Operational Activity retention"
 msgstr "Aufbewahrungsdauer der Aktivitätshistorie"
-
-#: src/Admin/SettingsViewModel.php
-msgid "Operational Activity will not be removed automatically."
-msgstr "Einträge der Aktivitätshistorie werden nicht automatisch gelöscht."
 
 #: templates/admin/activity.php
 msgid "Operational event overview"
@@ -863,10 +859,6 @@ msgstr "Referenzen sind maskiert. Vollständige Einmalcode-Werte werden nur im e
 msgid "Refreshing the page does not distribute another One-Time Code. Every distribution requires a new form submission."
 msgstr "Das Aktualisieren der Seite gibt keinen weiteren Einmalcode aus. Jede Ausgabe erfordert ein neues Absenden des Formulars."
 
-#: templates/admin/import-rollback-confirmation.php
-msgid "Remove still-available One-Time Codes from this import?"
-msgstr "Noch verfügbare Einmalcodes aus diesem Import entfernen?"
-
 #: templates/admin/activity.php templates/admin/inventory.php
 msgid "Reset filters"
 msgstr "Filter zurücksetzen"
@@ -891,17 +883,13 @@ msgstr "Zurück zur Ausgabe"
 msgid "Review available-code deletion"
 msgstr "Löschen verfügbarer Codes prüfen"
 
-#: templates/admin/import-rollback-confirmation.php
-msgid "Review import rollback"
-msgstr "Import-Rollback prüfen"
-
 #: templates/admin/inventory.php
 msgid "Review pool-scoped inventory without exposing complete One-Time Code values."
 msgstr "Poolbezogenen Bestand prüfen, ohne vollständige Einmalcode-Werte offenzulegen."
 
 #: templates/admin/activity.php
 msgid "Review privacy-safe operational events and identify actions that need attention."
-msgstr "Datenschutzkonforme betriebliche Ereignisse prüfen und Aktionen erkennen, die Aufmerksamkeit erfordern."
+msgstr "Aktivitäten prüfen und wichtige Vorgänge schnell erkennen"
 
 #: templates/admin/import.php
 msgid "Review rollback"
@@ -985,7 +973,7 @@ msgstr "Der Import konnte nicht abgeschlossen werden. Pool und Datei prüfen und
 
 #: templates/admin/dashboard.php
 msgid "The latest operational events, without personal data."
-msgstr "Die letzten betrieblichen Ereignisse ohne personenbezogene Daten."
+msgstr "Die letzten Aktivitäten ohne personenbezogene Daten"
 
 #: templates/admin/pools.php
 msgid "The operation could not be completed."
@@ -1054,6 +1042,14 @@ msgstr "Einmalcodes insgesamt"
 #: templates/admin/pool-danger-zone.php
 msgid "Type “%s” to confirm:"
 msgstr "Zur Bestätigung „%s“ eingeben:"
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "Undo import"
+msgstr "Import rückgängig machen"
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "Undo this import?"
+msgstr "Diesen Import rückgängig machen?"
 
 #: src/Admin/InventoryViewModel.php
 msgid "Unexpected assignment timestamp"

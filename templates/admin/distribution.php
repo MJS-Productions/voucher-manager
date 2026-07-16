@@ -47,7 +47,6 @@ foreach ( $distributable_rows as $row ) {
 		<?php if ( ! empty( $result['success'] ) && is_string( $result['code'] ?? null ) ) : ?>
 			<?php $remaining = isset( $result['remaining'] ) ? absint( $result['remaining'] ) : null; ?>
 			<div class="voucher-manager__distribution-result voucher-manager__distribution-result--<?php echo esc_attr( $view->result_tone( $remaining ) ); ?>">
-				<p class="voucher-manager__eyebrow"><?php echo esc_html__( 'Distribution complete', 'voucher-manager' ); ?></p>
 				<h2><?php echo esc_html__( 'Assigned One-Time Code', 'voucher-manager' ); ?></h2>
 				<p class="voucher-manager__result-guidance"><?php echo esc_html__( 'Copy the One-Time Code now and deliver it through the intended channel. For privacy, the complete value is shown only in this one-time result.', 'voucher-manager' ); ?></p>
 				<div class="voucher-manager__code-result" aria-label="<?php echo esc_attr__( 'Distributed One-Time Code', 'voucher-manager' ); ?>">

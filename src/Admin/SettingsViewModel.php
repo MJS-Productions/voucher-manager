@@ -30,7 +30,7 @@ final class SettingsViewModel {
 
 	public function retention_description( int $days ): string {
 		return 0 === $days
-			? __( 'Operational Activity will not be removed automatically.', 'voucher-manager' )
+			? __( 'Activity history entries will be kept indefinitely.', 'voucher-manager' )
 			: sprintf(
 				/* translators: %d: number of retention days */
 				__( 'Operational Activity older than %d days will become eligible for scheduled cleanup.', 'voucher-manager' ),

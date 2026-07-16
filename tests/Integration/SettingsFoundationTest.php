@@ -80,7 +80,7 @@ $options = $view->retention_options();
 $assert( array( 30, 90, 180, 0 ) === array_keys( $options ), 'Settings must expose only the four approved retention choices.' );
 $assert( str_contains( $view->uninstall_warning(), 'permanently delete' ), 'Destructive uninstall needs an explicit permanent-deletion warning.' );
 $assert( str_contains( $view->retention_description( 90 ), '90 days' ), 'Finite retention needs understandable guidance.' );
-$assert( str_contains( $view->retention_description( 0 ), 'not be removed automatically' ), 'Indefinite retention needs explicit guidance.' );
+$assert( str_contains( $view->retention_description( 0 ), 'kept indefinitely' ), 'Indefinite retention needs explicit guidance.' );
 
 $admin_source    = file_get_contents( $root . '/src/Admin/SettingsAdmin.php' );
 $repository      = file_get_contents( $root . '/src/Infrastructure/WordPress/WpSettingsRepository.php' );

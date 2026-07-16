@@ -32,7 +32,6 @@ $remaining = isset( $result['remaining'] ) ? absint( $result['remaining'] ) : nu
 		<?php if ( ! empty( $result['success'] ) && is_string( $result['code'] ?? null ) ) : ?>
 			<div class="notice notice-warning inline"><p><?php echo esc_html__( 'The One-Time Code was assigned successfully, but the normal one-time result could not be stored. Copy it before leaving this page.', 'voucher-manager' ); ?></p></div>
 			<div class="voucher-manager__distribution-result voucher-manager__distribution-result--<?php echo esc_attr( $view->result_tone( $remaining ) ); ?>">
-				<p class="voucher-manager__eyebrow"><?php echo esc_html__( 'Distribution complete', 'voucher-manager' ); ?></p>
 				<h2><?php echo esc_html__( 'Assigned One-Time Code', 'voucher-manager' ); ?></h2>
 				<div class="voucher-manager__code-result" aria-label="<?php echo esc_attr__( 'Distributed One-Time Code', 'voucher-manager' ); ?>">
 					<code id="vm-distributed-code"><?php echo esc_html( (string) $result['code'] ); ?></code>

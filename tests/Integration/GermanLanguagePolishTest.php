@@ -44,8 +44,8 @@ $required_german = array(
 	'Aufbewahrungsdauer und Verhalten bei der Deinstallation verwalten.',
 	'Aufbewahrungsdauer der Aktivitätshistorie',
 	'Die Aktivitätshistorie dient der Nachvollziehbarkeit von Vorgängen. Sie ist kein rechtliches oder finanzielles Prüfprotokoll.',
-	'Einträge der Aktivitätshistorie werden nicht automatisch gelöscht.',
-	'Die Bereinigung erfolgt automatisch über WordPress-Cron in begrenzten täglichen Schritten.',
+	'Einträge der Aktivitätshistorie werden dauerhaft aufbewahrt.',
+	'Die Bereinigung erfolgt automatisch über WordPress-Cron. Beim Speichern dieser Einstellung werden keine Aktivitäten sofort gelöscht.',
 	'Verhalten bei der Deinstallation',
 	'Standard: Alle Daten von Voucher Manager behalten.',
 );

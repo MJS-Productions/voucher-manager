@@ -130,8 +130,9 @@ $assert(
 
 $assert(
 	is_string( $template_source )
-	&& str_contains( $template_source, 'WordPress Cron in bounded daily batches' )
-	&& str_contains( $template_source, 'does not delete Activity immediately' ),
+	&& str_contains( $template_source, 'Cleanup runs automatically through WordPress Cron' )
+	&& str_contains( $template_source, 'does not delete Activity immediately' )
+	&& str_contains( $template_source, '0 < $settings->activity_retention_days()' ),
 	'Settings must explain asynchronous bounded cleanup.'
 );
 

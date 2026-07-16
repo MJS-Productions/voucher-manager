@@ -54,6 +54,7 @@
       "@test:translation-readiness",
       "@test:german-translation",
       "@test:german-language-polish",
+      "@test:german-experience-polish",
       "@build",
       "@validate:artifact"
     ],
@@ -83,7 +84,8 @@
     "test:i18n-readiness": "php tests/Integration/InternationalizationReadinessTest.php",
     "test:translation-readiness": "php tests/Integration/TranslationReadinessTest.php",
     "test:german-translation": "php tests/Integration/GermanTranslationExperienceTest.php",
-    "test:german-language-polish": "php tests/Integration/GermanLanguagePolishTest.php"
+    "test:german-language-polish": "php tests/Integration/GermanLanguagePolishTest.php",
+    "test:german-experience-polish": "php tests/Integration/GermanExperiencePolishTest.php"
   },
   "config": {
     "sort-packages": true

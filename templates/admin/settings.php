@@ -44,7 +44,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php endforeach; ?>
 			</select>
 			<p class="description"><?php echo esc_html( $view->retention_description( $settings->activity_retention_days() ) ); ?></p>
-			<p class="voucher-manager__muted"><?php echo esc_html__( 'Cleanup runs through WordPress Cron in bounded daily batches. Saving this preference does not delete Activity immediately.', 'voucher-manager' ); ?></p>
+			<?php if ( 0 < $settings->activity_retention_days() ) : ?>
+				<p class="voucher-manager__muted"><?php echo esc_html__( 'Cleanup runs automatically through WordPress Cron. Saving this preference does not delete Activity immediately.', 'voucher-manager' ); ?></p>
+			<?php endif; ?>
 		</section>
 
 		<section class="voucher-manager__card voucher-manager__settings-section voucher-manager__danger-zone">
