@@ -1,0 +1,1233 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Voucher Manager 0.9.3-alpha\n"
+"Report-Msgid-Bugs-To: https://github.com/mjs512/voucher-manager/issues\n"
+"POT-Creation-Date: 2026-07-16 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: voucher-manager\n"
+
+#: src/Admin/ImportViewModel.php
+msgid "%1$d added, %2$d skipped, %3$d invalid — %4$d rows processed"
+msgstr ""
+
+#: src/Admin/DistributionViewModel.php templates/admin/import.php
+msgid "%1$s — %2$d available, %3$d total"
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "%d One-Time Code"
+msgid_plural "%d One-Time Codes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/DashboardViewModel.php templates/admin/import.php
+msgid "%d One-Time Code added"
+msgid_plural "%d One-Time Codes added"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/DistributionViewModel.php
+msgid "%d One-Time Code remains available in this pool."
+msgid_plural "%d One-Time Codes remain available in this pool."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "%d One-Time Code remains available."
+msgid_plural "%d One-Time Codes remain available."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "%d import record"
+msgid_plural "%d import records"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "%d invalid"
+msgid_plural "%d invalid"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/import.php
+msgid "%d invalid row"
+msgid_plural "%d invalid rows"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/import.php
+msgid "%d row processed"
+msgid_plural "%d rows processed"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/import.php
+msgid "%d row skipped"
+msgid_plural "%d rows skipped"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "%d skipped"
+msgid_plural "%d skipped"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/inventory.php
+msgid "%s Inventory"
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "%s matching events"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "%s total events"
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "0 matching records"
+msgstr ""
+
+#: src/Admin/SettingsViewModel.php
+msgid "180 days"
+msgstr ""
+
+#: src/Admin/SettingsViewModel.php
+msgid "30 days"
+msgstr ""
+
+#: src/Admin/SettingsViewModel.php
+msgid "90 days"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "A pool groups One-Time Codes that belong to the same campaign, product or distribution workflow."
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "A secure distribution request could not be prepared. Reload this page and try again."
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "A successful distribution changes the One-Time Code from available to assigned immediately."
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Activate"
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "Active pools currently have no available One-Time Codes. Import codes before trying again."
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Activity history"
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Activity is operational history, not a legal or financial audit log."
+msgstr ""
+
+#: templates/admin/pool-form.php
+msgid "Add New Pool"
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "Administration"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Administrative action failed"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "All One-Time Code records in this pool"
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "All activity"
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "All events"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "All imports"
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "All outcomes"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "All states"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "Already distributed"
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "Assign one available One-Time Code from an active pool. Each successful distribution immediately marks the code as assigned."
+msgstr ""
+
+#: templates/admin/distribution-direct-result.php templates/admin/distribution.php
+msgid "Assigned One-Time Code"
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "Assignment time unavailable"
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php templates/admin/activity.php
+msgid "Attention"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "Attention:"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Available One-Time Codes"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Available One-Time Codes deleted"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Available One-Time Codes permanently deleted."
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "Available One-Time Codes to delete"
+msgstr ""
+
+#: src/Admin/PoolViewModel.php
+msgid "Available for distribution."
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "Available-code deletion failed. No additional action was performed."
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "Back to Pool Danger Zone"
+msgstr ""
+
+#: templates/admin/inventory.php templates/admin/pool-danger-zone.php
+msgid "Back to Pools"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "CSV: codes are read from the first column; a common header is ignored."
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Change the filters or return after another operational action."
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Check whether the file only contained duplicates, empty rows, or invalid values."
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "Choose a pool with available inventory. Voucher Manager atomically assigns the next One-Time Code so concurrent requests cannot assign the same record."
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Cleanup runs through WordPress Cron in bounded daily batches. Saving this preference does not delete Activity immediately."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php templates/admin/inventory.php
+msgid "Code #%d"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Code collections"
+msgstr ""
+
+#: src/Admin/ImportViewModel.php
+msgid "Completed"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Completed and recorded"
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "Confirm available-code deletion"
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Confirm that you understand the permanent uninstall deletion before enabling it."
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Confirm the rollback acknowledgement before continuing."
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Control operational data retention and the explicit uninstall boundary."
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "Copied"
+msgstr ""
+
+#: templates/admin/distribution-direct-result.php templates/admin/distribution.php
+msgid "Copy code"
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "Copy the One-Time Code now and deliver it through the intended channel. For privacy, the complete value is shown only in this one-time result."
+msgstr ""
+
+#: templates/admin/dashboard.php templates/admin/pool-form.php templates/admin/pools.php
+msgid "Create Pool"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Create a pool before importing codes."
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Create a pool first"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Create the first pool"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Danger Zone"
+msgstr ""
+
+#: src/Admin/Admin.php templates/admin/dashboard.php
+msgid "Dashboard"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Database"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Database schema"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Deactivate"
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Deactivating Voucher Manager never deletes data. This setting affects uninstall only."
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Default: preserve all Voucher Manager business data."
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Delete all Voucher Manager data when the plugin is uninstalled"
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "Delete available One-Time Codes"
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "Delete pool and all associated data"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Deleted %d available One-Time Code"
+msgid_plural "Deleted %d available One-Time Codes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/import.php
+msgid "Deleted pool"
+msgstr ""
+
+#: templates/admin/pool-form.php
+msgid "Description"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Designed and developed with love in Austria."
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Destination pool"
+msgstr ""
+
+#: templates/admin/dashboard.php templates/admin/distribution.php templates/admin/pools.php
+msgid "Distribute Code"
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "Distribute next available One-Time Code"
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php templates/admin/pools.php
+msgid "Distributed"
+msgstr ""
+
+#: templates/admin/distribution-direct-result.php templates/admin/distribution.php
+msgid "Distributed One-Time Code"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Distributed codes"
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "Distributed codes preserved"
+msgstr ""
+
+#: src/Admin/DistributionAdmin.php src/Admin/OperationalActivityViewModel.php templates/admin/distribution-direct-result.php templates/admin/distribution.php
+msgid "Distribution"
+msgstr ""
+
+#: templates/admin/distribution-direct-result.php templates/admin/distribution.php
+msgid "Distribution complete"
+msgstr ""
+
+#: src/Admin/DistributionAdmin.php
+msgid "Distribution could not be completed. Please try again."
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Distribution failed"
+msgstr ""
+
+#: templates/admin/distribution-direct-result.php templates/admin/distribution.php
+msgid "Distribution failed."
+msgstr ""
+
+#: src/Admin/PoolViewModel.php
+msgid "Distribution is paused."
+msgstr ""
+
+#: templates/admin/distribution-direct-result.php
+msgid "Distribution result"
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "Distribution safety"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Duplicate codes are skipped instead of being added twice."
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Edit"
+msgstr ""
+
+#: templates/admin/pool-form.php
+msgid "Edit Pool"
+msgstr ""
+
+#: src/Admin/PoolViewModel.php
+msgid "Empty"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Empty or invalid rows are counted but not imported."
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "Error"
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Errors"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Every great project starts with a single line."
+msgstr ""
+
+#: src/Admin/ImportViewModel.php
+msgid "Failed"
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Failed operations"
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Filter activity"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "Filter inventory"
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "I understand that this may permanently remove up to %d available One-Time Code."
+msgid_plural "I understand that this may permanently remove up to %d available One-Time Codes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "I understand that this permanently deletes %d available One-Time Code."
+msgid_plural "I understand that this permanently deletes %d available One-Time Codes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/settings.php
+msgid "I understand that uninstalling the plugin will permanently delete all Pools, Imports, Codes and Activity."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php templates/admin/inventory.php
+msgid "Import #%1$d — %2$s"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Import #%d"
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "Import #%d unavailable"
+msgstr ""
+
+#: src/Admin/ImportAdmin.php templates/admin/dashboard.php templates/admin/distribution.php templates/admin/import.php templates/admin/inventory.php templates/admin/pools.php
+msgid "Import Codes"
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "Import additional One-Time Codes into this pool before the next distribution."
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "Import and operational history preserved"
+msgstr ""
+
+#: src/Admin/PoolViewModel.php
+msgid "Import codes to continue distribution."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "Import codes to make this pool ready for distribution."
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Import completed"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Import completed without adding codes."
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Import completed."
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Import failed"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Import rollback blocked"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Import rolled back"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Import rolled back. %d available One-Time Code removed."
+msgid_plural "Import rolled back. %d available One-Time Codes removed."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "Import time unavailable"
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "Import unavailable"
+msgstr ""
+
+#: templates/admin/import.php templates/admin/inventory.php
+msgid "Imported"
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php templates/admin/dashboard.php templates/admin/pool-danger-zone.php
+msgid "Imports"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Imports and distributions will appear here."
+msgstr ""
+
+#: src/Admin/PoolViewModel.php
+msgid "Inactive"
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "Information"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Inventory overview"
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Keep Activity for"
+msgstr ""
+
+#: src/Admin/SettingsViewModel.php
+msgid "Keep indefinitely"
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "Lifecycle data is inconsistent. No automatic change was made."
+msgstr ""
+
+#: src/Admin/PoolViewModel.php
+msgid "Low stock"
+msgstr ""
+
+#: templates/admin/pool-form.php
+msgid "Low-stock warning threshold"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Manage One-Time Code inventory and review recent Activity."
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Maximum file size: 10 MB."
+msgstr ""
+
+#: templates/admin/pool-form.php
+msgid "Name"
+msgstr ""
+
+#: templates/admin/activity.php templates/admin/dashboard.php
+msgid "Needs attention"
+msgstr ""
+
+#: templates/admin/activity.php templates/admin/inventory.php
+msgid "Next"
+msgstr ""
+
+#: templates/admin/distribution-direct-result.php templates/admin/distribution.php
+msgid "No One-Time Code was distributed."
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "No One-Time Codes are ready to distribute"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "No activity recorded yet."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "No assigned One-Time Codes match this filter."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "No available One-Time Codes match this filter."
+msgstr ""
+
+#: src/Domain/Distribution/DistributionService.php
+msgid "No available One-Time Codes remain in this pool."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "No codes match this import filter."
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "No description added."
+msgstr ""
+
+#: templates/admin/import.php
+msgid "No imports yet."
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "No matching activity found."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "No matching inventory found."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "Not assigned"
+msgstr ""
+
+#: templates/admin/pool-form.php
+msgid "Notifications will use this value in a future Pro extension."
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "One-Time Code assignment occurs immediately after confirmation."
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "One-Time Code distributed"
+msgstr ""
+
+#: src/Domain/Distribution/DistributionService.php
+msgid "One-Time Code distributed."
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "One-Time Code inventory"
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "Only active pools with available inventory can be selected."
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "Only codes from this import that are still available will be removed. If any code from this import has already been distributed, the rollback is blocked and no codes are removed."
+msgstr ""
+
+#: src/Admin/OperationalActivityAdmin.php templates/admin/activity.php
+msgid "Operational Activity"
+msgstr ""
+
+#: src/Admin/SettingsViewModel.php
+msgid "Operational Activity older than %d days will become eligible for scheduled cleanup."
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Operational Activity retention"
+msgstr ""
+
+#: src/Admin/SettingsViewModel.php
+msgid "Operational Activity will not be removed automatically."
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Operational event overview"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Organize One-Time Codes into pools for controlled distribution."
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "Originally added"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "PHP"
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "Permanent deletion cannot be undone."
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "Permanently delete %d unused One-Time Code. Assigned One-Time Codes, the pool and operational history are preserved."
+msgid_plural "Permanently delete %d unused One-Time Codes. Assigned One-Time Codes, the pool and operational history are preserved."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "Permanently delete available One-Time Codes"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Please enter a pool name."
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Pool #%d"
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "Pool Danger Zone"
+msgstr ""
+
+#: src/Admin/InventoryAdmin.php
+msgid "Pool Inventory"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Pool deleted"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Pool deleted."
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Pool deletion failed"
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "Pool deletion failed. The destructive operation was rolled back."
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Pool has no available One-Time Codes"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "Pool inventory summary"
+msgstr ""
+
+#: templates/admin/pool-form.php
+msgid "Pool is active"
+msgstr ""
+
+#: src/Domain/Distribution/DistributionService.php
+msgid "Pool is unavailable."
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Pool overview"
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "Pool preserved"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Pool status updated."
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "Pool totals"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "Pool updated."
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php src/Admin/PoolAdmin.php templates/admin/dashboard.php templates/admin/pools.php
+msgid "Pools"
+msgstr ""
+
+#: templates/admin/activity.php templates/admin/inventory.php
+msgid "Previous"
+msgstr ""
+
+#: src/Admin/ImportViewModel.php
+msgid "Processing"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Quick actions"
+msgstr ""
+
+#: src/Admin/PoolViewModel.php templates/admin/dashboard.php
+msgid "Ready"
+msgstr ""
+
+#: templates/admin/dashboard.php templates/admin/inventory.php
+msgid "Ready for distribution"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Recent activity"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Recent imports"
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Recorded operational history"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "Reference"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "References are masked. Complete One-Time Code values are shown only in the one-time Distribution result."
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "Refreshing the page does not distribute another One-Time Code. Every distribution requires a new form submission."
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "Remove still-available One-Time Codes from this import?"
+msgstr ""
+
+#: templates/admin/activity.php templates/admin/inventory.php
+msgid "Reset filters"
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "Reset the filters to return to the complete pool inventory."
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "Retry the administrative action. If it fails again, review the WordPress error log."
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "Retry the distribution and confirm that the selected pool is active and has inventory."
+msgstr ""
+
+#: templates/admin/distribution-direct-result.php
+msgid "Return to Distribution"
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "Review available-code deletion"
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "Review import rollback"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgid "Review pool-scoped inventory without exposing complete One-Time Code values."
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Review privacy-safe operational events and identify actions that need attention."
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Review rollback"
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "Review the source file and retry the import. Technical details remain in the WordPress error log."
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "Roll back import"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Rollback is unavailable because codes from this import have already been assigned. No codes were removed."
+msgstr ""
+
+#: src/Admin/ImportViewModel.php
+msgid "Rolled back"
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Save settings"
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Settings saved."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "Showing %1$d–%2$d of %3$d matching records"
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php templates/admin/activity.php
+msgid "Success"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "Successfully assigned"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "System status"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "TXT or CSV file"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "TXT: place one code on each line."
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Technical identifiers and counts may be shown. One-Time Code values and personal data are never presented here."
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "The One-Time Code value is not written to operational Activity context."
+msgstr ""
+
+#: templates/admin/distribution-direct-result.php
+msgid "The One-Time Code was assigned successfully, but the normal one-time result could not be stored. Copy it before leaving this page."
+msgstr ""
+
+#: src/Admin/DistributionViewModel.php
+msgid "The One-Time Code was assigned successfully. Remaining inventory could not be refreshed."
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "The deletion was rolled back. The pool data should remain intact; retry or review the WordPress error log."
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "The first pool has been created."
+msgstr ""
+
+#: templates/admin/import.php
+msgid "The import could not be completed. Check the pool and file, then try again."
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "The latest operational events, without personal data."
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "The operation could not be completed."
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "The pool name did not match. Nothing was deleted."
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "There are no available One-Time Codes to delete."
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgid "This action cannot be undone."
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "This action permanently deletes unused codes."
+msgstr ""
+
+#: templates/admin/distribution.php
+msgid "This distribution request was already used or expired. No additional One-Time Code was distributed."
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "This import contains assigned One-Time Codes and cannot be rolled back safely."
+msgstr ""
+
+#: templates/admin/import.php
+msgid "This import is not available for rollback."
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "This permanently deletes the pool, %1$s and %2$s."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "This pool has inventory, but no One-Time Codes have been assigned yet."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "This pool has inventory, but none of it is currently available."
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "This pool has no available One-Time Codes to delete."
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "This pool has no inventory yet."
+msgstr ""
+
+#: src/Admin/DistributionViewModel.php
+msgid "This pool is now empty. Import more One-Time Codes before the next distribution."
+msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "This was a permanent lifecycle action. No One-Time Code values were retained in Activity."
+msgstr ""
+
+#: templates/admin/inventory.php templates/admin/pool-danger-zone.php templates/admin/pools.php
+msgid "Total One-Time Codes"
+msgstr ""
+
+#: templates/admin/pool-danger-zone.php
+msgid "Type “%s” to confirm:"
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgid "Unexpected assignment timestamp"
+msgstr ""
+
+#: templates/admin/settings.php
+msgid "Uninstall data boundary"
+msgstr ""
+
+#: templates/admin/pool-form.php
+msgid "Update Pool"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "Upload a code file"
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "View all activity"
+msgstr ""
+
+#: templates/admin/pools.php
+msgid "View inventory"
+msgstr ""
+
+#: src/Admin/Admin.php
+msgid "Voucher Manager"
+msgstr ""
+
+#: src/Admin/Admin.php
+msgid "Voucher Manager Dashboard"
+msgstr ""
+
+#: src/Admin/SettingsAdmin.php templates/admin/settings.php
+msgid "Voucher Manager Settings"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Voucher Manager activity"
+msgstr ""
+
+#: src/Admin/PoolViewModel.php
+msgid "Warning threshold: %d"
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Warnings and errors"
+msgstr ""
+
+#: templates/admin/import.php
+msgid "What happens during import"
+msgstr ""
+
+#: src/Admin/SettingsViewModel.php
+msgid "When enabled, uninstalling Voucher Manager will permanently delete all Pools, Imports, Codes, Activity and plugin settings. Deactivation never deletes data."
+msgstr ""
+
+#: templates/admin/dashboard.php
+msgid "WordPress"
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "Yes"
+msgstr ""
+
+#: src/Admin/Admin.php src/Admin/DistributionAdmin.php src/Admin/ImportAdmin.php src/Admin/InventoryAdmin.php src/Admin/OperationalActivityAdmin.php src/Admin/PoolAdmin.php src/Admin/SettingsAdmin.php
+msgid "You are not allowed to access this page."
+msgstr ""
+
+#: templates/admin/pool-delete-available-confirmation.php
+msgid "You must explicitly acknowledge the permanent deletion before continuing."
+msgstr ""
+
+#: templates/admin/activity.php
+msgctxt "Activity filter label"
+msgid "Area"
+msgstr ""
+
+#: templates/admin/activity.php
+msgctxt "Activity filter label"
+msgid "Outcome"
+msgstr ""
+
+#: templates/admin/pool-form.php
+msgctxt "Cancel Pool editing action"
+msgid "Cancel"
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgctxt "Cancel import rollback action"
+msgid "Cancel"
+msgstr ""
+
+#: templates/admin/distribution.php
+msgctxt "Distribution form field label"
+msgid "Pool"
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgctxt "Import destination Pool label"
+msgid "Pool"
+msgstr ""
+
+#: templates/admin/import-rollback-confirmation.php
+msgctxt "Import source file label"
+msgid "File"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgctxt "Inventory filter or table column"
+msgid "State"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgctxt "Inventory source import"
+msgid "Import"
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgctxt "One-Time Code status"
+msgid "Assigned"
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php templates/admin/inventory.php templates/admin/pool-danger-zone.php templates/admin/pools.php
+msgctxt "One-Time Code status"
+msgid "Available"
+msgstr ""
+
+#: src/Admin/InventoryViewModel.php
+msgctxt "One-Time Code status"
+msgid "Other"
+msgstr ""
+
+#: templates/admin/inventory.php
+msgctxt "One-Time Code status or timestamp column"
+msgid "Assigned"
+msgstr ""
+
+#: templates/admin/import.php
+msgctxt "Recent imports table column"
+msgid "Actions"
+msgstr ""
+
+#: templates/admin/import.php
+msgctxt "Recent imports table column"
+msgid "File"
+msgstr ""
+
+#: templates/admin/import.php
+msgctxt "Recent imports table column"
+msgid "Pool"
+msgstr ""
+
+#: templates/admin/import.php
+msgctxt "Recent imports table column"
+msgid "Result"
+msgstr ""
+
+#: templates/admin/import.php
+msgctxt "Recent imports table column"
+msgid "Status"
+msgstr ""
+
+#: src/Admin/OperationalActivityAdmin.php
+msgctxt "admin menu label"
+msgid "Activity"
+msgstr ""
+
+#: src/Admin/ImportAdmin.php
+msgctxt "admin menu label"
+msgid "Import"
+msgstr ""
+
+#: src/Admin/SettingsAdmin.php
+msgctxt "admin menu label"
+msgid "Settings"
+msgstr ""

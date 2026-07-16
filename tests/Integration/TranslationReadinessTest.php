@@ -63,7 +63,7 @@ $assert(
 $assert(
 	is_string( $danger_template )
 	&& substr_count( $danger_template, '_n(' ) >= 3
-	&& str_contains( $danger_template, 'This permanently deletes the pool, %1$s, and %2$s.' )
+	&& str_contains( $danger_template, 'This permanently deletes the pool, %1$s and %2$s.' )
 	&& ! str_contains( $danger_template, 'all %1$s' )
 	&& str_contains( $danger_template, 'translators: 1: localized One-Time Code count' ),
 	'Destructive Pool summaries must support independent plurals and grammar-safe reorderable placeholders.'

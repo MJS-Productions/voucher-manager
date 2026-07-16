@@ -5,10 +5,10 @@ Professional management and distribution of unique One-Time Codes for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Alpha development  
-**Release candidate:** `0.9.2-alpha` — The Localization Contract  
-**Previous published release:** `0.9.1-alpha` — The Translation Foundation
+**Release candidate:** `0.9.3-alpha` — The German Experience  
+**Previous published release:** `0.9.2-alpha` — The Localization Contract
 
-Sprint 9 Part 3.2 establishes the localization quality contract for `0.9.2-alpha`. Ambiguous labels now carry translator context, count-sensitive copy uses plural forms, dynamic messages include translator guidance and all previous Product Language, i18n and VM-018 safeguards remain intact.
+Sprint 9 Part 3.3 delivers the complete bundled German administration experience for `0.9.3-alpha`. The source catalog, editable `de_DE` catalog and compiled runtime catalog follow the approved terminology while all previous Product Language, localization, VM-018 and Distribution safety safeguards remain intact.
 
 ## Current capabilities
 
@@ -62,6 +62,7 @@ Official WordPress smoke tests should use the `voucher-manager.zip` artifact bui
 - `BUG_STORIES.md` — notable project failures and lessons learned;
 - `docs/` — current technical and experience documentation;
 - `docs/adr/` — architecture decision records;
+- `docs/GERMAN_TRANSLATION.md` — approved German terminology, catalog files and runtime loading.
 - `docs/LOCALIZATION_GUIDE.md` — context, placeholder, plural and escaping rules.
 - `docs/TRANSLATOR_NOTES.md` — product terminology and translation guidance.
 - `docs/INTERNATIONALIZATION_AUDIT.md` — Sprint 9 Part 3.1 runtime string audit and staged localization boundary.

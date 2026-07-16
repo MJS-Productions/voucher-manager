@@ -91,3 +91,12 @@ Never imply that complete values are available in Inventory or Activity.
 ## Internal language
 
 Do not rename stable PHP classes, namespaces, repositories, database fields, event names or stored status values merely to mirror UI terminology.
+
+
+## German contract status
+
+The German terminology is approved and locked for Sprint 9 Part 3.3.
+
+Use `Einmalcode`, `Bestand`, `Ausgabe`, `Aktivitätshistorie`, `Verfügbar`, `Ausgegeben`, `Gefahrenbereich` and `Dauerhafte Löschung`.
+
+The English source language does not use the serial comma in the reviewed destructive Pool summary.

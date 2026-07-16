@@ -54,7 +54,7 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 		echo esc_html(
 			sprintf(
 				/* translators: 1: localized One-Time Code count, 2: localized import record count */
-				__( 'This permanently deletes the pool, %1$s, and %2$s.', 'voucher-manager' ),
+				__( 'This permanently deletes the pool, %1$s and %2$s.', 'voucher-manager' ),
 				$code_count,
 				$import_count
 			)

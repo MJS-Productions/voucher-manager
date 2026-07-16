@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+## 0.9.3-alpha - 2026-07-16 — The German Experience
+
+### Added
+- Complete bundled German `de_DE` translation with editable PO and compiled MO catalogs.
+- Maintained POT source catalog with all 292 reviewed runtime strings.
+- German Translation documentation and ADR 0031.
+- German Translation Experience regression coverage before release build.
+
+### Changed
+- Applied the approved German Product Language contract throughout the catalog.
+- Standardized German status, navigation, Inventory, Distribution, Activity and destructive-flow terminology.
+- Removed the serial comma from the English destructive Pool summary according to the approved source-language style.
+- Preserved Product Language, localization, VM-018 and Distribution safety boundaries.
+
 ## 0.9.2-alpha - 2026-07-16 — The Localization Contract
 
 ### Added
