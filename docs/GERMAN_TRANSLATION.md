@@ -53,3 +53,18 @@ Approved:
 ## Boundaries
 
 Technical identifiers, event keys, stored status values, database names and exception diagnostics remain untranslated.
+
+
+## Language polish revision
+
+The German catalog was reviewed in WordPress and polished for natural administrator-facing language.
+
+Notable decisions:
+
+- `in a future Pro extension` → `in the Pro extension`
+- `Import zurückrollen` → `Import rückgängig machen`
+- `Import zurückgerollt` → `Import erfolgreich rückgängig gemacht`
+- technical `atomar` wording removed from the Distribution guidance
+- `Operational Activity retention` → `Aufbewahrungsdauer der Aktivitätshistorie`
+- `Uninstall data boundary` → `Verhalten bei der Deinstallation`
+- `business data` → `Daten von Voucher Manager`

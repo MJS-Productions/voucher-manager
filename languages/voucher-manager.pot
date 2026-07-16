@@ -242,7 +242,7 @@ msgid "Check whether the file only contained duplicates, empty rows, or invalid 
 msgstr ""
 
 #: templates/admin/distribution.php
-msgid "Choose a pool with available inventory. Voucher Manager atomically assigns the next One-Time Code so concurrent requests cannot assign the same record."
+msgid "Choose a pool with available inventory. Voucher Manager automatically assigns the next available One-Time Code. Concurrent requests never receive the same code."
 msgstr ""
 
 #: templates/admin/settings.php
@@ -674,7 +674,7 @@ msgid "Not assigned"
 msgstr ""
 
 #: templates/admin/pool-form.php
-msgid "Notifications will use this value in a future Pro extension."
+msgid "Notifications will use this value in the Pro extension."
 msgstr ""
 
 #: templates/admin/distribution.php

@@ -86,7 +86,7 @@ foreach ( $distributable_rows as $row ) {
 	<div class="voucher-manager__distribution-grid">
 		<div class="voucher-manager__card voucher-manager__form">
 			<h2><?php echo esc_html__( 'Distribute next available One-Time Code', 'voucher-manager' ); ?></h2>
-			<p><?php echo esc_html__( 'Choose a pool with available inventory. Voucher Manager atomically assigns the next One-Time Code so concurrent requests cannot assign the same record.', 'voucher-manager' ); ?></p>
+			<p><?php echo esc_html__( 'Choose a pool with available inventory. Voucher Manager automatically assigns the next available One-Time Code. Concurrent requests never receive the same code.', 'voucher-manager' ); ?></p>
 
 			<?php if ( empty( $distributable_rows ) ) : ?>
 				<div class="voucher-manager__empty-state voucher-manager__distribution-empty">

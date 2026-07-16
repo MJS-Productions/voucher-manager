@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Fixed
+- Polished German administrator-facing language for Pro references, Import rollback, Activity retention and uninstall settings.
+- Removed implementation jargon from the English and German Distribution guidance.
+- Replaced future-facing Pro wording with the definitive planned Pro-extension wording.
+
 ## 0.9.3-alpha - 2026-07-16 — The German Experience
 
 ### Added
