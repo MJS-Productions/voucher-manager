@@ -1,6 +1,6 @@
 {
   "name": "mjs512/voucher-manager",
-  "description": "Professional management and distribution of unique codes for WordPress.",
+  "description": "Professional One-Time Code Management for WordPress.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
   "authors": [
@@ -39,6 +39,7 @@
       "@test:distribution-experience",
       "@test:operational-visibility",
       "@test:sprint7-release-readiness",
+      "@test:product-identity",
       "@test:release-identity",
       "@test:inventory-experience",
       "@test:inventory-navigation",
@@ -89,7 +90,8 @@
     "test:german-language-polish": "php tests/Integration/GermanLanguagePolishTest.php",
     "test:german-experience-polish": "php tests/Integration/GermanExperiencePolishTest.php",
     "translations": "php tools/compile-translations.php",
-    "test:translation-artifact-integrity": "php tests/Integration/TranslationArtifactIntegrityTest.php"
+    "test:translation-artifact-integrity": "php tests/Integration/TranslationArtifactIntegrityTest.php",
+    "test:product-identity": "php tests/Integration/ProductIdentityTest.php"
   },
   "config": {
     "sort-packages": true

@@ -1,14 +1,14 @@
 # Voucher Manager
 
-Professional management and distribution of unique One-Time Codes for WordPress.
+Professional One-Time Code Management for WordPress.
 
 > Simple for users. Reliable for businesses.
 
-**Status:** Alpha development  
-**Release candidate:** `0.9.3-alpha` — The German Experience  
+**Status:** Release Candidate  
+**Release candidate:** `1.0.0-rc.1` — The First Release Candidate  
 **Previous published release:** `0.8.0-alpha` — The Hardened Lifecycle
 
-Sprint 9 Part 3.3 delivers the complete bundled German administration experience for `0.9.3-alpha`. The source catalog, editable `de_DE` catalog and compiled runtime catalog follow the approved terminology while all previous Product Language, localization, VM-018 and Distribution safety safeguards remain intact.
+`1.0.0-rc.1` is the first publication candidate for Voucher Manager Free 1.0. It combines the hardened One-Time Code lifecycle, complete German administration experience, deterministic translation artifacts and the fully audited release process under the official product identity.
 
 ## Current capabilities
 
@@ -35,7 +35,7 @@ Sprint 9 Part 3.3 delivers the complete bundled German administration experience
 3. Distribute one available code.
 4. Track inventory and operational activity.
 
-Voucher Manager currently prioritizes stability and usability before larger integrations or commercial features.
+Voucher Manager Free is a complete product. Voucher Manager Pro will add convenience and advanced workflows without weakening the Free edition.
 
 ## Quality and release process
 
@@ -65,6 +65,7 @@ Official WordPress smoke tests should use the `voucher-manager.zip` artifact bui
 - `docs/adr/` — architecture decision records;
 - `docs/GERMAN_TRANSLATION.md` — approved German terminology, catalog files and runtime loading.
 - `docs/adr/0032-translation-artifact-integrity.md` — deterministic PO-to-MO build and release boundary.
+- `docs/adr/0033-product-identity.md` — official product name, tagline and Free/Pro family.
 - `docs/LOCALIZATION_GUIDE.md` — context, placeholder, plural and escaping rules.
 - `docs/TRANSLATOR_NOTES.md` — product terminology and translation guidance.
 - `docs/INTERNATIONALIZATION_AUDIT.md` — Sprint 9 Part 3.1 runtime string audit and staged localization boundary.

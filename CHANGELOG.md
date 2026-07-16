@@ -2,20 +2,29 @@
 
 ## Unreleased
 
+## 1.0.0-rc.1 - 2026-07-16 — The First Release Candidate
+
 ### Added
+- Official Voucher Manager product identity and tagline: `Professional One-Time Code Management for WordPress`.
+- ADR 0033 documenting the stable Free/Pro product family.
+- First Free 1.0 release-candidate identity, notes and regression coverage.
 - Sprint 10 Part 1 deterministic PO-to-MO compiler exposed through `composer translations`.
 - Translation Artifact Integrity regression gate and ADR 0032.
 - Explicit translation build step in GitHub Actions and direct release builds.
 
 ### Changed
+- Promoted the reviewed internal `0.9.x` development line to the first public Free 1.0 release candidate.
 - Release artifacts now require POT, PO and current MO catalogs.
-- README release history now identifies `0.8.0-alpha` as the last publicly published Alpha release.
+- README release history identifies `0.8.0-alpha` as the last publicly published Alpha release.
+- Polished Dashboard, Activity, Distribution, Import rollback and retention guidance in English and German.
+- Replaced future-facing Pro wording with the definitive Voucher Manager Pro wording.
 
 ### Fixed
-- Polished Dashboard and Activity descriptions, removed the redundant Distribution success eyebrow, corrected rollback confirmation to the all-or-nothing rule and hid Cron guidance for indefinite retention.
-- Polished German administrator-facing language for Pro references, Import rollback, Activity retention and uninstall settings.
-- Removed implementation jargon from the English and German Distribution guidance.
-- Replaced future-facing Pro wording with the definitive planned Pro-extension wording.
+- Removed the redundant Distribution success eyebrow.
+- Corrected rollback confirmation to the all-or-nothing import rule.
+- Hid Cron cleanup guidance when Activity retention is set to indefinite.
+- Removed implementation jargon from administrator-facing Distribution guidance.
+
 
 ## 0.9.3-alpha - 2026-07-16 — The German Experience
 

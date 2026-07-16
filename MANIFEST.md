@@ -1,5 +1,7 @@
 # Voucher Manager Manifest
 
+> **Professional One-Time Code Management for WordPress**
+
 ## Why we build
 
 Voucher Manager exists to solve real-world problems with simple, reliable and professional software.
@@ -20,3 +22,12 @@ Every great project starts with a single line.
 **Simple things deserve professional solutions.**
 
 Designed and developed with ❤️ in Austria.
+
+
+## Product identity
+
+- Product: **Voucher Manager**
+- Tagline: **Professional One-Time Code Management for WordPress**
+- Free edition: **Voucher Manager**
+- Commercial edition: **Voucher Manager Pro**
+- Slug and text domain: `voucher-manager`
