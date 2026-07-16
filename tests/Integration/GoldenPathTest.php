@@ -236,13 +236,18 @@ try {
     $assert(2 === count(array_filter($eventTypes, static fn(string $type): bool => 'distribution.completed' === $type)), 'Each successful distribution must be logged.');
     $assert(in_array('distribution.empty', $eventTypes, true), 'Empty distribution must be logged.');
 
-    $rollbackBlocked = false;
-    try {
-        $importService->rollback($importResult->import_id());
-    } catch (\RuntimeException) {
-        $rollbackBlocked = true;
-    }
-    $assert($rollbackBlocked, 'Rollback must be blocked after codes have been assigned.');
+    $rollbackResult = $importService->rollback($importResult->import_id());
+    $assert(false === $rollbackResult, 'Rollback must be blocked after codes have been assigned.');
+
+    $eventTypes = array_column($logs->entries, 'event_type');
+    $assert(
+        1 === count(array_filter($eventTypes, static fn(string $type): bool => 'import.rollback_blocked' === $type)),
+        'Blocked rollback must record exactly one business-rule Activity event.'
+    );
+    $assert(
+        ! in_array('admin.action_failed', $eventTypes, true),
+        'Expected rollback protection must not be recorded as an administrative failure.'
+    );
 } finally {
     unlink($file);
 }

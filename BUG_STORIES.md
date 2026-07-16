@@ -212,3 +212,25 @@ The intent-to-result mapping now retains the short-lived owner-scoped result pay
 ### Lesson
 
 A consume-once recovery token cannot safely be shared by multiple concurrent browser responses.
+
+
+---
+
+## VM-018 — The Rollback That Failed Successfully
+
+**Status:** Fixed  
+**Discovered in:** WordPress import rollback smoke test after 0.8.0-alpha
+
+### Story
+
+An import containing assigned codes correctly blocked rollback and recorded `import.rollback_blocked`. The expected domain block was implemented with a `RuntimeException`, so the generic administrative error boundary also recorded `admin.action_failed`.
+
+The Activity screen therefore showed a yellow business-rule event and a misleading red technical failure for the same correctly handled action.
+
+### Fix
+
+Assigned-code protection now returns an explicit blocked result, records only `import.rollback_blocked`, and bypasses the generic error path. Unexpected exceptions still produce `admin.action_failed`.
+
+### Lesson
+
+An expected domain decision must not be represented as an unexpected technical exception.

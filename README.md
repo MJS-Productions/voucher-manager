@@ -5,10 +5,10 @@ Professional management and distribution of unique voucher codes for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Alpha development  
-**Release candidate:** `0.8.0-alpha` — The Hardened Lifecycle  
-**Previous published release:** `0.7.0-alpha` — The Visible Inventory
+**Release candidate:** `0.8.1-alpha` — The Activity Clarity Patch  
+**Previous published release:** `0.8.0-alpha` — The Hardened Lifecycle
 
-Sprint 8 is development-complete and has passed the final Keeper concurrency gate. The `0.8.0-alpha` candidate adds Settings, bounded Activity retention, consent-aware uninstall behavior and hardened manual Distribution with authoritative claim outcomes, replay protection and resilient one-time result delivery.
+The `0.8.1-alpha` maintenance candidate preserves the complete Sprint 8 lifecycle and Distribution safety baseline while correcting Activity semantics for intentionally blocked import rollbacks.
 
 ## Current capabilities
 

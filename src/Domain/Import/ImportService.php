@@ -76,13 +76,32 @@ final class ImportService {
 		}
 	}
 
-	public function rollback( int $import_id ): int {
+	/**
+	 * Roll back an import while preserving already assigned codes.
+	 *
+	 * A protected business-rule block returns false and records its own
+	 * warning event. Unexpected repository failures still throw and therefore
+	 * remain visible through the administrative error boundary.
+	 */
+	public function rollback( int $import_id ): int|false {
 		if ( 0 < $this->codes->count_assigned_by_import( $import_id ) ) {
-			throw new RuntimeException( 'Assigned codes prevent rollback.' );
+			$this->logs->add(
+				OperationalEvent::IMPORT_ROLLBACK_BLOCKED->value,
+				'Import rollback was blocked because assigned codes exist.',
+				array( 'import_id' => $import_id )
+			);
+
+			return false;
 		}
+
 		$deleted = $this->codes->delete_available_by_import( $import_id );
 		$this->imports->mark_rolled_back( $import_id );
-		$this->logs->add( OperationalEvent::IMPORT_ROLLED_BACK->value, 'Code import rolled back.', array( 'import_id' => $import_id, 'deleted' => $deleted ) );
+		$this->logs->add(
+			OperationalEvent::IMPORT_ROLLED_BACK->value,
+			'Code import rolled back.',
+			array( 'import_id' => $import_id, 'deleted' => $deleted )
+		);
+
 		return $deleted;
 	}
 }

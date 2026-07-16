@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.8.1-alpha - 2026-07-16 — The Activity Clarity Patch
+
+### Fixed
+- Prevented an intentionally blocked import rollback from also creating a misleading red `admin.action_failed` Activity entry.
+- Represented assigned-code rollback protection as an explicit domain outcome while preserving red Activity for unexpected technical failures.
+- Added VM-018 regression coverage, documentation and ADR 0027.
+
 ## 0.8.0-alpha - 2026-07-16 — The Hardened Lifecycle
 
 ### Added

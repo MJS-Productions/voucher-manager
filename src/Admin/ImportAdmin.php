@@ -166,7 +166,7 @@ final class ImportAdmin {
 		}
 
 		$deleted = $this->boundary->execute(
-			fn(): int => $this->service->rollback( $import_id ),
+			fn(): int|false => $this->service->rollback( $import_id ),
 			null,
 			array(
 				'action'    => 'import.rollback',
@@ -175,13 +175,12 @@ final class ImportAdmin {
 			)
 		);
 
-		if ( ! is_int( $deleted ) ) {
-			$this->logger->warning(
-				OperationalEvent::IMPORT_ROLLBACK_BLOCKED,
-				'Import rollback was blocked or failed.',
-				array( 'import_id' => $import_id, 'source' => 'manual' )
-			);
+		if ( false === $deleted ) {
 			$this->redirect( array( 'vm_notice' => 'rollback_blocked' ) );
+		}
+
+		if ( null === $deleted ) {
+			$this->redirect( array( 'vm_notice' => 'import_error' ) );
 		}
 
 		$this->redirect( array( 'vm_notice' => 'rolled_back', 'deleted' => $deleted ) );

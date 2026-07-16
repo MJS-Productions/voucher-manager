@@ -48,6 +48,7 @@
       "@test:distribution-intent-idempotency",
       "@test:distribution-result-delivery",
       "@test:distribution-safety-review",
+      "@test:rollback-activity-cleanup",
       "@build",
       "@validate:artifact"
     ],
@@ -71,7 +72,8 @@
     "test:distribution-claim-outcome": "php tests/Integration/DistributionClaimOutcomeTest.php",
     "test:distribution-intent-idempotency": "php tests/Integration/DistributionIntentIdempotencyTest.php",
     "test:distribution-result-delivery": "php tests/Integration/DistributionResultDeliveryTest.php",
-    "test:distribution-safety-review": "php tests/Integration/DistributionSafetyReviewTest.php"
+    "test:distribution-safety-review": "php tests/Integration/DistributionSafetyReviewTest.php",
+    "test:rollback-activity-cleanup": "php tests/Integration/RollbackActivityCleanupTest.php"
   },
   "config": {
     "sort-packages": true
