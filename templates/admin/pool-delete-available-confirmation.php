@@ -17,7 +17,7 @@ $danger_url = add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' 
 		<h2><?php echo esc_html( $pool->name() ); ?></h2>
 		<p><strong><?php echo esc_html__( 'This action permanently deletes unused codes.', 'voucher-manager' ); ?></strong></p>
 		<dl>
-			<dt><?php echo esc_html__( 'Available codes to delete', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $summary['available'] ) ); ?></dd>
+			<dt><?php echo esc_html__( 'Available One-Time Codes to delete', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $summary['available'] ) ); ?></dd>
 			<dt><?php echo esc_html__( 'Distributed codes preserved', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $summary['assigned'] ) ); ?></dd>
 			<dt><?php echo esc_html__( 'Pool preserved', 'voucher-manager' ); ?></dt><dd><?php echo esc_html__( 'Yes', 'voucher-manager' ); ?></dd>
 			<dt><?php echo esc_html__( 'Import and operational history preserved', 'voucher-manager' ); ?></dt><dd><?php echo esc_html__( 'Yes', 'voucher-manager' ); ?></dd>
@@ -27,11 +27,11 @@ $danger_url = add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' 
 				<?php wp_nonce_field( 'voucher_manager_delete_available_codes_' . $pool->id() ); ?>
 				<input type="hidden" name="action" value="voucher_manager_delete_available_codes">
 				<input type="hidden" name="pool_id" value="<?php echo esc_attr( (string) $pool->id() ); ?>">
-				<p><label><input type="checkbox" name="confirm_delete_available" value="1" required> <?php echo esc_html( sprintf( __( 'I understand that this permanently deletes %d available codes.', 'voucher-manager' ), $summary['available'] ) ); ?></label></p>
-				<p><button class="button" type="submit"><?php echo esc_html__( 'Permanently delete available codes', 'voucher-manager' ); ?></button></p>
+				<p><label><input type="checkbox" name="confirm_delete_available" value="1" required> <?php echo esc_html( sprintf( __( 'I understand that this permanently deletes %d available One-Time Codes.', 'voucher-manager' ), $summary['available'] ) ); ?></label></p>
+				<p><button class="button" type="submit"><?php echo esc_html__( 'Permanently delete available One-Time Codes', 'voucher-manager' ); ?></button></p>
 			</form>
 		<?php else : ?>
-			<p><?php echo esc_html__( 'There are no available codes to delete.', 'voucher-manager' ); ?></p>
+			<p><?php echo esc_html__( 'There are no available One-Time Codes to delete.', 'voucher-manager' ); ?></p>
 		<?php endif; ?>
 	</section>
 </div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Code inventory read repository.
+ * One-Time Code inventory read repository.
  *
  * @package VoucherManager
  */

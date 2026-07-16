@@ -57,7 +57,7 @@ $repository = new class() implements LogRepository {
 $logger = new OperationalLogger( $repository );
 $logger->info(
 	OperationalEvent::DISTRIBUTION_COMPLETED,
-	'Code distributed.',
+	'One-Time Code distributed.',
 	array(
 		'pool_id'       => 12,
 		'code_id'       => 99,

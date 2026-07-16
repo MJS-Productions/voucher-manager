@@ -69,7 +69,7 @@ $admin    = file_get_contents( $root . '/src/Admin/PoolAdmin.php' );
 $assert( is_string( $template ) && str_contains( $template, 'voucher-manager__pool-grid' ), 'Pools should use the overview card layout.' );
 $assert( is_string( $template ) && str_contains( $template, 'Available' ), 'Available inventory must be visible.' );
 $assert( is_string( $template ) && str_contains( $template, 'Distributed' ), 'Distributed inventory must be visible.' );
-$assert( is_string( $template ) && str_contains( $template, 'Create your first pool' ), 'The empty state should guide first-time users.' );
+$assert( is_string( $template ) && str_contains( $template, 'Create the first pool' ), 'The empty state should guide first-time users.' );
 $assert( is_string( $admin ) && str_contains( $admin, 'PoolOverviewData' ), 'Pool inventory should be prepared outside the template.' );
 
 fwrite(

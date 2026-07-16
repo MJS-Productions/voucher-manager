@@ -23,7 +23,7 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 			<?php if ( 0 === $imported ) : ?><p><?php echo esc_html__( 'Check whether the file only contained duplicates, empty rows, or invalid values.', 'voucher-manager' ); ?></p><?php endif; ?>
 		</div>
 	<?php elseif ( 'rolled_back' === $notice ) : ?>
-		<div class="notice notice-success is-dismissible"><p><?php echo esc_html( sprintf( __( 'Import rolled back. %d available codes removed.', 'voucher-manager' ), absint( $_GET['deleted'] ?? 0 ) ) ); ?></p></div>
+		<div class="notice notice-success is-dismissible"><p><?php echo esc_html( sprintf( __( 'Import rolled back. %d available One-Time Codes removed.', 'voucher-manager' ), absint( $_GET['deleted'] ?? 0 ) ) ); ?></p></div>
 	<?php elseif ( in_array( $notice, array( 'invalid_pool', 'import_error', 'rollback_blocked', 'rollback_confirmation_required', 'rollback_unavailable' ), true ) ) : ?>
 		<div class="notice notice-error is-dismissible"><p><?php
 			$message = match ( $notice ) {

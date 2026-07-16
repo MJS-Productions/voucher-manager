@@ -37,19 +37,21 @@ final class DistributionViewModel {
 
 	public function remaining_message( ?int $remaining ): string {
 		if ( null === $remaining ) {
-			return __( 'The code was assigned successfully. Remaining inventory could not be refreshed.', 'voucher-manager' );
+			return __( 'The One-Time Code was assigned successfully. Remaining inventory could not be refreshed.', 'voucher-manager' );
 		}
 
 		if ( 0 === $remaining ) {
-			return __( 'This pool is now empty. Import more codes before the next distribution.', 'voucher-manager' );
-		}
-
-		if ( 1 === $remaining ) {
-			return __( '1 code remains available in this pool.', 'voucher-manager' );
+			return __( 'This pool is now empty. Import more One-Time Codes before the next distribution.', 'voucher-manager' );
 		}
 
 		return sprintf(
-			__( '%d codes remain available in this pool.', 'voucher-manager' ),
+			/* translators: %d: number of available One-Time Codes remaining in the pool */
+			_n(
+				'%d One-Time Code remains available in this pool.',
+				'%d One-Time Codes remain available in this pool.',
+				$remaining,
+				'voucher-manager'
+			),
 			$remaining
 		);
 	}

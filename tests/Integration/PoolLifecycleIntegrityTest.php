@@ -15,7 +15,7 @@ $repo=new LifecycleMemoryRepository(); $logs=new LifecycleLogRepository(); $serv
 $assert(1===$service->delete_available_codes(7),'Delete-available must report affected available rows.');
 $assert(1===count($repo->codes) && 'assigned'===$repo->codes[0]['status'],'Assigned codes must survive delete-available.');
 $assert('pool.available_codes_deleted'===$logs->entries[0]['event_type'],'Delete-available event vocabulary changed.');
-$assert(!str_contains(json_encode($logs->entries,JSON_THROW_ON_ERROR),'SECRET-'),'Lifecycle logs must not contain voucher values.');
+$assert(!str_contains(json_encode($logs->entries,JSON_THROW_ON_ERROR),'SECRET-'),'Lifecycle logs must not contain One-Time Code values.');
 $repo=new LifecycleMemoryRepository(); $service=new VoucherManager\Domain\Pool\PoolLifecycleService($repo,new VoucherManager\Domain\Log\OperationalLogger($logs)); $deleted=$service->delete_pool(7);
 $assert(!$repo->pool && []===$repo->codes && []===$repo->imports,'Full deletion must remove pool, codes and imports.'); $assert(2===$deleted['deleted_code_count'] && 2===$deleted['deleted_import_count'],'Full deletion counts must be retained for logging.');
 $repo=new LifecycleMemoryRepository(); $repo->fail=true; $service=new VoucherManager\Domain\Pool\PoolLifecycleService($repo,new VoucherManager\Domain\Log\OperationalLogger($logs)); try{$service->delete_pool(7);}catch(RuntimeException){}

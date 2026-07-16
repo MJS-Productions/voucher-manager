@@ -137,8 +137,8 @@ final class InventoryViewModel {
 		}
 
 		return match ( $state ) {
-			'available' => __( 'No available codes match this filter.', 'voucher-manager' ),
-			'assigned'  => __( 'No assigned codes match this filter.', 'voucher-manager' ),
+			'available' => __( 'No available One-Time Codes match this filter.', 'voucher-manager' ),
+			'assigned'  => __( 'No assigned One-Time Codes match this filter.', 'voucher-manager' ),
 			default     => __( 'No matching inventory found.', 'voucher-manager' ),
 		};
 	}
@@ -154,7 +154,7 @@ final class InventoryViewModel {
 
 		return match ( $state ) {
 			'available' => __( 'This pool has inventory, but none of it is currently available.', 'voucher-manager' ),
-			'assigned'  => __( 'This pool has inventory, but no codes have been assigned yet.', 'voucher-manager' ),
+			'assigned'  => __( 'This pool has inventory, but no One-Time Codes have been assigned yet.', 'voucher-manager' ),
 			default     => __( 'Reset the filters to return to the complete pool inventory.', 'voucher-manager' ),
 		};
 	}

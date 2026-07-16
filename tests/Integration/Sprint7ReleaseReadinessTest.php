@@ -36,7 +36,7 @@ $assert(
 	is_string( $record )
 	&& str_contains( $record, 'import_filename' )
 	&& ! str_contains( $record, 'private readonly string $code,' ),
-	'Inventory read model must retain sanitized provenance without hydrating complete voucher values.'
+	'Inventory read model must retain sanitized provenance without hydrating complete One-Time Code values.'
 );
 
 $assert(

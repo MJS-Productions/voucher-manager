@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 0.9.0-alpha - 2026-07-16 — The Product Language
+
+### Added
+- Product Language Guide defining `One-Time Code`, approved short action labels and neutral-professional tone.
+- ADR 0028 for the Product Language contract.
+- Product Language regression coverage for terminology, neutral wording and translation-ready plural forms.
+
+### Changed
+- Standardized English user-facing terminology around `One-Time Code` and `One-Time Codes`.
+- Replaced direct-address result and onboarding copy with neutral-professional wording.
+- Clarified privacy, Inventory, Distribution, Import, Pool and Activity copy without changing behavior.
+- Preserved the VM-018 distinction between expected rollback protection and unexpected technical failure.
+
 ## 0.8.1-alpha - 2026-07-16 — The Activity Clarity Patch
 
 ### Fixed

@@ -1,14 +1,14 @@
 # Voucher Manager
 
-Professional management and distribution of unique voucher codes for WordPress.
+Professional management and distribution of unique One-Time Codes for WordPress.
 
 > Simple for users. Reliable for businesses.
 
 **Status:** Alpha development  
-**Release candidate:** `0.8.1-alpha` — The Activity Clarity Patch  
-**Previous published release:** `0.8.0-alpha` — The Hardened Lifecycle
+**Release candidate:** `0.9.0-alpha` — The Product Language  
+**Previous published release:** `0.8.1-alpha` — The Activity Clarity Patch
 
-The `0.8.1-alpha` maintenance candidate preserves the complete Sprint 8 lifecycle and Distribution safety baseline while correcting Activity semantics for intentionally blocked import rollbacks.
+Sprint 9 Part 2 establishes the English Product Language baseline for `0.9.0-alpha`. User-facing copy now consistently uses `One-Time Code`, follows a neutral-professional tone and preserves the complete VM-018 rollback Activity cleanup.
 
 ## Current capabilities
 
@@ -17,7 +17,7 @@ The `0.8.1-alpha` maintenance candidate preserves the complete Sprint 8 lifecycl
 - privacy-safe, pool-scoped Inventory with masked references, filters, pagination and import provenance;
 - read-only lifecycle-integrity visibility for contradictory Inventory timestamps;
 - pool lifecycle Danger Zone for scoped available-code deletion and atomic full pool deletion;
-- TXT and CSV voucher-code imports with result summaries and protected rollback;
+- TXT and CSV One-Time Code imports with result summaries and protected rollback;
 - atomic manual distribution from `available` to `assigned`;
 - one-use Distribution intents that prevent duplicate execution from rapid resubmission;
 - authoritative post-claim outcomes and isolated one-time result delivery under concurrent browser requests;
@@ -31,7 +31,7 @@ The `0.8.1-alpha` maintenance candidate preserves the complete Sprint 8 lifecycl
 ## Core workflow
 
 1. Create a pool.
-2. Import voucher codes.
+2. Import One-Time Codes.
 3. Distribute one available code.
 4. Track inventory and operational activity.
 
@@ -62,6 +62,7 @@ Official WordPress smoke tests should use the `voucher-manager.zip` artifact bui
 - `BUG_STORIES.md` — notable project failures and lessons learned;
 - `docs/` — current technical and experience documentation;
 - `docs/adr/` — architecture decision records;
+- `docs/PRODUCT_LANGUAGE.md` — approved English terminology, tone and German target language.
 - `docs/SPRINT_8_PART_5_4_FINAL_DISTRIBUTION_SAFETY_REVIEW.md` — final Distribution invariants and Keeper smoke-test gate.
 
 ## Credits

@@ -80,7 +80,7 @@ $tones    = array(
 		<div class="voucher-manager__card-header">
 			<div>
 				<h2 id="voucher-manager-activity-history-title"><?php echo esc_html__( 'Activity history', 'voucher-manager' ); ?></h2>
-				<p><?php echo esc_html__( 'Technical identifiers and counts may be shown. Voucher values and personal data are never presented here.', 'voucher-manager' ); ?></p>
+				<p><?php echo esc_html__( 'Technical identifiers and counts may be shown. One-Time Code values and personal data are never presented here.', 'voucher-manager' ); ?></p>
 			</div>
 			<span class="voucher-manager__muted">
 				<?php

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<header class="voucher-manager__header">
 		<div>
 			<h1><?php echo esc_html( sprintf( __( '%s Inventory', 'voucher-manager' ), $pool->name() ) ); ?></h1>
-			<p><?php echo esc_html__( 'Review pool-scoped inventory without exposing complete voucher values.', 'voucher-manager' ); ?></p>
+			<p><?php echo esc_html__( 'Review pool-scoped inventory without exposing complete One-Time Code values.', 'voucher-manager' ); ?></p>
 		</div>
 		<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-pools' ) ); ?>"><?php echo esc_html__( 'Back to Pools', 'voucher-manager' ); ?></a>
 	</header>
@@ -25,9 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<h2 class="voucher-manager__section-title voucher-manager__inventory-totals-title"><?php echo esc_html__( 'Pool totals', 'voucher-manager' ); ?></h2>
 	<section class="voucher-manager__metrics voucher-manager__metrics--three" aria-label="<?php echo esc_attr__( 'Pool inventory summary', 'voucher-manager' ); ?>">
 		<article class="voucher-manager__metric">
-			<span><?php echo esc_html__( 'Total codes', 'voucher-manager' ); ?></span>
+			<span><?php echo esc_html__( 'Total One-Time Codes', 'voucher-manager' ); ?></span>
 			<strong><?php echo esc_html( number_format_i18n( $data['counts']['total'] ) ); ?></strong>
-			<small><?php echo esc_html__( 'All code records in this pool', 'voucher-manager' ); ?></small>
+			<small><?php echo esc_html__( 'All One-Time Code records in this pool', 'voucher-manager' ); ?></small>
 		</article>
 		<article class="voucher-manager__metric">
 			<span><?php echo esc_html__( 'Available', 'voucher-manager' ); ?></span>
@@ -77,8 +77,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<section class="voucher-manager__card voucher-manager__table-card">
 		<div class="voucher-manager__inventory-table-header">
 			<div>
-				<h2><?php echo esc_html__( 'Code inventory', 'voucher-manager' ); ?></h2>
-				<p><?php echo esc_html__( 'References are masked. Complete voucher values are only shown in the one-time Distribution result.', 'voucher-manager' ); ?></p>
+				<h2><?php echo esc_html__( 'One-Time Code inventory', 'voucher-manager' ); ?></h2>
+				<p><?php echo esc_html__( 'References are masked. Complete One-Time Code values are shown only in the one-time Distribution result.', 'voucher-manager' ); ?></p>
 			</div>
 			<div class="voucher-manager__inventory-result-meta">
 				<?php $filter_summary = $view->active_filter_summary( $data['filters']['state'], $data['filters']['import_id'], $data['import_options'] ); ?>

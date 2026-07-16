@@ -30,18 +30,18 @@ $remaining = isset( $result['remaining'] ) ? absint( $result['remaining'] ) : nu
 		<h1><?php echo esc_html__( 'Distribution', 'voucher-manager' ); ?></h1>
 
 		<?php if ( ! empty( $result['success'] ) && is_string( $result['code'] ?? null ) ) : ?>
-			<div class="notice notice-warning inline"><p><?php echo esc_html__( 'The code was assigned successfully, but the normal one-time result could not be stored. Copy it before leaving this page.', 'voucher-manager' ); ?></p></div>
+			<div class="notice notice-warning inline"><p><?php echo esc_html__( 'The One-Time Code was assigned successfully, but the normal one-time result could not be stored. Copy it before leaving this page.', 'voucher-manager' ); ?></p></div>
 			<div class="voucher-manager__distribution-result voucher-manager__distribution-result--<?php echo esc_attr( $view->result_tone( $remaining ) ); ?>">
 				<p class="voucher-manager__eyebrow"><?php echo esc_html__( 'Distribution complete', 'voucher-manager' ); ?></p>
-				<h2><?php echo esc_html__( 'Your assigned code', 'voucher-manager' ); ?></h2>
-				<div class="voucher-manager__code-result" aria-label="<?php echo esc_attr__( 'Distributed voucher code', 'voucher-manager' ); ?>">
+				<h2><?php echo esc_html__( 'Assigned One-Time Code', 'voucher-manager' ); ?></h2>
+				<div class="voucher-manager__code-result" aria-label="<?php echo esc_attr__( 'Distributed One-Time Code', 'voucher-manager' ); ?>">
 					<code id="vm-distributed-code"><?php echo esc_html( (string) $result['code'] ); ?></code>
 					<button type="button" class="button button-secondary" id="vm-copy-distributed-code"><?php echo esc_html__( 'Copy code', 'voucher-manager' ); ?></button>
 				</div>
 				<p class="voucher-manager__result-inventory"><?php echo esc_html( $view->remaining_message( $remaining ) ); ?></p>
 			</div>
 		<?php else : ?>
-			<div class="notice notice-error inline"><p><strong><?php echo esc_html__( 'No code was distributed.', 'voucher-manager' ); ?></strong> <?php echo esc_html( (string) ( $result['message'] ?? __( 'Distribution failed.', 'voucher-manager' ) ) ); ?></p></div>
+			<div class="notice notice-error inline"><p><strong><?php echo esc_html__( 'No One-Time Code was distributed.', 'voucher-manager' ); ?></strong> <?php echo esc_html( (string) ( $result['message'] ?? __( 'Distribution failed.', 'voucher-manager' ) ) ); ?></p></div>
 		<?php endif; ?>
 
 		<p><a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-distribution' ) ); ?>"><?php echo esc_html__( 'Return to Distribution', 'voucher-manager' ); ?></a></p>

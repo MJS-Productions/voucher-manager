@@ -60,7 +60,7 @@ $assert = static function ( bool $condition, string $message ): void {
 $view = new VoucherManager\Admin\DashboardViewModel();
 
 $assert(
-	'Code distributed' === $view->activity_label( 'distribution.completed' ),
+	'One-Time Code distributed' === $view->activity_label( 'distribution.completed' ),
 	'Completed distributions should have a readable label.'
 );
 $assert(
@@ -72,11 +72,11 @@ $assert(
 	'Unexpected admin failures should have an error tone.'
 );
 $assert(
-	'2 codes remain available.' === $view->activity_detail(
+	'2 One-Time Codes remain available.' === $view->activity_detail(
 		'distribution.completed',
 		array( 'remaining' => 2, 'code' => 'MUST-NOT-APPEAR' )
 	),
-	'Distribution detail should show inventory, not the voucher value.'
+	'Distribution detail should show inventory, not the One-Time Code value.'
 );
 $assert(
 	'Pool #12' === $view->activity_detail(
@@ -87,11 +87,11 @@ $assert(
 );
 
 $assert(
-	'Deleted 4 available codes' === $view->activity_label(
+	'Deleted 4 available One-Time Codes' === $view->activity_label(
 		'pool.available_codes_deleted',
 		array( 'deleted_available_count' => 4, 'code' => 'MUST-NOT-APPEAR' )
 	),
-	'Available-code deletion should show the affected count without exposing voucher values.'
+	'Available-code deletion should show the affected count without exposing One-Time Code values.'
 );
 $assert(
 	'Pool deleted' === $view->activity_label( 'pool.deleted' ),
@@ -110,7 +110,7 @@ $assert(
 	'Failed destructive lifecycle events should have an error tone.'
 );
 $assert(
-	'Pool #6 · 5 codes added · 3 skipped · 2 invalid' === $view->activity_detail(
+	'Pool #6 · 5 One-Time Codes added · 3 skipped · 2 invalid' === $view->activity_detail(
 		'import.completed',
 		array(
 			'pool_id'  => 6,

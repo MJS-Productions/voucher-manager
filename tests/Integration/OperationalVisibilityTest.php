@@ -53,7 +53,7 @@ $view = new VoucherManager\Admin\OperationalActivityViewModel();
 $assert( 'Error' === $view->severity_label( 'admin.action_failed' ), 'Admin failures must be clearly identified as errors.' );
 $assert( 'Attention' === $view->severity_label( 'distribution.empty' ), 'Empty inventory must be marked as needing attention.' );
 $assert(
-	'Import additional codes into this pool before the next distribution.' === $view->guidance( 'distribution.empty' ),
+	'Import additional One-Time Codes into this pool before the next distribution.' === $view->guidance( 'distribution.empty' ),
 	'Empty distribution events must provide an actionable next step.'
 );
 $assert(
@@ -87,7 +87,7 @@ $assert(
 $assert(
 	! str_contains( $template_source, "['message']" )
 	&& ! str_contains( $template_source, 'json_encode' )
-	&& str_contains( $template_source, 'Voucher values and personal data are never presented here' ),
+	&& str_contains( $template_source, 'One-Time Code values and personal data are never presented here' ),
 	'The activity view must not expose raw messages or raw context.'
 );
 $assert(

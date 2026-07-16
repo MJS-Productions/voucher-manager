@@ -152,7 +152,7 @@ $assert(
 $assert(
 	is_string( $template_source )
 	&& ! str_contains( $template_source, 'get_transient' )
-	&& str_contains( $template_source, 'This distribution request was already used or expired. No additional code was distributed.' ),
+	&& str_contains( $template_source, 'This distribution request was already used or expired. No additional One-Time Code was distributed.' ),
 	'Normal presentation must no longer consume a shared transient and must explain unrecoverable replay safely.'
 );
 
@@ -167,7 +167,7 @@ $assert(
 $assert(
 	! str_contains( $admin_source, "'code' => \$result_token" )
 	&& str_contains( $admin_source, "'result' => \$result_token" ),
-	'Redirect URLs may contain only opaque result tokens, never voucher values.'
+	'Redirect URLs may contain only opaque result tokens, never One-Time Code values.'
 );
 
 $assert(

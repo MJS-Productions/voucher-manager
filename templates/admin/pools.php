@@ -20,13 +20,13 @@ $notice = isset( $_GET['vm_notice'] )
 	: '';
 
 $messages = array(
-	'created'        => __( 'Your first voucher pool has been created.', 'voucher-manager' ),
+	'created'        => __( 'The first pool has been created.', 'voucher-manager' ),
 	'updated'        => __( 'Pool updated.', 'voucher-manager' ),
 	'deleted'        => __( 'Pool deleted.', 'voucher-manager' ),
 	'status'         => __( 'Pool status updated.', 'voucher-manager' ),
 	'invalid'        => __( 'Please enter a pool name.', 'voucher-manager' ),
 	'error'          => __( 'The operation could not be completed.', 'voucher-manager' ),
-	'available_deleted' => __( 'Available codes permanently deleted.', 'voucher-manager' ),
+	'available_deleted' => __( 'Available One-Time Codes permanently deleted.', 'voucher-manager' ),
 );
 
 $view_model = new PoolViewModel();
@@ -35,7 +35,7 @@ $view_model = new PoolViewModel();
 	<header class="voucher-manager__header">
 		<div>
 			<h1><?php echo esc_html__( 'Pools', 'voucher-manager' ); ?></h1>
-			<p><?php echo esc_html__( 'Organize voucher codes into inventories for distribution.', 'voucher-manager' ); ?></p>
+			<p><?php echo esc_html__( 'Organize One-Time Codes into pools for controlled distribution.', 'voucher-manager' ); ?></p>
 		</div>
 		<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'new' ), admin_url( 'admin.php' ) ) ); ?>">
 			<?php echo esc_html__( 'Create Pool', 'voucher-manager' ); ?>
@@ -51,8 +51,8 @@ $view_model = new PoolViewModel();
 	<?php if ( empty( $pool_rows ) ) : ?>
 		<section class="voucher-manager__card voucher-manager__pool-empty">
 			<span class="dashicons dashicons-tickets-alt" aria-hidden="true"></span>
-			<h2><?php echo esc_html__( 'Create your first pool', 'voucher-manager' ); ?></h2>
-			<p><?php echo esc_html__( 'A pool groups voucher codes that belong to the same campaign, product or distribution workflow.', 'voucher-manager' ); ?></p>
+			<h2><?php echo esc_html__( 'Create the first pool', 'voucher-manager' ); ?></h2>
+			<p><?php echo esc_html__( 'A pool groups One-Time Codes that belong to the same campaign, product or distribution workflow.', 'voucher-manager' ); ?></p>
 			<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'new' ), admin_url( 'admin.php' ) ) ); ?>">
 				<?php echo esc_html__( 'Create Pool', 'voucher-manager' ); ?>
 			</a>
@@ -131,7 +131,7 @@ $view_model = new PoolViewModel();
 						</div>
 						<div>
 							<strong><?php echo esc_html( number_format_i18n( $row['total'] ) ); ?></strong>
-							<span><?php echo esc_html__( 'Total codes', 'voucher-manager' ); ?></span>
+							<span><?php echo esc_html__( 'Total One-Time Codes', 'voucher-manager' ); ?></span>
 						</div>
 					</div>
 

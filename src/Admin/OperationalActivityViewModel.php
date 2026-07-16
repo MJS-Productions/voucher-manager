@@ -46,9 +46,9 @@ final class OperationalActivityViewModel {
 	public function guidance( string $event_type ): string {
 		return match ( $event_type ) {
 			'distribution.empty' =>
-				__( 'Import additional codes into this pool before the next distribution.', 'voucher-manager' ),
+				__( 'Import additional One-Time Codes into this pool before the next distribution.', 'voucher-manager' ),
 			'import.rollback_blocked' =>
-				__( 'This import contains assigned codes and cannot be rolled back safely.', 'voucher-manager' ),
+				__( 'This import contains assigned One-Time Codes and cannot be rolled back safely.', 'voucher-manager' ),
 			'import.failed' =>
 				__( 'Review the source file and retry the import. Technical details remain in the WordPress error log.', 'voucher-manager' ),
 			'distribution.failed' =>
@@ -59,7 +59,7 @@ final class OperationalActivityViewModel {
 				__( 'The deletion was rolled back. The pool data should remain intact; retry or review the WordPress error log.', 'voucher-manager' ),
 			'pool.available_codes_deleted',
 			'pool.deleted' =>
-				__( 'This was a permanent lifecycle action. No voucher values were retained in activity.', 'voucher-manager' ),
+				__( 'This was a permanent lifecycle action. No One-Time Code values were retained in Activity.', 'voucher-manager' ),
 			default => '',
 		};
 	}

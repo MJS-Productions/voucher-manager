@@ -28,7 +28,7 @@ final class DashboardViewModel {
 			if ( null !== $deleted ) {
 				return sprintf(
 					/* translators: %d: number of permanently deleted available codes */
-					_n( 'Deleted %d available code', 'Deleted %d available codes', $deleted, 'voucher-manager' ),
+					_n( 'Deleted %d available One-Time Code', 'Deleted %d available One-Time Codes', $deleted, 'voucher-manager' ),
 					$deleted
 				);
 			}
@@ -39,11 +39,11 @@ final class DashboardViewModel {
 			'import.failed'                => __( 'Import failed', 'voucher-manager' ),
 			'import.rolled_back'           => __( 'Import rolled back', 'voucher-manager' ),
 			'import.rollback_blocked'      => __( 'Import rollback blocked', 'voucher-manager' ),
-			'distribution.completed'       => __( 'Code distributed', 'voucher-manager' ),
-			'distribution.empty'           => __( 'Pool has no available codes', 'voucher-manager' ),
+			'distribution.completed'       => __( 'One-Time Code distributed', 'voucher-manager' ),
+			'distribution.empty'           => __( 'Pool has no available One-Time Codes', 'voucher-manager' ),
 			'distribution.failed'          => __( 'Distribution failed', 'voucher-manager' ),
 			'admin.action_failed'          => __( 'Administrative action failed', 'voucher-manager' ),
-			'pool.available_codes_deleted' => __( 'Available codes deleted', 'voucher-manager' ),
+			'pool.available_codes_deleted' => __( 'Available One-Time Codes deleted', 'voucher-manager' ),
 			'pool.deleted'                 => __( 'Pool deleted', 'voucher-manager' ),
 			'pool.delete_failed'           => __( 'Pool deletion failed', 'voucher-manager' ),
 			default                        => __( 'Voucher Manager activity', 'voucher-manager' ),
@@ -83,7 +83,7 @@ final class DashboardViewModel {
 		if ( 'distribution.completed' === $event_type && null !== $remaining ) {
 			return sprintf(
 				/* translators: %d: number of remaining available codes */
-				_n( '%d code remains available.', '%d codes remain available.', $remaining, 'voucher-manager' ),
+				_n( '%d One-Time Code remains available.', '%d One-Time Codes remain available.', $remaining, 'voucher-manager' ),
 				$remaining
 			);
 		}
@@ -104,7 +104,7 @@ final class DashboardViewModel {
 
 			$parts[] = sprintf(
 				/* translators: %d: number of imported codes */
-				_n( '%d code added', '%d codes added', $imported, 'voucher-manager' ),
+				_n( '%d One-Time Code added', '%d One-Time Codes added', $imported, 'voucher-manager' ),
 				$imported
 			);
 			$parts[] = sprintf(

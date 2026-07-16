@@ -107,7 +107,7 @@ $assert( 2 === $codes->claims, 'Remaining-count failure must not retry or releas
 
 $view = new VoucherManager\Admin\DistributionViewModel();
 $assert(
-	'The code was assigned successfully. Remaining inventory could not be refreshed.' === $view->remaining_message( null ),
+	'The One-Time Code was assigned successfully. Remaining inventory could not be refreshed.' === $view->remaining_message( null ),
 	'Unknown remaining inventory must explain success without falsely reporting an empty Pool.'
 );
 $assert( 'warning' === $view->result_tone( null ), 'Unknown remaining inventory must use a cautionary result tone.' );

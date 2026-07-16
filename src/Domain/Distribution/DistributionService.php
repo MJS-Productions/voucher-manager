@@ -28,7 +28,7 @@ final class DistributionService {
 				'No available code could be distributed.',
 				array( 'pool_id' => $pool_id )
 			);
-			return new DistributionResult( false, null, 'No available codes remain in this pool.', 0 );
+			return new DistributionResult( false, null, 'No available One-Time Codes remain in this pool.', 0 );
 		}
 
 		// Once the atomic claim commits, the successful business outcome is
@@ -45,7 +45,7 @@ final class DistributionService {
 			)
 		);
 
-		return new DistributionResult( true, $claimed['code'], 'Code distributed.', $remaining );
+		return new DistributionResult( true, $claimed['code'], 'One-Time Code distributed.', $remaining );
 	}
 
 	private function remaining_safely( int $pool_id ): ?int {

@@ -106,7 +106,7 @@ $assert( 'Available · Import #12 — codes.csv' === $view->active_filter_summar
 $assert( 'Showing 51–100 of 120 matching records' === $view->result_range( 2, 50, 120 ), 'Pagination must explain the visible result range.' );
 $assert( '0 matching records' === $view->result_range( 1, 50, 0 ), 'Empty filtered results need an explicit zero count.' );
 $assert( 'This pool has no inventory yet.' === $view->empty_state_title( true, 'all', null ), 'Empty pools need pool-level guidance.' );
-$assert( 'No assigned codes match this filter.' === $view->empty_state_title( false, 'assigned', null ), 'Assigned-only emptiness must describe the selected filter.' );
+$assert( 'No assigned One-Time Codes match this filter.' === $view->empty_state_title( false, 'assigned', null ), 'Assigned-only emptiness must describe the selected filter.' );
 $assert( 'No codes match this import filter.' === $view->empty_state_title( false, 'all', 12 ), 'Import-filter emptiness must be contextual.' );
 
 
@@ -161,7 +161,7 @@ $assert(
 	&& str_contains( $repository_source, 'i.filename AS import_filename' )
 	&& str_contains( $repository_source, "CASE WHEN CHAR_LENGTH(c.code) > 4 THEN RIGHT(c.code, 4) ELSE '' END AS code_suffix" )
 	&& ! str_contains( $repository_source, 'SELECT id, pool_id, import_id, code,' ),
-	'Repository must never hydrate the complete voucher value for inventory presentation.'
+	'Repository must never hydrate the complete One-Time Code value for inventory presentation.'
 );
 $assert(
 	str_contains( $repository_source, "status IN (%s, %s)" )

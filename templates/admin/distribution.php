@@ -37,10 +37,10 @@ foreach ( $distributable_rows as $row ) {
 ?>
 <div class="wrap voucher-manager">
 	<h1><?php echo esc_html__( 'Distribution', 'voucher-manager' ); ?></h1>
-	<p class="description"><?php echo esc_html__( 'Claim one available voucher code from an active pool. Each successful distribution immediately marks that code as assigned.', 'voucher-manager' ); ?></p>
+	<p class="description"><?php echo esc_html__( 'Assign one available One-Time Code from an active pool. Each successful distribution immediately marks the code as assigned.', 'voucher-manager' ); ?></p>
 
 	<?php if ( 'replayed' === $notice ) : ?>
-		<div class="notice notice-warning inline"><p><?php echo esc_html__( 'This distribution request was already used or expired. No additional code was distributed.', 'voucher-manager' ); ?></p></div>
+		<div class="notice notice-warning inline"><p><?php echo esc_html__( 'This distribution request was already used or expired. No additional One-Time Code was distributed.', 'voucher-manager' ); ?></p></div>
 	<?php endif; ?>
 
 	<?php if ( is_array( $result ) ) : ?>
@@ -48,9 +48,9 @@ foreach ( $distributable_rows as $row ) {
 			<?php $remaining = isset( $result['remaining'] ) ? absint( $result['remaining'] ) : null; ?>
 			<div class="voucher-manager__distribution-result voucher-manager__distribution-result--<?php echo esc_attr( $view->result_tone( $remaining ) ); ?>">
 				<p class="voucher-manager__eyebrow"><?php echo esc_html__( 'Distribution complete', 'voucher-manager' ); ?></p>
-				<h2><?php echo esc_html__( 'Your assigned code', 'voucher-manager' ); ?></h2>
-				<p class="voucher-manager__result-guidance"><?php echo esc_html__( 'Copy this code now and deliver it through your intended channel. For privacy, the code is shown only in this one-time result.', 'voucher-manager' ); ?></p>
-				<div class="voucher-manager__code-result" aria-label="<?php echo esc_attr__( 'Distributed voucher code', 'voucher-manager' ); ?>">
+				<h2><?php echo esc_html__( 'Assigned One-Time Code', 'voucher-manager' ); ?></h2>
+				<p class="voucher-manager__result-guidance"><?php echo esc_html__( 'Copy the One-Time Code now and deliver it through the intended channel. For privacy, the complete value is shown only in this one-time result.', 'voucher-manager' ); ?></p>
+				<div class="voucher-manager__code-result" aria-label="<?php echo esc_attr__( 'Distributed One-Time Code', 'voucher-manager' ); ?>">
 					<code id="vm-distributed-code"><?php echo esc_html( (string) $result['code'] ); ?></code>
 					<button type="button" class="button button-secondary" id="vm-copy-distributed-code" data-copy-label="<?php echo esc_attr__( 'Copy code', 'voucher-manager' ); ?>" data-copied-label="<?php echo esc_attr__( 'Copied', 'voucher-manager' ); ?>">
 						<?php echo esc_html__( 'Copy code', 'voucher-manager' ); ?>
@@ -76,20 +76,20 @@ foreach ( $distributable_rows as $row ) {
 			}());
 			</script>
 		<?php else : ?>
-			<div class="notice notice-error inline"><p><strong><?php echo esc_html__( 'No code was distributed.', 'voucher-manager' ); ?></strong> <?php echo esc_html( (string) ( $result['message'] ?? __( 'Distribution failed.', 'voucher-manager' ) ) ); ?></p></div>
+			<div class="notice notice-error inline"><p><strong><?php echo esc_html__( 'No One-Time Code was distributed.', 'voucher-manager' ); ?></strong> <?php echo esc_html( (string) ( $result['message'] ?? __( 'Distribution failed.', 'voucher-manager' ) ) ); ?></p></div>
 		<?php endif; ?>
 	<?php endif; ?>
 
 	<div class="voucher-manager__distribution-grid">
 		<div class="voucher-manager__card voucher-manager__form">
-			<h2><?php echo esc_html__( 'Distribute next available code', 'voucher-manager' ); ?></h2>
-			<p><?php echo esc_html__( 'Choose a pool with available inventory. Voucher Manager atomically claims the next code so concurrent requests cannot successfully distribute the same row.', 'voucher-manager' ); ?></p>
+			<h2><?php echo esc_html__( 'Distribute next available One-Time Code', 'voucher-manager' ); ?></h2>
+			<p><?php echo esc_html__( 'Choose a pool with available inventory. Voucher Manager atomically assigns the next One-Time Code so concurrent requests cannot assign the same record.', 'voucher-manager' ); ?></p>
 
 			<?php if ( empty( $distributable_rows ) ) : ?>
 				<div class="voucher-manager__empty-state voucher-manager__distribution-empty">
 					<span class="dashicons dashicons-tickets-alt" aria-hidden="true"></span>
-					<h3><?php echo esc_html__( 'No codes are ready to distribute', 'voucher-manager' ); ?></h3>
-					<p><?php echo esc_html__( 'Active pools currently have no available inventory. Import codes before trying again.', 'voucher-manager' ); ?></p>
+					<h3><?php echo esc_html__( 'No One-Time Codes are ready to distribute', 'voucher-manager' ); ?></h3>
+					<p><?php echo esc_html__( 'Active pools currently have no available One-Time Codes. Import codes before trying again.', 'voucher-manager' ); ?></p>
 					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-import' ) ); ?>"><?php echo esc_html__( 'Import Codes', 'voucher-manager' ); ?></a>
 				</div>
 			<?php elseif ( '' === $intent_token ) : ?>
@@ -107,7 +107,7 @@ foreach ( $distributable_rows as $row ) {
 							<?php endforeach; ?>
 						</select>
 					</p>
-					<p class="description"><?php echo esc_html__( 'One code will be claimed and marked assigned immediately after confirmation.', 'voucher-manager' ); ?></p>
+					<p class="description"><?php echo esc_html__( 'One One-Time Code will be assigned immediately after confirmation.', 'voucher-manager' ); ?></p>
 					<?php submit_button( __( 'Distribute Code', 'voucher-manager' ) ); ?>
 				</form>
 			<?php endif; ?>
@@ -117,9 +117,9 @@ foreach ( $distributable_rows as $row ) {
 			<h2><?php echo esc_html__( 'Distribution safety', 'voucher-manager' ); ?></h2>
 			<ul class="voucher-manager__guidance-list">
 				<li><?php echo esc_html__( 'Only active pools with available inventory can be selected.', 'voucher-manager' ); ?></li>
-				<li><?php echo esc_html__( 'A successful claim changes the code from available to assigned immediately.', 'voucher-manager' ); ?></li>
-				<li><?php echo esc_html__( 'The distributed voucher value is not written to operational activity context.', 'voucher-manager' ); ?></li>
-				<li><?php echo esc_html__( 'Refresh does not distribute another code. Every distribution requires a new POST action.', 'voucher-manager' ); ?></li>
+				<li><?php echo esc_html__( 'A successful distribution changes the One-Time Code from available to assigned immediately.', 'voucher-manager' ); ?></li>
+				<li><?php echo esc_html__( 'The One-Time Code value is not written to operational Activity context.', 'voucher-manager' ); ?></li>
+				<li><?php echo esc_html__( 'Refreshing the page does not distribute another One-Time Code. Every distribution requires a new form submission.', 'voucher-manager' ); ?></li>
 			</ul>
 		</div>
 	</div>

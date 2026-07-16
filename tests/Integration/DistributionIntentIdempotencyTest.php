@@ -118,7 +118,7 @@ $assert(
 $assert(
 	! str_contains( $admin_source, "'distribution_intent' =>" )
 	&& ! str_contains( $admin_source, "'code' => \$intent_token" ),
-	'Intent tokens must not be written to Activity context or confused with voucher values.'
+	'Intent tokens must not be written to Activity context or confused with One-Time Code values.'
 );
 
 $assert(

@@ -7,7 +7,7 @@ $back_url = add_query_arg( array( 'page' => 'voucher-manager-import' ), admin_ur
 <div class="wrap voucher-manager">
 	<h1><?php echo esc_html__( 'Review import rollback', 'voucher-manager' ); ?></h1>
 	<div class="voucher-manager__card voucher-manager__form voucher-manager__danger-review">
-		<h2><?php echo esc_html__( 'Remove still-available codes from this import?', 'voucher-manager' ); ?></h2>
+		<h2><?php echo esc_html__( 'Remove still-available One-Time Codes from this import?', 'voucher-manager' ); ?></h2>
 		<dl class="voucher-manager__status-list">
 			<div><dt><?php echo esc_html__( 'File', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( $import->filename() ); ?></dd></div>
 			<div><dt><?php echo esc_html__( 'Pool', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( $import->pool_name() ); ?></dd></div>
@@ -18,7 +18,7 @@ $back_url = add_query_arg( array( 'page' => 'voucher-manager-import' ), admin_ur
 			<input type="hidden" name="action" value="voucher_manager_rollback_import">
 			<input type="hidden" name="import_id" value="<?php echo esc_attr( (string) $import->id() ); ?>">
 			<?php wp_nonce_field( 'voucher_manager_rollback_import_' . $import->id() ); ?>
-			<p><label><input type="checkbox" name="confirm_rollback" value="1" required> <?php echo esc_html( sprintf( __( 'I understand that this may permanently remove up to %d available codes.', 'voucher-manager' ), $import->imported_rows() ) ); ?></label></p>
+			<p><label><input type="checkbox" name="confirm_rollback" value="1" required> <?php echo esc_html( sprintf( __( 'I understand that this may permanently remove up to %d available One-Time Codes.', 'voucher-manager' ), $import->imported_rows() ) ); ?></label></p>
 			<p><button type="submit" class="button button-secondary voucher-manager__delete"><?php echo esc_html__( 'Roll back import', 'voucher-manager' ); ?></button> <a class="button" href="<?php echo esc_url( $back_url ); ?>"><?php echo esc_html__( 'Cancel', 'voucher-manager' ); ?></a></p>
 		</form>
 	</div>

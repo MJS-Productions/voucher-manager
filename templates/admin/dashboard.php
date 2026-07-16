@@ -22,7 +22,7 @@ $database_label = $data['database_healthy']
 
 $metrics = array(
 	'available' => array(
-		'label' => __( 'Available codes', 'voucher-manager' ),
+		'label' => __( 'Available One-Time Codes', 'voucher-manager' ),
 		'hint'  => __( 'Ready for distribution', 'voucher-manager' ),
 	),
 	'assigned' => array(
@@ -46,7 +46,7 @@ $metrics = array(
 			<p>
 				<?php
 				echo esc_html__(
-					'Manage your code inventory and review recent activity.',
+					'Manage One-Time Code inventory and review recent Activity.',
 					'voucher-manager'
 				);
 				?>
