@@ -103,14 +103,14 @@ foreach ( $distributable_rows as $row ) {
 					<input type="hidden" name="distribution_intent" value="<?php echo esc_attr( $intent_token ); ?>">
 					<?php wp_nonce_field( 'voucher_manager_distribute_code' ); ?>
 					<p>
-						<label for="vm-distribution-pool"><strong><?php echo esc_html__( 'Pool', 'voucher-manager' ); ?></strong></label>
+						<label for="vm-distribution-pool"><strong><?php echo esc_html_x( 'Pool', 'Distribution form field label', 'voucher-manager' ); ?></strong></label>
 						<select id="vm-distribution-pool" name="pool_id" required>
 							<?php foreach ( $distributable_rows as $row ) : ?>
 								<option value="<?php echo esc_attr( (string) $row['pool']->id() ); ?>" <?php selected( $selected_pool_id, (int) $row['pool']->id() ); ?>><?php echo esc_html( $view->pool_option_label( $row ) ); ?></option>
 							<?php endforeach; ?>
 						</select>
 					</p>
-					<p class="description"><?php echo esc_html__( 'One One-Time Code will be assigned immediately after confirmation.', 'voucher-manager' ); ?></p>
+					<p class="description"><?php echo esc_html__( 'One-Time Code assignment occurs immediately after confirmation.', 'voucher-manager' ); ?></p>
 					<?php submit_button( __( 'Distribute Code', 'voucher-manager' ) ); ?>
 				</form>
 			<?php endif; ?>

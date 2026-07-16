@@ -123,7 +123,7 @@ $view_model = new PoolViewModel();
 					<div class="voucher-manager__pool-inventory">
 						<div>
 							<strong><?php echo esc_html( number_format_i18n( $row['available'] ) ); ?></strong>
-							<span><?php echo esc_html__( 'Available', 'voucher-manager' ); ?></span>
+							<span><?php echo esc_html_x( 'Available', 'One-Time Code status', 'voucher-manager' ); ?></span>
 						</div>
 						<div>
 							<strong><?php echo esc_html( number_format_i18n( $row['assigned'] ) ); ?></strong>

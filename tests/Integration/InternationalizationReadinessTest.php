@@ -70,7 +70,8 @@ $assert(
 	is_string( $audit )
 	&& str_contains( $audit, 'PASS after cleanup.' )
 	&& str_contains( $audit, 'Technical exception messages remain untranslated' )
-	&& str_contains( $audit, 'Parts 3.2 and 3.3' ),
+	&& str_contains( $audit, 'Part 3.2 completed:' )
+	&& str_contains( $audit, 'Still pending for Part 3.3:' ),
 	'The i18n audit must document the resolved gaps and remaining staged work.'
 );
 

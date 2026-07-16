@@ -59,7 +59,7 @@ final class ImportAdmin {
 		add_submenu_page(
 			'voucher-manager',
 			__( 'Import Codes', 'voucher-manager' ),
-			__( 'Import', 'voucher-manager' ),
+			_x( 'Import', 'admin menu label', 'voucher-manager' ),
 			'manage_options',
 			'voucher-manager-import',
 			array( $this, 'render' )

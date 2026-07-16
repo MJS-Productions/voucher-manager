@@ -33,9 +33,9 @@ final class InventoryViewModel {
 
 	public function status_label( CodeStatus $status ): string {
 		return match ( $status ) {
-			CodeStatus::AVAILABLE => __( 'Available', 'voucher-manager' ),
-			CodeStatus::ASSIGNED  => __( 'Assigned', 'voucher-manager' ),
-			default               => __( 'Other', 'voucher-manager' ),
+			CodeStatus::AVAILABLE => _x( 'Available', 'One-Time Code status', 'voucher-manager' ),
+			CodeStatus::ASSIGNED  => _x( 'Assigned', 'One-Time Code status', 'voucher-manager' ),
+			default               => _x( 'Other', 'One-Time Code status', 'voucher-manager' ),
 		};
 	}
 
@@ -88,9 +88,9 @@ final class InventoryViewModel {
 		$parts = array();
 
 		if ( 'available' === $state ) {
-			$parts[] = __( 'Available', 'voucher-manager' );
+			$parts[] = _x( 'Available', 'One-Time Code status', 'voucher-manager' );
 		} elseif ( 'assigned' === $state ) {
-			$parts[] = __( 'Assigned', 'voucher-manager' );
+			$parts[] = _x( 'Assigned', 'One-Time Code status', 'voucher-manager' );
 		}
 
 		if ( null !== $import_id ) {

@@ -35,7 +35,7 @@ final class SettingsAdmin {
 		add_submenu_page(
 			'voucher-manager',
 			__( 'Voucher Manager Settings', 'voucher-manager' ),
-			__( 'Settings', 'voucher-manager' ),
+			_x( 'Settings', 'admin menu label', 'voucher-manager' ),
 			'manage_options',
 			'voucher-manager-settings',
 			array( $this, 'render' )

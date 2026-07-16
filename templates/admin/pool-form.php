@@ -15,6 +15,6 @@ $is_edit = null !== $pool;
 		<p><label for="vm-threshold"><strong><?php echo esc_html__( 'Low-stock warning threshold', 'voucher-manager' ); ?></strong></label><input id="vm-threshold" name="warning_threshold" type="number" min="0" step="1" value="<?php echo esc_attr( $is_edit ? (string) $pool->warning_threshold() : '10' ); ?>"><span class="description"><?php echo esc_html__( 'Notifications will use this value in a future Pro extension.', 'voucher-manager' ); ?></span></p>
 		<p><label><input name="active" type="checkbox" value="1" <?php checked( ! $is_edit || $pool->is_active() ); ?>> <?php echo esc_html__( 'Pool is active', 'voucher-manager' ); ?></label></p>
 		<?php submit_button( $is_edit ? __( 'Update Pool', 'voucher-manager' ) : __( 'Create Pool', 'voucher-manager' ) ); ?>
-		<a class="button" href="<?php echo esc_url( add_query_arg( 'page', 'voucher-manager-pools', admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Cancel', 'voucher-manager' ); ?></a>
+		<a class="button" href="<?php echo esc_url( add_query_arg( 'page', 'voucher-manager-pools', admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html_x( 'Cancel', 'Cancel Pool editing action', 'voucher-manager' ); ?></a>
 	</form>
 </div>

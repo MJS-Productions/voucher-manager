@@ -21,6 +21,21 @@ if ( ! function_exists( '__' ) ) {
 	}
 }
 
+if ( ! function_exists( '_x' ) ) {
+	function _x( string $text, string $context, string $domain = 'default' ): string {
+		unset( $context, $domain );
+		return $text;
+	}
+}
+
+if ( ! function_exists( 'esc_html_x' ) ) {
+	function esc_html_x( string $text, string $context, string $domain = 'default' ): string {
+		unset( $context, $domain );
+		return $text;
+	}
+}
+
+
 $root = dirname( __DIR__, 2 );
 
 spl_autoload_register(

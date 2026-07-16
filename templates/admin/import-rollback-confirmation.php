@@ -9,8 +9,8 @@ $back_url = add_query_arg( array( 'page' => 'voucher-manager-import' ), admin_ur
 	<div class="voucher-manager__card voucher-manager__form voucher-manager__danger-review">
 		<h2><?php echo esc_html__( 'Remove still-available One-Time Codes from this import?', 'voucher-manager' ); ?></h2>
 		<dl class="voucher-manager__status-list">
-			<div><dt><?php echo esc_html__( 'File', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( $import->filename() ); ?></dd></div>
-			<div><dt><?php echo esc_html__( 'Pool', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( $import->pool_name() ); ?></dd></div>
+			<div><dt><?php echo esc_html_x( 'File', 'Import source file label', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( $import->filename() ); ?></dd></div>
+			<div><dt><?php echo esc_html_x( 'Pool', 'Import destination Pool label', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( $import->pool_name() ); ?></dd></div>
 			<div><dt><?php echo esc_html__( 'Originally added', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $import->imported_rows() ) ); ?></dd></div>
 		</dl>
 		<div class="notice notice-warning inline"><p><strong><?php echo esc_html__( 'This action cannot be undone.', 'voucher-manager' ); ?></strong> <?php echo esc_html__( 'Only codes from this import that are still available will be removed. If any code from this import has already been distributed, the rollback is blocked and no codes are removed.', 'voucher-manager' ); ?></p></div>
@@ -18,8 +18,24 @@ $back_url = add_query_arg( array( 'page' => 'voucher-manager-import' ), admin_ur
 			<input type="hidden" name="action" value="voucher_manager_rollback_import">
 			<input type="hidden" name="import_id" value="<?php echo esc_attr( (string) $import->id() ); ?>">
 			<?php wp_nonce_field( 'voucher_manager_rollback_import_' . $import->id() ); ?>
-			<p><label><input type="checkbox" name="confirm_rollback" value="1" required> <?php echo esc_html( sprintf( __( 'I understand that this may permanently remove up to %d available One-Time Codes.', 'voucher-manager' ), $import->imported_rows() ) ); ?></label></p>
-			<p><button type="submit" class="button button-secondary voucher-manager__delete"><?php echo esc_html__( 'Roll back import', 'voucher-manager' ); ?></button> <a class="button" href="<?php echo esc_url( $back_url ); ?>"><?php echo esc_html__( 'Cancel', 'voucher-manager' ); ?></a></p>
+			<?php $maximum_removal = $import->imported_rows(); ?>
+			<p><label><input type="checkbox" name="confirm_rollback" value="1" required>
+				<?php
+				echo esc_html(
+					sprintf(
+						/* translators: %d: maximum number of available One-Time Codes that rollback may remove */
+						_n(
+							'I understand that this may permanently remove up to %d available One-Time Code.',
+							'I understand that this may permanently remove up to %d available One-Time Codes.',
+							$maximum_removal,
+							'voucher-manager'
+						),
+						$maximum_removal
+					)
+				);
+				?>
+			</label></p>
+			<p><button type="submit" class="button button-secondary voucher-manager__delete"><?php echo esc_html__( 'Roll back import', 'voucher-manager' ); ?></button> <a class="button" href="<?php echo esc_url( $back_url ); ?>"><?php echo esc_html_x( 'Cancel', 'Cancel import rollback action', 'voucher-manager' ); ?></a></p>
 		</form>
 	</div>
 </div>

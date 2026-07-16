@@ -19,6 +19,21 @@ if ( ! function_exists( '__' ) ) {
 		return $text;
 	}
 }
+
+if ( ! function_exists( '_x' ) ) {
+	function _x( string $text, string $context, string $domain = 'default' ): string {
+		unset( $context, $domain );
+		return $text;
+	}
+}
+
+if ( ! function_exists( 'esc_html_x' ) ) {
+	function esc_html_x( string $text, string $context, string $domain = 'default' ): string {
+		unset( $context, $domain );
+		return $text;
+	}
+}
+
 if ( ! function_exists( 'get_option' ) ) {
 	function get_option( string $name ): string {
 		return 'date_format' === $name ? 'Y-m-d' : 'H:i';

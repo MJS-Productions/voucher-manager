@@ -36,14 +36,18 @@ Test stubs and test-output strings are excluded from the runtime localization co
 
 ## Boundaries
 
-Part 3.1 does not yet:
+Part 3.2 completed:
+
+- `_x()` context for ambiguous menu, status, filter and table labels;
+- translator comments for dynamic placeholders;
+- `_n()` handling for import, rollback and destructive count-sensitive copy;
+- localization and translator documentation.
+
+Still pending for Part 3.3:
 
 - generate the POT catalog;
-- add `_x()` context to ambiguous labels;
-- perform the complete placeholder and plural audit;
-- ship `de_DE` PO/MO files.
-
-Those belong to Parts 3.2 and 3.3.
+- ship complete `de_DE` PO/MO files;
+- perform the German WordPress experience gate.
 
 ## Technical identifiers
 

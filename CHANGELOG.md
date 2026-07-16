@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+## 0.9.2-alpha - 2026-07-16 — The Localization Contract
+
+### Added
+- Sprint 9 Part 3.2 Localization Guide and Translator Notes.
+- ADR 0030 defining context, placeholder, translator-comment and plural rules.
+- Translation Readiness regression coverage before release build.
+
+### Changed
+- Added translator context to ambiguous admin menu, status, filter, form and table labels.
+- Added translator comments and numbered placeholders to dynamic Inventory, Import, Distribution and destructive-flow copy.
+- Added plural-aware Import summaries, rollback messages and Pool deletion confirmations.
+- Replaced the awkward `One One-Time Code` sentence with neutral assignment wording.
+- Preserved the Product Language, VM-018 and runtime i18n boundaries.
+
 ## 0.9.1-alpha - 2026-07-16 — The Translation Foundation
 
 ### Added

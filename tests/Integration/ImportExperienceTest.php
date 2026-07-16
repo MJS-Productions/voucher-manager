@@ -4,6 +4,21 @@ declare(strict_types=1);
 $root = dirname( __DIR__, 2 );
 spl_autoload_register( static function ( string $class ) use ( $root ): void { $prefix='VoucherManager\\'; if ( str_starts_with( $class, $prefix ) ) { $file=$root.'/src/'.str_replace('\\','/',substr($class,strlen($prefix))).'.php'; if ( is_readable($file) ) { require_once $file; } } } );
 if ( ! function_exists( '__' ) ) { function __( string $text, string $domain = '' ): string { unset($domain); return $text; } }
+
+if ( ! function_exists( '_x' ) ) {
+	function _x( string $text, string $context, string $domain = 'default' ): string {
+		unset( $context, $domain );
+		return $text;
+	}
+}
+
+if ( ! function_exists( 'esc_html_x' ) ) {
+	function esc_html_x( string $text, string $context, string $domain = 'default' ): string {
+		unset( $context, $domain );
+		return $text;
+	}
+}
+
 $assert = static function ( bool $condition, string $message ): void { if ( ! $condition ) { throw new RuntimeException( 'Import experience assertion failed: ' . $message ); } };
 
 $record = new VoucherManager\Domain\Import\ImportRecord( 5, 7, 'Summer', 'codes.csv', 'csv', 'completed', 12, 8, 3, 1, '2026-07-13 10:00:00' );

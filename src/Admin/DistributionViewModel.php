@@ -21,6 +21,7 @@ final class DistributionViewModel {
 	 */
 	public function pool_option_label( array $row ): string {
 		return sprintf(
+			/* translators: 1: Pool name, 2: available One-Time Code count, 3: total One-Time Code count */
 			__( '%1$s — %2$d available, %3$d total', 'voucher-manager' ),
 			$row['pool']->name(),
 			$row['available'],

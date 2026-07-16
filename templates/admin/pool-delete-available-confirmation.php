@@ -27,7 +27,22 @@ $danger_url = add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' 
 				<?php wp_nonce_field( 'voucher_manager_delete_available_codes_' . $pool->id() ); ?>
 				<input type="hidden" name="action" value="voucher_manager_delete_available_codes">
 				<input type="hidden" name="pool_id" value="<?php echo esc_attr( (string) $pool->id() ); ?>">
-				<p><label><input type="checkbox" name="confirm_delete_available" value="1" required> <?php echo esc_html( sprintf( __( 'I understand that this permanently deletes %d available One-Time Codes.', 'voucher-manager' ), $summary['available'] ) ); ?></label></p>
+				<p><label><input type="checkbox" name="confirm_delete_available" value="1" required>
+					<?php
+					echo esc_html(
+						sprintf(
+							/* translators: %d: number of available One-Time Codes that will be permanently deleted */
+							_n(
+								'I understand that this permanently deletes %d available One-Time Code.',
+								'I understand that this permanently deletes %d available One-Time Codes.',
+								$summary['available'],
+								'voucher-manager'
+							),
+							$summary['available']
+						)
+					);
+					?>
+				</label></p>
 				<p><button class="button" type="submit"><?php echo esc_html__( 'Permanently delete available One-Time Codes', 'voucher-manager' ); ?></button></p>
 			</form>
 		<?php else : ?>

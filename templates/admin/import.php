@@ -17,13 +17,53 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 		$skipped = absint( $_GET['skipped'] ?? 0 );
 		$invalid = absint( $_GET['invalid'] ?? 0 );
 	?>
+		<?php
+		$summary_parts = array(
+			sprintf(
+				/* translators: %d: number of One-Time Codes added by the import */
+				_n( '%d One-Time Code added', '%d One-Time Codes added', $imported, 'voucher-manager' ),
+				$imported
+			),
+			sprintf(
+				/* translators: %d: number of import rows skipped as duplicates */
+				_n( '%d row skipped', '%d rows skipped', $skipped, 'voucher-manager' ),
+				$skipped
+			),
+			sprintf(
+				/* translators: %d: number of invalid import rows */
+				_n( '%d invalid row', '%d invalid rows', $invalid, 'voucher-manager' ),
+				$invalid
+			),
+			sprintf(
+				/* translators: %d: total number of import rows processed */
+				_n( '%d row processed', '%d rows processed', $total, 'voucher-manager' ),
+				$total
+			),
+		);
+		?>
 		<div class="notice <?php echo 0 < $imported ? 'notice-success' : 'notice-warning'; ?> is-dismissible">
 			<p><strong><?php echo esc_html( 0 < $imported ? __( 'Import completed.', 'voucher-manager' ) : __( 'Import completed without adding codes.', 'voucher-manager' ) ); ?></strong></p>
-			<p><?php echo esc_html( sprintf( __( '%1$d codes added, %2$d skipped, %3$d invalid — %4$d rows processed.', 'voucher-manager' ), $imported, $skipped, $invalid, $total ) ); ?></p>
+			<p><?php echo esc_html( implode( ', ', array_slice( $summary_parts, 0, 3 ) ) . ' — ' . $summary_parts[3] . '.' ); ?></p>
 			<?php if ( 0 === $imported ) : ?><p><?php echo esc_html__( 'Check whether the file only contained duplicates, empty rows, or invalid values.', 'voucher-manager' ); ?></p><?php endif; ?>
 		</div>
 	<?php elseif ( 'rolled_back' === $notice ) : ?>
-		<div class="notice notice-success is-dismissible"><p><?php echo esc_html( sprintf( __( 'Import rolled back. %d available One-Time Codes removed.', 'voucher-manager' ), absint( $_GET['deleted'] ?? 0 ) ) ); ?></p></div>
+		<?php $deleted = absint( $_GET['deleted'] ?? 0 ); ?>
+		<div class="notice notice-success is-dismissible"><p>
+			<?php
+			echo esc_html(
+				sprintf(
+					/* translators: %d: number of available One-Time Codes removed by rollback */
+					_n(
+						'Import rolled back. %d available One-Time Code removed.',
+						'Import rolled back. %d available One-Time Codes removed.',
+						$deleted,
+						'voucher-manager'
+					),
+					$deleted
+				)
+			);
+			?>
+		</p></div>
 	<?php elseif ( in_array( $notice, array( 'invalid_pool', 'import_error', 'rollback_blocked', 'rollback_confirmation_required', 'rollback_unavailable' ), true ) ) : ?>
 		<div class="notice notice-error is-dismissible"><p><?php
 			$message = match ( $notice ) {
@@ -49,7 +89,19 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 				<p><label for="vm-pool"><strong><?php echo esc_html__( 'Destination pool', 'voucher-manager' ); ?></strong></label>
 				<select id="vm-pool" name="pool_id" required>
 					<?php foreach ( $pool_rows as $row ) : $pool = $row['pool']; ?>
-					<option value="<?php echo esc_attr( (string) $pool->id() ); ?>" <?php selected( $selected_pool_id, (int) $pool->id() ); ?>><?php echo esc_html( sprintf( __( '%1$s — %2$d available, %3$d total', 'voucher-manager' ), $pool->name(), $row['available'], $row['total'] ) ); ?></option>
+					<option value="<?php echo esc_attr( (string) $pool->id() ); ?>" <?php selected( $selected_pool_id, (int) $pool->id() ); ?>>
+						<?php
+						echo esc_html(
+							sprintf(
+								/* translators: 1: Pool name, 2: available One-Time Code count, 3: total One-Time Code count */
+								__( '%1$s — %2$d available, %3$d total', 'voucher-manager' ),
+								$pool->name(),
+								$row['available'],
+								$row['total']
+							)
+						);
+						?>
+					</option>
 					<?php endforeach; ?>
 				</select></p>
 				<p><label for="vm-code-file"><strong><?php echo esc_html__( 'TXT or CSV file', 'voucher-manager' ); ?></strong></label><input id="vm-code-file" type="file" name="code_file" accept=".txt,.csv,text/plain,text/csv" required></p>
@@ -72,7 +124,7 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 
 	<h2 class="voucher-manager__section-title"><?php echo esc_html__( 'Recent imports', 'voucher-manager' ); ?></h2>
 	<div class="voucher-manager__card voucher-manager__table-card">
-	<table class="widefat striped"><thead><tr><th><?php echo esc_html__( 'File', 'voucher-manager' ); ?></th><th><?php echo esc_html__( 'Pool', 'voucher-manager' ); ?></th><th><?php echo esc_html__( 'Result', 'voucher-manager' ); ?></th><th><?php echo esc_html__( 'Status', 'voucher-manager' ); ?></th><th><?php echo esc_html__( 'Imported', 'voucher-manager' ); ?></th><th><?php echo esc_html__( 'Actions', 'voucher-manager' ); ?></th></tr></thead><tbody>
+	<table class="widefat striped"><thead><tr><th><?php echo esc_html_x( 'File', 'Recent imports table column', 'voucher-manager' ); ?></th><th><?php echo esc_html_x( 'Pool', 'Recent imports table column', 'voucher-manager' ); ?></th><th><?php echo esc_html_x( 'Result', 'Recent imports table column', 'voucher-manager' ); ?></th><th><?php echo esc_html_x( 'Status', 'Recent imports table column', 'voucher-manager' ); ?></th><th><?php echo esc_html__( 'Imported', 'voucher-manager' ); ?></th><th><?php echo esc_html_x( 'Actions', 'Recent imports table column', 'voucher-manager' ); ?></th></tr></thead><tbody>
 	<?php if ( empty( $imports ) ) : ?><tr><td colspan="6"><?php echo esc_html__( 'No imports yet.', 'voucher-manager' ); ?></td></tr><?php endif; ?>
 	<?php foreach ( $imports as $import ) :
 		$review_url = add_query_arg( array( 'page' => 'voucher-manager-import', 'action' => 'confirm-rollback', 'import_id' => $import->id() ), admin_url( 'admin.php' ) );

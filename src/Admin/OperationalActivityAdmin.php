@@ -22,7 +22,7 @@ final class OperationalActivityAdmin {
 		add_submenu_page(
 			'voucher-manager',
 			__( 'Operational Activity', 'voucher-manager' ),
-			__( 'Activity', 'voucher-manager' ),
+			_x( 'Activity', 'admin menu label', 'voucher-manager' ),
 			'manage_options',
 			'voucher-manager-activity',
 			array( $this, 'render' )

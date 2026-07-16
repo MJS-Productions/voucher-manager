@@ -16,7 +16,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wrap voucher-manager">
 	<header class="voucher-manager__header">
 		<div>
-			<h1><?php echo esc_html( sprintf( __( '%s Inventory', 'voucher-manager' ), $pool->name() ) ); ?></h1>
+			<h1>
+				<?php
+				echo esc_html(
+					sprintf(
+						/* translators: %s: Pool name */
+						__( '%s Inventory', 'voucher-manager' ),
+						$pool->name()
+					)
+				);
+				?>
+			</h1>
 			<p><?php echo esc_html__( 'Review pool-scoped inventory without exposing complete One-Time Code values.', 'voucher-manager' ); ?></p>
 		</div>
 		<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-pools' ) ); ?>"><?php echo esc_html__( 'Back to Pools', 'voucher-manager' ); ?></a>
@@ -30,12 +40,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<small><?php echo esc_html__( 'All One-Time Code records in this pool', 'voucher-manager' ); ?></small>
 		</article>
 		<article class="voucher-manager__metric">
-			<span><?php echo esc_html__( 'Available', 'voucher-manager' ); ?></span>
+			<span><?php echo esc_html_x( 'Available', 'One-Time Code status', 'voucher-manager' ); ?></span>
 			<strong><?php echo esc_html( number_format_i18n( $data['counts']['available'] ) ); ?></strong>
 			<small><?php echo esc_html__( 'Ready for distribution', 'voucher-manager' ); ?></small>
 		</article>
 		<article class="voucher-manager__metric">
-			<span><?php echo esc_html__( 'Assigned', 'voucher-manager' ); ?></span>
+			<span><?php echo esc_html_x( 'Assigned', 'One-Time Code status or timestamp column', 'voucher-manager' ); ?></span>
 			<strong><?php echo esc_html( number_format_i18n( $data['counts']['assigned'] ) ); ?></strong>
 			<small><?php echo esc_html__( 'Already distributed', 'voucher-manager' ); ?></small>
 		</article>
@@ -47,21 +57,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<input type="hidden" name="pool_id" value="<?php echo esc_attr( (string) $pool->id() ); ?>">
 
 			<div>
-				<label for="vm-inventory-state"><strong><?php echo esc_html__( 'State', 'voucher-manager' ); ?></strong></label>
+				<label for="vm-inventory-state"><strong><?php echo esc_html_x( 'State', 'Inventory filter or table column', 'voucher-manager' ); ?></strong></label>
 				<select id="vm-inventory-state" name="state">
 					<option value="all" <?php selected( $data['filters']['state'], 'all' ); ?>><?php echo esc_html__( 'All states', 'voucher-manager' ); ?></option>
-					<option value="available" <?php selected( $data['filters']['state'], 'available' ); ?>><?php echo esc_html__( 'Available', 'voucher-manager' ); ?></option>
-					<option value="assigned" <?php selected( $data['filters']['state'], 'assigned' ); ?>><?php echo esc_html__( 'Assigned', 'voucher-manager' ); ?></option>
+					<option value="available" <?php selected( $data['filters']['state'], 'available' ); ?>><?php echo esc_html_x( 'Available', 'One-Time Code status', 'voucher-manager' ); ?></option>
+					<option value="assigned" <?php selected( $data['filters']['state'], 'assigned' ); ?>><?php echo esc_html_x( 'Assigned', 'One-Time Code status or timestamp column', 'voucher-manager' ); ?></option>
 				</select>
 			</div>
 
 			<div>
-				<label for="vm-inventory-import"><strong><?php echo esc_html__( 'Import', 'voucher-manager' ); ?></strong></label>
+				<label for="vm-inventory-import"><strong><?php echo esc_html_x( 'Import', 'Inventory source import', 'voucher-manager' ); ?></strong></label>
 				<select id="vm-inventory-import" name="import_id">
 					<option value="0"><?php echo esc_html__( 'All imports', 'voucher-manager' ); ?></option>
 					<?php foreach ( $data['import_options'] as $option ) : ?>
 						<option value="<?php echo esc_attr( (string) $option['id'] ); ?>" <?php selected( $data['filters']['import_id'], $option['id'] ); ?>>
-							<?php echo esc_html( sprintf( __( 'Import #%1$d — %2$s', 'voucher-manager' ), $option['id'], $option['filename'] ) ); ?>
+							<?php
+							echo esc_html(
+								sprintf(
+									/* translators: 1: import ID, 2: source filename */
+									__( 'Import #%1$d — %2$s', 'voucher-manager' ),
+									$option['id'],
+									$option['filename']
+								)
+							);
+							?>
 						</option>
 					<?php endforeach; ?>
 				</select>
@@ -106,10 +125,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<thead>
 					<tr>
 						<th><?php echo esc_html__( 'Reference', 'voucher-manager' ); ?></th>
-						<th><?php echo esc_html__( 'State', 'voucher-manager' ); ?></th>
-						<th><?php echo esc_html__( 'Import', 'voucher-manager' ); ?></th>
+						<th><?php echo esc_html_x( 'State', 'Inventory filter or table column', 'voucher-manager' ); ?></th>
+						<th><?php echo esc_html_x( 'Import', 'Inventory source import', 'voucher-manager' ); ?></th>
 						<th><?php echo esc_html__( 'Imported', 'voucher-manager' ); ?></th>
-						<th><?php echo esc_html__( 'Assigned', 'voucher-manager' ); ?></th>
+						<th><?php echo esc_html_x( 'Assigned', 'One-Time Code status or timestamp column', 'voucher-manager' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -121,7 +140,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<tr class="voucher-manager__inventory-row voucher-manager__inventory-row--<?php echo esc_attr( $integrity ); ?>">
 							<td>
 								<code class="voucher-manager__masked-reference"><?php echo esc_html( $view->reference( $record ) ); ?></code><br>
-								<small><?php echo esc_html( sprintf( __( 'Code #%d', 'voucher-manager' ), $record->id() ) ); ?></small>
+								<small>
+									<?php
+									echo esc_html(
+										sprintf(
+											/* translators: %d: internal One-Time Code record ID */
+											__( 'Code #%d', 'voucher-manager' ),
+											$record->id()
+										)
+									);
+									?>
+								</small>
 								<?php if ( '' !== $note ) : ?>
 									<p class="voucher-manager__integrity-note"><strong><?php echo esc_html__( 'Attention:', 'voucher-manager' ); ?></strong> <?php echo esc_html( $note ); ?></p>
 								<?php endif; ?>

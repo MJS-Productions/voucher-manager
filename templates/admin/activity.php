@@ -50,7 +50,7 @@ $tones    = array(
 		<form method="get" action="<?php echo esc_url( admin_url( 'admin.php' ) ); ?>">
 			<input type="hidden" name="page" value="voucher-manager-activity">
 			<div>
-				<label for="vm-activity-family"><strong><?php echo esc_html__( 'Area', 'voucher-manager' ); ?></strong></label>
+				<label for="vm-activity-family"><strong><?php echo esc_html_x( 'Area', 'Activity filter label', 'voucher-manager' ); ?></strong></label>
 				<select id="vm-activity-family" name="family">
 					<?php foreach ( $families as $family ) : ?>
 						<option value="<?php echo esc_attr( $family ); ?>" <?php selected( $data['filters']['family'], $family ); ?>>
@@ -60,7 +60,7 @@ $tones    = array(
 				</select>
 			</div>
 			<div>
-				<label for="vm-activity-tone"><strong><?php echo esc_html__( 'Outcome', 'voucher-manager' ); ?></strong></label>
+				<label for="vm-activity-tone"><strong><?php echo esc_html_x( 'Outcome', 'Activity filter label', 'voucher-manager' ); ?></strong></label>
 				<select id="vm-activity-tone" name="tone">
 					<?php foreach ( $tones as $tone => $label ) : ?>
 						<option value="<?php echo esc_attr( $tone ); ?>" <?php selected( $data['filters']['tone'], $tone ); ?>>
