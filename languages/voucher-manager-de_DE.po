@@ -892,8 +892,8 @@ msgid "Review privacy-safe operational events and identify actions that need att
 msgstr "Aktivitäten prüfen und wichtige Vorgänge schnell erkennen"
 
 #: templates/admin/import.php
-msgid "Review rollback"
-msgstr "Rollback prüfen"
+msgid "Undo import"
+msgstr "Import rückgängig machen"
 
 #: src/Admin/OperationalActivityViewModel.php
 msgid "Review the source file and retry the import. Technical details remain in the WordPress error log."
