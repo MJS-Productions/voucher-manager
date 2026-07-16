@@ -5,10 +5,10 @@ Professional management and distribution of unique One-Time Codes for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Alpha development  
-**Release candidate:** `0.9.0-alpha` — The Product Language  
-**Previous published release:** `0.8.1-alpha` — The Activity Clarity Patch
+**Release candidate:** `0.9.1-alpha` — The Translation Foundation  
+**Previous published release:** `0.9.0-alpha` — The Product Language
 
-Sprint 9 Part 2 establishes the English Product Language baseline for `0.9.0-alpha`. User-facing copy now consistently uses `One-Time Code`, follows a neutral-professional tone and preserves the complete VM-018 rollback Activity cleanup.
+Sprint 9 Part 3.1 establishes the runtime internationalization baseline for `0.9.1-alpha`. User-visible Distribution messages and JavaScript labels now flow through the `voucher-manager` translation boundary while all Product Language and VM-018 safeguards remain intact.
 
 ## Current capabilities
 
@@ -62,6 +62,7 @@ Official WordPress smoke tests should use the `voucher-manager.zip` artifact bui
 - `BUG_STORIES.md` — notable project failures and lessons learned;
 - `docs/` — current technical and experience documentation;
 - `docs/adr/` — architecture decision records;
+- `docs/INTERNATIONALIZATION_AUDIT.md` — Sprint 9 Part 3.1 runtime string audit and staged localization boundary.
 - `docs/PRODUCT_LANGUAGE.md` — approved English terminology, tone and German target language.
 - `docs/SPRINT_8_PART_5_4_FINAL_DISTRIBUTION_SAFETY_REVIEW.md` — final Distribution invariants and Keeper smoke-test gate.
 

@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## 0.9.1-alpha - 2026-07-16 — The Translation Foundation
+
+### Added
+- Sprint 9 Part 3.1 Internationalization Audit and runtime translation-boundary documentation.
+- ADR 0029 defining the plugin text-domain requirement for visible runtime UI strings.
+- Internationalization Readiness regression coverage before release build.
+
+### Changed
+- Routed user-visible Distribution result messages through the `voucher-manager` text domain.
+- Removed duplicated English JavaScript fallbacks and reused translated copy-button labels from HTML data attributes.
+- Preserved technical exception diagnostics, event keys and persisted values outside the translation catalog.
+
 ## 0.9.0-alpha - 2026-07-16 — The Product Language
 
 ### Added

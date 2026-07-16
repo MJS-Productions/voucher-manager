@@ -50,6 +50,7 @@
       "@test:distribution-safety-review",
       "@test:rollback-activity-cleanup",
       "@test:product-language",
+      "@test:i18n-readiness",
       "@build",
       "@validate:artifact"
     ],
@@ -75,7 +76,8 @@
     "test:distribution-result-delivery": "php tests/Integration/DistributionResultDeliveryTest.php",
     "test:distribution-safety-review": "php tests/Integration/DistributionSafetyReviewTest.php",
     "test:rollback-activity-cleanup": "php tests/Integration/RollbackActivityCleanupTest.php",
-    "test:product-language": "php tests/Integration/ProductLanguageTest.php"
+    "test:product-language": "php tests/Integration/ProductLanguageTest.php",
+    "test:i18n-readiness": "php tests/Integration/InternationalizationReadinessTest.php"
   },
   "config": {
     "sort-packages": true

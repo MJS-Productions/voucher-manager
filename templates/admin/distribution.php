@@ -65,11 +65,14 @@ foreach ( $distributable_rows as $row ) {
 				if (!button || !code || !navigator.clipboard) {
 					return;
 				}
+				const copyLabel = button.dataset.copyLabel || button.textContent || '';
+				const copiedLabel = button.dataset.copiedLabel || copyLabel;
+
 				button.addEventListener('click', function () {
 					navigator.clipboard.writeText(code.textContent || '').then(function () {
-						button.textContent = button.dataset.copiedLabel || 'Copied';
+						button.textContent = copiedLabel;
 						window.setTimeout(function () {
-							button.textContent = button.dataset.copyLabel || 'Copy code';
+							button.textContent = copyLabel;
 						}, 1600);
 					});
 				});

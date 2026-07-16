@@ -21,6 +21,13 @@ use VoucherManager\Support\CodeFileParser;
 
 $root = dirname(__DIR__, 2);
 
+if ( ! function_exists( '__' ) ) {
+    function __( string $text, string $domain = 'default' ): string {
+        unset( $domain );
+        return $text;
+    }
+}
+
 spl_autoload_register(
     static function (string $class) use ($root): void {
         $prefix = 'VoucherManager\\';
