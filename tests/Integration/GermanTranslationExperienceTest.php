@@ -49,6 +49,7 @@ $required_pairs = array(
 	'msgid "Danger Zone"' => 'msgstr "Gefahrenbereich"',
 	'msgid "Permanent deletion cannot be undone."' => 'msgstr "Die dauerhafte Löschung kann nicht rückgängig gemacht werden."',
 	'msgid "Pool"' => 'msgstr "Pool"',
+	'msgid "Remaining inventory: %d One-Time Code"' => 'msgstr[0] "Verbleibender Bestand: %d Einmalcode"',
 );
 
 foreach ( $required_pairs as $source => $translation ) {

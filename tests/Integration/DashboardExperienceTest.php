@@ -87,11 +87,18 @@ $assert(
 	'Unexpected admin failures should have an error tone.'
 );
 $assert(
-	'2 One-Time Codes remain available.' === $view->activity_detail(
+	"Pool: Amazon Vouchers\n\nRemaining inventory: 2 One-Time Codes" === $view->activity_detail(
 		'distribution.completed',
-		array( 'remaining' => 2, 'code' => 'MUST-NOT-APPEAR' )
+		array( 'remaining' => 2, 'pool_name' => 'Amazon Vouchers', 'code' => 'MUST-NOT-APPEAR' )
 	),
-	'Distribution detail should show inventory, not the One-Time Code value.'
+	'Distribution detail should show Pool context and inventory, not the One-Time Code value.'
+);
+$assert(
+	"Pool: Amazon Vouchers\n\nRemaining inventory: 1 One-Time Code" === $view->activity_detail(
+		'distribution.completed',
+		array( 'remaining' => 1, 'pool_name' => 'Amazon Vouchers' )
+	),
+	'Distribution detail should use singular inventory grammar.'
 );
 $assert(
 	'Pool #12' === $view->activity_detail(

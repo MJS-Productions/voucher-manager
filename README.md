@@ -5,10 +5,10 @@ Professional One-Time Code Management for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Stable Release  
-**Current release:** `1.0.1` — Distribution Context Update  
-**Previous stable release:** `1.0.0` — Initial Stable Release
+**Current release:** `1.0.2` — Activity Pool Context Fix  
+**Previous release:** `1.0.1` — Distribution Context Update
 
-`1.0.1` is a focused maintenance release that adds Pool context and clearer singular/plural inventory wording to successful Distribution results.
+`1.0.2` improves successful Distribution entries in Activity history with the Pool name and remaining inventory while keeping One-Time Code values private.
 
 ## Current capabilities
 

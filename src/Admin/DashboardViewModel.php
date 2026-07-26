@@ -79,13 +79,28 @@ final class DashboardViewModel {
 		$pool_id   = isset( $context['pool_id'] ) ? absint( $context['pool_id'] ) : 0;
 		$import_id = isset( $context['import_id'] ) ? absint( $context['import_id'] ) : 0;
 		$remaining = isset( $context['remaining'] ) ? absint( $context['remaining'] ) : null;
+		$pool_name = isset( $context['pool_name'] )
+			? trim( (string) $context['pool_name'] )
+			: '';
 
 		if ( 'distribution.completed' === $event_type && null !== $remaining ) {
-			return sprintf(
-				/* translators: %d: number of remaining available codes */
-				_n( '%d One-Time Code remains available.', '%d One-Time Codes remain available.', $remaining, 'voucher-manager' ),
+			$inventory = sprintf(
+				/* translators: %d: number of available One-Time Codes remaining in the pool */
+				_n( 'Remaining inventory: %d One-Time Code', 'Remaining inventory: %d One-Time Codes', $remaining, 'voucher-manager' ),
 				$remaining
 			);
+
+			if ( '' === $pool_name ) {
+				return $inventory;
+			}
+
+			$pool = sprintf(
+				/* translators: %s: Pool name */
+				__( 'Pool: %s', 'voucher-manager' ),
+				$pool_name
+			);
+
+			return $pool . "\n\n" . $inventory;
 		}
 
 		if ( 'import.completed' === $event_type ) {

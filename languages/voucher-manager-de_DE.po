@@ -1240,3 +1240,4 @@ msgstr "Einstellungen"
 #: voucher-manager.php
 msgid "Professional One-Time Code Management for WordPress."
 msgstr "Professionelle Verwaltung von Einmalcodes für WordPress."
+

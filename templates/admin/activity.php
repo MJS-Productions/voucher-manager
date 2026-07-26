@@ -125,12 +125,11 @@ $tones    = array(
 								</span>
 							</div>
 							<?php if ( '' !== $detail ) : ?>
-								<p><?php echo esc_html( $detail ); ?></p>
+								<p><?php echo wp_kses_post( nl2br( esc_html( $detail ) ) ); ?></p>
 							<?php endif; ?>
 							<?php if ( '' !== $guidance ) : ?>
 								<p class="voucher-manager__activity-guidance"><?php echo esc_html( $guidance ); ?></p>
 							<?php endif; ?>
-							<code class="voucher-manager__event-name"><?php echo esc_html( $event_type ); ?></code>
 						</div>
 						<time datetime="<?php echo esc_attr( (string) $event['created_at'] ); ?>">
 							<?php

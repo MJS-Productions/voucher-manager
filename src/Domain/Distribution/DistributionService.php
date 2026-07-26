@@ -39,8 +39,9 @@ final class DistributionService {
 			OperationalEvent::DISTRIBUTION_COMPLETED->value,
 			'An available code was distributed.',
 			array(
-				'pool_id'  => $pool_id,
-				'code_id'  => $claimed['id'],
+				'pool_id'   => $pool_id,
+				'pool_name' => $pool->name(),
+				'code_id'   => $claimed['id'],
 				'remaining' => $remaining,
 			)
 		);

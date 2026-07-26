@@ -19,7 +19,7 @@ $plugin   = file_get_contents( $root . '/voucher-manager.php' );
 $readme   = file_get_contents( $root . '/README.md' );
 $manifest = file_get_contents( $root . '/MANIFEST.md' );
 $adr      = file_get_contents( $root . '/docs/adr/0033-product-identity.md' );
-$release  = file_get_contents( $root . '/RELEASE-1.0.1.md' );
+$release  = file_get_contents( $root . '/RELEASE-1.0.2.md' );
 $composer = file_get_contents( $root . '/composer.json' );
 
 $tagline = 'Professional One-Time Code Management for WordPress';

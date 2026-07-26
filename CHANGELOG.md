@@ -2,12 +2,12 @@
 
 ## Unreleased
 
-## 1.0.1 - 2026-07-26 — Distribution Context Update
+## 1.0.2 - 2026-07-26 — Activity Pool Context Fix
 
 ### Changed
-- Successful Distribution results now show the Pool name.
-- Remaining inventory now uses explicit singular/plural-aware wording.
-
+- Successful Distribution entries in Activity history now show the Pool name and remaining inventory.
+- Remaining inventory uses correct singular and plural wording.
+- Internal event identifiers are no longer shown in the administrator-facing Activity list.
 
 ## 1.0.0 - 2026-07-26 — Initial Stable Release
 
