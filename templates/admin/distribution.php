@@ -4,6 +4,7 @@
  *
  * @var array<int,array{pool:\VoucherManager\Domain\Pool\Pool,total:int,available:int,assigned:int}> $pool_rows
  * @var \VoucherManager\Admin\DistributionViewModel $view
+ * @var string $result_pool_name
  */
 
 declare(strict_types=1);
@@ -55,6 +56,9 @@ foreach ( $distributable_rows as $row ) {
 						<?php echo esc_html__( 'Copy code', 'voucher-manager' ); ?>
 					</button>
 				</div>
+				<?php if ( '' !== $result_pool_name ) : ?>
+					<p class="voucher-manager__result-pool"><?php echo esc_html( $view->pool_message( $result_pool_name ) ); ?></p>
+				<?php endif; ?>
 				<p class="voucher-manager__result-inventory"><?php echo esc_html( $view->remaining_message( $remaining ) ); ?></p>
 			</div>
 			<script>

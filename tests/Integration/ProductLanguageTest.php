@@ -63,8 +63,8 @@ $distribution_view = file_get_contents( $root . '/src/Admin/DistributionViewMode
 $assert(
 	is_string( $distribution_view )
 	&& str_contains( $distribution_view, '_n(' )
-	&& str_contains( $distribution_view, '%d One-Time Code remains available in this pool.' )
-	&& str_contains( $distribution_view, '%d One-Time Codes remain available in this pool.' ),
+	&& str_contains( $distribution_view, 'Remaining inventory: %d One-Time Code' )
+	&& str_contains( $distribution_view, 'Remaining inventory: %d One-Time Codes' ),
 	'Remaining inventory must use translation-ready singular and plural forms.'
 );
 

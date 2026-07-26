@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 1.0.1 - 2026-07-26 — Distribution Context Update
+
+### Changed
+- Successful Distribution results now show the Pool name.
+- Remaining inventory now uses explicit singular/plural-aware wording.
+
+
 ## 1.0.0 - 2026-07-26 — Initial Stable Release
 
 ### Added

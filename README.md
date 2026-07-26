@@ -5,10 +5,10 @@ Professional One-Time Code Management for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Stable Release  
-**Current release:** `1.0.0` — Initial Stable Release  
-**Previous release candidate:** `1.0.0-rc.2` — Final Polish Candidate
+**Current release:** `1.0.1` — Distribution Context Update  
+**Previous stable release:** `1.0.0` — Initial Stable Release
 
-`1.0.0` is the first stable release of Voucher Manager Free. It combines the hardened One-Time Code lifecycle, complete German administration experience, deterministic translation artifacts and the fully audited release process under the official product identity.
+`1.0.1` is a focused maintenance release that adds Pool context and clearer singular/plural inventory wording to successful Distribution results.
 
 ## Current capabilities
 

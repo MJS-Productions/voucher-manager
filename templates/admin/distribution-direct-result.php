@@ -6,6 +6,7 @@
  *
  * @var array{success:bool,code:?string,message:string,remaining:?int,pool_id:int} $result
  * @var \VoucherManager\Admin\DistributionViewModel $view
+ * @var string $result_pool_name
  */
 
 declare(strict_types=1);
@@ -37,6 +38,9 @@ $remaining = isset( $result['remaining'] ) ? absint( $result['remaining'] ) : nu
 					<code id="vm-distributed-code"><?php echo esc_html( (string) $result['code'] ); ?></code>
 					<button type="button" class="button button-secondary" id="vm-copy-distributed-code"><?php echo esc_html__( 'Copy code', 'voucher-manager' ); ?></button>
 				</div>
+				<?php if ( '' !== $result_pool_name ) : ?>
+					<p class="voucher-manager__result-pool"><?php echo esc_html( $view->pool_message( $result_pool_name ) ); ?></p>
+				<?php endif; ?>
 				<p class="voucher-manager__result-inventory"><?php echo esc_html( $view->remaining_message( $remaining ) ); ?></p>
 			</div>
 		<?php else : ?>

@@ -34,10 +34,15 @@ msgstr[0] "%d Einmalcode hinzugefügt"
 msgstr[1] "%d Einmalcodes hinzugefügt"
 
 #: src/Admin/DistributionViewModel.php
-msgid "%d One-Time Code remains available in this pool."
-msgid_plural "%d One-Time Codes remain available in this pool."
-msgstr[0] "In diesem Pool bleibt %d Einmalcode verfügbar."
-msgstr[1] "In diesem Pool bleiben %d Einmalcodes verfügbar."
+msgid "Remaining inventory: %d One-Time Code"
+msgid_plural "Remaining inventory: %d One-Time Codes"
+msgstr[0] "Verbleibender Bestand: %d Einmalcode"
+msgstr[1] "Verbleibender Bestand: %d Einmalcodes"
+
+#: src/Admin/DistributionViewModel.php
+#, php-format
+msgid "Pool: %s"
+msgstr "Pool: %s"
 
 #: src/Admin/DashboardViewModel.php
 msgid "%d One-Time Code remains available."

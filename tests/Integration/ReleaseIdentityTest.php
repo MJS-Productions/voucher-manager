@@ -8,7 +8,7 @@
 declare(strict_types=1);
 
 $root     = dirname( __DIR__, 2 );
-$expected = '1.0.0';
+$expected = '1.0.1';
 
 $assert = static function ( bool $condition, string $message ): void {
 	if ( ! $condition ) {
@@ -30,25 +30,25 @@ $assert(
 );
 
 $assert(
-	is_string( $readme ) && str_contains( $readme, 'Current release:** `' . $expected . '` — Initial Stable Release' ),
-	'README must identify the stable release.'
+	is_string( $readme ) && str_contains( $readme, 'Current release:** `' . $expected . '` — Distribution Context Update' ),
+	'README must identify the patch release.'
 );
 
 $assert(
-	is_string( $changelog ) && str_contains( $changelog, '## ' . $expected . ' - 2026-07-26 — Initial Stable Release' ),
+	is_string( $changelog ) && str_contains( $changelog, '## ' . $expected . ' - 2026-07-26 — Distribution Context Update' ),
 	'Changelog must contain the reviewed release section.'
 );
 
 $assert(
 	is_string( $release )
-	&& str_contains( $release, '# Voucher Manager ' . $expected . ' — Initial Stable Release' )
+	&& str_contains( $release, '# Voucher Manager ' . $expected . ' — Distribution Context Update' )
 	&& str_contains( $release, 'No database schema migration is introduced' ),
-	'Stable release notes must match the reviewed version and upgrade boundary.'
+	'Patch release notes must match the reviewed version and upgrade boundary.'
 );
 
 $assert(
 	! file_exists( $root . '/RELEASE-0.9.3-alpha.md' ),
-	'The root release note must describe the current stable release rather than an Alpha release.'
+	'The root release note must describe the current patch release rather than an Alpha release.'
 );
 
 $assert(
@@ -58,4 +58,4 @@ $assert(
 	'Final Sprint 8 review must document the approved release gate.'
 );
 
-echo "Release identity OK: 1.0.0 is consistent across plugin, README, changelog, release notes and final gate.\n";
+echo "Release identity OK: 1.0.1 is consistent across plugin, README, changelog, release notes and final gate.\n";

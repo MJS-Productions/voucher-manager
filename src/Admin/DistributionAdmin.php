@@ -88,6 +88,14 @@ final class DistributionAdmin {
 				'source' => 'manual',
 			)
 		);
+		$result_pool_name = '';
+		if ( is_array( $result ) ) {
+			$result_pool = $this->pools->find( (int) ( $result['pool_id'] ?? 0 ) );
+			if ( null !== $result_pool ) {
+				$result_pool_name = $result_pool->name();
+			}
+		}
+
 		$view         = $this->view;
 		$intent_token = $this->boundary->execute(
 			fn(): string => $this->intents->create( get_current_user_id() ),
@@ -198,7 +206,9 @@ final class DistributionAdmin {
 			'remaining' => $distribution_result->remaining(),
 			'pool_id'   => $pool_id,
 		);
-		$view = $this->view;
+		$result_pool      = $this->pools->find( $pool_id );
+		$result_pool_name = null === $result_pool ? '' : $result_pool->name();
+		$view             = $this->view;
 
 		$template = VOUCHER_MANAGER_PATH . 'templates/admin/distribution-direct-result.php';
 		if ( is_readable( $template ) ) {

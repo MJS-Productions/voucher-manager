@@ -34,10 +34,15 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/Admin/DistributionViewModel.php
-msgid "%d One-Time Code remains available in this pool."
-msgid_plural "%d One-Time Codes remain available in this pool."
+msgid "Remaining inventory: %d One-Time Code"
+msgid_plural "Remaining inventory: %d One-Time Codes"
 msgstr[0] ""
 msgstr[1] ""
+
+#: src/Admin/DistributionViewModel.php
+#, php-format
+msgid "Pool: %s"
+msgstr ""
 
 #: src/Admin/DashboardViewModel.php
 msgid "%d One-Time Code remains available."
