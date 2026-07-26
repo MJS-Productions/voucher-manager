@@ -1231,3 +1231,7 @@ msgstr ""
 msgctxt "admin menu label"
 msgid "Settings"
 msgstr ""
+
+#: voucher-manager.php
+msgid "Professional One-Time Code Management for WordPress."
+msgstr ""
