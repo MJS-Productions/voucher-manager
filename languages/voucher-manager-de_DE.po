@@ -243,7 +243,7 @@ msgstr "CSV: Codes werden aus der ersten Spalte gelesen; eine übliche Kopfzeile
 
 #: templates/admin/activity.php
 msgid "Change the filters or return after another operational action."
-msgstr "Filter ändern oder nach einer weiteren betrieblichen Aktion zurückkehren."
+msgstr "Keine Aktivitäten entsprechen dem aktuellen Filter. Ändere den Filter, um weitere Aktivitäten anzuzeigen.."
 
 #: templates/admin/import.php
 msgid "Check whether the file only contained duplicates, empty rows, or invalid values."
