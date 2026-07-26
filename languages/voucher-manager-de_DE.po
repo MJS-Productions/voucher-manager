@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Voucher Manager 1.0.0-rc.1\n"
+"Project-Id-Version: Voucher Manager 1.0.0-rc.2\n"
 "Report-Msgid-Bugs-To: https://github.com/mjs512/voucher-manager/issues\n"
 "POT-Creation-Date: 2026-07-16 00:00+0000\n"
 "PO-Revision-Date: 2026-07-16 00:00+0000\n"
@@ -242,8 +242,8 @@ msgid "CSV: codes are read from the first column; a common header is ignored."
 msgstr "CSV: Codes werden aus der ersten Spalte gelesen; eine übliche Kopfzeile wird ignoriert."
 
 #: templates/admin/activity.php
-msgid "Change the filters or return after another operational action."
-msgstr "Keine Aktivitäten entsprechen dem aktuellen Filter. Ändere den Filter, um weitere Aktivitäten anzuzeigen.."
+msgid "Adjust the filters to display more activity."
+msgstr "Filter anpassen, um weitere Aktivitäten anzuzeigen."
 
 #: templates/admin/import.php
 msgid "Check whether the file only contained duplicates, empty rows, or invalid values."
@@ -641,6 +641,10 @@ msgstr "Keine Einmalcodes zur Ausgabe bereit"
 msgid "No activity recorded yet."
 msgstr "Noch keine Aktivitäten protokolliert."
 
+#: templates/admin/activity.php
+msgid "New activity will appear here automatically."
+msgstr "Neue Aktivitäten werden hier automatisch angezeigt."
+
 #: src/Admin/InventoryViewModel.php
 msgid "No assigned One-Time Codes match this filter."
 msgstr "Keine ausgegebenen Einmalcodes entsprechen diesem Filter."
@@ -949,7 +953,7 @@ msgstr "Technische Kennungen und Anzahlen können angezeigt werden. Einmalcode-W
 
 #: templates/admin/distribution.php
 msgid "The One-Time Code value is not written to operational Activity context."
-msgstr "Der Einmalcode-Wert wird nicht in den Kontext betrieblicher Aktivitäten geschrieben."
+msgstr "Einmalcodes werden nicht in der Aktivitätshistorie protokolliert."
 
 #: templates/admin/distribution-direct-result.php
 msgid "The One-Time Code was assigned successfully, but the normal one-time result could not be stored. Copy it before leaving this page."

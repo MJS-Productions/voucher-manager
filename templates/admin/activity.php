@@ -97,8 +97,13 @@ $tones    = array(
 
 		<?php if ( empty( $data['events'] ) ) : ?>
 			<div class="voucher-manager__empty-state">
-				<strong><?php echo esc_html__( 'No matching activity found.', 'voucher-manager' ); ?></strong>
-				<p><?php echo esc_html__( 'Change the filters or return after another operational action.', 'voucher-manager' ); ?></p>
+				<?php if ( 0 === (int) $data['counts']['all'] ) : ?>
+					<strong><?php echo esc_html__( 'No activity recorded yet.', 'voucher-manager' ); ?></strong>
+					<p><?php echo esc_html__( 'New activity will appear here automatically.', 'voucher-manager' ); ?></p>
+				<?php else : ?>
+					<strong><?php echo esc_html__( 'No matching activity found.', 'voucher-manager' ); ?></strong>
+					<p><?php echo esc_html__( 'Adjust the filters to display more activity.', 'voucher-manager' ); ?></p>
+				<?php endif; ?>
 			</div>
 		<?php else : ?>
 			<ol class="voucher-manager__activity-history">

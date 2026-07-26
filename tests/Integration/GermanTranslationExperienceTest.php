@@ -76,8 +76,8 @@ $assert(
 );
 
 $assert(
-	291 === substr_count( $po, "\nmsgid " ),
-	'German PO must contain exactly the reviewed 291 source entries in addition to its header.'
+	292 === substr_count( $po, "\nmsgid " ),
+	'German PO must contain exactly the reviewed 292 source entries in addition to its header.'
 );
 
 $catalog_body = preg_replace( '/\Amsgid ""\nmsgstr ""\n(?:".*"\n)+\n/sU', '', $po, 1 );

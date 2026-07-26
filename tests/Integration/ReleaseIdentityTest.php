@@ -8,7 +8,7 @@
 declare(strict_types=1);
 
 $root     = dirname( __DIR__, 2 );
-$expected = '1.0.0-rc.1';
+$expected = '1.0.0-rc.2';
 
 $assert = static function ( bool $condition, string $message ): void {
 	if ( ! $condition ) {
@@ -30,18 +30,18 @@ $assert(
 );
 
 $assert(
-	is_string( $readme ) && str_contains( $readme, 'Release candidate:** `' . $expected . '` — The First Release Candidate' ),
+	is_string( $readme ) && str_contains( $readme, 'Release candidate:** `' . $expected . '` — Final Polish Candidate' ),
 	'README must identify the reviewed release candidate.'
 );
 
 $assert(
-	is_string( $changelog ) && str_contains( $changelog, '## ' . $expected . ' - 2026-07-16 — The First Release Candidate' ),
+	is_string( $changelog ) && str_contains( $changelog, '## ' . $expected . ' - 2026-07-26 — Final Polish Candidate' ),
 	'Changelog must contain the reviewed release section.'
 );
 
 $assert(
 	is_string( $release )
-	&& str_contains( $release, '# Voucher Manager ' . $expected . ' — The First Release Candidate' )
+	&& str_contains( $release, '# Voucher Manager ' . $expected . ' — Final Polish Candidate' )
 	&& str_contains( $release, 'No database schema migration is introduced' ),
 	'Current release notes must match the reviewed version and upgrade boundary.'
 );
@@ -58,4 +58,4 @@ $assert(
 	'Final Sprint 8 review must document the approved release gate.'
 );
 
-echo "Release identity OK: 1.0.0-rc.1 is consistent across plugin, README, changelog, release notes and final gate.\n";
+echo "Release identity OK: 1.0.0-rc.2 is consistent across plugin, README, changelog, release notes and final gate.\n";

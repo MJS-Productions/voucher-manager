@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 1.0.0-rc.2 - 2026-07-26 — Final Polish Candidate
+
+- Restored the public plugin author identity to **MJS-Productions**.
+- Simplified the German distribution-safety message.
+- Added distinct activity empty states for a fresh installation and filters without matches.
+- Kept German guidance neutral without direct Du/Sie address.
+
 ## 1.0.0-rc.1 - 2026-07-16 — The First Release Candidate
 
 ### Added

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Voucher Manager 1.0.0-rc.1\n"
+"Project-Id-Version: Voucher Manager 1.0.0-rc.2\n"
 "Report-Msgid-Bugs-To: https://github.com/mjs512/voucher-manager/issues\n"
 "POT-Creation-Date: 2026-07-16 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -242,7 +242,7 @@ msgid "CSV: codes are read from the first column; a common header is ignored."
 msgstr ""
 
 #: templates/admin/activity.php
-msgid "Change the filters or return after another operational action."
+msgid "Adjust the filters to display more activity."
 msgstr ""
 
 #: templates/admin/import.php
@@ -639,6 +639,10 @@ msgstr ""
 
 #: templates/admin/dashboard.php
 msgid "No activity recorded yet."
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "New activity will appear here automatically."
 msgstr ""
 
 #: src/Admin/InventoryViewModel.php
