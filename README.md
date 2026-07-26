@@ -4,11 +4,11 @@ Professional One-Time Code Management for WordPress.
 
 > Simple for users. Reliable for businesses.
 
-**Status:** Release Candidate  
-**Release candidate:** `1.0.0-rc.2` — Final Polish Candidate  
-**Previous published release:** `0.8.0-alpha` — The Hardened Lifecycle
+**Status:** Stable Release  
+**Current release:** `1.0.0` — Initial Stable Release  
+**Previous release candidate:** `1.0.0-rc.2` — Final Polish Candidate
 
-`1.0.0-rc.2` is the final polish candidate for Voucher Manager Free 1.0. It combines the hardened One-Time Code lifecycle, complete German administration experience, deterministic translation artifacts and the fully audited release process under the official product identity.
+`1.0.0` is the first stable release of Voucher Manager Free. It combines the hardened One-Time Code lifecycle, complete German administration experience, deterministic translation artifacts and the fully audited release process under the official product identity.
 
 ## Current capabilities
 

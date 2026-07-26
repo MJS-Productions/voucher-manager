@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 1.0.0 - 2026-07-26 — Initial Stable Release
+
+### Added
+- First stable release of Voucher Manager Free.
+- Professional pool-based One-Time Code management for WordPress.
+- Secure atomic distribution, CSV and TXT import, protected import rollback and privacy-aware Activity history.
+- English and German administration experience with deterministic translation artifacts.
+- Automated Quality Gate, release artifact validation and documented lifecycle boundaries.
+
+### Changed
+- Promoted the fully reviewed `1.0.0-rc.2` candidate to the stable `1.0.0` release without database schema changes.
+- Finalized public product identity as **Voucher Manager** by **MJS-Productions**.
+
 ## 1.0.0-rc.2 - 2026-07-26 — Final Polish Candidate
 
 - Restored the public plugin author identity to **MJS-Productions**.

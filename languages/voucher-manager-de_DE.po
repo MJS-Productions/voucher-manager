@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Voucher Manager 1.0.0-rc.2\n"
+"Project-Id-Version: Voucher Manager 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/mjs512/voucher-manager/issues\n"
 "POT-Creation-Date: 2026-07-16 00:00+0000\n"
 "PO-Revision-Date: 2026-07-16 00:00+0000\n"
