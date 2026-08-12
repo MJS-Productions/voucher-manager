@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## 1.0.3 - 2026-08-12 — Distribution Result Boundary Fix
+
+### Changed
+- A completed Distribution result is now separated from the next Distribution form by an explicit `Distribute another One-Time Code` action.
+- Updated the Dashboard credit to `Made in Austria by MJS-Productions.`
+
+### Fixed
+- Hardened manual Distribution against accidental rapid resubmission across the result-page boundary while preserving one-use Distribution intents.
+
 ## 1.0.2 - 2026-07-26 — Activity Pool Context Fix
 
 ### Changed
