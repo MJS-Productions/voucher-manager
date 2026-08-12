@@ -170,7 +170,7 @@ $metrics = array(
 	</div>
 
 	<footer class="voucher-manager__footer">
-		<span><?php echo esc_html__( 'Designed and developed with love in Austria.', 'voucher-manager' ); ?></span>
+		<span><?php echo esc_html__( 'Made in Austria by MJS-Productions.', 'voucher-manager' ); ?></span>
 		<em><?php echo esc_html__( 'Every great project starts with a single line.', 'voucher-manager' ); ?></em>
 	</footer>
 </div>

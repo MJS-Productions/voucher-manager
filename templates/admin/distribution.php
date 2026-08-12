@@ -101,7 +101,7 @@ foreach ( $distributable_rows as $row ) {
 			<?php elseif ( '' === $intent_token ) : ?>
 				<div class="notice notice-error inline"><p><?php echo esc_html__( 'A secure distribution request could not be prepared. Reload this page and try again.', 'voucher-manager' ); ?></p></div>
 			<?php else : ?>
-				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<form class="voucher-manager__distribution-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 					<input type="hidden" name="action" value="voucher_manager_distribute_code">
 					<input type="hidden" name="distribution_intent" value="<?php echo esc_attr( $intent_token ); ?>">
 					<?php wp_nonce_field( 'voucher_manager_distribute_code' ); ?>

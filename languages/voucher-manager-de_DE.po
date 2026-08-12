@@ -377,8 +377,8 @@ msgid "Description"
 msgstr "Beschreibung"
 
 #: templates/admin/dashboard.php
-msgid "Designed and developed with love in Austria."
-msgstr "Mit Liebe in Österreich konzipiert und entwickelt."
+msgid "Made in Austria by MJS-Productions."
+msgstr "Made in Austria by MJS-Productions."
 
 #: templates/admin/import.php
 msgid "Destination pool"

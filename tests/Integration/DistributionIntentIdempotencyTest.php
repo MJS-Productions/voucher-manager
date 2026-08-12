@@ -69,6 +69,8 @@ $admin_source    = file_get_contents( $root . '/src/Admin/DistributionAdmin.php'
 $template_source = file_get_contents( $root . '/templates/admin/distribution.php' );
 $composer_source = file_get_contents( $root . '/composer.json' );
 $plugin_source   = file_get_contents( $root . '/voucher-manager.php' );
+$admin_assets    = file_get_contents( $root . '/src/Admin/Admin.php' );
+$admin_script    = file_get_contents( $root . '/assets/js/admin.js' );
 
 $assert(
 	is_string( $store_source )
@@ -113,6 +115,18 @@ $assert(
 	&& str_contains( $template_source, 'esc_attr( $intent_token )' )
 	&& str_contains( $template_source, 'A secure distribution request could not be prepared' ),
 	'Every rendered form must carry an escaped intent and fail closed if intent creation fails.'
+);
+
+$assert(
+	str_contains( $template_source, 'class="voucher-manager__distribution-form"' )
+	&& is_string( $admin_assets )
+	&& str_contains( $admin_assets, "assets/js/admin.js" )
+	&& is_string( $admin_script )
+	&& str_contains( $admin_script, "form.dataset.vmSubmitting === '1'" )
+	&& str_contains( $admin_script, "form.dataset.vmSubmitting = '1'" )
+	&& str_contains( $admin_script, 'event.preventDefault()' )
+	&& str_contains( $admin_script, 'button.disabled = true' ),
+	'Distribution UI must synchronously lock the first submission and block further rapid submits.'
 );
 
 $assert(

@@ -52,6 +52,14 @@ final class Admin {
 			array(),
 			VOUCHER_MANAGER_VERSION
 		);
+
+		wp_enqueue_script(
+			'voucher-manager-admin',
+			VOUCHER_MANAGER_URL . 'assets/js/admin.js',
+			array(),
+			VOUCHER_MANAGER_VERSION,
+			true
+		);
 	}
 
 	public function render_dashboard(): void {
