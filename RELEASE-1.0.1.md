@@ -19,4 +19,4 @@ No database schema migration is introduced. Existing Voucher Manager 1.0.0 insta
 
 Publication requires the complete quality chain, deterministic translation compilation and release-artifact validation. Official WordPress smoke tests use the artifact produced by GitHub Actions.
 
-Made with ❤️ in Austria by MJS-Productions.
+Made in Austria by MJS-Productions.

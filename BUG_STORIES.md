@@ -29,11 +29,11 @@ The update package expected `vendor/autoload.php`, but the release ZIP did not c
 
 **Version:** 0.4.1-alpha
 
-**Status:** In progress
+**Status:** Resolved
 
 The project introduced additional release discipline after the first distribution release.
 
-Lesson:
+### Lesson
 A stable product needs repeatable release processes.
 
 
@@ -255,7 +255,7 @@ That produced the grammatically incorrect text:
 
 The sentence now uses grammar-safe placeholders:
 
-`This permanently deletes the pool, %1$s, and %2$s.`
+`This permanently deletes the pool, %1$s and %2$s.`
 
 The independently pluralized count fragments remain unchanged.
 

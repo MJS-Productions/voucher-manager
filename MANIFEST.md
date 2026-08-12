@@ -21,7 +21,7 @@ Every great project starts with a single line.
 
 **Simple things deserve professional solutions.**
 
-Designed and developed with ❤️ in Austria.
+Designed and developed in Austria.
 
 
 ## Product identity
@@ -29,5 +29,5 @@ Designed and developed with ❤️ in Austria.
 - Product: **Voucher Manager**
 - Tagline: **Professional One-Time Code Management for WordPress**
 - Free edition: **Voucher Manager**
-- Commercial edition: **Voucher Manager Pro**
+- Pro extension: **Voucher Manager Pro**
 - Slug and text domain: `voucher-manager`

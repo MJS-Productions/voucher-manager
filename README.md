@@ -59,18 +59,20 @@ Official WordPress smoke tests should use the `voucher-manager.zip` artifact bui
 
 ## Project documentation
 
-- `CHANGELOG.md` — release and unreleased development changes;
 - `BUG_STORIES.md` — notable project failures and lessons learned;
+- `CHANGELOG.md` — release and unreleased development changes;
+- `CONTRIBUTING.md` — contribution and quality requirements;
 - `docs/` — current technical and experience documentation;
 - `docs/adr/` — architecture decision records;
-- `docs/GERMAN_TRANSLATION.md` — approved German terminology, catalog files and runtime loading.
-- `docs/adr/0032-translation-artifact-integrity.md` — deterministic PO-to-MO build and release boundary.
-- `docs/adr/0033-product-identity.md` — official product name, tagline and Free/Pro family.
-- `docs/LOCALIZATION_GUIDE.md` — context, placeholder, plural and escaping rules.
-- `docs/TRANSLATOR_NOTES.md` — product terminology and translation guidance.
-- `docs/INTERNATIONALIZATION_AUDIT.md` — Sprint 9 Part 3.1 runtime string audit and staged localization boundary.
-- `docs/PRODUCT_LANGUAGE.md` — approved English terminology, tone and German target language.
-- `docs/SPRINT_8_PART_5_4_FINAL_DISTRIBUTION_SAFETY_REVIEW.md` — final Distribution invariants and Keeper smoke-test gate.
+- `docs/adr/0032-translation-artifact-integrity.md` — deterministic PO-to-MO build and release boundary;
+- `docs/adr/0033-product-identity.md` — official product name, tagline and Free/Pro family;
+- `docs/GERMAN_TRANSLATION.md` — approved German terminology, catalog files and runtime loading;
+- `docs/INTERNATIONALIZATION_AUDIT.md` — Sprint 9 Part 3.1 runtime string audit and staged localization boundary;
+- `docs/LOCALIZATION_GUIDE.md` — context, placeholder, plural and escaping rules;
+- `docs/PRODUCT_LANGUAGE.md` — approved English terminology, tone and German target language;
+- `docs/SPRINT_8_PART_5_4_FINAL_DISTRIBUTION_SAFETY_REVIEW.md` — final Distribution invariants and Keeper smoke-test gate;
+- `docs/TRANSLATOR_NOTES.md` — product terminology and translation guidance;
+- `MANIFEST.md` — product philosophy and identity principles;
 
 ## Credits
 
@@ -80,7 +82,7 @@ Originally conceived from a real-world business need by Michael Sczaszny.
 
 Designed, architected and developed collaboratively with ChatGPT (OpenAI).
 
-Made with ❤️ in Austria.
+Made in Austria by MJS-Productions.
 
 ## Philosophy
 

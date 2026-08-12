@@ -9,6 +9,14 @@
 - Remaining inventory uses correct singular and plural wording.
 - Internal event identifiers are no longer shown in the administrator-facing Activity list.
 
+## 1.0.1 - 2026-07-26 — Distribution Context Update
+
+### Changed
+- Successful Distribution results now show the source Pool name.
+- Remaining inventory is presented as an explicit label.
+- Singular and plural wording is handled correctly for one or multiple remaining One-Time Codes.
+- German translations now display `Pool: …` and `Verbleibender Bestand: …`.
+
 ## 1.0.0 - 2026-07-26 — Initial Stable Release
 
 ### Added
@@ -51,7 +59,6 @@
 - Corrected rollback confirmation to the all-or-nothing import rule.
 - Hid Cron cleanup guidance when Activity retention is set to indefinite.
 - Removed implementation jargon from administrator-facing Distribution guidance.
-
 
 ## 0.9.3-alpha - 2026-07-16 — The German Experience
 
@@ -144,7 +151,7 @@
 
 ### Fixed
 - Prevented original and replay redirects from racing to consume the same one-time Distribution result token.
-- Give each racing replay an independent short-lived delivery token for the same already claimed voucher.
+- Gave each racing replay an independent short-lived delivery token for the same already claimed voucher.
 - Prevented rapid replay requests from overwriting and hiding a successfully assigned voucher result.
 - Replaced the shared per-user Distribution transient with unique owner-scoped, consume-once result tokens.
 - Added replay recovery, multi-tab result isolation and protected direct presentation when result persistence fails.

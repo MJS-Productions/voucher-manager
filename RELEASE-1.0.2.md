@@ -19,3 +19,5 @@ No database schema migration is introduced. Existing activity records remain rea
 
 - WordPress 6.5 or newer
 - PHP 8.1 or newer
+
+Made in Austria by MJS-Productions.
