@@ -389,6 +389,10 @@ msgid "Distribute Code"
 msgstr "Code ausgeben"
 
 #: templates/admin/distribution.php
+msgid "Distribute another One-Time Code"
+msgstr "Weiteren Einmalcode ausgeben"
+
+#: templates/admin/distribution.php
 msgid "Distribute next available One-Time Code"
 msgstr "Nächsten verfügbaren Einmalcode ausgeben"
 

@@ -60,6 +60,11 @@ foreach ( $distributable_rows as $row ) {
 					<p class="voucher-manager__result-pool"><?php echo esc_html( $view->pool_message( $result_pool_name ) ); ?></p>
 				<?php endif; ?>
 				<p class="voucher-manager__result-inventory"><?php echo esc_html( $view->remaining_message( $remaining ) ); ?></p>
+				<p>
+					<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-distribution', 'pool_id' => absint( $result['pool_id'] ?? 0 ) ), admin_url( 'admin.php' ) ) ); ?>">
+						<?php echo esc_html__( 'Distribute another One-Time Code', 'voucher-manager' ); ?>
+					</a>
+				</p>
 			</div>
 			<script>
 			(function () {
@@ -86,6 +91,7 @@ foreach ( $distributable_rows as $row ) {
 		<?php endif; ?>
 	<?php endif; ?>
 
+	<?php if ( ! $has_successful_result ) : ?>
 	<div class="voucher-manager__distribution-grid">
 		<div class="voucher-manager__card voucher-manager__form">
 			<h2><?php echo esc_html__( 'Distribute next available One-Time Code', 'voucher-manager' ); ?></h2>
@@ -129,4 +135,5 @@ foreach ( $distributable_rows as $row ) {
 			</ul>
 		</div>
 	</div>
+	<?php endif; ?>
 </div>

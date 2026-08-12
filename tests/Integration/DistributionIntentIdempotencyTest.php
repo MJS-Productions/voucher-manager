@@ -118,6 +118,14 @@ $assert(
 );
 
 $assert(
+	str_contains( $admin_source, '$has_successful_result = is_array( $result )' )
+	&& str_contains( $admin_source, 'if ( ! $has_successful_result )' )
+	&& str_contains( $template_source, 'if ( ! $has_successful_result )' )
+	&& str_contains( $template_source, 'Distribute another One-Time Code' ),
+	'A successful one-time result must not immediately render a fresh Distribution form or intent; another distribution requires an explicit new action.'
+);
+
+$assert(
 	str_contains( $template_source, 'class="voucher-manager__distribution-form"' )
 	&& is_string( $admin_assets )
 	&& str_contains( $admin_assets, "assets/js/admin.js" )

@@ -96,15 +96,23 @@ final class DistributionAdmin {
 			}
 		}
 
-		$view         = $this->view;
-		$intent_token = $this->boundary->execute(
-			fn(): string => $this->intents->create( get_current_user_id() ),
-			'',
-			array(
-				'action' => 'distribution.intent_create',
-				'source' => 'manual',
-			)
-		);
+		$view = $this->view;
+
+		$has_successful_result = is_array( $result )
+			&& ! empty( $result['success'] )
+			&& is_string( $result['code'] ?? null );
+
+		$intent_token = '';
+		if ( ! $has_successful_result ) {
+			$intent_token = $this->boundary->execute(
+				fn(): string => $this->intents->create( get_current_user_id() ),
+				'',
+				array(
+					'action' => 'distribution.intent_create',
+					'source' => 'manual',
+				)
+			);
+		}
 
 		$template = VOUCHER_MANAGER_PATH . 'templates/admin/distribution.php';
 
