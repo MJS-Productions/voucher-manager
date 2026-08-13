@@ -21,7 +21,7 @@ Every great project starts with a single line.
 
 **Simple things deserve professional solutions.**
 
-Designed and developed in Austria.
+Designed and developed in Austria by MJS-Production.
 
 
 ## Product identity
