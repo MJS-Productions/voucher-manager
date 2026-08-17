@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 1.0.4 - 2026-08-17 — Import Activity Pool Context Fix
+
+### Fixed
+- Newly completed Import entries in Activity history now record and display the Pool name instead of the internal Pool ID.
+- Existing Activity entries without a stored Pool name retain the previous Pool ID fallback.
+
+
 ## 1.0.3 - 2026-08-12 — Distribution Result Boundary Fix
 
 ### Changed

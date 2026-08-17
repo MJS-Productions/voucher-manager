@@ -62,10 +62,23 @@ final class ImportService {
 			}
 			$skipped = max( 0, $total - $invalid - $imported );
 			$this->imports->complete( $import_id, $total, $imported, $skipped, $invalid );
+			$import_record = $this->imports->find( $import_id );
+			$pool_name     = null === $import_record ? '' : trim( $import_record->pool_name() );
+			$context       = array(
+				'import_id' => $import_id,
+				'pool_id'   => $pool_id,
+				'imported'  => $imported,
+				'skipped'   => $skipped,
+				'invalid'   => $invalid,
+			);
+			if ( '' !== $pool_name ) {
+				$context['pool_name'] = $pool_name;
+			}
+
 			$this->logs->add(
 				OperationalEvent::IMPORT_COMPLETED->value,
 				'Code import completed.',
-				array( 'import_id' => $import_id, 'pool_id' => $pool_id, 'imported' => $imported, 'skipped' => $skipped, 'invalid' => $invalid )
+				$context
 			);
 			return new ImportResult( $import_id, $total, $imported, $skipped, $invalid );
 		} catch ( Throwable $exception ) {

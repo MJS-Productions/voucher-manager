@@ -145,7 +145,23 @@ final class MemoryImportRepository implements ImportRepository {
     }
 
     public function recent(int $limit = 20): array { return []; }
-    public function find(int $id): ?ImportRecord { return null; }
+    public function find(int $id): ?ImportRecord {
+        $record = $this->records[$id] ?? null;
+        if (null === $record) { return null; }
+        return new ImportRecord(
+            $id,
+            (int) $record['pool_id'],
+            'Golden Path Pool',
+            (string) $record['filename'],
+            (string) $record['file_type'],
+            (string) $record['status'],
+            (int) ($record['total'] ?? 0),
+            (int) ($record['imported'] ?? 0),
+            (int) ($record['skipped'] ?? 0),
+            (int) ($record['invalid'] ?? 0),
+            '2026-08-17 00:00:00'
+        );
+    }
     public function mark_rolled_back(int $id): bool { $this->records[$id]['status'] = 'rolled_back'; return true; }
 }
 
@@ -255,6 +271,8 @@ try {
 
     $eventTypes = array_column($logs->entries, 'event_type');
     $assert(in_array('import.completed', $eventTypes, true), 'Import completion must be logged.');
+    $importLog = $logs->entries[0] ?? null;
+    $assert('Golden Path Pool' === ($importLog['context']['pool_name'] ?? null), 'Import completion must preserve the Pool name in Activity context.');
     $assert(2 === count(array_filter($eventTypes, static fn(string $type): bool => 'distribution.completed' === $type)), 'Each successful distribution must be logged.');
     $assert(in_array('distribution.empty', $eventTypes, true), 'Empty distribution must be logged.');
 

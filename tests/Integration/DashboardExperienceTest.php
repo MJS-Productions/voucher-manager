@@ -132,6 +132,20 @@ $assert(
 	'Failed destructive lifecycle events should have an error tone.'
 );
 $assert(
+	'Pool: Campaign Codes · 5 One-Time Codes added · 3 skipped · 2 invalid' === $view->activity_detail(
+		'import.completed',
+		array(
+			'pool_id'   => 6,
+			'pool_name' => 'Campaign Codes',
+			'imported'  => 5,
+			'skipped'   => 3,
+			'invalid'   => 2,
+			'code'      => 'MUST-NOT-APPEAR',
+		)
+	),
+	'Completed imports should show the Pool name and a concise privacy-safe result summary.'
+);
+$assert(
 	'Pool #6 · 5 One-Time Codes added · 3 skipped · 2 invalid' === $view->activity_detail(
 		'import.completed',
 		array(
@@ -139,10 +153,9 @@ $assert(
 			'imported' => 5,
 			'skipped'  => 3,
 			'invalid'  => 2,
-			'code'     => 'MUST-NOT-APPEAR',
 		)
 	),
-	'Completed imports should show a concise privacy-safe result summary.'
+	'Legacy completed imports without stored Pool names should retain the Pool ID fallback.'
 );
 
 $assert(

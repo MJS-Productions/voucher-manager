@@ -109,7 +109,13 @@ final class DashboardViewModel {
 			$invalid  = isset( $context['invalid'] ) ? absint( $context['invalid'] ) : 0;
 			$parts    = array();
 
-			if ( 0 < $pool_id ) {
+			if ( '' !== $pool_name ) {
+				$parts[] = sprintf(
+					/* translators: %s: Pool name */
+					__( 'Pool: %s', 'voucher-manager' ),
+					$pool_name
+				);
+			} elseif ( 0 < $pool_id ) {
 				$parts[] = sprintf(
 					/* translators: %d: internal pool ID */
 					__( 'Pool #%d', 'voucher-manager' ),

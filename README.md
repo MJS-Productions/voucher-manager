@@ -5,10 +5,10 @@ Professional One-Time Code Management for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Stable Release  
-**Current release:** `1.0.3` — Distribution Result Boundary Fix
-**Previous release:** `1.0.2` — Activity Pool Context Fix
+**Current release:** `1.0.4` — Import Activity Pool Context Fix
+**Previous release:** `1.0.3` — Distribution Result Boundary Fix
 
-`1.0.3` hardens manual Distribution against accidental rapid resubmission by separating a completed result from the next Distribution form and updates the Dashboard credit.
+`1.0.4` records and displays the Pool name for newly completed Import entries in Activity history while preserving the Pool ID fallback for existing entries.
 
 ## Current capabilities
 
