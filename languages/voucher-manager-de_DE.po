@@ -164,7 +164,7 @@ msgstr "Alle Einmalcode-Einträge in diesem Pool"
 
 #: templates/admin/import-rollback-confirmation.php
 msgid "All One-Time Codes added by this import will be permanently removed. If any of them has already been distributed, the rollback is blocked and no codes are removed."
-msgstr "Alle durch diesen Import hinzugefügten Einmalcodes werden dauerhaft entfernt. Wurde bereits einer davon ausgegeben, wird der Rollback blockiert und es werden keine Codes entfernt."
+msgstr "Alle durch diesen Import hinzugefügten Einmalcodes werden dauerhaft entfernt. Wurde bereits einer davon ausgegeben, kann der Import nicht rückgängig gemacht werden und es werden keine Einmalcodes entfernt."
 
 #: src/Admin/OperationalActivityViewModel.php
 msgid "All activity"
@@ -288,7 +288,7 @@ msgstr "Vor dem Aktivieren bestätigen, dass die dauerhafte Löschung bei der De
 
 #: templates/admin/import.php
 msgid "Confirm the rollback acknowledgement before continuing."
-msgstr "Vor dem Fortfahren die Rollback-Bestätigung aktivieren."
+msgstr "Vor dem Fortfahren bestätigen, dass der Import rückgängig gemacht werden soll."
 
 #: templates/admin/settings.php
 msgid "Control operational data retention and the explicit uninstall boundary."
@@ -501,8 +501,8 @@ msgstr[0] "Ich verstehe, dass dadurch der eine durch diesen Import hinzugefügte
 msgstr[1] "Ich verstehe, dass dadurch alle %d durch diesen Import hinzugefügten Einmalcodes dauerhaft entfernt werden."
 
 #: templates/admin/settings.php
-msgid "I understand that uninstalling the plugin will permanently delete all Pools, Imports, Codes and Activity."
-msgstr "Ich verstehe, dass die Deinstallation des Plugins alle Pools, Importe, Codes und Aktivitäten dauerhaft löscht."
+msgid "I understand that uninstalling the plugin will permanently delete all Pools, Imports, One-Time Codes and Activity."
+msgstr "Ich verstehe, dass die Deinstallation des Plugins alle Pools, Importe, Einmalcodes und Aktivitäten dauerhaft löscht."
 
 #: src/Admin/InventoryViewModel.php templates/admin/inventory.php
 msgid "Import #%1$d — %2$s"
@@ -554,7 +554,7 @@ msgstr "Import fehlgeschlagen"
 
 #: src/Admin/DashboardViewModel.php
 msgid "Import rollback blocked"
-msgstr "Import-Rollback blockiert"
+msgstr "Import konnte nicht rückgängig gemacht werden"
 
 #: src/Admin/DashboardViewModel.php
 msgid "Import rolled back"
@@ -918,11 +918,11 @@ msgstr "Import rückgängig machen"
 
 #: templates/admin/import.php
 msgid "Rollback is unavailable because codes from this import have already been assigned. No codes were removed."
-msgstr "Der Rollback ist nicht verfügbar, weil bereits Codes aus diesem Import ausgegeben wurden. Es wurden keine Codes entfernt."
+msgstr "Der Import kann nicht rückgängig gemacht werden, weil bereits Einmalcodes daraus ausgegeben wurden. Es wurden keine Einmalcodes entfernt."
 
 #: src/Admin/ImportViewModel.php
 msgid "Rolled back"
-msgstr "Zurückgerollt"
+msgstr "Rückgängig gemacht"
 
 #: templates/admin/settings.php
 msgid "Save settings"
@@ -1014,11 +1014,11 @@ msgstr "Diese Ausgabeanfrage wurde bereits verwendet oder ist abgelaufen. Es wur
 
 #: src/Admin/OperationalActivityViewModel.php
 msgid "This import contains assigned One-Time Codes and cannot be rolled back safely."
-msgstr "Dieser Import enthält ausgegebene Einmalcodes und kann nicht sicher zurückgerollt werden."
+msgstr "Dieser Import enthält ausgegebene Einmalcodes und kann deshalb nicht rückgängig gemacht werden."
 
 #: templates/admin/import.php
 msgid "This import is not available for rollback."
-msgstr "Dieser Import ist nicht für einen Rollback verfügbar."
+msgstr "Dieser Import kann nicht rückgängig gemacht werden."
 
 #: templates/admin/pool-danger-zone.php
 msgid "This permanently deletes the pool, %1$s and %2$s."
@@ -1117,8 +1117,8 @@ msgid "What happens during import"
 msgstr "Was beim Import geschieht"
 
 #: src/Admin/SettingsViewModel.php
-msgid "When enabled, uninstalling Voucher Manager will permanently delete all Pools, Imports, Codes, Activity and plugin settings. Deactivation never deletes data."
-msgstr "Wenn diese Option aktiviert ist, löscht die Deinstallation von Voucher Manager dauerhaft alle Pools, Importe, Codes, Aktivitäten und Plugin-Einstellungen. Beim Deaktivieren werden niemals Daten gelöscht."
+msgid "When enabled, uninstalling Voucher Manager will permanently delete all Pools, Imports, One-Time Codes, Activity and plugin settings. Deactivation never deletes data."
+msgstr "Wenn diese Option aktiviert ist, löscht die Deinstallation von Voucher Manager dauerhaft alle Pools, Importe, Einmalcodes, Aktivitäten und Plugin-Einstellungen. Beim Deaktivieren werden niemals Daten gelöscht."
 
 #: templates/admin/dashboard.php
 msgid "WordPress"

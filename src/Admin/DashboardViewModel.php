@@ -142,6 +142,14 @@ final class DashboardViewModel {
 			return implode( ' · ', $parts );
 		}
 
+		if ( '' !== $pool_name ) {
+			return sprintf(
+				/* translators: %s: Pool name */
+				__( 'Pool: %s', 'voucher-manager' ),
+				$pool_name
+			);
+		}
+
 		if ( 0 < $pool_id ) {
 			return sprintf(
 				/* translators: %d: internal pool ID */

@@ -61,7 +61,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<label class="voucher-manager__settings-checkbox voucher-manager__settings-confirmation">
 				<input type="checkbox" name="confirm_delete_data_on_uninstall" value="1">
-				<span><?php echo esc_html__( 'I understand that uninstalling the plugin will permanently delete all Pools, Imports, Codes and Activity.', 'voucher-manager' ); ?></span>
+				<span><?php echo esc_html__( 'I understand that uninstalling the plugin will permanently delete all Pools, Imports, One-Time Codes and Activity.', 'voucher-manager' ); ?></span>
 			</label>
 
 			<p class="description"><?php echo esc_html__( 'Deactivating Voucher Manager never deletes data. This setting affects uninstall only.', 'voucher-manager' ); ?></p>

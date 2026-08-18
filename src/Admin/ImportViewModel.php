@@ -41,8 +41,10 @@ final class ImportViewModel {
 		);
 	}
 
-	public function can_review_rollback( ImportRecord $import ): bool {
-		return 'completed' === $import->status() && 0 < $import->imported_rows();
+	public function can_review_rollback( ImportRecord $import, int $assigned_count = 0 ): bool {
+		return 'completed' === $import->status()
+			&& 0 < $import->imported_rows()
+			&& 0 === $assigned_count;
 	}
 	/**
 	 * Return a requested destination pool only when it exists in the loaded inventory rows.

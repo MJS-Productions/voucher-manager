@@ -120,6 +120,13 @@ $assert(
 	'Pool deletion should have a readable label.'
 );
 $assert(
+	'Pool: Retired Campaign' === $view->activity_detail(
+		'pool.deleted',
+		array( 'pool_id' => 12, 'pool_name' => 'Retired Campaign' )
+	),
+	'Pool deletion detail should preserve the Pool name instead of exposing only the internal ID.'
+);
+$assert(
 	'Pool deletion failed' === $view->activity_label( 'pool.delete_failed' ),
 	'Failed pool deletion should have a readable label.'
 );

@@ -4,6 +4,7 @@
 /** @var array<\VoucherManager\Domain\Import\ImportRecord> $imports */
 /** @var \VoucherManager\Admin\ImportViewModel $view_model */
 /** @var int $selected_pool_id */
+/** @var array<int,int> $assigned_counts */
 declare(strict_types=1);
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_notice'] ) ) : '';
@@ -136,7 +137,7 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 		<td><?php echo esc_html( $view_model->result_summary( $import ) ); ?></td>
 		<td><span class="voucher-manager__badge voucher-manager__badge--<?php echo esc_attr( $tone ); ?>"><?php echo esc_html( $view_model->status_label( $import ) ); ?></span></td>
 		<td><?php echo esc_html( mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $import->created_at() . ' UTC', true ) ); ?></td>
-		<td><?php if ( $view_model->can_review_rollback( $import ) ) : ?><a class="voucher-manager__delete" href="<?php echo esc_url( $review_url ); ?>"><?php echo esc_html__( 'Undo import', 'voucher-manager' ); ?></a><?php else : ?>—<?php endif; ?></td>
+		<td><?php if ( $view_model->can_review_rollback( $import, $assigned_counts[ $import->id() ] ?? 0 ) ) : ?><a class="voucher-manager__delete" href="<?php echo esc_url( $review_url ); ?>"><?php echo esc_html__( 'Undo import', 'voucher-manager' ); ?></a><?php else : ?>—<?php endif; ?></td>
 	</tr>
 	<?php endforeach; ?>
 	</tbody></table></div>

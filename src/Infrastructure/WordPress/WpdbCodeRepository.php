@@ -45,6 +45,44 @@ final class WpdbCodeRepository implements CodeRepository {
 		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE import_id = %d AND status != %s", $import_id, CodeStatus::AVAILABLE->value ) );
 	}
 
+	/**
+	 * Return assigned-code counts for a set of import IDs.
+	 *
+	 * @param array<int,int> $import_ids Import IDs.
+	 * @return array<int,int> Assigned counts keyed by import ID.
+	 */
+	public function assigned_counts_by_import( array $import_ids ): array {
+		global $wpdb;
+
+		$ids = array_values( array_unique( array_filter( array_map( 'absint', $import_ids ) ) ) );
+		if ( array() === $ids ) {
+			return array();
+		}
+
+		$counts = array_fill_keys( $ids, 0 );
+		$table  = $this->table();
+		$in     = implode( ', ', array_fill( 0, count( $ids ), '%d' ) );
+		$args   = array_merge( $ids, array( CodeStatus::AVAILABLE->value ) );
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$rows = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT import_id, COUNT(*) AS assigned_count FROM {$table} WHERE import_id IN ({$in}) AND status != %s GROUP BY import_id",
+				$args
+			),
+			ARRAY_A
+		);
+
+		foreach ( is_array( $rows ) ? $rows : array() as $row ) {
+			$import_id = isset( $row['import_id'] ) ? absint( $row['import_id'] ) : 0;
+			if ( 0 < $import_id && array_key_exists( $import_id, $counts ) ) {
+				$counts[ $import_id ] = isset( $row['assigned_count'] ) ? absint( $row['assigned_count'] ) : 0;
+			}
+		}
+
+		return $counts;
+	}
+
 	public function claim_next_available( int $pool_id ): ?array {
 		( new CodeStateMachine() )->assert_transition( CodeStatus::AVAILABLE, CodeStatus::ASSIGNED );
 

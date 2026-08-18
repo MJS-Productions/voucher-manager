@@ -501,7 +501,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: templates/admin/settings.php
-msgid "I understand that uninstalling the plugin will permanently delete all Pools, Imports, Codes and Activity."
+msgid "I understand that uninstalling the plugin will permanently delete all Pools, Imports, One-Time Codes and Activity."
 msgstr ""
 
 #: src/Admin/InventoryViewModel.php templates/admin/inventory.php
@@ -1117,7 +1117,7 @@ msgid "What happens during import"
 msgstr ""
 
 #: src/Admin/SettingsViewModel.php
-msgid "When enabled, uninstalling Voucher Manager will permanently delete all Pools, Imports, Codes, Activity and plugin settings. Deactivation never deletes data."
+msgid "When enabled, uninstalling Voucher Manager will permanently delete all Pools, Imports, One-Time Codes, Activity and plugin settings. Deactivation never deletes data."
 msgstr ""
 
 #: templates/admin/dashboard.php

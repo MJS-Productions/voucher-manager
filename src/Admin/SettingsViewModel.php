@@ -39,7 +39,7 @@ final class SettingsViewModel {
 	}
 
 	public function uninstall_warning(): string {
-		return __( 'When enabled, uninstalling Voucher Manager will permanently delete all Pools, Imports, Codes, Activity and plugin settings. Deactivation never deletes data.', 'voucher-manager' );
+		return __( 'When enabled, uninstalling Voucher Manager will permanently delete all Pools, Imports, One-Time Codes, Activity and plugin settings. Deactivation never deletes data.', 'voucher-manager' );
 	}
 
 	public function defaults(): Settings {

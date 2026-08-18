@@ -4,7 +4,7 @@ Tags: one-time codes, vouchers, inventory, code distribution
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,13 @@ Yes. Voucher Manager includes English and German and uses the WordPress localiza
 7. Settings for activity retention and data management.
 
 == Changelog ==
+
+= 1.0.5 =
+* Preserved the Pool name in Activity when a Pool is permanently deleted.
+* Hide the Undo import action when an Import already contains distributed One-Time Codes.
+* Aligned German Import undo wording with "rückgängig machen".
+* Aligned uninstall copy with the established One-Time Code / Einmalcode terminology.
+* No database schema migration is required.
 
 = 1.0.4 =
 * Added the Pool name to newly completed Import entries in Activity history.

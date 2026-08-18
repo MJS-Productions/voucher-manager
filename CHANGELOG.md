@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 1.0.5 - 2026-08-18 — Activity and Terminology Consistency
+
+### Changed
+- Completed Imports only offer the undo action when no One-Time Codes from that Import have been distributed.
+- German Import undo wording now consistently uses the established `rückgängig machen` terminology.
+- Uninstall guidance uses `One-Time Codes` / `Einmalcodes` when referring to managed data objects.
+
+### Fixed
+- Pool-deletion Activity now preserves and displays the Pool name instead of exposing only the internal Pool ID.
+
 ## 1.0.4 - 2026-08-17 — Import Activity Pool Context Fix
 
 ### Fixed

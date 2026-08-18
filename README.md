@@ -5,10 +5,10 @@ Professional One-Time Code Management for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Stable Release  
-**Current release:** `1.0.4` — Import Activity Pool Context Fix
-**Previous release:** `1.0.3` — Distribution Result Boundary Fix
+**Current release:** `1.0.5` — Activity and Terminology Consistency
+**Previous release:** `1.0.4` — Import Activity Pool Context Fix
 
-`1.0.4` records and displays the Pool name for newly completed Import entries in Activity history while preserving the Pool ID fallback for existing entries.
+`1.0.5` preserves Pool names for Pool-deletion Activity, hides unavailable Import rollback actions and aligns German Import and uninstall terminology with the established product language.
 
 ## Current capabilities
 

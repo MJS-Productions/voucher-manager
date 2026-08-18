@@ -30,6 +30,7 @@ final class ImportAdmin {
 
 	private WpdbPoolRepository $pools;
 	private WpdbImportRepository $imports;
+	private WpdbCodeRepository $codes;
 	private ImportService $service;
 	private OperationalLogger $logger;
 	private ErrorBoundary $boundary;
@@ -39,9 +40,10 @@ final class ImportAdmin {
 		$this->logger   = new OperationalLogger( new WpdbLogRepository() );
 		$this->pools    = new WpdbPoolRepository();
 		$this->imports  = new WpdbImportRepository();
+		$this->codes    = new WpdbCodeRepository();
 		$this->service  = new ImportService(
 			$this->imports,
-			new WpdbCodeRepository(),
+			$this->codes,
 			$this->logger,
 			new CodeFileParser()
 		);
@@ -97,6 +99,16 @@ final class ImportAdmin {
 			array(),
 			array( 'action' => 'import.render_pool_inventory', 'source' => 'manual' )
 		);
+		$import_ids = array_map(
+			static fn( $import ): int => $import->id(),
+			$imports
+		);
+		$assigned_counts = $this->boundary->execute(
+			fn(): array => $this->codes->assigned_counts_by_import( $import_ids ),
+			array(),
+			array( 'action' => 'import.render_rollback_availability', 'source' => 'manual' )
+		);
+
 		$view_model        = $this->view_model;
 		$requested_pool_id = isset( $_GET['pool_id'] ) ? absint( $_GET['pool_id'] ) : 0;
 		$selected_pool_id  = $view_model->selected_pool_id( $requested_pool_id, $pool_rows );

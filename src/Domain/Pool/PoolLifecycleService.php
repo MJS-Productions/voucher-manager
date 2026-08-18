@@ -21,14 +21,14 @@ final class PoolLifecycleService {
 	}
 
 	/** @return array{deleted_code_count:int,deleted_import_count:int} */
-	public function delete_pool( int $pool_id ): array {
+	public function delete_pool( int $pool_id, string $pool_name = '' ): array {
 		try {
 			$deleted = $this->repository->delete_pool_with_data( $pool_id );
 		} catch ( Throwable $exception ) {
-			$this->logger->error( OperationalEvent::POOL_DELETE_FAILED, 'Pool deletion failed and was rolled back.', array( 'pool_id' => $pool_id, 'exception_class' => $exception::class ) );
+			$this->logger->error( OperationalEvent::POOL_DELETE_FAILED, 'Pool deletion failed and was rolled back.', array( 'pool_id' => $pool_id, 'pool_name' => $pool_name, 'exception_class' => $exception::class ) );
 			throw $exception;
 		}
-		$this->logger->info( OperationalEvent::POOL_DELETED, 'Pool and associated data were permanently deleted.', array( 'pool_id' => $pool_id, 'deleted_code_count' => $deleted['deleted_code_count'], 'deleted_import_count' => $deleted['deleted_import_count'] ) );
+		$this->logger->info( OperationalEvent::POOL_DELETED, 'Pool and associated data were permanently deleted.', array( 'pool_id' => $pool_id, 'pool_name' => $pool_name, 'deleted_code_count' => $deleted['deleted_code_count'], 'deleted_import_count' => $deleted['deleted_import_count'] ) );
 		return $deleted;
 	}
 }

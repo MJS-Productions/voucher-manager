@@ -26,7 +26,8 @@ $view = new VoucherManager\Admin\ImportViewModel();
 $assert( 'Completed' === $view->status_label( $record ), 'Completed status label changed.' );
 $assert( 'success' === $view->status_tone( $record ), 'Completed status tone changed.' );
 $assert( str_contains( $view->result_summary( $record ), '8 added' ) && str_contains( $view->result_summary( $record ), '12 rows processed' ), 'Result summary must explain added and processed counts.' );
-$assert( $view->can_review_rollback( $record ), 'Completed imports with added codes must expose rollback review.' );
+$assert( $view->can_review_rollback( $record ), 'Completed imports with added codes must expose rollback review when no codes are assigned.' );
+$assert( ! $view->can_review_rollback( $record, 1 ), 'Completed imports with assigned codes must not expose rollback review.' );
 $rolled_back = new VoucherManager\Domain\Import\ImportRecord( 6, 7, 'Summer', 'old.txt', 'txt', 'rolled_back', 2, 2, 0, 0, '2026-07-13 10:00:00' );
 $assert( ! $view->can_review_rollback( $rolled_back ), 'Rolled-back imports must not offer rollback again.' );
 
@@ -51,6 +52,7 @@ $assert( str_contains( $template, 'available, %3$d total' ), 'Pool selection mus
 $assert( str_contains( $pools_template, "'page'    => 'voucher-manager-import'" ) && str_contains( $pools_template, "'pool_id' => \$pool_id" ), 'Pool Import Codes actions must carry the source pool as navigation context.' );
 $assert( str_contains( $admin, '$requested_pool_id' ) && str_contains( $admin, 'selected_pool_id( $requested_pool_id, $pool_rows )' ), 'Import rendering must validate requested pool context against loaded pools.' );
 $assert( str_contains( $template, 'selected( $selected_pool_id, (int) $pool->id() )' ), 'The validated source pool must be preselected without locking the dropdown.' );
+$assert( str_contains( $admin, 'assigned_counts_by_import( $import_ids )' ) && str_contains( $template, '$assigned_counts[ $import->id() ] ?? 0' ), 'Recent imports must use assigned-code counts to hide rollback when the operation is guaranteed to be blocked.' );
 
 $assert( str_contains( $template, "'confirm-rollback'" ) && ! str_contains( $template, 'onclick="return confirm' ), 'Rollback must route through a dedicated review page without JavaScript confirm.' );
 $assert( ! str_contains( $template, 'wp_nonce_url' ) && ! str_contains( $template, "'action'=>'voucher_manager_rollback_import'" ), 'Import history must not expose destructive rollback as a GET action.' );
