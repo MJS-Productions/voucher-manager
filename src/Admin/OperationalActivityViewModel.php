@@ -59,7 +59,7 @@ final class OperationalActivityViewModel {
 				__( 'The deletion was rolled back. The pool data should remain intact; retry or review the WordPress error log.', 'voucher-manager' ),
 			'pool.available_codes_deleted',
 			'pool.deleted' =>
-				__( 'This was a permanent lifecycle action. No One-Time Code values were retained in Activity.', 'voucher-manager' ),
+				__( 'No One-Time Code values were retained in Activity.', 'voucher-manager' ),
 			default => '',
 		};
 	}

@@ -1045,8 +1045,8 @@ msgid "This pool is now empty. Import more One-Time Codes before the next distri
 msgstr "Dieser Pool ist jetzt leer. Vor der nächsten Ausgabe weitere Einmalcodes importieren."
 
 #: src/Admin/OperationalActivityViewModel.php
-msgid "This was a permanent lifecycle action. No One-Time Code values were retained in Activity."
-msgstr "Dies war eine dauerhafte Lebenszyklusaktion. In der Aktivitätshistorie wurden keine Einmalcode-Werte gespeichert."
+msgid "No One-Time Code values were retained in Activity."
+msgstr "In der Aktivitätshistorie wurden keine Einmalcode-Werte gespeichert."
 
 #: templates/admin/inventory.php templates/admin/pool-danger-zone.php templates/admin/pools.php
 msgid "Total One-Time Codes"
