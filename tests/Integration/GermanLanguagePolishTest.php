@@ -68,8 +68,16 @@ $assert(
 	'German Inventory status filter must use the approved short label Alle.'
 );
 
+$assert(
+	is_string( $po )
+	&& str_contains( $po, "msgid \"All imports\"\nmsgstr \"Alle\"" )
+	&& ! str_contains( $po, "msgid \"All imports\"\nmsgstr \"Alle Importe\"" ),
+	'German Inventory import filter must use the approved short label Alle.'
+);
+
 $forbidden_german = array(
 	'msgstr "Alle Status"',
+	'msgstr "Alle Importe"',
 	'in einer zukünftigen Pro-Erweiterung',
 	'Import zurückrollen',
 	'Import zurückgerollt',

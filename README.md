@@ -8,7 +8,7 @@ Professional One-Time Code Management for WordPress.
 **Current release:** `1.0.6` — German Inventory Filter Polish
 **Previous release:** `1.0.5` — Activity and Terminology Consistency
 
-`1.0.6` refines the German Inventory status filter label from `Alle Status` to the shorter and clearer `Alle`.
+`1.0.6` refines the German Inventory filter labels from `Alle Status` and `Alle Importe` to the shorter and clearer `Alle`.
 
 ## Current capabilities
 

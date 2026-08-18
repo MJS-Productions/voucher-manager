@@ -176,7 +176,7 @@ msgstr "Alle Ereignisse"
 
 #: templates/admin/inventory.php
 msgid "All imports"
-msgstr "Alle Importe"
+msgstr "Alle"
 
 #: templates/admin/activity.php
 msgid "All outcomes"

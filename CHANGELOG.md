@@ -5,7 +5,7 @@
 ## 1.0.6 - 2026-08-18 — German Inventory Filter Polish
 
 ### Changed
-- German Inventory status filtering now uses the shorter `Alle` option instead of `Alle Status`.
+- German Inventory filters now use the shorter `Alle` option instead of `Alle Status` and `Alle Importe`.
 
 ## 1.0.5 - 2026-08-18 — Activity and Terminology Consistency
 

@@ -7,11 +7,12 @@ Voucher Manager 1.0.6 is a small maintenance release that refines the German Inv
 ## Improvement
 
 - Changes the German status-filter option from `Alle Status` to the shorter and clearer `Alle`.
-- Leaves the English `All states` label unchanged.
+- Changes the German import-filter option from `Alle Importe` to the shorter and clearer `Alle`.
+- Leaves the English `All states` and `All imports` labels unchanged.
 
 ## Validation
 
-- Adds German language regression coverage for the approved Inventory filter wording.
+- Adds German language regression coverage for the approved Inventory filter wording for both Status and Import.
 - Requires the GitHub Quality Gate to pass before release packaging.
 
 ## Upgrade boundary
