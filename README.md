@@ -5,10 +5,10 @@ Professional One-Time Code Management for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Stable Release  
-**Current release:** `1.0.5` — Activity and Terminology Consistency
-**Previous release:** `1.0.4` — Import Activity Pool Context Fix
+**Current release:** `1.0.6` — German Inventory Filter Polish
+**Previous release:** `1.0.5` — Activity and Terminology Consistency
 
-`1.0.5` preserves Pool names for Pool-deletion Activity, hides unavailable Import rollback actions and aligns German Import and uninstall terminology with the established product language.
+`1.0.6` refines the German Inventory status filter label from `Alle Status` to the shorter and clearer `Alle`.
 
 ## Current capabilities
 

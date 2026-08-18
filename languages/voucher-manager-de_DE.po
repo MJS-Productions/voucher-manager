@@ -184,7 +184,7 @@ msgstr "Alle Ergebnisse"
 
 #: templates/admin/inventory.php
 msgid "All states"
-msgstr "Alle Status"
+msgstr "Alle"
 
 #: templates/admin/inventory.php
 msgid "Already distributed"

@@ -61,7 +61,15 @@ foreach ( $required_german as $translation ) {
 	);
 }
 
+$assert(
+	is_string( $po )
+	&& str_contains( $po, "msgid \"All states\"\nmsgstr \"Alle\"" )
+	&& ! str_contains( $po, "msgid \"All states\"\nmsgstr \"Alle Status\"" ),
+	'German Inventory status filter must use the approved short label Alle.'
+);
+
 $forbidden_german = array(
+	'msgstr "Alle Status"',
 	'in einer zukünftigen Pro-Erweiterung',
 	'Import zurückrollen',
 	'Import zurückgerollt',
