@@ -777,6 +777,22 @@ msgid "Pool Inventory"
 msgstr "Pool-Bestand"
 
 #: src/Admin/DashboardViewModel.php
+msgid "Pool created"
+msgstr "Pool erstellt"
+
+#: src/Admin/DashboardViewModel.php
+msgid "Pool updated"
+msgstr "Pool aktualisiert"
+
+#: src/Admin/DashboardViewModel.php
+msgid "Pool activated"
+msgstr "Pool aktiviert"
+
+#: src/Admin/DashboardViewModel.php
+msgid "Pool deactivated"
+msgstr "Pool deaktiviert"
+
+#: src/Admin/DashboardViewModel.php
 msgid "Pool deleted"
 msgstr "Pool gelöscht"
 

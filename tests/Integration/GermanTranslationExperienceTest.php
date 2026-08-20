@@ -49,6 +49,10 @@ $required_pairs = array(
 	'msgid "Danger Zone"' => 'msgstr "Gefahrenbereich"',
 	'msgid "Permanent deletion cannot be undone."' => 'msgstr "Die dauerhafte Löschung kann nicht rückgängig gemacht werden."',
 	'msgid "Pool"' => 'msgstr "Pool"',
+	'msgid "Pool created"' => 'msgstr "Pool erstellt"',
+	'msgid "Pool updated"' => 'msgstr "Pool aktualisiert"',
+	'msgid "Pool activated"' => 'msgstr "Pool aktiviert"',
+	'msgid "Pool deactivated"' => 'msgstr "Pool deaktiviert"',
 	'msgid "Remaining inventory: %d One-Time Code"' => 'msgstr[0] "Verbleibender Bestand: %d Einmalcode"',
 	'msgid "One-Time Code values are not stored in Activity history."' => 'msgstr "Einmalcode-Werte werden nicht in der Aktivitätshistorie gespeichert."',
 );
@@ -78,8 +82,8 @@ $assert(
 );
 
 $assert(
-	295 === substr_count( $po, "\nmsgid " ),
-	'German PO must contain exactly the reviewed 295 source entries in addition to its header.'
+	299 === substr_count( $po, "\nmsgid " ),
+	'German PO must contain exactly the reviewed 299 source entries in addition to its header.'
 );
 
 $catalog_body = preg_replace( '/\Amsgid ""\nmsgstr ""\n(?:".*"\n)+\n/sU', '', $po, 1 );

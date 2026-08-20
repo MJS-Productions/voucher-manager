@@ -151,6 +151,10 @@ final class OperationalActivityData {
 				'import.completed',
 				'import.rolled_back',
 				'distribution.completed',
+				'pool.created',
+				'pool.updated',
+				'pool.activated',
+				'pool.deactivated',
 			),
 			default   => array(),
 		};

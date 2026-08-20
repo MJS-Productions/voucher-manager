@@ -115,6 +115,18 @@ $assert(
 	),
 	'Available-code deletion should show the affected count without exposing One-Time Code values.'
 );
+$assert( 'Pool created' === $view->activity_label( 'pool.created' ), 'Pool creation should have a readable label.' );
+$assert( 'Pool updated' === $view->activity_label( 'pool.updated' ), 'Pool updates should have a readable label.' );
+$assert( 'Pool activated' === $view->activity_label( 'pool.activated' ), 'Pool activation should have a readable label.' );
+$assert( 'Pool deactivated' === $view->activity_label( 'pool.deactivated' ), 'Pool deactivation should have a readable label.' );
+$assert( 'success' === $view->activity_tone( 'pool.created' ), 'Pool creation should have a success tone.' );
+$assert( 'success' === $view->activity_tone( 'pool.updated' ), 'Pool updates should have a success tone.' );
+$assert( 'success' === $view->activity_tone( 'pool.activated' ), 'Pool activation should have a success tone.' );
+$assert( 'success' === $view->activity_tone( 'pool.deactivated' ), 'Pool deactivation should have a success tone.' );
+$assert(
+	'Pool: Campaign Pool' === $view->activity_detail( 'pool.created', array( 'pool_id' => 21, 'pool_name' => 'Campaign Pool' ) ),
+	'Pool lifecycle details should use the Pool name.'
+);
 $assert(
 	'Pool deleted' === $view->activity_label( 'pool.deleted' ),
 	'Pool deletion should have a readable label.'
@@ -180,8 +192,27 @@ $assert(
 );
 
 $admin_source = file_get_contents( $root . '/src/Admin/Admin.php' );
+$pool_admin_source = file_get_contents( $root . '/src/Admin/PoolAdmin.php' );
+$activity_data_source = file_get_contents( $root . '/src/Admin/OperationalActivityData.php' );
 $template_source = file_get_contents( $root . '/templates/admin/dashboard.php' );
 
+$assert(
+	is_string( $pool_admin_source )
+	&& str_contains( $pool_admin_source, 'OperationalEvent::POOL_CREATED' )
+	&& str_contains( $pool_admin_source, 'OperationalEvent::POOL_UPDATED' )
+	&& str_contains( $pool_admin_source, 'OperationalEvent::POOL_ACTIVATED' )
+	&& str_contains( $pool_admin_source, 'OperationalEvent::POOL_DEACTIVATED' )
+	&& str_contains( $pool_admin_source, 'is_active() !== $active' ),
+	'Pool creation, editing and both status-change paths must record Activity.'
+);
+$assert(
+	is_string( $activity_data_source )
+	&& str_contains( $activity_data_source, "'pool.created'" )
+	&& str_contains( $activity_data_source, "'pool.updated'" )
+	&& str_contains( $activity_data_source, "'pool.activated'" )
+	&& str_contains( $activity_data_source, "'pool.deactivated'" ),
+	'Pool lifecycle events must participate in success filtering.'
+);
 $assert(
 	is_string( $admin_source ) && str_contains( $admin_source, "__( 'Dashboard', 'voucher-manager' )" ),
 	'The duplicated submenu label should be renamed to Dashboard.'
