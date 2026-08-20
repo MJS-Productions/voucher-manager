@@ -11,6 +11,7 @@ namespace VoucherManager\Admin;
 
 use VoucherManager\Domain\Distribution\DistributionResult;
 use VoucherManager\Domain\Distribution\DistributionService;
+use VoucherManager\Domain\Log\OperationalEvent;
 use VoucherManager\Domain\Log\OperationalLogger;
 use VoucherManager\Infrastructure\WordPress\WpDistributionIntentStore;
 use VoucherManager\Infrastructure\WordPress\WpDistributionResultStore;
@@ -155,7 +156,8 @@ final class DistributionAdmin {
 				'action'  => 'distribution.execute',
 				'pool_id' => $pool_id,
 				'source'  => 'manual',
-			)
+			),
+			OperationalEvent::DISTRIBUTION_FAILED
 		);
 
 		$result_token = $this->results->store( $intent_token, $user_id, $result, $pool_id );

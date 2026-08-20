@@ -56,6 +56,13 @@ $assert(
 );
 
 $assert(
+	is_string( $admin )
+	&& str_contains( $admin, 'OperationalEvent::DISTRIBUTION_FAILED' )
+	&& strpos( $admin, 'OperationalEvent::DISTRIBUTION_FAILED' ) > strpos( $admin, '$this->service->distribute' ),
+	'Unexpected Distribution execution failures must use the dedicated failure event without changing post-claim service behavior.'
+);
+
+$assert(
 	is_string( $intent )
 	&& str_contains( $intent, 'TTL_SECONDS = 600' )
 	&& str_contains( $intent, 'bin2hex( random_bytes( 32 ) )' )

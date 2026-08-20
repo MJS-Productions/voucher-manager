@@ -102,7 +102,7 @@ $failure = $repository->events[1] ?? null;
 $assert( is_array( $failure ), 'The boundary should log an operational error.' );
 $assert(
 	OperationalEvent::ADMIN_ACTION_FAILED->value === $failure['event'],
-	'The boundary should use the stable admin failure event.'
+	'The boundary should use the stable admin failure event by default.'
 );
 $assert(
 	RuntimeException::class === $failure['context']['exception_class'],
@@ -115,6 +115,33 @@ $assert(
 $assert(
 	! str_contains( json_encode( $failure ), 'MUST-NOT-LOG' ),
 	'Sensitive context must not be persisted.'
+);
+
+$distribution_fallback = $boundary->execute(
+	static function (): string {
+		throw new RuntimeException( 'Distribution storage failure.' );
+	},
+	'distribution-fallback',
+	array(
+		'action'  => 'distribution.execute',
+		'pool_id' => 12,
+		'source'  => 'manual',
+	),
+	OperationalEvent::DISTRIBUTION_FAILED
+);
+
+$assert( 'distribution-fallback' === $distribution_fallback, 'The targeted boundary should return its safe fallback.' );
+
+$distribution_failure = $repository->events[2] ?? null;
+$assert( is_array( $distribution_failure ), 'The targeted boundary should log an operational error.' );
+$assert(
+	OperationalEvent::DISTRIBUTION_FAILED->value === $distribution_failure['event'],
+	'The targeted boundary should use the requested Distribution failure event.'
+);
+$assert( 12 === $distribution_failure['context']['pool_id'], 'Distribution failure should retain the Pool ID.' );
+$assert(
+	! str_contains( json_encode( $distribution_failure ), 'Distribution storage failure' ),
+	'Targeted boundary failures must not persist exception messages.'
 );
 
 $failing_repository = new class() implements LogRepository {
@@ -135,5 +162,5 @@ $resilient_logger->error(
 
 fwrite(
 	STDOUT,
-	"Operational logging OK: context sanitized, exceptions bounded, log failures contained." . PHP_EOL
+	"Operational logging OK: context sanitized, targeted failures supported, log failures contained." . PHP_EOL
 );
