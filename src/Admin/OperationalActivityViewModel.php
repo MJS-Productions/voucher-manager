@@ -74,6 +74,7 @@ final class OperationalActivityViewModel {
 			'import'       => __( 'Imports', 'voucher-manager' ),
 			'distribution' => __( 'Distribution', 'voucher-manager' ),
 			'pool'         => __( 'Pools', 'voucher-manager' ),
+			'settings'     => __( 'Settings', 'voucher-manager' ),
 			'admin'        => __( 'Administration', 'voucher-manager' ),
 			default        => __( 'All activity', 'voucher-manager' ),
 		};

@@ -131,7 +131,7 @@ final class OperationalActivityData {
 	}
 
 	private function normalize_family( string $family ): string {
-		return in_array( $family, array( 'all', 'import', 'distribution', 'pool', 'admin' ), true )
+		return in_array( $family, array( 'all', 'import', 'distribution', 'pool', 'settings', 'admin' ), true )
 			? $family
 			: 'all';
 	}
@@ -151,6 +151,7 @@ final class OperationalActivityData {
 				'import.completed',
 				'import.rolled_back',
 				'distribution.completed',
+				'settings.updated',
 				'pool.created',
 				'pool.updated',
 				'pool.activated',

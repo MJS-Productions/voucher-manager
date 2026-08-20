@@ -1261,3 +1261,11 @@ msgstr "Einstellungen"
 msgid "Professional One-Time Code Management for WordPress."
 msgstr "Professionelle Verwaltung von Einmalcodes für WordPress."
 
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: src/Admin/DashboardViewModel.php
+msgid "Settings updated"
+msgstr "Einstellungen aktualisiert"

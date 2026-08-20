@@ -9,8 +9,11 @@ declare(strict_types=1);
 
 namespace VoucherManager\Admin;
 
+use VoucherManager\Domain\Log\OperationalEvent;
+use VoucherManager\Domain\Log\OperationalLogger;
 use VoucherManager\Domain\Settings\Settings;
 use VoucherManager\Infrastructure\WordPress\WpSettingsRepository;
+use VoucherManager\Infrastructure\WordPress\WpdbLogRepository;
 use VoucherManager\Lifecycle\ActivityRetentionScheduler;
 
 /**
@@ -20,10 +23,12 @@ final class SettingsAdmin {
 
 	private WpSettingsRepository $repository;
 	private SettingsViewModel $view;
+	private OperationalLogger $logger;
 
 	public function __construct() {
 		$this->repository = new WpSettingsRepository();
 		$this->view       = new SettingsViewModel();
+		$this->logger     = new OperationalLogger( new WpdbLogRepository() );
 	}
 
 	public function register(): void {
@@ -82,7 +87,21 @@ final class SettingsAdmin {
 			)
 		);
 
-		$this->repository->save( $settings );
+		$retention_changed = $current->activity_retention_days() !== $settings->activity_retention_days();
+		$uninstall_behavior_changed = $current->delete_data_on_uninstall() !== $settings->delete_data_on_uninstall();
+		$saved = $this->repository->save( $settings );
+
+		if ( $saved && ( $retention_changed || $uninstall_behavior_changed ) ) {
+			$this->logger->info(
+				OperationalEvent::SETTINGS_UPDATED,
+				'Voucher Manager settings were updated.',
+				array(
+					'retention_changed'          => $retention_changed,
+					'uninstall_behavior_changed' => $uninstall_behavior_changed,
+				)
+			);
+		}
+
 		( new ActivityRetentionScheduler() )->reconcile( $settings );
 		$this->redirect( 'settings_saved' );
 	}

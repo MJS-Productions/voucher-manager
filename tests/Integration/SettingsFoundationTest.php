@@ -85,6 +85,9 @@ $assert( str_contains( $view->retention_description( 0 ), 'kept indefinitely' ),
 $admin_source    = file_get_contents( $root . '/src/Admin/SettingsAdmin.php' );
 $repository      = file_get_contents( $root . '/src/Infrastructure/WordPress/WpSettingsRepository.php' );
 $template_source = file_get_contents( $root . '/templates/admin/settings.php' );
+$activity_source = file_get_contents( $root . '/templates/admin/activity.php' );
+$activity_data   = file_get_contents( $root . '/src/Admin/OperationalActivityData.php' );
+$activity_view   = file_get_contents( $root . '/src/Admin/OperationalActivityViewModel.php' );
 $root_admin      = file_get_contents( $root . '/src/Admin/Admin.php' );
 $uninstall       = file_get_contents( $root . '/uninstall.php' );
 $plugin          = file_get_contents( $root . '/voucher-manager.php' );
@@ -105,6 +108,26 @@ $assert(
 	&& str_contains( $admin_source, "! \$current->delete_data_on_uninstall()" )
 	&& str_contains( $admin_source, 'uninstall_confirmation_required' ),
 	'Settings saves must enforce capability, nonce and explicit OFF-to-ON destructive consent.'
+);
+
+$assert(
+	is_string( $admin_source )
+	&& str_contains( $admin_source, 'OperationalEvent::SETTINGS_UPDATED' )
+	&& str_contains( $admin_source, '$retention_changed' )
+	&& str_contains( $admin_source, '$uninstall_behavior_changed' )
+	&& str_contains( $admin_source, '$saved && ( $retention_changed || $uninstall_behavior_changed )' ),
+	'Settings Activity must be written only after a successful persistence that actually changed a setting.'
+);
+
+$assert(
+	is_string( $activity_source )
+	&& str_contains( $activity_source, "'settings'" )
+	&& is_string( $activity_data )
+	&& str_contains( $activity_data, "'settings.updated'" )
+	&& str_contains( $activity_data, "'settings'" )
+	&& is_string( $activity_view )
+	&& str_contains( $activity_view, "'settings'     => __( 'Settings'" ),
+	'Settings Activity must be selectable as its own family and participate in success filtering.'
 );
 
 $assert(
@@ -141,4 +164,4 @@ $assert(
 	'Settings Foundation coverage must run before the release build.'
 );
 
-echo "Settings foundation OK: normalized retention, explicit uninstall consent and safe administration boundary verified.\n";
+echo "Settings foundation OK: normalized retention, explicit uninstall consent and Activity coverage verified.\n";

@@ -86,6 +86,8 @@ $assert(
 	'error' === $view->activity_tone( 'admin.action_failed' ),
 	'Unexpected admin failures should have an error tone.'
 );
+$assert( 'Settings updated' === $view->activity_label( 'settings.updated' ), 'Settings updates should have a readable label.' );
+$assert( 'success' === $view->activity_tone( 'settings.updated' ), 'Settings updates should have a success tone.' );
 $assert(
 	"Pool: Amazon Vouchers\n\nRemaining inventory: 2 One-Time Codes" === $view->activity_detail(
 		'distribution.completed',
@@ -207,11 +209,13 @@ $assert(
 );
 $assert(
 	is_string( $activity_data_source )
+	&& str_contains( $activity_data_source, "'settings.updated'" )
+	&& str_contains( $activity_data_source, "'settings'" )
 	&& str_contains( $activity_data_source, "'pool.created'" )
 	&& str_contains( $activity_data_source, "'pool.updated'" )
 	&& str_contains( $activity_data_source, "'pool.activated'" )
 	&& str_contains( $activity_data_source, "'pool.deactivated'" ),
-	'Pool lifecycle events must participate in success filtering.'
+	'Settings and Pool lifecycle events must participate in Activity family and success filtering.'
 );
 $assert(
 	is_string( $admin_source ) && str_contains( $admin_source, "__( 'Dashboard', 'voucher-manager' )" ),

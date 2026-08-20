@@ -22,6 +22,7 @@ enum OperationalEvent: string {
 	case DISTRIBUTION_EMPTY        = 'distribution.empty';
 	case DISTRIBUTION_FAILED       = 'distribution.failed';
 	case ADMIN_ACTION_FAILED       = 'admin.action_failed';
+	case SETTINGS_UPDATED          = 'settings.updated';
 	case POOL_CREATED              = 'pool.created';
 	case POOL_UPDATED              = 'pool.updated';
 	case POOL_ACTIVATED            = 'pool.activated';

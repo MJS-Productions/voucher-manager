@@ -1260,3 +1260,11 @@ msgstr ""
 #: voucher-manager.php
 msgid "Professional One-Time Code Management for WordPress."
 msgstr ""
+
+#: src/Admin/OperationalActivityViewModel.php
+msgid "Settings"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Settings updated"
+msgstr ""

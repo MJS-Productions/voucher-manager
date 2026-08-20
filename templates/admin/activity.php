@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$families = array( 'all', 'import', 'distribution', 'pool', 'admin' );
+$families = array( 'all', 'import', 'distribution', 'pool', 'settings', 'admin' );
 $tones    = array(
 	'all'     => __( 'All outcomes', 'voucher-manager' ),
 	'success' => __( 'Success', 'voucher-manager' ),
