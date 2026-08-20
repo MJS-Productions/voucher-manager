@@ -28,7 +28,7 @@ $composer    = file_get_contents( $root . '/composer.json' );
 $assert(
 	is_string( $po )
 	&& str_contains( $po, 'msgstr "Bestand verwalten"' )
-	&& str_contains( $po, 'msgstr "Die letzten Aktivitäten ohne personenbezogene Daten"' )
+	&& str_contains( $po, 'msgstr "Die letzten Aktivitäten."' )
 	&& str_contains( $po, 'msgstr "Aktivitäten prüfen und wichtige Vorgänge schnell erkennen"' ),
 	'Dashboard and Activity descriptions must use the approved concise German copy.'
 );
