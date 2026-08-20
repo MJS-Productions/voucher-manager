@@ -1284,3 +1284,11 @@ msgstr ""
 #: src/Admin/DashboardViewModel.php
 msgid "Voucher Manager uninstalled"
 msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Activity cleanup completed"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php
+msgid "Activity cleanup failed"
+msgstr ""

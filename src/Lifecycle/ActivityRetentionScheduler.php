@@ -10,9 +10,12 @@ declare(strict_types=1);
 namespace VoucherManager\Lifecycle;
 
 use VoucherManager\Domain\Activity\ActivityRetentionService;
+use VoucherManager\Domain\Log\OperationalEvent;
+use VoucherManager\Domain\Log\OperationalLogger;
 use VoucherManager\Domain\Settings\Settings;
 use VoucherManager\Infrastructure\WordPress\WpSettingsRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbActivityRetentionRepository;
+use VoucherManager\Infrastructure\WordPress\WpdbLogRepository;
 
 /**
  * Reconciles the daily cleanup schedule and runs bounded cleanup.
@@ -57,10 +60,33 @@ final class ActivityRetentionScheduler {
 			return;
 		}
 
+		$retention_days = $settings->activity_retention_days();
+		$logger         = new OperationalLogger( new WpdbLogRepository() );
+
 		try {
-			( new ActivityRetentionService( new WpdbActivityRetentionRepository() ) )
-				->cleanup( $settings->activity_retention_days() );
+			$deleted = ( new ActivityRetentionService( new WpdbActivityRetentionRepository() ) )
+				->cleanup( $retention_days );
+
+			if ( 0 < $deleted ) {
+				$logger->info(
+					OperationalEvent::ACTIVITY_CLEANUP_COMPLETED,
+					'Expired Activity entries were cleaned up.',
+					array(
+						'deleted_count'  => $deleted,
+						'retention_days' => $retention_days,
+					)
+				);
+			}
 		} catch ( \Throwable $exception ) {
+			$logger->error(
+				OperationalEvent::ACTIVITY_CLEANUP_FAILED,
+				'Automatic Activity cleanup failed.',
+				array(
+					'retention_days' => $retention_days,
+					'exception_class' => $exception::class,
+				)
+			);
+
 			error_log(
 				sprintf(
 					'Voucher Manager Activity cleanup failed: %s',

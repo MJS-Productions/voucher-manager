@@ -1285,3 +1285,11 @@ msgstr "Voucher Manager deaktiviert"
 #: src/Admin/DashboardViewModel.php
 msgid "Voucher Manager uninstalled"
 msgstr "Voucher Manager deinstalliert"
+
+#: src/Admin/DashboardViewModel.php
+msgid "Activity cleanup completed"
+msgstr "Activity-Bereinigung abgeschlossen"
+
+#: src/Admin/DashboardViewModel.php
+msgid "Activity cleanup failed"
+msgstr "Activity-Bereinigung fehlgeschlagen"

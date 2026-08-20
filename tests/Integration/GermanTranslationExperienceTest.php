@@ -54,6 +54,8 @@ $required_pairs = array(
 	'msgid "Pool activated"' => 'msgstr "Pool aktiviert"',
 	'msgid "Pool deactivated"' => 'msgstr "Pool deaktiviert"',
 	'msgid "Settings updated"' => 'msgstr "Einstellungen aktualisiert"',
+	'msgid "Activity cleanup completed"' => 'msgstr "Activity-Bereinigung abgeschlossen"',
+	'msgid "Activity cleanup failed"' => 'msgstr "Activity-Bereinigung fehlgeschlagen"',
 	'msgid "Voucher Manager installed"' => 'msgstr "Voucher Manager installiert"',
 	'msgid "Voucher Manager activated"' => 'msgstr "Voucher Manager aktiviert"',
 	'msgid "Voucher Manager deactivated"' => 'msgstr "Voucher Manager deaktiviert"',
@@ -87,8 +89,8 @@ $assert(
 );
 
 $assert(
-	305 === substr_count( $po, "\nmsgid " ),
-	'German PO must contain exactly the reviewed 305 source entries in addition to its header.'
+	307 === substr_count( $po, "\nmsgid " ),
+	'German PO must contain exactly the reviewed 307 source entries in addition to its header.'
 );
 
 $catalog_body = preg_replace( '/\Amsgid ""\nmsgstr ""\n(?:".*"\n)+\n/sU', '', $po, 1 );

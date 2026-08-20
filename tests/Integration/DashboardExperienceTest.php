@@ -88,6 +88,10 @@ $assert(
 );
 $assert( 'Settings updated' === $view->activity_label( 'settings.updated' ), 'Settings updates should have a readable label.' );
 $assert( 'success' === $view->activity_tone( 'settings.updated' ), 'Settings updates should have a success tone.' );
+$assert( 'Activity cleanup completed' === $view->activity_label( 'activity.cleanup_completed' ), 'Successful cleanup should have a readable label.' );
+$assert( 'Activity cleanup failed' === $view->activity_label( 'activity.cleanup_failed' ), 'Failed cleanup should have a readable label.' );
+$assert( 'success' === $view->activity_tone( 'activity.cleanup_completed' ), 'Successful cleanup should have a success tone.' );
+$assert( 'error' === $view->activity_tone( 'activity.cleanup_failed' ), 'Failed cleanup should have an error tone.' );
 $assert( 'Voucher Manager installed' === $view->activity_label( 'plugin.installed' ), 'Plugin installation should have a readable label.' );
 $assert( 'Voucher Manager activated' === $view->activity_label( 'plugin.activated' ), 'Plugin activation should have a readable label.' );
 $assert( 'Voucher Manager deactivated' === $view->activity_label( 'plugin.deactivated' ), 'Plugin deactivation should have a readable label.' );
@@ -216,12 +220,14 @@ $assert(
 $assert(
 	is_string( $activity_data_source )
 	&& str_contains( $activity_data_source, "'settings.updated'" )
+	&& str_contains( $activity_data_source, "'activity.cleanup_completed'" )
+	&& str_contains( $activity_data_source, "'activity.cleanup_failed'" )
 	&& str_contains( $activity_data_source, "'settings'" )
 	&& str_contains( $activity_data_source, "'pool.created'" )
 	&& str_contains( $activity_data_source, "'pool.updated'" )
 	&& str_contains( $activity_data_source, "'pool.activated'" )
 	&& str_contains( $activity_data_source, "'pool.deactivated'" ),
-	'Settings and Pool lifecycle events must participate in Activity family and success filtering.'
+	'Settings, maintenance and Pool lifecycle events must participate in Activity outcome filtering.'
 );
 $assert(
 	is_string( $admin_source ) && str_contains( $admin_source, "__( 'Dashboard', 'voucher-manager' )" ),

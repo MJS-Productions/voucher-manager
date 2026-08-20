@@ -20,6 +20,7 @@ final class OperationalActivityData {
 		'import.failed',
 		'distribution.failed',
 		'admin.action_failed',
+		'activity.cleanup_failed',
 		'pool.delete_failed',
 	);
 
@@ -152,6 +153,7 @@ final class OperationalActivityData {
 				'import.rolled_back',
 				'distribution.completed',
 				'settings.updated',
+				'activity.cleanup_completed',
 				'pool.created',
 				'pool.updated',
 				'pool.activated',

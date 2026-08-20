@@ -102,6 +102,25 @@ $assert(
 );
 
 $assert(
+	is_string( $scheduler_source )
+	&& str_contains( $scheduler_source, 'OperationalEvent::ACTIVITY_CLEANUP_COMPLETED' )
+	&& str_contains( $scheduler_source, 'if ( 0 < $deleted )' )
+	&& str_contains( $scheduler_source, "'deleted_count'  => \$deleted" )
+	&& str_contains( $scheduler_source, "'retention_days' => \$retention_days" ),
+	'Successful automatic cleanup must record Activity only when at least one expired entry was deleted.'
+);
+
+$assert(
+	is_string( $scheduler_source )
+	&& str_contains( $scheduler_source, 'OperationalEvent::ACTIVITY_CLEANUP_FAILED' )
+	&& str_contains( $scheduler_source, "'exception_class' => \$exception::class" )
+	&& ! str_contains( $scheduler_source, '$exception->getMessage()' )
+	&& ! str_contains( $scheduler_source, '$exception->getTrace' )
+	&& str_contains( $scheduler_source, 'Voucher Manager Activity cleanup failed: %s' ),
+	'Failed automatic cleanup must record bounded Activity context while retaining the PHP error-log fallback.'
+);
+
+$assert(
 	is_string( $deactivator )
 	&& str_contains( $deactivator, 'ActivityRetentionScheduler' )
 	&& str_contains( $deactivator, 'unschedule' )
@@ -149,4 +168,4 @@ $assert(
 	'Activity retention coverage must run before the release build.'
 );
 
-echo "Activity retention OK: UTC cutoff, 500-row bound, daily scheduling and data-preserving deactivation verified.\n";
+echo "Activity retention OK: bounded cleanup, daily scheduling and maintenance Activity coverage verified.\n";
