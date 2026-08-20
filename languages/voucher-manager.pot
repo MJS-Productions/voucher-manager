@@ -901,7 +901,7 @@ msgid "Review pool-scoped inventory without exposing complete One-Time Code valu
 msgstr ""
 
 #: templates/admin/activity.php
-msgid "Review privacy-safe operational events and identify actions that need attention."
+msgid "Review operational events and identify actions that need attention."
 msgstr ""
 
 #: templates/admin/import.php
@@ -957,7 +957,7 @@ msgid "TXT: place one code on each line."
 msgstr ""
 
 #: templates/admin/activity.php
-msgid "Technical identifiers and counts may be shown. One-Time Code values and personal data are never presented here."
+msgid "One-Time Code values are not stored in Activity history."
 msgstr ""
 
 #: templates/admin/distribution.php

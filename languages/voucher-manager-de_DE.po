@@ -901,7 +901,7 @@ msgid "Review pool-scoped inventory without exposing complete One-Time Code valu
 msgstr "Poolbezogenen Bestand prüfen, ohne vollständige Einmalcode-Werte offenzulegen."
 
 #: templates/admin/activity.php
-msgid "Review privacy-safe operational events and identify actions that need attention."
+msgid "Review operational events and identify actions that need attention."
 msgstr "Aktivitäten prüfen und wichtige Vorgänge schnell erkennen"
 
 #: templates/admin/import.php
@@ -957,8 +957,8 @@ msgid "TXT: place one code on each line."
 msgstr "TXT: Einen Code pro Zeile eintragen."
 
 #: templates/admin/activity.php
-msgid "Technical identifiers and counts may be shown. One-Time Code values and personal data are never presented here."
-msgstr "Technische Kennungen und Anzahlen können angezeigt werden. Einmalcode-Werte und personenbezogene Daten werden hier niemals dargestellt."
+msgid "One-Time Code values are not stored in Activity history."
+msgstr "Werte von Einmal-Codes werden in der Aktivitätshistorie nicht gespeichert."
 
 #: templates/admin/distribution.php
 msgid "The One-Time Code value is not written to operational Activity context."
@@ -1046,7 +1046,7 @@ msgstr "Dieser Pool ist jetzt leer. Vor der nächsten Ausgabe weitere Einmalcode
 
 #: src/Admin/OperationalActivityViewModel.php
 msgid "No One-Time Code values were retained in Activity."
-msgstr "In der Aktivitätshistorie wurden keine Einmalcode-Werte gespeichert."
+msgstr "In der Aktivitätshistorie wurden keine Werte von Einmal-Codes gespeichert."
 
 #: templates/admin/inventory.php templates/admin/pool-danger-zone.php templates/admin/pools.php
 msgid "Total One-Time Codes"

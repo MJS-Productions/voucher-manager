@@ -102,7 +102,7 @@ $assert(
 $assert(
 	! str_contains( $template_source, "['message']" )
 	&& ! str_contains( $template_source, 'json_encode' )
-	&& str_contains( $template_source, 'One-Time Code values and personal data are never presented here' ),
+	&& str_contains( $template_source, 'One-Time Code values are not stored in Activity history' ),
 	'The activity view must not expose raw messages or raw context.'
 );
 $assert(

@@ -24,7 +24,7 @@ $tones    = array(
 	<header class="voucher-manager__header">
 		<div>
 			<h1><?php echo esc_html__( 'Operational Activity', 'voucher-manager' ); ?></h1>
-			<p><?php echo esc_html__( 'Review privacy-safe operational events and identify actions that need attention.', 'voucher-manager' ); ?></p>
+			<p><?php echo esc_html__( 'Review operational events and identify actions that need attention.', 'voucher-manager' ); ?></p>
 		</div>
 	</header>
 
@@ -80,7 +80,7 @@ $tones    = array(
 		<div class="voucher-manager__card-header">
 			<div>
 				<h2 id="voucher-manager-activity-history-title"><?php echo esc_html__( 'Activity history', 'voucher-manager' ); ?></h2>
-				<p><?php echo esc_html__( 'Technical identifiers and counts may be shown. One-Time Code values and personal data are never presented here.', 'voucher-manager' ); ?></p>
+				<p><?php echo esc_html__( 'One-Time Code values are not stored in Activity history.', 'voucher-manager' ); ?></p>
 			</div>
 			<span class="voucher-manager__muted">
 				<?php
