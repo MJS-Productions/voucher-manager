@@ -18,7 +18,7 @@ $danger_url = add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' 
 		<p><strong><?php echo esc_html__( 'This action permanently deletes unused codes.', 'voucher-manager' ); ?></strong></p>
 		<dl>
 			<dt><?php echo esc_html__( 'Available One-Time Codes to delete', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $summary['available'] ) ); ?></dd>
-			<dt><?php echo esc_html__( 'Distributed codes preserved', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $summary['assigned'] ) ); ?></dd>
+			<dt><?php echo esc_html__( 'Distributed One-Time Codes preserved', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $summary['assigned'] ) ); ?></dd>
 			<dt><?php echo esc_html__( 'Pool preserved', 'voucher-manager' ); ?></dt><dd><?php echo esc_html__( 'Yes', 'voucher-manager' ); ?></dd>
 			<dt><?php echo esc_html__( 'Import and operational history preserved', 'voucher-manager' ); ?></dt><dd><?php echo esc_html__( 'Yes', 'voucher-manager' ); ?></dd>
 		</dl>

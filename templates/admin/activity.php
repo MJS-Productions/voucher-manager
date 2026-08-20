@@ -32,7 +32,7 @@ $tones    = array(
 		<article class="voucher-manager__metric">
 			<span><?php echo esc_html__( 'All events', 'voucher-manager' ); ?></span>
 			<strong><?php echo esc_html( number_format_i18n( $data['counts']['all'] ) ); ?></strong>
-			<small><?php echo esc_html__( 'Recorded operational history', 'voucher-manager' ); ?></small>
+			<small><?php echo esc_html__( 'Recorded events', 'voucher-manager' ); ?></small>
 		</article>
 		<article class="voucher-manager__metric">
 			<span><?php echo esc_html__( 'Needs attention', 'voucher-manager' ); ?></span>

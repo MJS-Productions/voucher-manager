@@ -405,12 +405,12 @@ msgid "Distributed One-Time Code"
 msgstr "Ausgegebener Einmalcode"
 
 #: templates/admin/dashboard.php
-msgid "Distributed codes"
-msgstr "Ausgegebene Codes"
+msgid "Distributed One-Time Codes"
+msgstr "Ausgegebene Einmalcodes"
 
 #: templates/admin/pool-delete-available-confirmation.php
-msgid "Distributed codes preserved"
-msgstr "Ausgegebene Codes beibehalten"
+msgid "Distributed One-Time Codes preserved"
+msgstr "Ausgegebene Einmalcodes beibehalten"
 
 #: src/Admin/DistributionAdmin.php src/Admin/OperationalActivityViewModel.php templates/admin/distribution-direct-result.php templates/admin/distribution.php
 msgid "Distribution"
@@ -857,8 +857,8 @@ msgid "Recent imports"
 msgstr "Letzte Importe"
 
 #: templates/admin/activity.php
-msgid "Recorded operational history"
-msgstr "Protokollierte Aktivitätshistorie"
+msgid "Recorded events"
+msgstr "Protokollierte Ereignisse"
 
 #: templates/admin/inventory.php
 msgid "Reference"

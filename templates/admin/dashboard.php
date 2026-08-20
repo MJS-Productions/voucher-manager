@@ -26,7 +26,7 @@ $metrics = array(
 		'hint'  => __( 'Ready for distribution', 'voucher-manager' ),
 	),
 	'assigned' => array(
-		'label' => __( 'Distributed codes', 'voucher-manager' ),
+		'label' => __( 'Distributed One-Time Codes', 'voucher-manager' ),
 		'hint'  => __( 'Successfully assigned', 'voucher-manager' ),
 	),
 	'pools' => array(

@@ -405,11 +405,11 @@ msgid "Distributed One-Time Code"
 msgstr ""
 
 #: templates/admin/dashboard.php
-msgid "Distributed codes"
+msgid "Distributed One-Time Codes"
 msgstr ""
 
 #: templates/admin/pool-delete-available-confirmation.php
-msgid "Distributed codes preserved"
+msgid "Distributed One-Time Codes preserved"
 msgstr ""
 
 #: src/Admin/DistributionAdmin.php src/Admin/OperationalActivityViewModel.php templates/admin/distribution-direct-result.php templates/admin/distribution.php
@@ -857,7 +857,7 @@ msgid "Recent imports"
 msgstr ""
 
 #: templates/admin/activity.php
-msgid "Recorded operational history"
+msgid "Recorded events"
 msgstr ""
 
 #: templates/admin/inventory.php
