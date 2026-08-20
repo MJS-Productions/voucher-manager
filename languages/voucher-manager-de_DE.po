@@ -409,8 +409,8 @@ msgid "Distributed One-Time Codes"
 msgstr "Ausgegebene Einmalcodes"
 
 #: templates/admin/pool-delete-available-confirmation.php
-msgid "Distributed One-Time Codes preserved"
-msgstr "Ausgegebene Einmalcodes beibehalten"
+msgid "Distributed One-Time Codes remain"
+msgstr "Ausgegebene Einmalcodes bleiben erhalten"
 
 #: src/Admin/DistributionAdmin.php src/Admin/OperationalActivityViewModel.php templates/admin/distribution-direct-result.php templates/admin/distribution.php
 msgid "Distribution"
@@ -525,8 +525,8 @@ msgid "Import additional One-Time Codes into this pool before the next distribut
 msgstr "Vor der nächsten Ausgabe weitere Einmalcodes in diesen Pool importieren."
 
 #: templates/admin/pool-delete-available-confirmation.php
-msgid "Import and operational history preserved"
-msgstr "Import- und Aktivitätshistorie beibehalten"
+msgid "Import and Activity history remain"
+msgstr "Import- und Aktivitätshistorie bleiben erhalten"
 
 #: src/Admin/PoolViewModel.php
 msgid "Import codes to continue distribution."
@@ -630,9 +630,13 @@ msgstr "Maximale Dateigröße: 10 MB."
 msgid "Name"
 msgstr "Name"
 
-#: templates/admin/activity.php templates/admin/dashboard.php
+#: templates/admin/dashboard.php
 msgid "Needs attention"
 msgstr "Erfordert Aufmerksamkeit"
+
+#: templates/admin/activity.php
+msgid "Need attention"
+msgstr "Erfordern Aufmerksamkeit"
 
 #: templates/admin/activity.php templates/admin/inventory.php
 msgid "Next"
@@ -809,8 +813,8 @@ msgid "Pool overview"
 msgstr "Pool-Übersicht"
 
 #: templates/admin/pool-delete-available-confirmation.php
-msgid "Pool preserved"
-msgstr "Pool beibehalten"
+msgid "Pool remains"
+msgstr "Pool bleibt erhalten"
 
 #: templates/admin/pools.php
 msgid "Pool status updated."
@@ -857,8 +861,8 @@ msgid "Recent imports"
 msgstr "Letzte Importe"
 
 #: templates/admin/activity.php
-msgid "Recorded events"
-msgstr "Protokollierte Ereignisse"
+msgid "Recorded"
+msgstr "Protokolliert"
 
 #: templates/admin/inventory.php
 msgid "Reference"

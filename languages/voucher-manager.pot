@@ -409,7 +409,7 @@ msgid "Distributed One-Time Codes"
 msgstr ""
 
 #: templates/admin/pool-delete-available-confirmation.php
-msgid "Distributed One-Time Codes preserved"
+msgid "Distributed One-Time Codes remain"
 msgstr ""
 
 #: src/Admin/DistributionAdmin.php src/Admin/OperationalActivityViewModel.php templates/admin/distribution-direct-result.php templates/admin/distribution.php
@@ -525,7 +525,7 @@ msgid "Import additional One-Time Codes into this pool before the next distribut
 msgstr ""
 
 #: templates/admin/pool-delete-available-confirmation.php
-msgid "Import and operational history preserved"
+msgid "Import and Activity history remain"
 msgstr ""
 
 #: src/Admin/PoolViewModel.php
@@ -630,8 +630,12 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: templates/admin/activity.php templates/admin/dashboard.php
+#: templates/admin/dashboard.php
 msgid "Needs attention"
+msgstr ""
+
+#: templates/admin/activity.php
+msgid "Need attention"
 msgstr ""
 
 #: templates/admin/activity.php templates/admin/inventory.php
@@ -809,7 +813,7 @@ msgid "Pool overview"
 msgstr ""
 
 #: templates/admin/pool-delete-available-confirmation.php
-msgid "Pool preserved"
+msgid "Pool remains"
 msgstr ""
 
 #: templates/admin/pools.php
@@ -857,7 +861,7 @@ msgid "Recent imports"
 msgstr ""
 
 #: templates/admin/activity.php
-msgid "Recorded events"
+msgid "Recorded"
 msgstr ""
 
 #: templates/admin/inventory.php
