@@ -75,7 +75,7 @@ Notable decisions:
 A WordPress page-by-page review refined the German experience:
 
 - Dashboard: `Bestand verwalten`
-- Dashboard Activity: `Die letzten Aktivitäten ohne personenbezogene Daten`
+- Dashboard Activity: `Die letzten Aktivitäten`
 - Activity introduction: `Aktivitäten prüfen und wichtige Vorgänge schnell erkennen`
 - Import rollback: all codes from the import are removed or none are removed
 - Distribution result: the redundant completion eyebrow was removed

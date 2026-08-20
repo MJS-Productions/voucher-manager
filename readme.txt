@@ -28,9 +28,9 @@ Create dedicated pools, import codes from TXT or CSV files, distribute available
 * WordPress Roles and Capabilities - administrative access follows the native WordPress permission system.
 * English and German Interface - integrated with the WordPress localization system.
 
-= Privacy-Conscious by Design =
+= Data-Minimal by Design =
 
-Voucher Manager minimizes stored information and supports GDPR-conscious workflows. Distributed One-Time Code values are not stored in the activity history.
+Voucher Manager stores only the information required for its core functionality. One-Time Code values are not stored in Activity history.
 
 = Simple Workflow =
 

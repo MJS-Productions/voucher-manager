@@ -130,7 +130,7 @@ foreach ( $distributable_rows as $row ) {
 			<ul class="voucher-manager__guidance-list">
 				<li><?php echo esc_html__( 'Only active pools with available inventory can be selected.', 'voucher-manager' ); ?></li>
 				<li><?php echo esc_html__( 'A successful distribution changes the One-Time Code from available to assigned immediately.', 'voucher-manager' ); ?></li>
-				<li><?php echo esc_html__( 'The One-Time Code value is not written to operational Activity context.', 'voucher-manager' ); ?></li>
+				<li><?php echo esc_html__( 'One-Time Code values are not stored in Activity history.', 'voucher-manager' ); ?></li>
 				<li><?php echo esc_html__( 'Refreshing the page does not distribute another One-Time Code. Every distribution requires a new form submission.', 'voucher-manager' ); ?></li>
 			</ul>
 		</div>

@@ -86,7 +86,7 @@ $metrics = array(
 					<h2 id="voucher-manager-activity-title">
 						<?php echo esc_html__( 'Recent activity', 'voucher-manager' ); ?>
 					</h2>
-					<p><?php echo esc_html__( 'The latest operational events, without personal data.', 'voucher-manager' ); ?></p>
+					<p><?php echo esc_html__( 'The latest operational events.', 'voucher-manager' ); ?></p>
 				</div>
 				<div class="voucher-manager__activity-header-actions">
 					<span class="voucher-manager__muted">

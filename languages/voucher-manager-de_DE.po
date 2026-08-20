@@ -956,13 +956,9 @@ msgstr "TXT- oder CSV-Datei"
 msgid "TXT: place one code on each line."
 msgstr "TXT: Einen Code pro Zeile eintragen."
 
-#: templates/admin/activity.php
+#: templates/admin/activity.php templates/admin/distribution.php
 msgid "One-Time Code values are not stored in Activity history."
-msgstr "Werte von Einmal-Codes werden in der Aktivitätshistorie nicht gespeichert."
-
-#: templates/admin/distribution.php
-msgid "The One-Time Code value is not written to operational Activity context."
-msgstr "Einmalcodes werden nicht in der Aktivitätshistorie protokolliert."
+msgstr "Einmalcode-Werte werden nicht in der Aktivitätshistorie gespeichert."
 
 #: templates/admin/distribution-direct-result.php
 msgid "The One-Time Code was assigned successfully, but the normal one-time result could not be stored. Copy it before leaving this page."
@@ -985,8 +981,8 @@ msgid "The import could not be completed. Check the pool and file, then try agai
 msgstr "Der Import konnte nicht abgeschlossen werden. Pool und Datei prüfen und erneut versuchen."
 
 #: templates/admin/dashboard.php
-msgid "The latest operational events, without personal data."
-msgstr "Die letzten Aktivitäten ohne personenbezogene Daten"
+msgid "The latest operational events."
+msgstr "Die letzten Aktivitäten."
 
 #: templates/admin/pools.php
 msgid "The operation could not be completed."
@@ -1046,7 +1042,7 @@ msgstr "Dieser Pool ist jetzt leer. Vor der nächsten Ausgabe weitere Einmalcode
 
 #: src/Admin/OperationalActivityViewModel.php
 msgid "No One-Time Code values were retained in Activity."
-msgstr "In der Aktivitätshistorie wurden keine Werte von Einmal-Codes gespeichert."
+msgstr "In der Aktivitätshistorie wurden keine Einmalcode-Werte gespeichert."
 
 #: templates/admin/inventory.php templates/admin/pool-danger-zone.php templates/admin/pools.php
 msgid "Total One-Time Codes"

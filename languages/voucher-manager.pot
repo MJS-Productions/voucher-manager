@@ -956,12 +956,8 @@ msgstr ""
 msgid "TXT: place one code on each line."
 msgstr ""
 
-#: templates/admin/activity.php
+#: templates/admin/activity.php templates/admin/distribution.php
 msgid "One-Time Code values are not stored in Activity history."
-msgstr ""
-
-#: templates/admin/distribution.php
-msgid "The One-Time Code value is not written to operational Activity context."
 msgstr ""
 
 #: templates/admin/distribution-direct-result.php
@@ -985,7 +981,7 @@ msgid "The import could not be completed. Check the pool and file, then try agai
 msgstr ""
 
 #: templates/admin/dashboard.php
-msgid "The latest operational events, without personal data."
+msgid "The latest operational events."
 msgstr ""
 
 #: templates/admin/pools.php
