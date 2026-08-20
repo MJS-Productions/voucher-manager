@@ -250,10 +250,10 @@ try {
     $importService = new ImportService($imports, $codes, $logs, new CodeFileParser());
     $importResult = $importService->import($poolId, $file, 'golden-path.txt', 'txt');
 
-    $assert(5 === $importResult->total(), 'Import total should include parser output including trailing empty rows.');
+    $assert(3 === $importResult->total(), 'Import total should count only non-blank TXT rows.');
     $assert(2 === $importResult->imported(), 'Two unique non-empty codes should be imported.');
     $assert(1 === $importResult->skipped(), 'Duplicate should be skipped.');
-    $assert(2 === $importResult->invalid(), 'Blank and trailing empty rows should be invalid.');
+    $assert(0 === $importResult->invalid(), 'Blank TXT rows should be ignored rather than counted as invalid.');
     $assert(2 === $codes->count_available($poolId), 'Two codes should be available after import.');
 
     $distribution = new DistributionService($pools, $codes, $logs);
