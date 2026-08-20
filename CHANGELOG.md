@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+## 1.0.7 - 2026-08-20 — Activity History Coverage
+
+### Added
+- Expanded privacy-safe Activity History coverage for Pool creation, updates and status changes.
+- Added Activity logging for Settings changes and unexpected Distribution failures.
+- Added plugin lifecycle Activity for installation, activation, deactivation and retained-data uninstall.
+- Added Activity events for successful and failed automatic Activity cleanup.
+
+### Changed
+- Refined administrator-facing Activity metrics, deletion confirmations and One-Time Code terminology in English and German.
+- Activity cleanup completion is recorded only when old Activity entries were actually deleted.
+
+### Fixed
+- TXT imports now ignore blank lines instead of treating them as importable values.
+- Dedicated Distribution failure Activity is now used for unexpected Distribution execution failures.
+
+### Security
+- New operational Activity continues to exclude One-Time Code values, exception messages and stack traces.
+
+### Upgrade boundary
+- No database schema migration is required.
+
 ## 1.0.6 - 2026-08-18 — German Inventory Filter Polish
 
 ### Changed
