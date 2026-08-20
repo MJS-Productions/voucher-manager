@@ -32,7 +32,13 @@ final class CodeFileParser {
 		while ( ! $file->eof() ) {
 			$line = $file->fgets();
 			if ( false === $line ) { break; }
-			yield $this->strip_bom( rtrim( $line, "\r\n" ) );
+
+			$value = $this->strip_bom( rtrim( $line, "\r\n" ) );
+			if ( '' === trim( $value ) ) {
+				continue;
+			}
+
+			yield $value;
 		}
 	}
 

@@ -41,6 +41,34 @@ $assert( 3 === $view->selected_pool_id( 3, $pool_rows ), 'A valid pool navigatio
 $assert( 0 === $view->selected_pool_id( 99, $pool_rows ), 'An unknown pool ID must not become a trusted import preselection.' );
 $assert( 0 === $view->selected_pool_id( 0, $pool_rows ), 'Missing pool context must retain the normal dropdown fallback.' );
 
+$parser = new VoucherManager\Support\CodeFileParser();
+
+$txt_file = tempnam( sys_get_temp_dir(), 'voucher-manager-import-' );
+if ( false === $txt_file ) {
+	throw new RuntimeException( 'Temporary TXT file could not be created.' );
+}
+file_put_contents( $txt_file, "\n  \nCODE-001\n\nCODE-002\n\t\nCODE-003\n\n" );
+$txt_codes = iterator_to_array( $parser->parse( $txt_file, 'txt' ), false );
+unlink( $txt_file );
+
+$assert(
+	array( 'CODE-001', 'CODE-002', 'CODE-003' ) === $txt_codes,
+	'TXT parser must ignore leading, intermediate, trailing and whitespace-only blank lines.'
+);
+
+$csv_file = tempnam( sys_get_temp_dir(), 'voucher-manager-import-' );
+if ( false === $csv_file ) {
+	throw new RuntimeException( 'Temporary CSV file could not be created.' );
+}
+file_put_contents( $csv_file, "code\nCSV-001\n\nCSV-002\n" );
+$csv_codes = iterator_to_array( $parser->parse( $csv_file, 'csv' ), false );
+unlink( $csv_file );
+
+$assert(
+	array( 'CSV-001', 'CSV-002' ) === $csv_codes,
+	'CSV parser must continue to ignore blank lines when TXT blank-line handling changes.'
+);
+
 $admin = file_get_contents( $root . '/src/Admin/ImportAdmin.php' );
 $template = file_get_contents( $root . '/templates/admin/import.php' );
 $confirmation = file_get_contents( $root . '/templates/admin/import-rollback-confirmation.php' );
@@ -62,4 +90,4 @@ $assert( str_contains( $admin, "isset( \$_POST['confirm_rollback'] )" ) && str_c
 $assert( str_contains( $confirmation, 'If any of them has already been distributed, the rollback is blocked' ), 'Confirmation must explain protected rollback semantics.' );
 $assert( str_contains( $composer, '@test:import-experience' ) && strpos( $composer, '@test:import-experience' ) < strpos( $composer, '@build' ), 'Import Experience test must run before build.' );
 
-echo "Import experience OK: guided upload, result clarity, rollback review and security boundary verified.\n";
+echo "Import experience OK: guided upload, blank-line handling, result clarity, rollback review and security boundary verified.\n";
