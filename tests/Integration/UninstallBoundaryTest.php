@@ -51,6 +51,7 @@ $assert(
 );
 
 $uninstall   = file_get_contents( $root . '/uninstall.php' );
+$activator   = file_get_contents( $root . '/src/Lifecycle/Activator.php' );
 $deactivator = file_get_contents( $root . '/src/Lifecycle/Deactivator.php' );
 $settings    = file_get_contents( $root . '/src/Domain/Settings/Settings.php' );
 $composer    = file_get_contents( $root . '/composer.json' );
@@ -86,10 +87,30 @@ $assert(
 );
 
 $assert(
-	str_contains( $uninstall, 'Preserve Pools, Imports, Codes, Activity and user Settings by default' )
+	str_contains( $uninstall, 'OperationalEvent::PLUGIN_UNINSTALLED' )
+	&& strpos( $uninstall, 'OperationalEvent::PLUGIN_UNINSTALLED' ) > strpos( $uninstall, 'if ( $delete_data )' )
+	&& str_contains( $uninstall, 'Preserve Pools, Imports, Codes, Activity and user Settings by default' )
 	&& str_contains( $uninstall, 'delete_option( UninstallDataBoundary::VERSION_OPTION )' )
 	&& str_contains( $uninstall, 'delete_option( UninstallDataBoundary::DATABASE_VERSION_OPTION )' ),
-	'Default uninstall must preserve business tables and Settings while removing runtime identity options.'
+	'Default uninstall must record retained-data uninstall Activity before removing runtime identity options.'
+);
+
+$assert(
+	is_string( $activator )
+	&& str_contains( $activator, "get_option( 'voucher_manager_version', false )" )
+	&& str_contains( $activator, 'OperationalEvent::PLUGIN_INSTALLED' )
+	&& str_contains( $activator, 'OperationalEvent::PLUGIN_ACTIVATED' )
+	&& strpos( $activator, 'OperationalEvent::PLUGIN_INSTALLED' ) > strpos( $activator, '( new Migrator() )->migrate()' ),
+	'Activation must distinguish a new installation from reactivation using the runtime version option and log only after migration.'
+);
+
+$assert(
+	is_string( $deactivator )
+	&& str_contains( $deactivator, 'OperationalEvent::PLUGIN_DEACTIVATED' )
+	&& ! str_contains( $deactivator, 'DROP TABLE' )
+	&& ! str_contains( $deactivator, 'delete_option' )
+	&& ! str_contains( $deactivator, 'UninstallDataBoundary' ),
+	'Deactivation must record Activity while remaining completely separate from uninstall deletion.'
 );
 
 $assert(
@@ -97,14 +118,6 @@ $assert(
 	&& ! str_contains( $uninstall, 'get_sites' )
 	&& ! str_contains( $uninstall, 'base_prefix' ),
 	'Part 4 must remain site-scoped and must not introduce unaudited network-wide deletion.'
-);
-
-$assert(
-	is_string( $deactivator )
-	&& ! str_contains( $deactivator, 'DROP TABLE' )
-	&& ! str_contains( $deactivator, 'delete_option' )
-	&& ! str_contains( $deactivator, 'UninstallDataBoundary' ),
-	'Deactivation must remain completely separate from uninstall deletion.'
 );
 
 $assert(
@@ -127,4 +140,4 @@ $assert(
 	'Uninstall Boundary coverage must run before the release build.'
 );
 
-echo "Uninstall boundary OK: preserved-data default, explicit consent and exact site-scoped cleanup verified.\n";
+echo "Uninstall boundary OK: lifecycle Activity, preserved-data default and exact site-scoped cleanup verified.\n";

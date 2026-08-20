@@ -54,6 +54,10 @@ $required_pairs = array(
 	'msgid "Pool activated"' => 'msgstr "Pool aktiviert"',
 	'msgid "Pool deactivated"' => 'msgstr "Pool deaktiviert"',
 	'msgid "Settings updated"' => 'msgstr "Einstellungen aktualisiert"',
+	'msgid "Voucher Manager installed"' => 'msgstr "Voucher Manager installiert"',
+	'msgid "Voucher Manager activated"' => 'msgstr "Voucher Manager aktiviert"',
+	'msgid "Voucher Manager deactivated"' => 'msgstr "Voucher Manager deaktiviert"',
+	'msgid "Voucher Manager uninstalled"' => 'msgstr "Voucher Manager deinstalliert"',
 	'msgid "Remaining inventory: %d One-Time Code"' => 'msgstr[0] "Verbleibender Bestand: %d Einmalcode"',
 	'msgid "One-Time Code values are not stored in Activity history."' => 'msgstr "Einmalcode-Werte werden nicht in der Aktivitätshistorie gespeichert."',
 );
@@ -83,8 +87,8 @@ $assert(
 );
 
 $assert(
-	301 === substr_count( $po, "\nmsgid " ),
-	'German PO must contain exactly the reviewed 301 source entries in addition to its header.'
+	305 === substr_count( $po, "\nmsgid " ),
+	'German PO must contain exactly the reviewed 305 source entries in addition to its header.'
 );
 
 $catalog_body = preg_replace( '/\Amsgid ""\nmsgstr ""\n(?:".*"\n)+\n/sU', '', $po, 1 );

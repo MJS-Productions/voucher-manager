@@ -1269,3 +1269,19 @@ msgstr "Einstellungen"
 #: src/Admin/DashboardViewModel.php
 msgid "Settings updated"
 msgstr "Einstellungen aktualisiert"
+
+#: src/Admin/DashboardViewModel.php
+msgid "Voucher Manager installed"
+msgstr "Voucher Manager installiert"
+
+#: src/Admin/DashboardViewModel.php
+msgid "Voucher Manager activated"
+msgstr "Voucher Manager aktiviert"
+
+#: src/Admin/DashboardViewModel.php
+msgid "Voucher Manager deactivated"
+msgstr "Voucher Manager deaktiviert"
+
+#: src/Admin/DashboardViewModel.php
+msgid "Voucher Manager uninstalled"
+msgstr "Voucher Manager deinstalliert"

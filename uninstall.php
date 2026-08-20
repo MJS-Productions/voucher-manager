@@ -15,7 +15,15 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 require_once __DIR__ . '/src/Lifecycle/UninstallDataBoundary.php';
+require_once __DIR__ . '/src/Domain/Log/LogRepository.php';
+require_once __DIR__ . '/src/Domain/Log/LogLevel.php';
+require_once __DIR__ . '/src/Domain/Log/OperationalEvent.php';
+require_once __DIR__ . '/src/Domain/Log/OperationalLogger.php';
+require_once __DIR__ . '/src/Infrastructure/WordPress/WpdbLogRepository.php';
 
+use VoucherManager\Domain\Log\OperationalEvent;
+use VoucherManager\Domain\Log\OperationalLogger;
+use VoucherManager\Infrastructure\WordPress\WpdbLogRepository;
 use VoucherManager\Lifecycle\UninstallDataBoundary;
 
 $raw_settings = get_option( UninstallDataBoundary::SETTINGS_OPTION, array() );
@@ -54,6 +62,11 @@ if ( $delete_data ) {
 
 	return;
 }
+
+( new OperationalLogger( new WpdbLogRepository() ) )->info(
+	OperationalEvent::PLUGIN_UNINSTALLED,
+	'Voucher Manager was uninstalled with data retained.'
+);
 
 // Preserve Pools, Imports, Codes, Activity and user Settings by default.
 // Runtime identity options are safe to recreate on a later activation.

@@ -23,6 +23,10 @@ enum OperationalEvent: string {
 	case DISTRIBUTION_FAILED       = 'distribution.failed';
 	case ADMIN_ACTION_FAILED       = 'admin.action_failed';
 	case SETTINGS_UPDATED          = 'settings.updated';
+	case PLUGIN_INSTALLED          = 'plugin.installed';
+	case PLUGIN_ACTIVATED          = 'plugin.activated';
+	case PLUGIN_DEACTIVATED        = 'plugin.deactivated';
+	case PLUGIN_UNINSTALLED        = 'plugin.uninstalled';
 	case POOL_CREATED              = 'pool.created';
 	case POOL_UPDATED              = 'pool.updated';
 	case POOL_ACTIVATED            = 'pool.activated';

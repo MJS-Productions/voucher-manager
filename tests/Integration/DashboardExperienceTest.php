@@ -88,6 +88,12 @@ $assert(
 );
 $assert( 'Settings updated' === $view->activity_label( 'settings.updated' ), 'Settings updates should have a readable label.' );
 $assert( 'success' === $view->activity_tone( 'settings.updated' ), 'Settings updates should have a success tone.' );
+$assert( 'Voucher Manager installed' === $view->activity_label( 'plugin.installed' ), 'Plugin installation should have a readable label.' );
+$assert( 'Voucher Manager activated' === $view->activity_label( 'plugin.activated' ), 'Plugin activation should have a readable label.' );
+$assert( 'Voucher Manager deactivated' === $view->activity_label( 'plugin.deactivated' ), 'Plugin deactivation should have a readable label.' );
+$assert( 'Voucher Manager uninstalled' === $view->activity_label( 'plugin.uninstalled' ), 'Plugin uninstall should have a readable label.' );
+$assert( 'neutral' === $view->activity_tone( 'plugin.installed' ), 'Plugin lifecycle events should remain informational.' );
+$assert( 'neutral' === $view->activity_tone( 'plugin.uninstalled' ), 'Plugin uninstall with retained data should remain informational.' );
 $assert(
 	"Pool: Amazon Vouchers\n\nRemaining inventory: 2 One-Time Codes" === $view->activity_detail(
 		'distribution.completed',
