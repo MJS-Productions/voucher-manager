@@ -130,21 +130,23 @@ final class WpdbCodeInventoryRepository implements CodeInventoryRepository {
 		$codes   = $this->codes_table();
 		$imports = $this->imports_table();
 
-		$prepared = $wpdb->prepare(
-			'SELECT DISTINCT i.id, i.filename
-				FROM %i i
-				INNER JOIN %i c ON c.import_id = i.id
-				WHERE c.pool_id = %d AND c.status IN (%s, %s)
-				ORDER BY i.id DESC',
-			$imports,
-			$codes,
-			$pool_id,
-			CodeStatus::AVAILABLE->value,
-			CodeStatus::ASSIGNED->value
-		);
-
+		// Table identifiers and all values are supplied through wpdb placeholders.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
-		$rows = $wpdb->get_results( $prepared, ARRAY_A );
+		$rows = $wpdb->get_results(
+			$wpdb->prepare(
+				'SELECT DISTINCT i.id, i.filename
+					FROM %i i
+					INNER JOIN %i c ON c.import_id = i.id
+					WHERE c.pool_id = %d AND c.status IN (%s, %s)
+					ORDER BY i.id DESC',
+				$imports,
+				$codes,
+				$pool_id,
+				CodeStatus::AVAILABLE->value,
+				CodeStatus::ASSIGNED->value
+			),
+			ARRAY_A
+		);
 
 		return array_map(
 			static fn( array $row ): array => array(

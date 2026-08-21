@@ -45,22 +45,21 @@ final class PoolOverviewData {
 
 		$placeholders = implode( ', ', array_fill( 0, count( $pool_ids ), '%d' ) );
 		$table        = $wpdb->prefix . 'vm_codes';
-
-		$query_args = array_merge( array( $table ), $pool_ids );
+		$query_args   = array_merge( array( $table ), $pool_ids );
 
 		// The identifier and every pool ID are supplied through wpdb placeholders.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$prepared = $wpdb->prepare(
-			"SELECT pool_id, status, COUNT(*) AS amount
-				FROM %i
-				WHERE pool_id IN ({$placeholders})
-				GROUP BY pool_id, status",
-			...$query_args
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT pool_id, status, COUNT(*) AS amount
+					FROM %i
+					WHERE pool_id IN ({$placeholders})
+					GROUP BY pool_id, status",
+				...$query_args
+			),
+			ARRAY_A
 		);
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
-		$results = $wpdb->get_results( $prepared, ARRAY_A );
-		$counts  = array();
+		$counts = array();
 
 		foreach ( is_array( $results ) ? $results : array() as $result ) {
 			$pool_id = (int) $result['pool_id'];
