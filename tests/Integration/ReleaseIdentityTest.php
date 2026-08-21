@@ -8,7 +8,7 @@
 declare(strict_types=1);
 
 $root     = dirname( __DIR__, 2 );
-$expected = '1.0.7';
+$expected = '1.0.8';
 
 $assert = static function ( bool $condition, string $message ): void {
 	if ( ! $condition ) {
@@ -31,12 +31,12 @@ $assert(
 );
 
 $assert(
-	is_string( $readme ) && str_contains( $readme, 'Current release:** `' . $expected . '` — Activity History Coverage' ),
+	is_string( $readme ) && str_contains( $readme, 'Current release:** `' . $expected . '` — WordPress 7.1 and Release Hardening' ),
 	'README must identify the patch release.'
 );
 
 $assert(
-	is_string( $changelog ) && str_contains( $changelog, '## ' . $expected . ' - 2026-08-20 — Activity History Coverage' ),
+	is_string( $changelog ) && str_contains( $changelog, '## ' . $expected . ' - 2026-08-21 — WordPress 7.1 and Release Hardening' ),
 	'Changelog must contain the reviewed release section.'
 );
 
@@ -47,7 +47,7 @@ $assert(
 
 $assert(
 	is_string( $release )
-	&& str_contains( $release, '# Voucher Manager ' . $expected . ' — Activity History Coverage' )
+	&& str_contains( $release, '# Voucher Manager ' . $expected . ' — WordPress 7.1 and Release Hardening' )
 	&& str_contains( $release, 'No database schema migration is introduced' ),
 	'Patch release notes must match the reviewed version and upgrade boundary.'
 );
@@ -64,4 +64,4 @@ $assert(
 	'Final Sprint 8 review must document the approved release gate.'
 );
 
-echo "Release identity OK: 1.0.7 is consistent across plugin, README, WordPress readme, changelog, release notes and final gate.\n";
+echo "Release identity OK: 1.0.8 is consistent across plugin, README, WordPress readme, changelog, release notes and final gate.\n";
