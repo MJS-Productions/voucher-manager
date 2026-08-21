@@ -26,7 +26,8 @@ $plugin     = file_get_contents( $root . '/voucher-manager.php' );
 
 $assert(
 	is_string( $repository )
-	&& str_contains( $repository, 'LEFT JOIN {$imports} i ON i.id = c.import_id AND i.pool_id = c.pool_id' )
+	&& str_contains( $repository, 'LEFT JOIN %i i ON i.id = c.import_id AND i.pool_id = c.pool_id' )
+	&& str_contains( $repository, '$query_args = array_merge( array( $table, $imports ), $args );' )
 	&& str_contains( $repository, "RIGHT(c.code, 4)" )
 	&& ! str_contains( $repository, 'SELECT c.code' ),
 	'Inventory repository must preserve privacy-safe suffix selection and missing-provenance visibility.'
