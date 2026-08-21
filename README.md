@@ -5,10 +5,10 @@ Professional One-Time Code Management for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Stable Release  
-**Current release:** `1.0.7` — Activity History Coverage
-**Previous release:** `1.0.6` — German Inventory Filter Polish
+**Current release:** `1.0.8` — WordPress 7.1 and Release Hardening
+**Previous release:** `1.0.7` — Activity History Coverage
 
-`1.0.7` expands privacy-safe Activity History coverage across Pool administration, Settings, Distribution failures, plugin lifecycle events and automatic Activity cleanup, while also hardening TXT imports with blank-line handling.
+`1.0.8` confirms compatibility with WordPress 7.1, hardens WordPress database-query preparation and release validation, tightens production ZIP packaging and aligns Import guidance with blank-row handling.
 
 ## Current capabilities
 

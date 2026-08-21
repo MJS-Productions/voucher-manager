@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+## 1.0.8 - 2026-08-21 — WordPress 7.1 and Release Hardening
+
+### Changed
+- Confirmed Voucher Manager under WordPress 7.1 and updated the WordPress.org `Tested up to` declaration.
+- Hardened WordPress database-query preparation and related Plugin Check compatibility without changing data behavior.
+- Tightened release packaging to ship only production runtime files and strengthened release-artifact validation.
+- Updated legacy integration assertions so they verify the prepared-query safety boundary rather than the previous SQL string shape.
+
+### Fixed
+- Corrected Import help text so blank rows are described as ignored, while invalid rows remain counted but not imported.
+- Removed prepared-SQL regressions introduced during Plugin Check hardening.
+
+### Validation
+- WordPress Plugin Check completed with zero errors; remaining warnings were reviewed and accepted where they reflect deliberate repository/database architecture or static-analysis limitations.
+- English and German Import guidance manually verified after the translation update.
+
+### Upgrade boundary
+- No database schema migration is required.
+
 ## 1.0.7 - 2026-08-20 — Activity History Coverage
 
 ### Added

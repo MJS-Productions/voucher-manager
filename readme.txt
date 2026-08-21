@@ -4,7 +4,7 @@ Tags: one-time codes, vouchers, inventory, code distribution
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,13 @@ Yes. Voucher Manager includes English and German and uses the WordPress localiza
 7. Settings for activity retention and data management.
 
 == Changelog ==
+
+= 1.0.8 =
+* Confirmed compatibility with WordPress 7.1 and updated the tested-up-to declaration.
+* Hardened database query preparation and release validation for current WordPress Plugin Check expectations.
+* Tightened release packaging so development-only repository files are excluded from the installable ZIP.
+* Corrected Import guidance: blank rows are ignored, while invalid rows are counted but not imported.
+* No database schema migration is required.
 
 = 1.0.7 =
 * Expanded Activity History coverage for Pool administration, Settings changes, Distribution failures, plugin lifecycle events and automatic Activity cleanup.
