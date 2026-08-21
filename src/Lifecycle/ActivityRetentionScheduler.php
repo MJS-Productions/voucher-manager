@@ -86,6 +86,15 @@ final class ActivityRetentionScheduler {
 					'exception_class' => $exception::class,
 				)
 			);
+
+			// Intentional fallback if operational Activity logging is unavailable.
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+			error_log(
+				sprintf(
+					'Voucher Manager Activity cleanup failed: %s',
+					$exception::class
+				)
+			);
 		}
 	}
 
