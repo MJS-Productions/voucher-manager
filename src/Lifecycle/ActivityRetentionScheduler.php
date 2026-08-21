@@ -82,15 +82,8 @@ final class ActivityRetentionScheduler {
 				OperationalEvent::ACTIVITY_CLEANUP_FAILED,
 				'Automatic Activity cleanup failed.',
 				array(
-					'retention_days' => $retention_days,
+					'retention_days'  => $retention_days,
 					'exception_class' => $exception::class,
-				)
-			);
-
-			error_log(
-				sprintf(
-					'Voucher Manager Activity cleanup failed: %s',
-					$exception::class
 				)
 			);
 		}

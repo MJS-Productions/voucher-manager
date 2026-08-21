@@ -219,13 +219,22 @@ final class ImportAdmin {
 	/**
 	 * Validate the uploaded TXT or CSV file.
 	 *
+	 * The import action verifies the admin nonce before this private helper is
+	 * reached. Upload metadata cannot be sanitized as a whole because the
+	 * temporary path must remain unchanged for is_uploaded_file(); each field
+	 * is therefore validated or sanitized according to its type below.
+	 *
 	 * @return array{name:string,tmp_name:string,type:string}
 	 */
 	private function validate_upload(): array {
+		// Nonce verification happens in import() before this helper is called.
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( ! isset( $_FILES['code_file'] ) || ! is_array( $_FILES['code_file'] ) ) {
 			throw new RuntimeException( 'Missing file.' );
 		}
 
+		// See method documentation: individual upload fields are validated below.
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$file  = $_FILES['code_file'];
 		$error = isset( $file['error'] ) ? (int) $file['error'] : UPLOAD_ERR_NO_FILE;
 		$size  = isset( $file['size'] ) ? (int) $file['size'] : 0;

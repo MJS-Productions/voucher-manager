@@ -24,6 +24,8 @@ final class TableStatus {
 	public function is_healthy(): bool {
 		global $wpdb;
 		foreach ( $this->names() as $table ) {
+			// Direct schema checks must reflect the current database state and are not cacheable.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 			$found = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) ) );
 			if ( $table !== $found ) {
 				return false;
@@ -38,7 +40,14 @@ final class TableStatus {
 		if ( ! isset( $tables[ $key ] ) ) {
 			return 0;
 		}
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$tables[$key]}" );
+
+		// Direct table counts are health/status snapshots and must reflect current state.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+		return (int) $wpdb->get_var(
+			$wpdb->prepare(
+				'SELECT COUNT(*) FROM %i',
+				$tables[ $key ]
+			)
+		);
 	}
 }

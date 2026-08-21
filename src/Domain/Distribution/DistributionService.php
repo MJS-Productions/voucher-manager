@@ -70,6 +70,9 @@ final class DistributionService {
 	}
 
 	private function report_post_claim_failure( string $stage, \Throwable $exception ): void {
+		// Intentional last-resort diagnostic: this path is used when normal
+		// post-claim persistence or Activity logging has already failed.
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 		error_log(
 			sprintf(
 				'Voucher Manager distribution post-claim failure [%s]: %s',

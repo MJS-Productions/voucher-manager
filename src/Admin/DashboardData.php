@@ -46,28 +46,36 @@ final class DashboardData {
 			$counts['codes']   = $tables->count( 'codes' );
 			$counts['logs']    = $tables->count( 'logs' );
 
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			// Direct reads are intentional dashboard snapshots; caching would hide current inventory state.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 			$counts['available'] = (int) $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT COUNT(*) FROM {$names['codes']} WHERE status = %s",
+					'SELECT COUNT(*) FROM %i WHERE status = %s',
+					$names['codes'],
 					CodeStatus::AVAILABLE->value
 				)
 			);
 
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			// Direct reads are intentional dashboard snapshots; caching would hide current inventory state.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 			$counts['assigned'] = (int) $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT COUNT(*) FROM {$names['codes']} WHERE status = %s",
+					'SELECT COUNT(*) FROM %i WHERE status = %s',
+					$names['codes'],
 					CodeStatus::ASSIGNED->value
 				)
 			);
 
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			// Direct reads are intentional dashboard snapshots; caching would hide recent activity.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 			$rows = $wpdb->get_results(
-				"SELECT event_type, message, context, created_at
-				FROM {$names['logs']}
-				ORDER BY id DESC
-				LIMIT 5",
+				$wpdb->prepare(
+					'SELECT event_type, message, context, created_at
+						FROM %i
+						ORDER BY id DESC
+						LIMIT 5',
+					$names['logs']
+				),
 				ARRAY_A
 			);
 
