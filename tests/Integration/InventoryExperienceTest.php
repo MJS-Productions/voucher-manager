@@ -172,7 +172,8 @@ $composer_source   = file_get_contents( $root . '/composer.json' );
 
 $assert(
 	is_string( $repository_source )
-	&& str_contains( $repository_source, 'LEFT JOIN {$imports} i ON i.id = c.import_id AND i.pool_id = c.pool_id' )
+	&& str_contains( $repository_source, 'LEFT JOIN %i i ON i.id = c.import_id AND i.pool_id = c.pool_id' )
+	&& str_contains( $repository_source, '$query_args = array_merge( array( $table, $imports ), $args );' )
 	&& str_contains( $repository_source, 'i.filename AS import_filename' )
 	&& str_contains( $repository_source, "CASE WHEN CHAR_LENGTH(c.code) > 4 THEN RIGHT(c.code, 4) ELSE '' END AS code_suffix" )
 	&& ! str_contains( $repository_source, 'SELECT id, pool_id, import_id, code,' ),
