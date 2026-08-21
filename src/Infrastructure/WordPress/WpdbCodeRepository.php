@@ -26,9 +26,11 @@ final class WpdbCodeRepository implements CodeRepository {
 			$args[] = $now;
 		}
 		$table = $this->table();
-		$sql = "INSERT IGNORE INTO {$table} (pool_id,import_id,code_hash,code,status,imported_at) VALUES " . implode( ',', $values );
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$result = $wpdb->query( $wpdb->prepare( $sql, $args ) );
+		$sql = 'INSERT IGNORE INTO %i (pool_id,import_id,code_hash,code,status,imported_at) VALUES ' . implode( ',', $values );
+		$query_args = array_merge( array( $table ), $args );
+		// The VALUES placeholder list is generated internally; identifier and values are prepared.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$result = $wpdb->query( $wpdb->prepare( $sql, $query_args ) );
 		return false === $result ? 0 : (int) $result;
 	}
 
@@ -41,8 +43,7 @@ final class WpdbCodeRepository implements CodeRepository {
 	public function count_assigned_by_import( int $import_id ): int {
 		global $wpdb;
 		$table = $this->table();
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE import_id = %d AND status != %s", $import_id, CodeStatus::AVAILABLE->value ) );
+		return (int) $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM %i WHERE import_id = %d AND status != %s', $table, $import_id, CodeStatus::AVAILABLE->value ) );
 	}
 
 	/**
@@ -62,12 +63,13 @@ final class WpdbCodeRepository implements CodeRepository {
 		$counts = array_fill_keys( $ids, 0 );
 		$table  = $this->table();
 		$in     = implode( ', ', array_fill( 0, count( $ids ), '%d' ) );
-		$args   = array_merge( $ids, array( CodeStatus::AVAILABLE->value ) );
+		$args   = array_merge( array( $table ), $ids, array( CodeStatus::AVAILABLE->value ) );
 
+		// The IN placeholder list is generated from validated integer IDs.
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT import_id, COUNT(*) AS assigned_count FROM {$table} WHERE import_id IN ({$in}) AND status != %s GROUP BY import_id",
+				"SELECT import_id, COUNT(*) AS assigned_count FROM %i WHERE import_id IN ({$in}) AND status != %s GROUP BY import_id",
 				$args
 			),
 			ARRAY_A
@@ -93,10 +95,10 @@ final class WpdbCodeRepository implements CodeRepository {
 		// requests cannot successfully claim the same available row.
 		$wpdb->query( 'START TRANSACTION' );
 		try {
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$row = $wpdb->get_row(
 				$wpdb->prepare(
-					"SELECT id, code FROM {$table} WHERE pool_id = %d AND status = %s ORDER BY id ASC LIMIT 1 FOR UPDATE",
+					'SELECT id, code FROM %i WHERE pool_id = %d AND status = %s ORDER BY id ASC LIMIT 1 FOR UPDATE',
+					$table,
 					$pool_id,
 					CodeStatus::AVAILABLE->value
 				),
@@ -129,9 +131,8 @@ final class WpdbCodeRepository implements CodeRepository {
 	public function count_available( int $pool_id ): int {
 		global $wpdb;
 		$table = $this->table();
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		return (int) $wpdb->get_var(
-			$wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE pool_id = %d AND status = %s", $pool_id, CodeStatus::AVAILABLE->value )
+			$wpdb->prepare( 'SELECT COUNT(*) FROM %i WHERE pool_id = %d AND status = %s', $table, $pool_id, CodeStatus::AVAILABLE->value )
 		);
 	}
 }

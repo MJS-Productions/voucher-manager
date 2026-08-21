@@ -27,16 +27,14 @@ final class WpdbPoolRepository implements PoolRepository {
 	public function all(): array {
 		global $wpdb;
 		$table = $this->table();
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$rows = $wpdb->get_results( "SELECT * FROM {$table} ORDER BY name ASC", ARRAY_A );
+		$rows = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %i ORDER BY name ASC', $table ), ARRAY_A );
 		return array_map( array( $this, 'hydrate' ), is_array( $rows ) ? $rows : array() );
 	}
 
 	public function find( int $id ): ?Pool {
 		global $wpdb;
 		$table = $this->table();
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE id = %d", $id ), ARRAY_A );
+		$row = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %i WHERE id = %d', $table, $id ), ARRAY_A );
 		return is_array( $row ) ? $this->hydrate( $row ) : null;
 	}
 
@@ -101,8 +99,7 @@ final class WpdbPoolRepository implements PoolRepository {
 	public function code_count( int $id ): int {
 		global $wpdb;
 		$table = $this->codes_table();
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE pool_id = %d", $id ) );
+		return (int) $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM %i WHERE pool_id = %d', $table, $id ) );
 	}
 
 	/** @param array<string,mixed> $row */
@@ -128,11 +125,9 @@ final class WpdbPoolRepository implements PoolRepository {
 		$index = 2;
 		do {
 			if ( 0 < $excluded_id ) {
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-				$found = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$table} WHERE slug = %s AND id != %d", $slug, $excluded_id ) );
+				$found = $wpdb->get_var( $wpdb->prepare( 'SELECT id FROM %i WHERE slug = %s AND id != %d', $table, $slug, $excluded_id ) );
 			} else {
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-				$found = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$table} WHERE slug = %s", $slug ) );
+				$found = $wpdb->get_var( $wpdb->prepare( 'SELECT id FROM %i WHERE slug = %s', $table, $slug ) );
 			}
 			if ( null !== $found ) { $slug = $base . '-' . $index; ++$index; }
 		} while ( null !== $found );

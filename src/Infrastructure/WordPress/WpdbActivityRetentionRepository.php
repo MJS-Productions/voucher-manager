@@ -23,19 +23,18 @@ final class WpdbActivityRetentionRepository implements ActivityRetentionReposito
 		$table = $wpdb->prefix . 'vm_logs';
 		$limit = max( 1, min( 1000, $limit ) );
 
-		$sql = "DELETE FROM {$table}
+		$sql = 'DELETE FROM %i
 			WHERE id IN (
 				SELECT id FROM (
 					SELECT id
-					FROM {$table}
+					FROM %i
 					WHERE created_at < %s
 					ORDER BY id ASC
 					LIMIT %d
 				) AS voucher_manager_expired_activity
-			)";
+			)';
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$deleted = $wpdb->query( $wpdb->prepare( $sql, $utc_cutoff, $limit ) );
+		$deleted = $wpdb->query( $wpdb->prepare( $sql, $table, $table, $utc_cutoff, $limit ) );
 
 		if ( false === $deleted ) {
 			throw new RuntimeException( 'Expired operational Activity could not be deleted.' );

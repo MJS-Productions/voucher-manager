@@ -22,16 +22,14 @@ final class WpdbImportRepository implements ImportRepository {
 	public function recent( int $limit = 20 ): array {
 		global $wpdb;
 		$imports=$this->table(); $pools=$this->pools_table(); $limit=max(1,min(100,$limit));
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$rows=$wpdb->get_results( $wpdb->prepare( "SELECT i.*, p.name AS pool_name FROM {$imports} i LEFT JOIN {$pools} p ON p.id=i.pool_id ORDER BY i.id DESC LIMIT %d", $limit ), ARRAY_A );
+		$rows=$wpdb->get_results( $wpdb->prepare( 'SELECT i.*, p.name AS pool_name FROM %i i LEFT JOIN %i p ON p.id=i.pool_id ORDER BY i.id DESC LIMIT %d', $imports, $pools, $limit ), ARRAY_A );
 		return array_map( array( $this, 'hydrate' ), is_array($rows)?$rows:array() );
 	}
 
 	public function find( int $id ): ?ImportRecord {
 		global $wpdb;
 		$imports=$this->table(); $pools=$this->pools_table();
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$row=$wpdb->get_row( $wpdb->prepare( "SELECT i.*, p.name AS pool_name FROM {$imports} i LEFT JOIN {$pools} p ON p.id=i.pool_id WHERE i.id=%d", $id ), ARRAY_A );
+		$row=$wpdb->get_row( $wpdb->prepare( 'SELECT i.*, p.name AS pool_name FROM %i i LEFT JOIN %i p ON p.id=i.pool_id WHERE i.id=%d', $imports, $pools, $id ), ARRAY_A );
 		return is_array($row)?$this->hydrate($row):null;
 	}
 

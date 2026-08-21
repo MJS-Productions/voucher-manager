@@ -14,15 +14,11 @@ final class WpdbPoolLifecycleRepository implements PoolLifecycleRepository {
 	public function deletion_summary( int $pool_id ): ?array {
 		global $wpdb;
 		$pools = $this->table( 'pools' ); $codes = $this->table( 'codes' ); $imports = $this->table( 'imports' );
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$exists = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$pools} WHERE id = %d", $pool_id ) );
+		$exists = $wpdb->get_var( $wpdb->prepare( 'SELECT id FROM %i WHERE id = %d', $pools, $pool_id ) );
 		if ( null === $exists ) { return null; }
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$total = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$codes} WHERE pool_id = %d", $pool_id ) );
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$available = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$codes} WHERE pool_id = %d AND status = %s", $pool_id, CodeStatus::AVAILABLE->value ) );
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$import_count = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$imports} WHERE pool_id = %d", $pool_id ) );
+		$total = (int) $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM %i WHERE pool_id = %d', $codes, $pool_id ) );
+		$available = (int) $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM %i WHERE pool_id = %d AND status = %s', $codes, $pool_id, CodeStatus::AVAILABLE->value ) );
+		$import_count = (int) $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM %i WHERE pool_id = %d', $imports, $pool_id ) );
 		return array( 'total' => $total, 'available' => $available, 'assigned' => $total - $available, 'imports' => $import_count );
 	}
 

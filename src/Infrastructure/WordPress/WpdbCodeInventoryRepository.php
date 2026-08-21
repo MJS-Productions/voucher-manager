@@ -46,8 +46,8 @@ final class WpdbCodeInventoryRepository implements CodeInventoryRepository {
 		$sql = "SELECT c.id, c.pool_id, c.import_id, i.filename AS import_filename,
 				CASE WHEN CHAR_LENGTH(c.code) > 4 THEN RIGHT(c.code, 4) ELSE '' END AS code_suffix,
 				c.status, c.imported_at, c.assigned_at
-			FROM {$table} c
-			LEFT JOIN {$imports} i ON i.id = c.import_id AND i.pool_id = c.pool_id
+			FROM %i c
+			LEFT JOIN %i i ON i.id = c.import_id AND i.pool_id = c.pool_id
 			WHERE " . str_replace(
 				array( 'pool_id', 'status', 'import_id' ),
 				array( 'c.pool_id', 'c.status', 'c.import_id' ),
@@ -56,8 +56,11 @@ final class WpdbCodeInventoryRepository implements CodeInventoryRepository {
 			ORDER BY c.id DESC
 			LIMIT %d OFFSET %d";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$rows = $wpdb->get_results( $wpdb->prepare( $sql, $args ), ARRAY_A );
+		$query_args = array_merge( array( $table, $imports ), $args );
+
+		// The SQL structure is internal; identifiers and all values are supplied through wpdb placeholders.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$rows = $wpdb->get_results( $wpdb->prepare( $sql, $query_args ), ARRAY_A );
 
 		$records = array();
 		foreach ( is_array( $rows ) ? $rows : array() as $row ) {
@@ -86,20 +89,22 @@ final class WpdbCodeInventoryRepository implements CodeInventoryRepository {
 
 		[$where, $args] = $this->where( $pool_id, $status, $import_id );
 		$table          = $this->codes_table();
-		$sql            = "SELECT COUNT(*) FROM {$table} WHERE {$where}";
+		$sql            = "SELECT COUNT(*) FROM %i WHERE {$where}";
+		$query_args     = array_merge( array( $table ), $args );
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		return (int) $wpdb->get_var( $wpdb->prepare( $sql, $args ) );
+		// The WHERE fragment is assembled only from fixed internal clauses; all values use placeholders.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		return (int) $wpdb->get_var( $wpdb->prepare( $sql, $query_args ) );
 	}
 
 	public function counts( int $pool_id ): array {
 		global $wpdb;
 
 		$table = $this->codes_table();
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT status, COUNT(*) AS amount FROM {$table} WHERE pool_id = %d AND status IN (%s, %s) GROUP BY status",
+				'SELECT status, COUNT(*) AS amount FROM %i WHERE pool_id = %d AND status IN (%s, %s) GROUP BY status',
+				$table,
 				$pool_id,
 				CodeStatus::AVAILABLE->value,
 				CodeStatus::ASSIGNED->value

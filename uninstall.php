@@ -44,16 +44,15 @@ $runtime_prefixes = array(
 foreach ( $runtime_prefixes as $runtime_prefix ) {
 	$runtime_like = $wpdb->esc_like( $runtime_prefix ) . '%';
 	// Runtime-only Distribution state never survives uninstall.
-	// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-	$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $runtime_like ) );
+	$wpdb->query( $wpdb->prepare( 'DELETE FROM %i WHERE option_name LIKE %s', $wpdb->options, $runtime_like ) );
 }
 
 if ( $delete_data ) {
 	foreach ( UninstallDataBoundary::tables( $wpdb->prefix ) as $table ) {
 		// Table names are generated only from the active site's trusted prefix
 		// and the fixed Voucher Manager ownership allowlist above.
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.SchemaChange
-		$wpdb->query( "DROP TABLE IF EXISTS {$table}" );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange
+		$wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %i', $table ) );
 	}
 
 	foreach ( UninstallDataBoundary::options() as $option ) {
