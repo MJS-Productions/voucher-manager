@@ -457,8 +457,8 @@ msgid "Empty"
 msgstr "Leer"
 
 #: templates/admin/import.php
-msgid "Empty or invalid rows are counted but not imported."
-msgstr "Leere oder ungültige Zeilen werden gezählt, aber nicht importiert."
+msgid "Invalid rows are counted but not imported."
+msgstr "Ungültige Zeilen werden gezählt, aber nicht importiert."
 
 #: src/Admin/OperationalActivityViewModel.php
 msgid "Error"

@@ -117,7 +117,7 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 				<li><?php echo esc_html__( 'TXT: place one code on each line.', 'voucher-manager' ); ?></li>
 				<li><?php echo esc_html__( 'CSV: codes are read from the first column; a common header is ignored.', 'voucher-manager' ); ?></li>
 				<li><?php echo esc_html__( 'Duplicate codes are skipped instead of being added twice.', 'voucher-manager' ); ?></li>
-				<li><?php echo esc_html__( 'Empty or invalid rows are counted but not imported.', 'voucher-manager' ); ?></li>
+				<li><?php echo esc_html__( 'Invalid rows are counted but not imported.', 'voucher-manager' ); ?></li>
 				<li><?php echo esc_html__( 'Maximum file size: 10 MB.', 'voucher-manager' ); ?></li>
 			</ul>
 		</aside>
