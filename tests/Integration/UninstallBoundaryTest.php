@@ -74,14 +74,16 @@ $assert(
 	str_contains( $uninstall, 'DISTRIBUTION_INTENT_OPTION_PREFIX' )
 	&& str_contains( $uninstall, 'DISTRIBUTION_RESULT_OPTION_PREFIX' )
 	&& str_contains( $uninstall, 'DISTRIBUTION_RESULT_INTENT_OPTION_PREFIX' )
-	&& str_contains( $uninstall, 'DELETE FROM {$wpdb->options} WHERE option_name LIKE %s' ),
+	&& str_contains( $uninstall, "DELETE FROM %i WHERE option_name LIKE %s" )
+	&& str_contains( $uninstall, '$wpdb->options' ),
 	'Uninstall must always remove ephemeral Distribution intent and result options without touching preserved business settings.'
 );
 
 $assert(
 	str_contains( $uninstall, 'if ( $delete_data )' )
 	&& str_contains( $uninstall, 'foreach ( UninstallDataBoundary::tables( $wpdb->prefix ) as $table )' )
-	&& str_contains( $uninstall, 'DROP TABLE IF EXISTS {$table}' )
+	&& str_contains( $uninstall, "DROP TABLE IF EXISTS %i" )
+	&& str_contains( $uninstall, '$wpdb->prepare' )
 	&& str_contains( $uninstall, 'foreach ( UninstallDataBoundary::options() as $option )' ),
 	'Opt-in destructive uninstall must drop only allowlisted tables and remove all owned options.'
 );
