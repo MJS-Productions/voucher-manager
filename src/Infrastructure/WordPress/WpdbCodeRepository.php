@@ -70,7 +70,7 @@ final class WpdbCodeRepository implements CodeRepository {
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT import_id, COUNT(*) AS assigned_count FROM %i WHERE import_id IN ({$in}) AND status != %s GROUP BY import_id",
-				$args
+				...$args
 			),
 			ARRAY_A
 		);
