@@ -56,6 +56,8 @@ final class CodeStateMachine {
 	 */
 	public function assert_transition( CodeStatus $from, CodeStatus $to ): void {
 		if ( ! $this->can_transition( $from, $to ) ) {
+			// Internal enum values are passed to an exception factory; no HTML output occurs here.
+			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 			throw InvalidCodeStatusTransition::from_statuses( $from, $to );
 		}
 	}

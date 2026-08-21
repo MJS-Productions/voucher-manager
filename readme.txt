@@ -2,7 +2,7 @@
 Contributors: mjs512
 Tags: one-time codes, vouchers, inventory, code distribution
 Requires at least: 6.5
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 8.1
 Stable tag: 1.0.7
 License: GPLv2 or later

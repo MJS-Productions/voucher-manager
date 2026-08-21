@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$root = dirname(__DIR__);
+$root    = dirname(__DIR__);
 $zipPath = $root . '/dist/voucher-manager.zip';
 
 if (!is_file($zipPath)) {
@@ -56,6 +56,7 @@ $required = [
     'voucher-manager/languages/voucher-manager.pot',
     'voucher-manager/languages/voucher-manager-de_DE.po',
     'voucher-manager/languages/voucher-manager-de_DE.mo',
+    'voucher-manager/readme.txt',
     'voucher-manager/uninstall.php',
 ];
 
@@ -66,17 +67,42 @@ foreach ($required as $file) {
     }
 }
 
+$allowedTopLevel = [
+    'assets',
+    'languages',
+    'src',
+    'templates',
+    'CHANGELOG.md',
+    'LICENSE',
+    'README.md',
+    'SECURITY.md',
+    'readme.txt',
+    'uninstall.php',
+    'voucher-manager.php',
+];
+
 foreach ($names as $name) {
     if (!str_starts_with($name, 'voucher-manager/')) {
         fwrite(STDERR, "Invalid release root: {$name}" . PHP_EOL);
         exit(1);
     }
 
-    foreach (['/.git/', '/.github/', '/tools/', '/tests/', '/vendor/'] as $forbidden) {
-        if (str_contains('/' . $name, $forbidden)) {
-            fwrite(STDERR, "Development file included in release: {$name}" . PHP_EOL);
-            exit(1);
-        }
+    $relative = substr($name, strlen('voucher-manager/'));
+
+    if ('' === $relative) {
+        continue;
+    }
+
+    $topLevel = explode('/', $relative, 2)[0];
+
+    if (!in_array($topLevel, $allowedTopLevel, true)) {
+        fwrite(STDERR, "Non-production file included in release: {$name}" . PHP_EOL);
+        exit(1);
+    }
+
+    if (str_starts_with(basename($relative), '.')) {
+        fwrite(STDERR, "Hidden file included in release: {$name}" . PHP_EOL);
+        exit(1);
     }
 }
 

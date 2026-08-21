@@ -4,15 +4,16 @@ declare(strict_types=1);
 $root = dirname(__DIR__);
 
 $translationCompiler = $root . '/tools/compile-translations.php';
-$command             = escapeshellarg( PHP_BINARY ) . ' ' . escapeshellarg( $translationCompiler );
-passthru( $command, $translationExitCode );
+$command             = escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg($translationCompiler);
+passthru($command, $translationExitCode);
 
-if ( 0 !== $translationExitCode ) {
-    fwrite( STDERR, "Release build stopped because translation compilation failed." . PHP_EOL );
-    exit( 1 );
+if (0 !== $translationExitCode) {
+    fwrite(STDERR, "Release build stopped because translation compilation failed." . PHP_EOL);
+    exit(1);
 }
-$dist = $root . '/dist';
-$build = $dist . '/voucher-manager';
+
+$dist    = $root . '/dist';
+$build   = $dist . '/voucher-manager';
 $zipPath = $dist . '/voucher-manager.zip';
 
 $remove = static function (string $path) use (&$remove): void {
@@ -38,51 +39,69 @@ $remove($build);
 $remove($zipPath);
 mkdir($build, 0777, true);
 
-$excludedTopLevel = [
-    '.git',
-    '.github',
-    'dist',
-    'docs',
-    'tests',
-    'tools',
-    'vendor',
+/*
+ * Keep the release artifact intentionally small and production-only.
+ * Repository, CI, test, tooling, release-note and local-development files
+ * remain in GitHub but are not shipped to WordPress installations.
+ */
+$includedTopLevelDirectories = [
+    'assets',
+    'languages',
+    'src',
+    'templates',
 ];
 
-$excludedFiles = [
-    '.gitignore',
-    'composer.json',
-    'composer.lock',
-    'CONTRIBUTING.md',
+$includedTopLevelFiles = [
+    'CHANGELOG.md',
+    'LICENSE',
+    'README.md',
+    'SECURITY.md',
+    'readme.txt',
+    'uninstall.php',
+    'voucher-manager.php',
 ];
 
-$iterator = new RecursiveIteratorIterator(
-    new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS),
-    RecursiveIteratorIterator::SELF_FIRST
-);
+foreach ($includedTopLevelDirectories as $directory) {
+    $sourceDirectory = $root . DIRECTORY_SEPARATOR . $directory;
 
-foreach ($iterator as $item) {
-    $relative = substr($item->getPathname(), strlen($root) + 1);
-    $segments = explode(DIRECTORY_SEPARATOR, $relative);
-
-    if (in_array($segments[0], $excludedTopLevel, true)
-        || in_array($relative, $excludedFiles, true)) {
-        continue;
+    if (!is_dir($sourceDirectory)) {
+        fwrite(STDERR, "Required release directory is missing: {$directory}" . PHP_EOL);
+        exit(1);
     }
 
-    $target = $build . DIRECTORY_SEPARATOR . $relative;
+    $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($sourceDirectory, FilesystemIterator::SKIP_DOTS),
+        RecursiveIteratorIterator::SELF_FIRST
+    );
 
-    if ($item->isDir()) {
-        if (!is_dir($target)) {
-            mkdir($target, 0777, true);
+    foreach ($iterator as $item) {
+        $relative = substr($item->getPathname(), strlen($root) + 1);
+        $target   = $build . DIRECTORY_SEPARATOR . $relative;
+
+        if ($item->isDir()) {
+            if (!is_dir($target)) {
+                mkdir($target, 0777, true);
+            }
+            continue;
         }
-        continue;
+
+        if (!is_dir(dirname($target))) {
+            mkdir(dirname($target), 0777, true);
+        }
+
+        copy($item->getPathname(), $target);
+    }
+}
+
+foreach ($includedTopLevelFiles as $file) {
+    $source = $root . DIRECTORY_SEPARATOR . $file;
+
+    if (!is_file($source)) {
+        fwrite(STDERR, "Required release file is missing: {$file}" . PHP_EOL);
+        exit(1);
     }
 
-    if (!is_dir(dirname($target))) {
-        mkdir(dirname($target), 0777, true);
-    }
-
-    copy($item->getPathname(), $target);
+    copy($source, $build . DIRECTORY_SEPARATOR . $file);
 }
 
 if (class_exists(ZipArchive::class)) {
@@ -93,11 +112,11 @@ if (class_exists(ZipArchive::class)) {
         exit(1);
     }
 
-    $files = new RecursiveIteratorIterator(
+    $zipFiles = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($build, FilesystemIterator::SKIP_DOTS)
     );
 
-    foreach ($files as $file) {
+    foreach ($zipFiles as $file) {
         if (!$file->isFile()) {
             continue;
         }

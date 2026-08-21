@@ -16,6 +16,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $remaining = isset( $result['remaining'] ) ? absint( $result['remaining'] ) : null;
+
+wp_enqueue_style(
+	'voucher-manager-admin',
+	VOUCHER_MANAGER_URL . 'assets/css/admin.css',
+	array(),
+	VOUCHER_MANAGER_VERSION
+);
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -23,8 +30,10 @@ $remaining = isset( $result['remaining'] ) ? absint( $result['remaining'] ) : nu
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?php echo esc_html__( 'Distribution result', 'voucher-manager' ); ?></title>
-	<?php wp_admin_css( 'common' ); ?>
-	<link rel="stylesheet" href="<?php echo esc_url( VOUCHER_MANAGER_URL . 'assets/css/admin.css' ); ?>">
+	<?php
+	wp_admin_css( 'common' );
+	wp_print_styles( 'voucher-manager-admin' );
+	?>
 </head>
 <body class="wp-admin wp-core-ui">
 	<div class="wrap voucher-manager voucher-manager__direct-result">

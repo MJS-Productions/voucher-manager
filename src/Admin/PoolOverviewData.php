@@ -46,16 +46,21 @@ final class PoolOverviewData {
 		$placeholders = implode( ', ', array_fill( 0, count( $pool_ids ), '%d' ) );
 		$table        = $wpdb->prefix . 'vm_codes';
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$sql = "SELECT pool_id, status, COUNT(*) AS amount
-			FROM {$table}
-			WHERE pool_id IN ({$placeholders})
-			GROUP BY pool_id, status";
+		$query_args = array_merge( array( $table ), $pool_ids );
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		$prepared = $wpdb->prepare( $sql, ...$pool_ids );
-		$results  = $wpdb->get_results( $prepared, ARRAY_A );
-		$counts   = array();
+		// The identifier and every pool ID are supplied through wpdb placeholders.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$prepared = $wpdb->prepare(
+			"SELECT pool_id, status, COUNT(*) AS amount
+				FROM %i
+				WHERE pool_id IN ({$placeholders})
+				GROUP BY pool_id, status",
+			...$query_args
+		);
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->get_results( $prepared, ARRAY_A );
+		$counts  = array();
 
 		foreach ( is_array( $results ) ? $results : array() as $result ) {
 			$pool_id = (int) $result['pool_id'];
@@ -83,7 +88,7 @@ final class PoolOverviewData {
 
 		return array_map(
 			static function ( Pool $pool ) use ( $counts ): array {
-				$pool_id = (int) $pool->id();
+				$pool_id   = (int) $pool->id();
 				$inventory = $counts[ $pool_id ] ?? array(
 					'total'     => 0,
 					'available' => 0,
