@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Voucher Manager
- * Plugin URI:        https://github.com/mjs512/voucher-manager
+ * Plugin URI:        https://github.com/MJS-Productions/voucher-manager
  * Description:       Professional One-Time Code Management for WordPress.
  * Version:           1.0.8
  * Requires at least: 6.5
