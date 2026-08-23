@@ -10,12 +10,11 @@ declare(strict_types=1);
 namespace VoucherManager\Admin;
 
 use VoucherManager\Domain\Distribution\DistributionResult;
-use VoucherManager\Domain\Distribution\DistributionService;
 use VoucherManager\Domain\Log\OperationalEvent;
 use VoucherManager\Domain\Log\OperationalLogger;
+use VoucherManager\Extension\DistributionApi;
 use VoucherManager\Infrastructure\WordPress\WpDistributionIntentStore;
 use VoucherManager\Infrastructure\WordPress\WpDistributionResultStore;
-use VoucherManager\Infrastructure\WordPress\WpdbCodeRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbLogRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbPoolRepository;
 use VoucherManager\Support\ErrorBoundary;
@@ -26,7 +25,7 @@ use VoucherManager\Support\ErrorBoundary;
 final class DistributionAdmin {
 
 	private WpdbPoolRepository $pools;
-	private DistributionService $service;
+	private DistributionApi $service;
 	private ErrorBoundary $boundary;
 	private PoolOverviewData $overview;
 	private DistributionViewModel $view;
@@ -36,11 +35,7 @@ final class DistributionAdmin {
 	public function __construct() {
 		$logger         = new OperationalLogger( new WpdbLogRepository() );
 		$this->pools    = new WpdbPoolRepository();
-		$this->service  = new DistributionService(
-			$this->pools,
-			new WpdbCodeRepository(),
-			$logger
-		);
+		$this->service  = new DistributionApi();
 		$this->boundary = new ErrorBoundary( $logger );
 		$this->overview = new PoolOverviewData();
 		$this->view     = new DistributionViewModel();

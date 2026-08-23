@@ -22,6 +22,7 @@
     "validate:header": "php tools/check-plugin-header.php",
     "test:autoload": "php tools/test-autoload.php",
     "test:extension-api-version": "php tests/Integration/ExtensionApiVersionTest.php",
+    "test:extension-distribution-api": "php tests/Integration/ExtensionDistributionApiTest.php",
     "build": "php tools/build-release.php",
     "validate:artifact": "php tools/validate-release.php",
     "quality": [
@@ -31,6 +32,7 @@
       "@validate:header",
       "@test:autoload",
       "@test:extension-api-version",
+      "@test:extension-distribution-api",
       "@test:golden-path",
       "@test:state-integrity",
       "@test:operational-logging",
