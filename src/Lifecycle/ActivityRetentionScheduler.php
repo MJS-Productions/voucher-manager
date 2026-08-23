@@ -13,6 +13,7 @@ use VoucherManager\Domain\Activity\ActivityRetentionService;
 use VoucherManager\Domain\Log\OperationalEvent;
 use VoucherManager\Domain\Log\OperationalLogger;
 use VoucherManager\Domain\Settings\Settings;
+use VoucherManager\Extension\ActivityRetentionArchiveHandoff;
 use VoucherManager\Infrastructure\WordPress\WpSettingsRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbActivityRetentionRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbLogRepository;
@@ -64,8 +65,15 @@ final class ActivityRetentionScheduler {
 		$logger         = new OperationalLogger( new WpdbLogRepository() );
 
 		try {
+			$archive_handoff = null;
+
+			if ( ActivityRetentionArchiveHandoff::is_active() ) {
+				$archive_handoff = static fn( array $candidates ): array =>
+					ActivityRetentionArchiveHandoff::archive( $candidates );
+			}
+
 			$deleted = ( new ActivityRetentionService( new WpdbActivityRetentionRepository() ) )
-				->cleanup( $retention_days );
+				->cleanup( $retention_days, null, $archive_handoff );
 
 			if ( 0 < $deleted ) {
 				$logger->info(
