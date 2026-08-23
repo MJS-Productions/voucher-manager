@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'VOUCHER_MANAGER_VERSION', '1.0.8' );
 define( 'VOUCHER_MANAGER_DATABASE_VERSION', '2' );
+define( 'VOUCHER_MANAGER_EXTENSION_API_VERSION', '1' );
 define( 'VOUCHER_MANAGER_FILE', __FILE__ );
 define( 'VOUCHER_MANAGER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VOUCHER_MANAGER_URL', plugin_dir_url( __FILE__ ) );
