@@ -9,13 +9,19 @@ declare(strict_types=1);
 
 namespace VoucherManager\Admin;
 
-use VoucherManager\Domain\Code\CodeStatus;
 use VoucherManager\Domain\Pool\Pool;
+use VoucherManager\Extension\InventoryReadApi;
 
 /**
  * Adds inventory information to pool entities for administration views.
  */
 final class PoolOverviewData {
+
+	private InventoryReadApi $inventory;
+
+	public function __construct() {
+		$this->inventory = new InventoryReadApi();
+	}
 
 	/**
 	 * Build pool overview rows.
@@ -24,8 +30,6 @@ final class PoolOverviewData {
 	 * @return array<int,array{pool:Pool,total:int,available:int,assigned:int}>
 	 */
 	public function rows( array $pools ): array {
-		global $wpdb;
-
 		if ( empty( $pools ) ) {
 			return array();
 		}
@@ -43,52 +47,12 @@ final class PoolOverviewData {
 			return array();
 		}
 
-		$placeholders = implode( ', ', array_fill( 0, count( $pool_ids ), '%d' ) );
-		$table        = $wpdb->prefix . 'vm_codes';
-		$query_args   = array_merge( array( $table ), $pool_ids );
-
-		// The identifier and every pool ID are supplied through wpdb placeholders.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$results = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT pool_id, status, COUNT(*) AS amount
-					FROM %i
-					WHERE pool_id IN ({$placeholders})
-					GROUP BY pool_id, status",
-				...$query_args
-			),
-			ARRAY_A
-		);
-		$counts = array();
-
-		foreach ( is_array( $results ) ? $results : array() as $result ) {
-			$pool_id = (int) $result['pool_id'];
-			$status  = (string) $result['status'];
-			$amount  = (int) $result['amount'];
-
-			if ( ! isset( $counts[ $pool_id ] ) ) {
-				$counts[ $pool_id ] = array(
-					'total'     => 0,
-					'available' => 0,
-					'assigned'  => 0,
-				);
-			}
-
-			$counts[ $pool_id ]['total'] += $amount;
-
-			if ( CodeStatus::AVAILABLE->value === $status ) {
-				$counts[ $pool_id ]['available'] = $amount;
-			}
-
-			if ( CodeStatus::ASSIGNED->value === $status ) {
-				$counts[ $pool_id ]['assigned'] = $amount;
-			}
-		}
+		$inventories = $this->inventory->for_pools( $pool_ids );
 
 		return array_map(
-			static function ( Pool $pool ) use ( $counts ): array {
+			static function ( Pool $pool ) use ( $inventories ): array {
 				$pool_id   = (int) $pool->id();
-				$inventory = $counts[ $pool_id ] ?? array(
+				$inventory = $inventories[ $pool_id ] ?? array(
 					'total'     => 0,
 					'available' => 0,
 					'assigned'  => 0,

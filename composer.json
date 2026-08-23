@@ -24,6 +24,7 @@
     "test:extension-api-version": "php tests/Integration/ExtensionApiVersionTest.php",
     "test:extension-distribution-api": "php tests/Integration/ExtensionDistributionApiTest.php",
     "test:extension-pool-read-api": "php tests/Integration/ExtensionPoolReadApiTest.php",
+    "test:extension-inventory-read-api": "php tests/Integration/ExtensionInventoryReadApiTest.php",
     "build": "php tools/build-release.php",
     "validate:artifact": "php tools/validate-release.php",
     "quality": [
@@ -35,6 +36,7 @@
       "@test:extension-api-version",
       "@test:extension-distribution-api",
       "@test:extension-pool-read-api",
+      "@test:extension-inventory-read-api",
       "@test:golden-path",
       "@test:state-integrity",
       "@test:operational-logging",
