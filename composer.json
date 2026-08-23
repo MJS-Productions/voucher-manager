@@ -23,6 +23,7 @@
     "test:autoload": "php tools/test-autoload.php",
     "test:extension-api-version": "php tests/Integration/ExtensionApiVersionTest.php",
     "test:extension-distribution-api": "php tests/Integration/ExtensionDistributionApiTest.php",
+    "test:extension-pool-read-api": "php tests/Integration/ExtensionPoolReadApiTest.php",
     "build": "php tools/build-release.php",
     "validate:artifact": "php tools/validate-release.php",
     "quality": [
@@ -33,6 +34,7 @@
       "@test:autoload",
       "@test:extension-api-version",
       "@test:extension-distribution-api",
+      "@test:extension-pool-read-api",
       "@test:golden-path",
       "@test:state-integrity",
       "@test:operational-logging",
