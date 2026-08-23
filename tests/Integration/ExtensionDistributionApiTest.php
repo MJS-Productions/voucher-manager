@@ -34,8 +34,9 @@ $assert(
 	'The API must wire the existing Voucher Manager distribution domain to the WordPress repositories.'
 );
 $assert(
-	str_contains( $api, 'return $this->service->distribute( $pool_id );' ),
-	'The API must delegate distribution to the existing DistributionService.'
+	str_contains( $api, '$result = $this->service->distribute( $pool_id );' )
+	&& str_contains( $api, 'return $result;' ),
+	'The API must delegate distribution to the existing DistributionService and return its result.'
 );
 $assert(
 	! str_contains( $api, 'claim_next_available' )
