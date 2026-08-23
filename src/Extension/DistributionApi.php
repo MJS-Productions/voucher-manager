@@ -35,6 +35,15 @@ final class DistributionApi {
 	 * Distributes the next available One-Time Code from a pool.
 	 */
 	public function distribute( int $pool_id ): DistributionResult {
-		return $this->service->distribute( $pool_id );
+		$result = $this->service->distribute( $pool_id );
+
+		if ( $result->success() ) {
+			InventoryChangedEvent::dispatch(
+				$pool_id,
+				InventoryChangedEvent::REASON_DISTRIBUTION
+			);
+		}
+
+		return $result;
 	}
 }

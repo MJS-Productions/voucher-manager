@@ -10,10 +10,12 @@ declare(strict_types=1);
 namespace VoucherManager\Admin;
 
 use RuntimeException;
+use VoucherManager\Domain\Import\ImportRecord;
 use VoucherManager\Domain\Import\ImportResult;
 use VoucherManager\Domain\Import\ImportService;
 use VoucherManager\Domain\Log\OperationalEvent;
 use VoucherManager\Domain\Log\OperationalLogger;
+use VoucherManager\Extension\InventoryChangedEvent;
 use VoucherManager\Infrastructure\WordPress\WpdbCodeRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbImportRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbLogRepository;
@@ -155,6 +157,13 @@ final class ImportAdmin {
 			$this->redirect( array( 'vm_notice' => 'import_error' ) );
 		}
 
+		if ( 0 < $result->imported() ) {
+			InventoryChangedEvent::dispatch(
+				$pool_id,
+				InventoryChangedEvent::REASON_IMPORT
+			);
+		}
+
 		$this->redirect(
 			array(
 				'vm_notice' => 'imported',
@@ -177,6 +186,16 @@ final class ImportAdmin {
 			$this->redirect( array( 'vm_notice' => 'rollback_confirmation_required' ) );
 		}
 
+		$rollback_import = $this->boundary->execute(
+			fn() => $this->imports->find( $import_id ),
+			null,
+			array(
+				'action'    => 'import.rollback_inventory_context',
+				'import_id' => $import_id,
+				'source'    => 'manual',
+			)
+		);
+
 		$deleted = $this->boundary->execute(
 			fn(): int|false => $this->service->rollback( $import_id ),
 			null,
@@ -195,6 +214,13 @@ final class ImportAdmin {
 			$this->redirect( array( 'vm_notice' => 'import_error' ) );
 		}
 
+		if ( 0 < $deleted && $rollback_import instanceof ImportRecord ) {
+			InventoryChangedEvent::dispatch(
+				$rollback_import->pool_id(),
+				InventoryChangedEvent::REASON_ROLLBACK
+			);
+		}
+
 		$this->redirect( array( 'vm_notice' => 'rolled_back', 'deleted' => $deleted ) );
 	}
 
@@ -206,7 +232,7 @@ final class ImportAdmin {
 			array( 'action' => 'import.render_rollback_confirmation', 'import_id' => $import_id, 'source' => 'manual' )
 		);
 
-		if ( ! $import instanceof \VoucherManager\Domain\Import\ImportRecord || ! $this->view_model->can_review_rollback( $import ) ) {
+		if ( ! $import instanceof ImportRecord || ! $this->view_model->can_review_rollback( $import ) ) {
 			$this->redirect( array( 'vm_notice' => 'rollback_unavailable' ) );
 		}
 
