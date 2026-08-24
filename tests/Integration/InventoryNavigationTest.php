@@ -17,18 +17,19 @@ $assert = static function ( bool $condition, string $message ): void {
 
 $admin_source       = file_get_contents( $root . '/src/Admin/InventoryAdmin.php' );
 $admin_assets_source = file_get_contents( $root . '/src/Admin/Admin.php' );
+$admin_styles_source = file_get_contents( $root . '/assets/css/admin.css' );
 $pools_source       = file_get_contents( $root . '/templates/admin/pools.php' );
 $composer           = file_get_contents( $root . '/composer.json' );
 
 $assert(
 	is_string( $admin_source )
 	&& is_string( $admin_assets_source )
+	&& is_string( $admin_styles_source )
 	&& str_contains( $admin_source, "add_submenu_page(\n\t\t\t'voucher-manager'," )
-	&& str_contains( $admin_assets_source, 'wp_add_inline_style(' )
-	&& str_contains( $admin_assets_source, 'voucher-manager-inventory' )
-	&& str_contains( $admin_assets_source, 'href="admin.php?page=voucher-manager-inventory"' )
+	&& str_contains( $admin_assets_source, "'assets/css/admin.css'" )
+	&& str_contains( $admin_styles_source, 'href="admin.php?page=voucher-manager-inventory"' )
 	&& ! str_contains( $admin_source, 'remove_submenu_page' ),
-	'Inventory must stay registered for access and hide only its visible submenu link through the enqueued admin stylesheet.'
+	'Inventory must stay registered for access while its submenu link is hidden by the enqueued admin stylesheet.'
 );
 
 $assert(

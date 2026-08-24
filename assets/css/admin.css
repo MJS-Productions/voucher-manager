@@ -707,3 +707,8 @@
 	background: #fcf9e8;
 	font-weight: 400;
 }
+
+/* Inventory is a pool detail screen, not a standalone submenu destination. */
+#toplevel_page_voucher-manager .wp-submenu a[href="admin.php?page=voucher-manager-inventory"] {
+	display: none;
+}
