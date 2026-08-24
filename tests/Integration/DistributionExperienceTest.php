@@ -93,7 +93,11 @@ $assert(
 	&& str_contains( $admin, '$this->results->consume' ),
 	'One-time results must use the unique consume-once result store rather than a shared per-user transient.'
 );
-$assert( str_contains( $admin, 'check_admin_referer' ) && str_contains( $admin, "current_user_can( 'manage_options' )" ), 'Distribution execution must retain nonce and capability protection.' );
+$assert(
+	str_contains( $admin, 'check_admin_referer' )
+	&& str_contains( $admin, 'current_user_can( Capabilities::DISTRIBUTE_CODES )' ),
+	'Distribution execution must retain nonce and Voucher Manager capability protection.'
+);
 $assert( str_contains( $composer, '@test:distribution-experience' ) && strpos( $composer, '@test:distribution-experience' ) < strpos( $composer, '@build' ), 'Distribution Experience test must run before build.' );
 
 echo "Distribution experience OK: inventory guidance, one-time result presentation, copy action and POST safety verified.\n";
