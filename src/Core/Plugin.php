@@ -29,7 +29,6 @@ final class Plugin {
 
 	public function boot(): void {
 		add_action( 'plugins_loaded', array( $this, 'maybe_upgrade_database' ), 5 );
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		( new ActivityRetentionScheduler() )->register();
 		if ( is_admin() ) {
 			( new Admin() )->register();
@@ -42,11 +41,4 @@ final class Plugin {
 		Activator::ensure_administrator_capabilities();
 	}
 
-	public function load_textdomain(): void {
-		load_plugin_textdomain(
-			'voucher-manager',
-			false,
-			dirname( plugin_basename( VOUCHER_MANAGER_FILE ) ) . '/languages'
-		);
-	}
 }

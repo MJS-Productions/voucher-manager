@@ -110,10 +110,8 @@ $assert(
 $plugin = file_get_contents( $root . '/src/Core/Plugin.php' );
 $assert(
 	is_string( $plugin )
-	&& str_contains( $plugin, "load_plugin_textdomain(" )
-	&& str_contains( $plugin, "'voucher-manager'" )
-	&& str_contains( $plugin, "'/languages'" ),
-	'Plugin must load the bundled German catalog from the languages directory.'
+	&& ! str_contains( $plugin, 'load_plugin_textdomain(' ),
+	'Plugin must rely on WordPress language packs instead of manually loading a bundled text domain.'
 );
 
 $danger = file_get_contents( $root . '/templates/admin/pool-danger-zone.php' );
