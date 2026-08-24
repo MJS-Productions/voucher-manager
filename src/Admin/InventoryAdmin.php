@@ -42,7 +42,7 @@ final class InventoryAdmin {
 			'voucher-manager',
 			__( 'Pool Inventory', 'voucher-manager' ),
 			__( 'Pool Inventory', 'voucher-manager' ),
-			'manage_options',
+			Capabilities::VIEW_INVENTORY,
 			'voucher-manager-inventory',
 			array( $this, 'render' )
 		);
@@ -111,7 +111,7 @@ final class InventoryAdmin {
 	}
 
 	private function guard(): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( Capabilities::VIEW_INVENTORY ) ) {
 			wp_die( esc_html__( 'You are not allowed to access this page.', 'voucher-manager' ) );
 		}
 	}

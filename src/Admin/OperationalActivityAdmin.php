@@ -23,14 +23,14 @@ final class OperationalActivityAdmin {
 			'voucher-manager',
 			__( 'Operational Activity', 'voucher-manager' ),
 			_x( 'Activity', 'admin menu label', 'voucher-manager' ),
-			'manage_options',
+			Capabilities::VIEW_ACTIVITY,
 			'voucher-manager-activity',
 			array( $this, 'render' )
 		);
 	}
 
 	public function render(): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( Capabilities::VIEW_ACTIVITY ) ) {
 			wp_die( esc_html__( 'You are not allowed to access this page.', 'voucher-manager' ) );
 		}
 

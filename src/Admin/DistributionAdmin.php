@@ -53,7 +53,7 @@ final class DistributionAdmin {
 			'voucher-manager',
 			__( 'Distribution', 'voucher-manager' ),
 			__( 'Distribution', 'voucher-manager' ),
-			'manage_options',
+			Capabilities::DISTRIBUTE_CODES,
 			'voucher-manager-distribution',
 			array( $this, 'render' )
 		);
@@ -223,7 +223,7 @@ final class DistributionAdmin {
 	}
 
 	private function guard(): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( Capabilities::DISTRIBUTE_CODES ) ) {
 			wp_die(
 				esc_html__( 'You are not allowed to access this page.', 'voucher-manager' )
 			);

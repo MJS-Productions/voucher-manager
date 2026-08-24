@@ -25,7 +25,7 @@ final class Admin {
 		add_menu_page(
 			__( 'Voucher Manager', 'voucher-manager' ),
 			__( 'Voucher Manager', 'voucher-manager' ),
-			'manage_options',
+			Capabilities::VIEW_DASHBOARD,
 			'voucher-manager',
 			array( $this, 'render_dashboard' ),
 			'dashicons-tickets-alt',
@@ -36,7 +36,7 @@ final class Admin {
 			'voucher-manager',
 			__( 'Voucher Manager Dashboard', 'voucher-manager' ),
 			__( 'Dashboard', 'voucher-manager' ),
-			'manage_options',
+			Capabilities::VIEW_DASHBOARD,
 			'voucher-manager',
 			array( $this, 'render_dashboard' )
 		);
@@ -63,7 +63,7 @@ final class Admin {
 	}
 
 	public function render_dashboard(): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( Capabilities::VIEW_DASHBOARD ) ) {
 			wp_die( esc_html__( 'You are not allowed to access this page.', 'voucher-manager' ) );
 		}
 		$data     = ( new DashboardData() )->get();
