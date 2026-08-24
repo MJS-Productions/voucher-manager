@@ -17,6 +17,7 @@ $assert = static function ( bool $condition, string $message ): void {
 
 $distribution_service  = file_get_contents( $root . '/src/Domain/Distribution/DistributionService.php' );
 $distribution_template = file_get_contents( $root . '/templates/admin/distribution.php' );
+$admin_script          = file_get_contents( $root . '/assets/js/admin.js' );
 $audit                 = file_get_contents( $root . '/docs/INTERNATIONALIZATION_AUDIT.md' );
 $composer              = file_get_contents( $root . '/composer.json' );
 $plugin                = file_get_contents( $root . '/voucher-manager.php' );
@@ -31,11 +32,13 @@ $assert(
 
 $assert(
 	is_string( $distribution_template )
+	&& is_string( $admin_script )
 	&& str_contains( $distribution_template, 'data-copy-label' )
 	&& str_contains( $distribution_template, 'data-copied-label' )
-	&& str_contains( $distribution_template, 'const copyLabel = button.dataset.copyLabel || button.textContent' )
-	&& ! str_contains( $distribution_template, "|| 'Copied'" )
-	&& ! str_contains( $distribution_template, "|| 'Copy code'" ),
+	&& str_contains( $admin_script, 'button.dataset.copyLabel || button.textContent' )
+	&& str_contains( $admin_script, 'button.dataset.copiedLabel || copyLabel' )
+	&& ! str_contains( $admin_script, "|| 'Copied'" )
+	&& ! str_contains( $admin_script, "|| 'Copy code'" ),
 	'JavaScript must reuse translated HTML labels rather than hard-coded English fallbacks.'
 );
 
