@@ -115,10 +115,10 @@ $assert(
 );
 $assert(
 	is_string( $admin_source )
-	&& str_contains( $admin_source, "current_user_can( 'manage_options' )" )
+	&& str_contains( $admin_source, 'current_user_can( Capabilities::VIEW_ACTIVITY )' )
 	&& str_contains( $admin_source, 'sanitize_key' )
 	&& str_contains( $admin_source, 'wp_unslash' ),
-	'The activity admin boundary must enforce capability and sanitized request handling.'
+	'The activity admin boundary must enforce Voucher Manager capability and sanitized request handling.'
 );
 $assert(
 	is_string( $root_admin ) && str_contains( $root_admin, 'OperationalActivityAdmin' ),

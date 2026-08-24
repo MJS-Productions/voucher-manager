@@ -187,10 +187,10 @@ $assert(
 );
 $assert(
 	is_string( $admin_source )
-	&& str_contains( $admin_source, "current_user_can( 'manage_options' )" )
+	&& str_contains( $admin_source, 'current_user_can( Capabilities::VIEW_INVENTORY )' )
 	&& str_contains( $admin_source, 'sanitize_key' )
 	&& str_contains( $admin_source, 'absint' ),
-	'Inventory access must retain capability and sanitized request handling.'
+	'Inventory access must retain Voucher Manager capability and sanitized request handling.'
 );
 $assert(
 	is_string( $template_source )

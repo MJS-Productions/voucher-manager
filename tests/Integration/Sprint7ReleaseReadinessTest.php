@@ -60,11 +60,11 @@ $assert(
 
 $assert(
 	is_string( $admin )
-	&& str_contains( $admin, "current_user_can( 'manage_options' )" )
+	&& str_contains( $admin, 'current_user_can( Capabilities::VIEW_INVENTORY )' )
 	&& str_contains( $admin, "add_filter( 'parent_file'" )
 	&& str_contains( $admin, "add_filter( 'submenu_file'" )
 	&& ! str_contains( $admin, 'remove_submenu_page' ),
-	'Inventory navigation must preserve capability checks and real WordPress parent registration.'
+	'Inventory navigation must preserve Voucher Manager capability checks and real WordPress parent registration.'
 );
 
 $assert(
