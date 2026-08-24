@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace VoucherManager\Lifecycle;
 
+use VoucherManager\Admin\Capabilities;
 use VoucherManager\Database\Migrator;
 use VoucherManager\Domain\Log\OperationalEvent;
 use VoucherManager\Domain\Log\OperationalLogger;
@@ -33,6 +34,8 @@ final class Activator {
 
 		update_option( 'voucher_manager_version', VOUCHER_MANAGER_VERSION, false );
 
+		self::grant_administrator_capabilities();
+
 		( new ActivityRetentionScheduler() )->reconcile();
 
 		$logger = new OperationalLogger( new WpdbLogRepository() );
@@ -40,5 +43,20 @@ final class Activator {
 			$was_installed ? OperationalEvent::PLUGIN_ACTIVATED : OperationalEvent::PLUGIN_INSTALLED,
 			$was_installed ? 'Voucher Manager was activated.' : 'Voucher Manager was installed.'
 		);
+	}
+
+	/**
+	 * Ensure administrators retain access to all Voucher Manager operations.
+	 */
+	private static function grant_administrator_capabilities(): void {
+		$administrator = get_role( 'administrator' );
+
+		if ( null === $administrator ) {
+			return;
+		}
+
+		foreach ( Capabilities::all() as $capability ) {
+			$administrator->add_cap( $capability );
+		}
 	}
 }
