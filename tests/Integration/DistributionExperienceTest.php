@@ -72,11 +72,18 @@ $assert( 'warning' === $view->result_tone( 0 ) && 'success' === $view->result_to
 
 $admin    = file_get_contents( $root . '/src/Admin/DistributionAdmin.php' );
 $template = file_get_contents( $root . '/templates/admin/distribution.php' );
+$script   = file_get_contents( $root . '/assets/js/admin.js' );
 $composer = file_get_contents( $root . '/composer.json' );
 
 $assert( is_string( $admin ) && str_contains( $admin, 'PoolOverviewData' ) && str_contains( $admin, "'pool_id'   => \$pool_id" ), 'Distribution controller must prepare inventory rows and retain pool context in the one-time result.' );
 $assert( is_string( $template ) && str_contains( $template, 'Assigned One-Time Code' ) && str_contains( $template, 'shown only in this one-time result' ) && str_contains( $template, 'pool_message' ), 'Success state must clearly present the one-time voucher result.' );
-$assert( str_contains( $template, 'vm-copy-distributed-code' ) && str_contains( $template, 'navigator.clipboard.writeText' ), 'Success state must provide an explicit copy action.' );
+$assert(
+	is_string( $script )
+	&& str_contains( $template, 'vm-copy-distributed-code' )
+	&& str_contains( $script, 'vm-copy-distributed-code' )
+	&& str_contains( $script, 'navigator.clipboard.writeText' ),
+	'Success state must provide an explicit copy action through the enqueued admin script.'
+);
 $assert( str_contains( $template, 'array_filter' ) && str_contains( $template, 'can_distribute' ), 'Pool choices must be filtered through centralized distribution presentation rules.' );
 $assert(
 	str_contains( $template, "\$_GET['pool_id']" )
