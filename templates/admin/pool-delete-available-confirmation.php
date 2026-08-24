@@ -9,18 +9,18 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 $danger_url = add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'danger-zone', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) );
 ?>
 <div class="wrap voucher-manager">
-	<h1><?php echo esc_html__( 'Confirm available-code deletion', 'voucher-manager' ); ?></h1>
-	<p><a href="<?php echo esc_url( $danger_url ); ?>">&larr; <?php echo esc_html__( 'Back to Pool Danger Zone', 'voucher-manager' ); ?></a></p>
-	<?php if ( 'confirmation_required' === $notice ) : ?><div class="notice notice-error"><p><?php echo esc_html__( 'You must explicitly acknowledge the permanent deletion before continuing.', 'voucher-manager' ); ?></p></div><?php endif; ?>
-	<?php if ( 'delete_failed' === $notice ) : ?><div class="notice notice-error"><p><?php echo esc_html__( 'Available-code deletion failed. No additional action was performed.', 'voucher-manager' ); ?></p></div><?php endif; ?>
+	<h1><?php echo esc_html__( 'Confirm available-code deletion', 'mjs-productions-voucher-manager' ); ?></h1>
+	<p><a href="<?php echo esc_url( $danger_url ); ?>">&larr; <?php echo esc_html__( 'Back to Pool Danger Zone', 'mjs-productions-voucher-manager' ); ?></a></p>
+	<?php if ( 'confirmation_required' === $notice ) : ?><div class="notice notice-error"><p><?php echo esc_html__( 'You must explicitly acknowledge the permanent deletion before continuing.', 'mjs-productions-voucher-manager' ); ?></p></div><?php endif; ?>
+	<?php if ( 'delete_failed' === $notice ) : ?><div class="notice notice-error"><p><?php echo esc_html__( 'Available-code deletion failed. No additional action was performed.', 'mjs-productions-voucher-manager' ); ?></p></div><?php endif; ?>
 	<section class="voucher-manager__card voucher-manager__danger-zone">
 		<h2><?php echo esc_html( $pool->name() ); ?></h2>
-		<p><strong><?php echo esc_html__( 'This action permanently deletes unused codes.', 'voucher-manager' ); ?></strong></p>
+		<p><strong><?php echo esc_html__( 'This action permanently deletes unused codes.', 'mjs-productions-voucher-manager' ); ?></strong></p>
 		<dl>
-			<dt><?php echo esc_html__( 'Available One-Time Codes to delete', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $summary['available'] ) ); ?></dd>
-			<dt><?php echo esc_html__( 'Distributed One-Time Codes remain', 'voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $summary['assigned'] ) ); ?></dd>
-			<dt><?php echo esc_html__( 'Pool remains', 'voucher-manager' ); ?></dt><dd><?php echo esc_html__( 'Yes', 'voucher-manager' ); ?></dd>
-			<dt><?php echo esc_html__( 'Import and Activity history remain', 'voucher-manager' ); ?></dt><dd><?php echo esc_html__( 'Yes', 'voucher-manager' ); ?></dd>
+			<dt><?php echo esc_html__( 'Available One-Time Codes to delete', 'mjs-productions-voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $summary['available'] ) ); ?></dd>
+			<dt><?php echo esc_html__( 'Distributed One-Time Codes remain', 'mjs-productions-voucher-manager' ); ?></dt><dd><?php echo esc_html( number_format_i18n( $summary['assigned'] ) ); ?></dd>
+			<dt><?php echo esc_html__( 'Pool remains', 'mjs-productions-voucher-manager' ); ?></dt><dd><?php echo esc_html__( 'Yes', 'mjs-productions-voucher-manager' ); ?></dd>
+			<dt><?php echo esc_html__( 'Import and Activity history remain', 'mjs-productions-voucher-manager' ); ?></dt><dd><?php echo esc_html__( 'Yes', 'mjs-productions-voucher-manager' ); ?></dd>
 		</dl>
 		<?php if ( 0 < $summary['available'] ) : ?>
 			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
@@ -36,17 +36,17 @@ $danger_url = add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' 
 								'I understand that this permanently deletes %d available One-Time Code.',
 								'I understand that this permanently deletes %d available One-Time Codes.',
 								$summary['available'],
-								'voucher-manager'
+								'mjs-productions-voucher-manager'
 							),
 							$summary['available']
 						)
 					);
 					?>
 				</label></p>
-				<p><button class="button" type="submit"><?php echo esc_html__( 'Permanently delete available One-Time Codes', 'voucher-manager' ); ?></button></p>
+				<p><button class="button" type="submit"><?php echo esc_html__( 'Permanently delete available One-Time Codes', 'mjs-productions-voucher-manager' ); ?></button></p>
 			</form>
 		<?php else : ?>
-			<p><?php echo esc_html__( 'There are no available One-Time Codes to delete.', 'voucher-manager' ); ?></p>
+			<p><?php echo esc_html__( 'There are no available One-Time Codes to delete.', 'mjs-productions-voucher-manager' ); ?></p>
 		<?php endif; ?>
 	</section>
 </div>

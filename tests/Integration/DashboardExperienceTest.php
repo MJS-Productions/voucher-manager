@@ -230,7 +230,7 @@ $assert(
 	'Settings, maintenance and Pool lifecycle events must participate in Activity outcome filtering.'
 );
 $assert(
-	is_string( $admin_source ) && str_contains( $admin_source, "__( 'Dashboard', 'voucher-manager' )" ),
+	is_string( $admin_source ) && str_contains( $admin_source, "__( 'Dashboard', 'mjs-productions-voucher-manager' )" ),
 	'The duplicated submenu label should be renamed to Dashboard.'
 );
 $assert(

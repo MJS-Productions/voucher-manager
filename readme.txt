@@ -1,4 +1,4 @@
-=== Voucher Manager ===
+=== MJS-Productions Voucher Manager ===
 Contributors: mjs512
 Tags: one-time codes, vouchers, inventory, code distribution
 Requires at least: 6.5

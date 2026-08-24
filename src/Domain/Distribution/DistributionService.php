@@ -18,7 +18,7 @@ final class DistributionService {
 	public function distribute( int $pool_id ): DistributionResult {
 		$pool = $this->pools->find( $pool_id );
 		if ( null === $pool || ! $pool->is_active() ) {
-			return new DistributionResult( false, null, __( 'Pool is unavailable.', 'voucher-manager' ), 0 );
+			return new DistributionResult( false, null, __( 'Pool is unavailable.', 'mjs-productions-voucher-manager' ), 0 );
 		}
 
 		$claimed = $this->codes->claim_next_available( $pool_id );
@@ -28,7 +28,7 @@ final class DistributionService {
 				'No available code could be distributed.',
 				array( 'pool_id' => $pool_id )
 			);
-			return new DistributionResult( false, null, __( 'No available One-Time Codes remain in this pool.', 'voucher-manager' ), 0 );
+			return new DistributionResult( false, null, __( 'No available One-Time Codes remain in this pool.', 'mjs-productions-voucher-manager' ), 0 );
 		}
 
 		// Once the atomic claim commits, the successful business outcome is
@@ -46,7 +46,7 @@ final class DistributionService {
 			)
 		);
 
-		return new DistributionResult( true, $claimed['code'], __( 'One-Time Code distributed.', 'voucher-manager' ), $remaining );
+		return new DistributionResult( true, $claimed['code'], __( 'One-Time Code distributed.', 'mjs-productions-voucher-manager' ), $remaining );
 	}
 
 	private function remaining_safely( int $pool_id ): ?int {

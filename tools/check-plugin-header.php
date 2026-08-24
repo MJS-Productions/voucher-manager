@@ -11,8 +11,8 @@ if (false === $plugin) {
 }
 
 $required = [
-    'Plugin Name' => 'Voucher Manager',
-    'Text Domain' => 'voucher-manager',
+    'Plugin Name' => 'MJS-Productions Voucher Manager',
+    'Text Domain' => 'mjs-productions-voucher-manager',
     'Requires PHP' => '8.1',
 ];
 

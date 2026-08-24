@@ -36,30 +36,30 @@ final class OperationalActivityViewModel {
 
 	public function severity_label( string $event_type ): string {
 		return match ( $this->tone( $event_type ) ) {
-			'success' => __( 'Success', 'voucher-manager' ),
-			'warning' => __( 'Attention', 'voucher-manager' ),
-			'error'   => __( 'Error', 'voucher-manager' ),
-			default   => __( 'Information', 'voucher-manager' ),
+			'success' => __( 'Success', 'mjs-productions-voucher-manager' ),
+			'warning' => __( 'Attention', 'mjs-productions-voucher-manager' ),
+			'error'   => __( 'Error', 'mjs-productions-voucher-manager' ),
+			default   => __( 'Information', 'mjs-productions-voucher-manager' ),
 		};
 	}
 
 	public function guidance( string $event_type ): string {
 		return match ( $event_type ) {
 			'distribution.empty' =>
-				__( 'Import additional One-Time Codes into this pool before the next distribution.', 'voucher-manager' ),
+				__( 'Import additional One-Time Codes into this pool before the next distribution.', 'mjs-productions-voucher-manager' ),
 			'import.rollback_blocked' =>
-				__( 'This import contains assigned One-Time Codes and cannot be rolled back safely.', 'voucher-manager' ),
+				__( 'This import contains assigned One-Time Codes and cannot be rolled back safely.', 'mjs-productions-voucher-manager' ),
 			'import.failed' =>
-				__( 'Review the source file and retry the import. Technical details remain in the WordPress error log.', 'voucher-manager' ),
+				__( 'Review the source file and retry the import. Technical details remain in the WordPress error log.', 'mjs-productions-voucher-manager' ),
 			'distribution.failed' =>
-				__( 'Retry the distribution and confirm that the selected pool is active and has inventory.', 'voucher-manager' ),
+				__( 'Retry the distribution and confirm that the selected pool is active and has inventory.', 'mjs-productions-voucher-manager' ),
 			'admin.action_failed' =>
-				__( 'Retry the administrative action. If it fails again, review the WordPress error log.', 'voucher-manager' ),
+				__( 'Retry the administrative action. If it fails again, review the WordPress error log.', 'mjs-productions-voucher-manager' ),
 			'pool.delete_failed' =>
-				__( 'The deletion was rolled back. The pool data should remain intact; retry or review the WordPress error log.', 'voucher-manager' ),
+				__( 'The deletion was rolled back. The pool data should remain intact; retry or review the WordPress error log.', 'mjs-productions-voucher-manager' ),
 			'pool.available_codes_deleted',
 			'pool.deleted' =>
-				__( 'No One-Time Code values were retained in Activity.', 'voucher-manager' ),
+				__( 'No One-Time Code values were retained in Activity.', 'mjs-productions-voucher-manager' ),
 			default => '',
 		};
 	}
@@ -71,12 +71,12 @@ final class OperationalActivityViewModel {
 
 	public function family_label( string $family ): string {
 		return match ( $family ) {
-			'import'       => __( 'Imports', 'voucher-manager' ),
-			'distribution' => __( 'Distribution', 'voucher-manager' ),
-			'pool'         => __( 'Pools', 'voucher-manager' ),
-			'settings'     => __( 'Settings', 'voucher-manager' ),
-			'admin'        => __( 'Administration', 'voucher-manager' ),
-			default        => __( 'All activity', 'voucher-manager' ),
+			'import'       => __( 'Imports', 'mjs-productions-voucher-manager' ),
+			'distribution' => __( 'Distribution', 'mjs-productions-voucher-manager' ),
+			'pool'         => __( 'Pools', 'mjs-productions-voucher-manager' ),
+			'settings'     => __( 'Settings', 'mjs-productions-voucher-manager' ),
+			'admin'        => __( 'Administration', 'mjs-productions-voucher-manager' ),
+			default        => __( 'All activity', 'mjs-productions-voucher-manager' ),
 		};
 	}
 }

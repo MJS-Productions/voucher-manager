@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Voucher Manager
+ * Plugin Name:       MJS-Productions Voucher Manager
  * Plugin URI:        https://github.com/MJS-Productions/voucher-manager
  * Description:       Professional One-Time Code Management for WordPress.
  * Version:           1.0.8
@@ -10,7 +10,7 @@
  * Author URI:        https://mjs-productions.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       voucher-manager
+ * Text Domain:       mjs-productions-voucher-manager
  * Domain Path:       /languages
  *
  * @package VoucherManager

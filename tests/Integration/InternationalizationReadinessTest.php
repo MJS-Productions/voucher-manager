@@ -23,9 +23,9 @@ $plugin                = file_get_contents( $root . '/voucher-manager.php' );
 
 $assert(
 	is_string( $distribution_service )
-	&& str_contains( $distribution_service, "__( 'Pool is unavailable.', 'voucher-manager' )" )
-	&& str_contains( $distribution_service, "__( 'No available One-Time Codes remain in this pool.', 'voucher-manager' )" )
-	&& str_contains( $distribution_service, "__( 'One-Time Code distributed.', 'voucher-manager' )" ),
+	&& str_contains( $distribution_service, "__( 'Pool is unavailable.', 'mjs-productions-voucher-manager' )" )
+	&& str_contains( $distribution_service, "__( 'No available One-Time Codes remain in this pool.', 'mjs-productions-voucher-manager' )" )
+	&& str_contains( $distribution_service, "__( 'One-Time Code distributed.', 'mjs-productions-voucher-manager' )" ),
 	'User-visible Distribution result messages must use the plugin text domain.'
 );
 
@@ -60,7 +60,7 @@ foreach ( $runtime_files as $file ) {
 
 	foreach ( $calls as $call ) {
 		$assert(
-			'voucher-manager' === $call[4],
+			'mjs-productions-voucher-manager' === $call[4],
 			'Runtime translation call uses an unexpected text domain in ' . basename( $file ) . '.'
 		);
 	}
@@ -84,7 +84,7 @@ $assert(
 
 $assert(
 	is_string( $plugin )
-	&& str_contains( $plugin, "Text Domain:       voucher-manager" )
+	&& str_contains( $plugin, "Text Domain:       mjs-productions-voucher-manager" )
 	&& str_contains( $plugin, "Domain Path:       /languages" )
 	&& str_contains( $plugin, "VOUCHER_MANAGER_DATABASE_VERSION', '2'" ),
 	'Plugin localization metadata and database boundary must remain stable.'

@@ -23,7 +23,7 @@ final class InventoryViewModel {
 		if ( '' === $suffix ) {
 			return sprintf(
 				/* translators: %d: internal code ID */
-				__( 'Code #%d', 'voucher-manager' ),
+				__( 'Code #%d', 'mjs-productions-voucher-manager' ),
 				$record->id()
 			);
 		}
@@ -33,9 +33,9 @@ final class InventoryViewModel {
 
 	public function status_label( CodeStatus $status ): string {
 		return match ( $status ) {
-			CodeStatus::AVAILABLE => _x( 'Available', 'One-Time Code status', 'voucher-manager' ),
-			CodeStatus::ASSIGNED  => _x( 'Assigned', 'One-Time Code status', 'voucher-manager' ),
-			default               => _x( 'Other', 'One-Time Code status', 'voucher-manager' ),
+			CodeStatus::AVAILABLE => _x( 'Available', 'One-Time Code status', 'mjs-productions-voucher-manager' ),
+			CodeStatus::ASSIGNED  => _x( 'Assigned', 'One-Time Code status', 'mjs-productions-voucher-manager' ),
+			default               => _x( 'Other', 'One-Time Code status', 'mjs-productions-voucher-manager' ),
 		};
 	}
 
@@ -88,9 +88,9 @@ final class InventoryViewModel {
 		$parts = array();
 
 		if ( 'available' === $state ) {
-			$parts[] = _x( 'Available', 'One-Time Code status', 'voucher-manager' );
+			$parts[] = _x( 'Available', 'One-Time Code status', 'mjs-productions-voucher-manager' );
 		} elseif ( 'assigned' === $state ) {
-			$parts[] = _x( 'Assigned', 'One-Time Code status', 'voucher-manager' );
+			$parts[] = _x( 'Assigned', 'One-Time Code status', 'mjs-productions-voucher-manager' );
 		}
 
 		if ( null !== $import_id ) {
@@ -98,7 +98,7 @@ final class InventoryViewModel {
 				if ( $import_id === $option['id'] ) {
 					$parts[] = sprintf(
 						/* translators: 1: import ID, 2: filename */
-						__( 'Import #%1$d — %2$s', 'voucher-manager' ),
+						__( 'Import #%1$d — %2$s', 'mjs-productions-voucher-manager' ),
 						$option['id'],
 						$option['filename']
 					);
@@ -112,7 +112,7 @@ final class InventoryViewModel {
 
 	public function result_range( int $page, int $per_page, int $total ): string {
 		if ( 0 === $total ) {
-			return __( '0 matching records', 'voucher-manager' );
+			return __( '0 matching records', 'mjs-productions-voucher-manager' );
 		}
 
 		$first = ( ( $page - 1 ) * $per_page ) + 1;
@@ -120,7 +120,7 @@ final class InventoryViewModel {
 
 		return sprintf(
 			/* translators: 1: first result, 2: last result, 3: total matching results */
-			__( 'Showing %1$d–%2$d of %3$d matching records', 'voucher-manager' ),
+			__( 'Showing %1$d–%2$d of %3$d matching records', 'mjs-productions-voucher-manager' ),
 			$first,
 			$last,
 			$total
@@ -129,33 +129,33 @@ final class InventoryViewModel {
 
 	public function empty_state_title( bool $pool_empty, string $state, ?int $import_id ): string {
 		if ( $pool_empty ) {
-			return __( 'This pool has no inventory yet.', 'voucher-manager' );
+			return __( 'This pool has no inventory yet.', 'mjs-productions-voucher-manager' );
 		}
 
 		if ( null !== $import_id ) {
-			return __( 'No codes match this import filter.', 'voucher-manager' );
+			return __( 'No codes match this import filter.', 'mjs-productions-voucher-manager' );
 		}
 
 		return match ( $state ) {
-			'available' => __( 'No available One-Time Codes match this filter.', 'voucher-manager' ),
-			'assigned'  => __( 'No assigned One-Time Codes match this filter.', 'voucher-manager' ),
-			default     => __( 'No matching inventory found.', 'voucher-manager' ),
+			'available' => __( 'No available One-Time Codes match this filter.', 'mjs-productions-voucher-manager' ),
+			'assigned'  => __( 'No assigned One-Time Codes match this filter.', 'mjs-productions-voucher-manager' ),
+			default     => __( 'No matching inventory found.', 'mjs-productions-voucher-manager' ),
 		};
 	}
 
 	public function empty_state_message( bool $pool_empty, string $state, ?int $import_id ): string {
 		if ( $pool_empty ) {
-			return __( 'Import codes to make this pool ready for distribution.', 'voucher-manager' );
+			return __( 'Import codes to make this pool ready for distribution.', 'mjs-productions-voucher-manager' );
 		}
 
 		if ( null !== $import_id ) {
-			return __( 'Reset the filters to return to the complete pool inventory.', 'voucher-manager' );
+			return __( 'Reset the filters to return to the complete pool inventory.', 'mjs-productions-voucher-manager' );
 		}
 
 		return match ( $state ) {
-			'available' => __( 'This pool has inventory, but none of it is currently available.', 'voucher-manager' ),
-			'assigned'  => __( 'This pool has inventory, but no One-Time Codes have been assigned yet.', 'voucher-manager' ),
-			default     => __( 'Reset the filters to return to the complete pool inventory.', 'voucher-manager' ),
+			'available' => __( 'This pool has inventory, but none of it is currently available.', 'mjs-productions-voucher-manager' ),
+			'assigned'  => __( 'This pool has inventory, but no One-Time Codes have been assigned yet.', 'mjs-productions-voucher-manager' ),
+			default     => __( 'Reset the filters to return to the complete pool inventory.', 'mjs-productions-voucher-manager' ),
 		};
 	}
 
@@ -164,20 +164,20 @@ final class InventoryViewModel {
 		$filename  = $record->import_filename();
 
 		if ( null === $import_id ) {
-			return __( 'Import unavailable', 'voucher-manager' );
+			return __( 'Import unavailable', 'mjs-productions-voucher-manager' );
 		}
 
 		if ( null === $filename || '' === trim( $filename ) ) {
 			return sprintf(
 				/* translators: %d: import ID */
-				__( 'Import #%d unavailable', 'voucher-manager' ),
+				__( 'Import #%d unavailable', 'mjs-productions-voucher-manager' ),
 				$import_id
 			);
 		}
 
 		return sprintf(
 			/* translators: 1: import ID, 2: sanitized source filename */
-			__( 'Import #%1$d — %2$s', 'voucher-manager' ),
+			__( 'Import #%1$d — %2$s', 'mjs-productions-voucher-manager' ),
 			$import_id,
 			$filename
 		);
@@ -186,26 +186,26 @@ final class InventoryViewModel {
 	public function formatted_imported_at( CodeInventoryRecord $record ): string {
 		return $this->formatted_utc_time(
 			$record->imported_at(),
-			__( 'Import time unavailable', 'voucher-manager' )
+			__( 'Import time unavailable', 'mjs-productions-voucher-manager' )
 		);
 	}
 
 	public function formatted_assigned_at( CodeInventoryRecord $record ): string {
 		if ( CodeStatus::AVAILABLE === $record->status() && null === $record->assigned_at() ) {
-			return __( 'Not assigned', 'voucher-manager' );
+			return __( 'Not assigned', 'mjs-productions-voucher-manager' );
 		}
 
 		if ( CodeStatus::ASSIGNED === $record->status() && null === $record->assigned_at() ) {
-			return __( 'Assignment time unavailable', 'voucher-manager' );
+			return __( 'Assignment time unavailable', 'mjs-productions-voucher-manager' );
 		}
 
 		if ( CodeStatus::AVAILABLE === $record->status() && null !== $record->assigned_at() ) {
-			return __( 'Unexpected assignment timestamp', 'voucher-manager' );
+			return __( 'Unexpected assignment timestamp', 'mjs-productions-voucher-manager' );
 		}
 
 		return $this->formatted_utc_time(
 			(string) $record->assigned_at(),
-			__( 'Assignment time unavailable', 'voucher-manager' )
+			__( 'Assignment time unavailable', 'mjs-productions-voucher-manager' )
 		);
 	}
 
@@ -224,7 +224,7 @@ final class InventoryViewModel {
 
 	public function lifecycle_note( CodeInventoryRecord $record ): string {
 		return 'attention' === $this->lifecycle_integrity( $record )
-			? __( 'Lifecycle data is inconsistent. No automatic change was made.', 'voucher-manager' )
+			? __( 'Lifecycle data is inconsistent. No automatic change was made.', 'mjs-productions-voucher-manager' )
 			: '';
 	}
 

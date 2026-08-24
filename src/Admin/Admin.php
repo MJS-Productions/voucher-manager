@@ -23,8 +23,8 @@ final class Admin {
 
 	public function register_menu(): void {
 		add_menu_page(
-			__( 'Voucher Manager', 'voucher-manager' ),
-			__( 'Voucher Manager', 'voucher-manager' ),
+			__( 'Voucher Manager', 'mjs-productions-voucher-manager' ),
+			__( 'Voucher Manager', 'mjs-productions-voucher-manager' ),
 			Capabilities::VIEW_DASHBOARD,
 			'voucher-manager',
 			array( $this, 'render_dashboard' ),
@@ -34,8 +34,8 @@ final class Admin {
 
 		add_submenu_page(
 			'voucher-manager',
-			__( 'Voucher Manager Dashboard', 'voucher-manager' ),
-			__( 'Dashboard', 'voucher-manager' ),
+			__( 'Voucher Manager Dashboard', 'mjs-productions-voucher-manager' ),
+			__( 'Dashboard', 'mjs-productions-voucher-manager' ),
 			Capabilities::VIEW_DASHBOARD,
 			'voucher-manager',
 			array( $this, 'render_dashboard' )
@@ -64,7 +64,7 @@ final class Admin {
 
 	public function render_dashboard(): void {
 		if ( ! current_user_can( Capabilities::VIEW_DASHBOARD ) ) {
-			wp_die( esc_html__( 'You are not allowed to access this page.', 'voucher-manager' ) );
+			wp_die( esc_html__( 'You are not allowed to access this page.', 'mjs-productions-voucher-manager' ) );
 		}
 		$data     = ( new DashboardData() )->get();
 		$template = VOUCHER_MANAGER_PATH . 'templates/admin/dashboard.php';

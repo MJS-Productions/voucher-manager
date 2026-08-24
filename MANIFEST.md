@@ -1,4 +1,4 @@
-# Voucher Manager Manifest
+# MJS-Productions Voucher Manager Manifest
 
 > **Professional One-Time Code Management for WordPress**
 
@@ -26,8 +26,8 @@ Designed and developed in Austria by MJS-Production.
 
 ## Product identity
 
-- Product: **Voucher Manager**
+- Product: **MJS-Productions Voucher Manager**
 - Tagline: **Professional One-Time Code Management for WordPress**
-- Free edition: **Voucher Manager**
-- Pro extension: **Voucher Manager Pro**
-- Slug and text domain: `voucher-manager`
+- Free edition: **MJS-Productions Voucher Manager**
+- Pro extension: **MJS-Productions Voucher Manager Pro**
+- Slug and text domain: `mjs-productions-voucher-manager`

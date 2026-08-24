@@ -17,37 +17,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $view_model    = new DashboardViewModel();
 $database_label = $data['database_healthy']
-	? __( 'Ready', 'voucher-manager' )
-	: __( 'Needs attention', 'voucher-manager' );
+	? __( 'Ready', 'mjs-productions-voucher-manager' )
+	: __( 'Needs attention', 'mjs-productions-voucher-manager' );
 
 $metrics = array(
 	'available' => array(
-		'label' => __( 'Available One-Time Codes', 'voucher-manager' ),
-		'hint'  => __( 'Ready for distribution', 'voucher-manager' ),
+		'label' => __( 'Available One-Time Codes', 'mjs-productions-voucher-manager' ),
+		'hint'  => __( 'Ready for distribution', 'mjs-productions-voucher-manager' ),
 	),
 	'assigned' => array(
-		'label' => __( 'Distributed One-Time Codes', 'voucher-manager' ),
-		'hint'  => __( 'Successfully assigned', 'voucher-manager' ),
+		'label' => __( 'Distributed One-Time Codes', 'mjs-productions-voucher-manager' ),
+		'hint'  => __( 'Successfully assigned', 'mjs-productions-voucher-manager' ),
 	),
 	'pools' => array(
-		'label' => __( 'Pools', 'voucher-manager' ),
-		'hint'  => __( 'Code collections', 'voucher-manager' ),
+		'label' => __( 'Pools', 'mjs-productions-voucher-manager' ),
+		'hint'  => __( 'Code collections', 'mjs-productions-voucher-manager' ),
 	),
 	'imports' => array(
-		'label' => __( 'Imports', 'voucher-manager' ),
-		'hint'  => __( 'Completed and recorded', 'voucher-manager' ),
+		'label' => __( 'Imports', 'mjs-productions-voucher-manager' ),
+		'hint'  => __( 'Completed and recorded', 'mjs-productions-voucher-manager' ),
 	),
 );
 ?>
 <div class="wrap voucher-manager">
 	<header class="voucher-manager__header">
 		<div>
-			<h1><?php echo esc_html__( 'Dashboard', 'voucher-manager' ); ?></h1>
+			<h1><?php echo esc_html__( 'Dashboard', 'mjs-productions-voucher-manager' ); ?></h1>
 			<p>
 				<?php
 				echo esc_html__(
 					'Manage One-Time Code inventory and review recent Activity.',
-					'voucher-manager'
+					'mjs-productions-voucher-manager'
 				);
 				?>
 			</p>
@@ -57,19 +57,19 @@ $metrics = array(
 		</span>
 	</header>
 
-	<nav class="voucher-manager__quick-actions" aria-label="<?php echo esc_attr__( 'Quick actions', 'voucher-manager' ); ?>">
+	<nav class="voucher-manager__quick-actions" aria-label="<?php echo esc_attr__( 'Quick actions', 'mjs-productions-voucher-manager' ); ?>">
 		<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-pools&action=new' ) ); ?>">
-			<?php echo esc_html__( 'Create Pool', 'voucher-manager' ); ?>
+			<?php echo esc_html__( 'Create Pool', 'mjs-productions-voucher-manager' ); ?>
 		</a>
 		<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-import' ) ); ?>">
-			<?php echo esc_html__( 'Import Codes', 'voucher-manager' ); ?>
+			<?php echo esc_html__( 'Import Codes', 'mjs-productions-voucher-manager' ); ?>
 		</a>
 		<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-distribution' ) ); ?>">
-			<?php echo esc_html__( 'Distribute Code', 'voucher-manager' ); ?>
+			<?php echo esc_html__( 'Distribute Code', 'mjs-productions-voucher-manager' ); ?>
 		</a>
 	</nav>
 
-	<section class="voucher-manager__metrics voucher-manager__metrics--four" aria-label="<?php echo esc_attr__( 'Inventory overview', 'voucher-manager' ); ?>">
+	<section class="voucher-manager__metrics voucher-manager__metrics--four" aria-label="<?php echo esc_attr__( 'Inventory overview', 'mjs-productions-voucher-manager' ); ?>">
 		<?php foreach ( $metrics as $key => $metric ) : ?>
 			<article class="voucher-manager__metric">
 				<span><?php echo esc_html( $metric['label'] ); ?></span>
@@ -84,9 +84,9 @@ $metrics = array(
 			<div class="voucher-manager__card-header">
 				<div>
 					<h2 id="voucher-manager-activity-title">
-						<?php echo esc_html__( 'Recent activity', 'voucher-manager' ); ?>
+						<?php echo esc_html__( 'Recent activity', 'mjs-productions-voucher-manager' ); ?>
 					</h2>
-					<p><?php echo esc_html__( 'The latest operational events.', 'voucher-manager' ); ?></p>
+					<p><?php echo esc_html__( 'The latest operational events.', 'mjs-productions-voucher-manager' ); ?></p>
 				</div>
 				<div class="voucher-manager__activity-header-actions">
 					<span class="voucher-manager__muted">
@@ -94,22 +94,22 @@ $metrics = array(
 						echo esc_html(
 							sprintf(
 								/* translators: %s: total number of operational log entries */
-								__( '%s total events', 'voucher-manager' ),
+								__( '%s total events', 'mjs-productions-voucher-manager' ),
 								number_format_i18n( $data['counts']['logs'] )
 							)
 						);
 						?>
 					</span>
 					<a href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-activity' ) ); ?>">
-						<?php echo esc_html__( 'View all activity', 'voucher-manager' ); ?>
+						<?php echo esc_html__( 'View all activity', 'mjs-productions-voucher-manager' ); ?>
 					</a>
 				</div>
 			</div>
 
 			<?php if ( empty( $data['activity'] ) ) : ?>
 				<div class="voucher-manager__empty-state">
-					<strong><?php echo esc_html__( 'No activity recorded yet.', 'voucher-manager' ); ?></strong>
-					<p><?php echo esc_html__( 'Imports and distributions will appear here.', 'voucher-manager' ); ?></p>
+					<strong><?php echo esc_html__( 'No activity recorded yet.', 'mjs-productions-voucher-manager' ); ?></strong>
+					<p><?php echo esc_html__( 'Imports and distributions will appear here.', 'mjs-productions-voucher-manager' ); ?></p>
 				</div>
 			<?php else : ?>
 				<ol class="voucher-manager__activity-list">
@@ -145,24 +145,24 @@ $metrics = array(
 		</section>
 
 		<section class="voucher-manager__card" aria-labelledby="voucher-manager-system-title">
-			<h2 id="voucher-manager-system-title"><?php echo esc_html__( 'System status', 'voucher-manager' ); ?></h2>
+			<h2 id="voucher-manager-system-title"><?php echo esc_html__( 'System status', 'mjs-productions-voucher-manager' ); ?></h2>
 			<dl class="voucher-manager__status-list">
 				<div>
-					<dt><?php echo esc_html__( 'Database', 'voucher-manager' ); ?></dt>
+					<dt><?php echo esc_html__( 'Database', 'mjs-productions-voucher-manager' ); ?></dt>
 					<dd class="<?php echo $data['database_healthy'] ? 'is-good' : 'is-warning'; ?>">
 						<?php echo esc_html( $database_label ); ?>
 					</dd>
 				</div>
 				<div>
-					<dt><?php echo esc_html__( 'Database schema', 'voucher-manager' ); ?></dt>
+					<dt><?php echo esc_html__( 'Database schema', 'mjs-productions-voucher-manager' ); ?></dt>
 					<dd><?php echo esc_html( $data['database_version'] ); ?></dd>
 				</div>
 				<div>
-					<dt><?php echo esc_html__( 'WordPress', 'voucher-manager' ); ?></dt>
+					<dt><?php echo esc_html__( 'WordPress', 'mjs-productions-voucher-manager' ); ?></dt>
 					<dd><?php echo esc_html( $data['wordpress_version'] ); ?></dd>
 				</div>
 				<div>
-					<dt><?php echo esc_html__( 'PHP', 'voucher-manager' ); ?></dt>
+					<dt><?php echo esc_html__( 'PHP', 'mjs-productions-voucher-manager' ); ?></dt>
 					<dd><?php echo esc_html( $data['php_version'] ); ?></dd>
 				</div>
 			</dl>
@@ -170,7 +170,7 @@ $metrics = array(
 	</div>
 
 	<footer class="voucher-manager__footer">
-		<span><?php echo esc_html__( 'Made in Austria by MJS-Productions.', 'voucher-manager' ); ?></span>
-		<em><?php echo esc_html__( 'Every great project starts with a single line.', 'voucher-manager' ); ?></em>
+		<span><?php echo esc_html__( 'Made in Austria by MJS-Productions.', 'mjs-productions-voucher-manager' ); ?></span>
+		<em><?php echo esc_html__( 'Every great project starts with a single line.', 'mjs-productions-voucher-manager' ); ?></em>
 	</footer>
 </div>

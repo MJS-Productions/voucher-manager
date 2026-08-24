@@ -40,10 +40,10 @@ final class PoolViewModel {
 	 */
 	public function inventory_label( Pool $pool, int $available ): string {
 		return match ( $this->inventory_state( $pool, $available ) ) {
-			'inactive' => __( 'Inactive', 'voucher-manager' ),
-			'empty'    => __( 'Empty', 'voucher-manager' ),
-			'low'      => __( 'Low stock', 'voucher-manager' ),
-			default    => __( 'Ready', 'voucher-manager' ),
+			'inactive' => __( 'Inactive', 'mjs-productions-voucher-manager' ),
+			'empty'    => __( 'Empty', 'mjs-productions-voucher-manager' ),
+			'low'      => __( 'Low stock', 'mjs-productions-voucher-manager' ),
+			default    => __( 'Ready', 'mjs-productions-voucher-manager' ),
 		};
 	}
 
@@ -52,21 +52,21 @@ final class PoolViewModel {
 	 */
 	public function inventory_hint( Pool $pool, int $available ): string {
 		if ( ! $pool->is_active() ) {
-			return __( 'Distribution is paused.', 'voucher-manager' );
+			return __( 'Distribution is paused.', 'mjs-productions-voucher-manager' );
 		}
 
 		if ( 0 === $available ) {
-			return __( 'Import codes to continue distribution.', 'voucher-manager' );
+			return __( 'Import codes to continue distribution.', 'mjs-productions-voucher-manager' );
 		}
 
 		if ( 0 < $pool->warning_threshold() && $available <= $pool->warning_threshold() ) {
 			return sprintf(
 				/* translators: %d: configured warning threshold */
-				__( 'Warning threshold: %d', 'voucher-manager' ),
+				__( 'Warning threshold: %d', 'mjs-productions-voucher-manager' ),
 				$pool->warning_threshold()
 			);
 		}
 
-		return __( 'Available for distribution.', 'voucher-manager' );
+		return __( 'Available for distribution.', 'mjs-productions-voucher-manager' );
 	}
 }

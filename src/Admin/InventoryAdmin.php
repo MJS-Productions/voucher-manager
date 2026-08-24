@@ -40,8 +40,8 @@ final class InventoryAdmin {
 	public function register_page(): void {
 		add_submenu_page(
 			'voucher-manager',
-			__( 'Pool Inventory', 'voucher-manager' ),
-			__( 'Pool Inventory', 'voucher-manager' ),
+			__( 'Pool Inventory', 'mjs-productions-voucher-manager' ),
+			__( 'Pool Inventory', 'mjs-productions-voucher-manager' ),
 			Capabilities::VIEW_INVENTORY,
 			'voucher-manager-inventory',
 			array( $this, 'render' )
@@ -112,7 +112,7 @@ final class InventoryAdmin {
 
 	private function guard(): void {
 		if ( ! current_user_can( Capabilities::VIEW_INVENTORY ) ) {
-			wp_die( esc_html__( 'You are not allowed to access this page.', 'voucher-manager' ) );
+			wp_die( esc_html__( 'You are not allowed to access this page.', 'mjs-productions-voucher-manager' ) );
 		}
 	}
 }

@@ -29,24 +29,24 @@ $composer        = file_get_contents( $root . '/composer.json' );
 
 $assert(
 	is_string( $inventory_view )
-	&& str_contains( $inventory_view, "_x( 'Available', 'One-Time Code status', 'voucher-manager' )" )
-	&& str_contains( $inventory_view, "_x( 'Assigned', 'One-Time Code status', 'voucher-manager' )" ),
+	&& str_contains( $inventory_view, "_x( 'Available', 'One-Time Code status', 'mjs-productions-voucher-manager' )" )
+	&& str_contains( $inventory_view, "_x( 'Assigned', 'One-Time Code status', 'mjs-productions-voucher-manager' )" ),
 	'Ambiguous One-Time Code status labels must carry translator context.'
 );
 
 $assert(
 	is_string( $import_admin )
-	&& str_contains( $import_admin, "_x( 'Import', 'admin menu label', 'voucher-manager' )" )
+	&& str_contains( $import_admin, "_x( 'Import', 'admin menu label', 'mjs-productions-voucher-manager' )" )
 	&& is_string( $activity_admin )
-	&& str_contains( $activity_admin, "_x( 'Activity', 'admin menu label', 'voucher-manager' )" )
+	&& str_contains( $activity_admin, "_x( 'Activity', 'admin menu label', 'mjs-productions-voucher-manager' )" )
 	&& is_string( $settings_admin )
-	&& str_contains( $settings_admin, "_x( 'Settings', 'admin menu label', 'voucher-manager' )" ),
+	&& str_contains( $settings_admin, "_x( 'Settings', 'admin menu label', 'mjs-productions-voucher-manager' )" ),
 	'Ambiguous admin menu labels must carry translator context.'
 );
 
 $assert(
 	is_string( $distribution )
-	&& str_contains( $distribution, "esc_html_x( 'Pool', 'Distribution form field label', 'voucher-manager' )" )
+	&& str_contains( $distribution, "esc_html_x( 'Pool', 'Distribution form field label', 'mjs-productions-voucher-manager' )" )
 	&& str_contains( $distribution, 'One-Time Code assignment occurs immediately after confirmation.' ),
 	'Distribution field context and neutral assignment wording must remain translation-ready.'
 );

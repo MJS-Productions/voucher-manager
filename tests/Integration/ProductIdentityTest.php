@@ -26,9 +26,9 @@ $tagline = 'Professional One-Time Code Management for WordPress';
 
 $assert(
 	is_string( $plugin )
-	&& str_contains( $plugin, 'Plugin Name:       Voucher Manager' )
+	&& str_contains( $plugin, 'Plugin Name:       MJS-Productions Voucher Manager' )
 	&& str_contains( $plugin, 'Description:       ' . $tagline . '.' )
-	&& str_contains( $plugin, 'Text Domain:       voucher-manager' ),
+	&& str_contains( $plugin, 'Text Domain:       mjs-productions-voucher-manager' ),
 	'Plugin header must use the approved public and technical identity.'
 );
 
@@ -44,8 +44,8 @@ foreach ( array( $readme, $manifest, $adr, $release ) as $document ) {
 $assert(
 	is_string( $adr )
 	&& str_contains( $adr, 'Voucher Manager Pro' )
-	&& str_contains( $adr, 'plugin slug: `voucher-manager`' )
-	&& str_contains( $adr, 'text domain: `voucher-manager`' ),
+	&& str_contains( $adr, 'plugin slug: `mjs-productions-voucher-manager`' )
+	&& str_contains( $adr, 'text domain: `mjs-productions-voucher-manager`' ),
 	'ADR 0033 must preserve the stable Free/Pro and technical identity.'
 );
 

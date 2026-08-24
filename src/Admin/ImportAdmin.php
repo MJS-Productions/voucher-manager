@@ -62,8 +62,8 @@ final class ImportAdmin {
 	public function register_menu(): void {
 		add_submenu_page(
 			'voucher-manager',
-			__( 'Import Codes', 'voucher-manager' ),
-			_x( 'Import', 'admin menu label', 'voucher-manager' ),
+			__( 'Import Codes', 'mjs-productions-voucher-manager' ),
+			_x( 'Import', 'admin menu label', 'mjs-productions-voucher-manager' ),
 			Capabilities::IMPORT_CODES,
 			'voucher-manager-import',
 			array( $this, 'render' )
@@ -293,7 +293,7 @@ final class ImportAdmin {
 	private function guard( string $capability ): void {
 		if ( ! current_user_can( $capability ) ) {
 			wp_die(
-				esc_html__( 'You are not allowed to access this page.', 'voucher-manager' )
+				esc_html__( 'You are not allowed to access this page.', 'mjs-productions-voucher-manager' )
 			);
 		}
 	}

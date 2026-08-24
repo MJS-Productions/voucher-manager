@@ -21,8 +21,8 @@ final class OperationalActivityAdmin {
 	public function register_menu(): void {
 		add_submenu_page(
 			'voucher-manager',
-			__( 'Operational Activity', 'voucher-manager' ),
-			_x( 'Activity', 'admin menu label', 'voucher-manager' ),
+			__( 'Operational Activity', 'mjs-productions-voucher-manager' ),
+			_x( 'Activity', 'admin menu label', 'mjs-productions-voucher-manager' ),
 			Capabilities::VIEW_ACTIVITY,
 			'voucher-manager-activity',
 			array( $this, 'render' )
@@ -31,7 +31,7 @@ final class OperationalActivityAdmin {
 
 	public function render(): void {
 		if ( ! current_user_can( Capabilities::VIEW_ACTIVITY ) ) {
-			wp_die( esc_html__( 'You are not allowed to access this page.', 'voucher-manager' ) );
+			wp_die( esc_html__( 'You are not allowed to access this page.', 'mjs-productions-voucher-manager' ) );
 		}
 
 		$family = isset( $_GET['family'] ) ? sanitize_key( wp_unslash( $_GET['family'] ) ) : 'all';

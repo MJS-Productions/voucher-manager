@@ -39,8 +39,8 @@ final class SettingsAdmin {
 	public function register_menu(): void {
 		add_submenu_page(
 			'voucher-manager',
-			__( 'Voucher Manager Settings', 'voucher-manager' ),
-			_x( 'Settings', 'admin menu label', 'voucher-manager' ),
+			__( 'Voucher Manager Settings', 'mjs-productions-voucher-manager' ),
+			_x( 'Settings', 'admin menu label', 'mjs-productions-voucher-manager' ),
 			'manage_options',
 			'voucher-manager-settings',
 			array( $this, 'render' )
@@ -108,7 +108,7 @@ final class SettingsAdmin {
 
 	private function guard(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You are not allowed to access this page.', 'voucher-manager' ) );
+			wp_die( esc_html__( 'You are not allowed to access this page.', 'mjs-productions-voucher-manager' ) );
 		}
 	}
 

@@ -28,36 +28,36 @@ final class DashboardViewModel {
 			if ( null !== $deleted ) {
 				return sprintf(
 					/* translators: %d: number of permanently deleted available codes */
-					_n( 'Deleted %d available One-Time Code', 'Deleted %d available One-Time Codes', $deleted, 'voucher-manager' ),
+					_n( 'Deleted %d available One-Time Code', 'Deleted %d available One-Time Codes', $deleted, 'mjs-productions-voucher-manager' ),
 					$deleted
 				);
 			}
 		}
 
 		return match ( $event_type ) {
-			'import.completed'             => __( 'Import completed', 'voucher-manager' ),
-			'import.failed'                => __( 'Import failed', 'voucher-manager' ),
-			'import.rolled_back'           => __( 'Import rolled back', 'voucher-manager' ),
-			'import.rollback_blocked'      => __( 'Import rollback blocked', 'voucher-manager' ),
-			'distribution.completed'       => __( 'One-Time Code distributed', 'voucher-manager' ),
-			'distribution.empty'           => __( 'Pool has no available One-Time Codes', 'voucher-manager' ),
-			'distribution.failed'          => __( 'Distribution failed', 'voucher-manager' ),
-			'admin.action_failed'          => __( 'Administrative action failed', 'voucher-manager' ),
-			'settings.updated'             => __( 'Settings updated', 'voucher-manager' ),
-			'activity.cleanup_completed'    => __( 'Activity cleanup completed', 'voucher-manager' ),
-			'activity.cleanup_failed'       => __( 'Activity cleanup failed', 'voucher-manager' ),
-			'plugin.installed'            => __( 'Voucher Manager installed', 'voucher-manager' ),
-			'plugin.activated'            => __( 'Voucher Manager activated', 'voucher-manager' ),
-			'plugin.deactivated'          => __( 'Voucher Manager deactivated', 'voucher-manager' ),
-			'plugin.uninstalled'          => __( 'Voucher Manager uninstalled', 'voucher-manager' ),
-			'pool.created'                 => __( 'Pool created', 'voucher-manager' ),
-			'pool.updated'                 => __( 'Pool updated', 'voucher-manager' ),
-			'pool.activated'               => __( 'Pool activated', 'voucher-manager' ),
-			'pool.deactivated'             => __( 'Pool deactivated', 'voucher-manager' ),
-			'pool.available_codes_deleted' => __( 'Available One-Time Codes deleted', 'voucher-manager' ),
-			'pool.deleted'                 => __( 'Pool deleted', 'voucher-manager' ),
-			'pool.delete_failed'           => __( 'Pool deletion failed', 'voucher-manager' ),
-			default                        => __( 'Voucher Manager activity', 'voucher-manager' ),
+			'import.completed'             => __( 'Import completed', 'mjs-productions-voucher-manager' ),
+			'import.failed'                => __( 'Import failed', 'mjs-productions-voucher-manager' ),
+			'import.rolled_back'           => __( 'Import rolled back', 'mjs-productions-voucher-manager' ),
+			'import.rollback_blocked'      => __( 'Import rollback blocked', 'mjs-productions-voucher-manager' ),
+			'distribution.completed'       => __( 'One-Time Code distributed', 'mjs-productions-voucher-manager' ),
+			'distribution.empty'           => __( 'Pool has no available One-Time Codes', 'mjs-productions-voucher-manager' ),
+			'distribution.failed'          => __( 'Distribution failed', 'mjs-productions-voucher-manager' ),
+			'admin.action_failed'          => __( 'Administrative action failed', 'mjs-productions-voucher-manager' ),
+			'settings.updated'             => __( 'Settings updated', 'mjs-productions-voucher-manager' ),
+			'activity.cleanup_completed'    => __( 'Activity cleanup completed', 'mjs-productions-voucher-manager' ),
+			'activity.cleanup_failed'       => __( 'Activity cleanup failed', 'mjs-productions-voucher-manager' ),
+			'plugin.installed'            => __( 'Voucher Manager installed', 'mjs-productions-voucher-manager' ),
+			'plugin.activated'            => __( 'Voucher Manager activated', 'mjs-productions-voucher-manager' ),
+			'plugin.deactivated'          => __( 'Voucher Manager deactivated', 'mjs-productions-voucher-manager' ),
+			'plugin.uninstalled'          => __( 'Voucher Manager uninstalled', 'mjs-productions-voucher-manager' ),
+			'pool.created'                 => __( 'Pool created', 'mjs-productions-voucher-manager' ),
+			'pool.updated'                 => __( 'Pool updated', 'mjs-productions-voucher-manager' ),
+			'pool.activated'               => __( 'Pool activated', 'mjs-productions-voucher-manager' ),
+			'pool.deactivated'             => __( 'Pool deactivated', 'mjs-productions-voucher-manager' ),
+			'pool.available_codes_deleted' => __( 'Available One-Time Codes deleted', 'mjs-productions-voucher-manager' ),
+			'pool.deleted'                 => __( 'Pool deleted', 'mjs-productions-voucher-manager' ),
+			'pool.delete_failed'           => __( 'Pool deletion failed', 'mjs-productions-voucher-manager' ),
+			default                        => __( 'Voucher Manager activity', 'mjs-productions-voucher-manager' ),
 		};
 	}
 
@@ -104,7 +104,7 @@ final class DashboardViewModel {
 		if ( 'distribution.completed' === $event_type && null !== $remaining ) {
 			$inventory = sprintf(
 				/* translators: %d: number of available One-Time Codes remaining in the pool */
-				_n( 'Remaining inventory: %d One-Time Code', 'Remaining inventory: %d One-Time Codes', $remaining, 'voucher-manager' ),
+				_n( 'Remaining inventory: %d One-Time Code', 'Remaining inventory: %d One-Time Codes', $remaining, 'mjs-productions-voucher-manager' ),
 				$remaining
 			);
 
@@ -114,7 +114,7 @@ final class DashboardViewModel {
 
 			$pool = sprintf(
 				/* translators: %s: Pool name */
-				__( 'Pool: %s', 'voucher-manager' ),
+				__( 'Pool: %s', 'mjs-productions-voucher-manager' ),
 				$pool_name
 			);
 
@@ -130,30 +130,30 @@ final class DashboardViewModel {
 			if ( '' !== $pool_name ) {
 				$parts[] = sprintf(
 					/* translators: %s: Pool name */
-					__( 'Pool: %s', 'voucher-manager' ),
+					__( 'Pool: %s', 'mjs-productions-voucher-manager' ),
 					$pool_name
 				);
 			} elseif ( 0 < $pool_id ) {
 				$parts[] = sprintf(
 					/* translators: %d: internal pool ID */
-					__( 'Pool #%d', 'voucher-manager' ),
+					__( 'Pool #%d', 'mjs-productions-voucher-manager' ),
 					$pool_id
 				);
 			}
 
 			$parts[] = sprintf(
 				/* translators: %d: number of imported codes */
-				_n( '%d One-Time Code added', '%d One-Time Codes added', $imported, 'voucher-manager' ),
+				_n( '%d One-Time Code added', '%d One-Time Codes added', $imported, 'mjs-productions-voucher-manager' ),
 				$imported
 			);
 			$parts[] = sprintf(
 				/* translators: %d: number of skipped rows */
-				_n( '%d skipped', '%d skipped', $skipped, 'voucher-manager' ),
+				_n( '%d skipped', '%d skipped', $skipped, 'mjs-productions-voucher-manager' ),
 				$skipped
 			);
 			$parts[] = sprintf(
 				/* translators: %d: number of invalid rows */
-				_n( '%d invalid', '%d invalid', $invalid, 'voucher-manager' ),
+				_n( '%d invalid', '%d invalid', $invalid, 'mjs-productions-voucher-manager' ),
 				$invalid
 			);
 
@@ -163,7 +163,7 @@ final class DashboardViewModel {
 		if ( '' !== $pool_name ) {
 			return sprintf(
 				/* translators: %s: Pool name */
-				__( 'Pool: %s', 'voucher-manager' ),
+				__( 'Pool: %s', 'mjs-productions-voucher-manager' ),
 				$pool_name
 			);
 		}
@@ -171,7 +171,7 @@ final class DashboardViewModel {
 		if ( 0 < $pool_id ) {
 			return sprintf(
 				/* translators: %d: internal pool ID */
-				__( 'Pool #%d', 'voucher-manager' ),
+				__( 'Pool #%d', 'mjs-productions-voucher-manager' ),
 				$pool_id
 			);
 		}
@@ -179,7 +179,7 @@ final class DashboardViewModel {
 		if ( 0 < $import_id ) {
 			return sprintf(
 				/* translators: %d: internal import ID */
-				__( 'Import #%d', 'voucher-manager' ),
+				__( 'Import #%d', 'mjs-productions-voucher-manager' ),
 				$import_id
 			);
 		}

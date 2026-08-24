@@ -1,4 +1,4 @@
-# Voucher Manager
+# MJS-Productions Voucher Manager
 
 Professional One-Time Code Management for WordPress.
 

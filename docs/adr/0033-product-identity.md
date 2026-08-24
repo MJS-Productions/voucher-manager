@@ -2,13 +2,13 @@
 
 ## Status
 
-Accepted for Sprint 10 Part 3.
+Updated following WordPress.org plugin review.
 
 ## Decision
 
 The official product name is:
 
-**Voucher Manager**
+**MJS-Productions Voucher Manager**
 
 The official tagline is:
 
@@ -16,20 +16,28 @@ The official tagline is:
 
 The product family is:
 
-- **Voucher Manager** — Free edition
-- **Voucher Manager Pro** — commercial extension
+- **MJS-Productions Voucher Manager** — Free edition
+- **MJS-Productions Voucher Manager Pro** — commercial extension
 
-The existing technical identity remains stable:
+The WordPress.org identity is:
 
-- plugin slug: `voucher-manager`
-- text domain: `voucher-manager`
+- plugin slug: `mjs-productions-voucher-manager`
+- text domain: `mjs-productions-voucher-manager`
+
+The existing internal technical identity remains stable:
+
 - PHP namespace: `VoucherManager`
 - repository name: `voucher-manager`
+- runtime constants, hooks, capabilities, options and database identifiers retain their established `VOUCHER_MANAGER_*` / `voucher_manager_*` forms.
 
 ## Rationale
 
-The name is direct, professional and immediately understandable to WordPress administrators. It supports Free and Pro without introducing a second brand and avoids a risky technical rename immediately before 1.0.
+The original name `Voucher Manager` was considered too generic during WordPress.org plugin review. Prefixing the established MJS-Productions brand creates a distinctive public plugin identity while preserving the familiar Voucher Manager product name.
+
+The WordPress.org slug and text domain follow the new public identity. Internal runtime contracts remain unchanged because they are independent of the WordPress.org directory slug and are already used by the plugin and its extension API.
 
 ## Consequences
 
-All public release documentation uses the approved product name and tagline. Technical identifiers remain unchanged.
+Public plugin identity and WordPress.org-facing metadata use **MJS-Productions Voucher Manager** and `mjs-productions-voucher-manager`.
+
+Internal PHP namespaces, hooks, capabilities, constants, options, database identifiers, admin page slugs and the GitHub repository name remain unchanged unless a separate compatibility decision explicitly requires otherwise.

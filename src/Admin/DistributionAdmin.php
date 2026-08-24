@@ -51,8 +51,8 @@ final class DistributionAdmin {
 	public function register_menu(): void {
 		add_submenu_page(
 			'voucher-manager',
-			__( 'Distribution', 'voucher-manager' ),
-			__( 'Distribution', 'voucher-manager' ),
+			__( 'Distribution', 'mjs-productions-voucher-manager' ),
+			__( 'Distribution', 'mjs-productions-voucher-manager' ),
 			Capabilities::DISTRIBUTE_CODES,
 			'voucher-manager-distribution',
 			array( $this, 'render' )
@@ -140,7 +140,7 @@ final class DistributionAdmin {
 		$fallback = new DistributionResult(
 			false,
 			null,
-			__( 'Distribution could not be completed. Please try again.', 'voucher-manager' ),
+			__( 'Distribution could not be completed. Please try again.', 'mjs-productions-voucher-manager' ),
 			null
 		);
 
@@ -225,7 +225,7 @@ final class DistributionAdmin {
 	private function guard(): void {
 		if ( ! current_user_can( Capabilities::DISTRIBUTE_CODES ) ) {
 			wp_die(
-				esc_html__( 'You are not allowed to access this page.', 'voucher-manager' )
+				esc_html__( 'You are not allowed to access this page.', 'mjs-productions-voucher-manager' )
 			);
 		}
 	}

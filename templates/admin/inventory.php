@@ -21,33 +21,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 				echo esc_html(
 					sprintf(
 						/* translators: %s: Pool name */
-						__( '%s Inventory', 'voucher-manager' ),
+						__( '%s Inventory', 'mjs-productions-voucher-manager' ),
 						$pool->name()
 					)
 				);
 				?>
 			</h1>
-			<p><?php echo esc_html__( 'Review pool-scoped inventory without exposing complete One-Time Code values.', 'voucher-manager' ); ?></p>
+			<p><?php echo esc_html__( 'Review pool-scoped inventory without exposing complete One-Time Code values.', 'mjs-productions-voucher-manager' ); ?></p>
 		</div>
-		<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-pools' ) ); ?>"><?php echo esc_html__( 'Back to Pools', 'voucher-manager' ); ?></a>
+		<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-pools' ) ); ?>"><?php echo esc_html__( 'Back to Pools', 'mjs-productions-voucher-manager' ); ?></a>
 	</header>
 
-	<h2 class="voucher-manager__section-title voucher-manager__inventory-totals-title"><?php echo esc_html__( 'Pool totals', 'voucher-manager' ); ?></h2>
-	<section class="voucher-manager__metrics voucher-manager__metrics--three" aria-label="<?php echo esc_attr__( 'Pool inventory summary', 'voucher-manager' ); ?>">
+	<h2 class="voucher-manager__section-title voucher-manager__inventory-totals-title"><?php echo esc_html__( 'Pool totals', 'mjs-productions-voucher-manager' ); ?></h2>
+	<section class="voucher-manager__metrics voucher-manager__metrics--three" aria-label="<?php echo esc_attr__( 'Pool inventory summary', 'mjs-productions-voucher-manager' ); ?>">
 		<article class="voucher-manager__metric">
-			<span><?php echo esc_html__( 'Total One-Time Codes', 'voucher-manager' ); ?></span>
+			<span><?php echo esc_html__( 'Total One-Time Codes', 'mjs-productions-voucher-manager' ); ?></span>
 			<strong><?php echo esc_html( number_format_i18n( $data['counts']['total'] ) ); ?></strong>
-			<small><?php echo esc_html__( 'All One-Time Code records in this pool', 'voucher-manager' ); ?></small>
+			<small><?php echo esc_html__( 'All One-Time Code records in this pool', 'mjs-productions-voucher-manager' ); ?></small>
 		</article>
 		<article class="voucher-manager__metric">
-			<span><?php echo esc_html_x( 'Available', 'One-Time Code status', 'voucher-manager' ); ?></span>
+			<span><?php echo esc_html_x( 'Available', 'One-Time Code status', 'mjs-productions-voucher-manager' ); ?></span>
 			<strong><?php echo esc_html( number_format_i18n( $data['counts']['available'] ) ); ?></strong>
-			<small><?php echo esc_html__( 'Ready for distribution', 'voucher-manager' ); ?></small>
+			<small><?php echo esc_html__( 'Ready for distribution', 'mjs-productions-voucher-manager' ); ?></small>
 		</article>
 		<article class="voucher-manager__metric">
-			<span><?php echo esc_html_x( 'Assigned', 'One-Time Code status or timestamp column', 'voucher-manager' ); ?></span>
+			<span><?php echo esc_html_x( 'Assigned', 'One-Time Code status or timestamp column', 'mjs-productions-voucher-manager' ); ?></span>
 			<strong><?php echo esc_html( number_format_i18n( $data['counts']['assigned'] ) ); ?></strong>
-			<small><?php echo esc_html__( 'Already distributed', 'voucher-manager' ); ?></small>
+			<small><?php echo esc_html__( 'Already distributed', 'mjs-productions-voucher-manager' ); ?></small>
 		</article>
 	</section>
 
@@ -57,25 +57,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<input type="hidden" name="pool_id" value="<?php echo esc_attr( (string) $pool->id() ); ?>">
 
 			<div>
-				<label for="vm-inventory-state"><strong><?php echo esc_html_x( 'State', 'Inventory filter or table column', 'voucher-manager' ); ?></strong></label>
+				<label for="vm-inventory-state"><strong><?php echo esc_html_x( 'State', 'Inventory filter or table column', 'mjs-productions-voucher-manager' ); ?></strong></label>
 				<select id="vm-inventory-state" name="state">
-					<option value="all" <?php selected( $data['filters']['state'], 'all' ); ?>><?php echo esc_html__( 'All states', 'voucher-manager' ); ?></option>
-					<option value="available" <?php selected( $data['filters']['state'], 'available' ); ?>><?php echo esc_html_x( 'Available', 'One-Time Code status', 'voucher-manager' ); ?></option>
-					<option value="assigned" <?php selected( $data['filters']['state'], 'assigned' ); ?>><?php echo esc_html_x( 'Assigned', 'One-Time Code status or timestamp column', 'voucher-manager' ); ?></option>
+					<option value="all" <?php selected( $data['filters']['state'], 'all' ); ?>><?php echo esc_html__( 'All states', 'mjs-productions-voucher-manager' ); ?></option>
+					<option value="available" <?php selected( $data['filters']['state'], 'available' ); ?>><?php echo esc_html_x( 'Available', 'One-Time Code status', 'mjs-productions-voucher-manager' ); ?></option>
+					<option value="assigned" <?php selected( $data['filters']['state'], 'assigned' ); ?>><?php echo esc_html_x( 'Assigned', 'One-Time Code status or timestamp column', 'mjs-productions-voucher-manager' ); ?></option>
 				</select>
 			</div>
 
 			<div>
-				<label for="vm-inventory-import"><strong><?php echo esc_html_x( 'Import', 'Inventory source import', 'voucher-manager' ); ?></strong></label>
+				<label for="vm-inventory-import"><strong><?php echo esc_html_x( 'Import', 'Inventory source import', 'mjs-productions-voucher-manager' ); ?></strong></label>
 				<select id="vm-inventory-import" name="import_id">
-					<option value="0"><?php echo esc_html__( 'All imports', 'voucher-manager' ); ?></option>
+					<option value="0"><?php echo esc_html__( 'All imports', 'mjs-productions-voucher-manager' ); ?></option>
 					<?php foreach ( $data['import_options'] as $option ) : ?>
 						<option value="<?php echo esc_attr( (string) $option['id'] ); ?>" <?php selected( $data['filters']['import_id'], $option['id'] ); ?>>
 							<?php
 							echo esc_html(
 								sprintf(
 									/* translators: 1: import ID, 2: source filename */
-									__( 'Import #%1$d — %2$s', 'voucher-manager' ),
+									__( 'Import #%1$d — %2$s', 'mjs-productions-voucher-manager' ),
 									$option['id'],
 									$option['filename']
 								)
@@ -86,9 +86,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</select>
 			</div>
 
-			<?php submit_button( __( 'Filter inventory', 'voucher-manager' ), 'secondary', '', false ); ?>
+			<?php submit_button( __( 'Filter inventory', 'mjs-productions-voucher-manager' ), 'secondary', '', false ); ?>
 			<?php if ( $view->has_active_filters( $data['filters']['state'], $data['filters']['import_id'] ) ) : ?>
-				<a class="button" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-inventory', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Reset filters', 'voucher-manager' ); ?></a>
+				<a class="button" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-inventory', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Reset filters', 'mjs-productions-voucher-manager' ); ?></a>
 			<?php endif; ?>
 		</form>
 	</div>
@@ -96,8 +96,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<section class="voucher-manager__card voucher-manager__table-card">
 		<div class="voucher-manager__inventory-table-header">
 			<div>
-				<h2><?php echo esc_html__( 'One-Time Code inventory', 'voucher-manager' ); ?></h2>
-				<p><?php echo esc_html__( 'References are masked. Complete One-Time Code values are shown only in the one-time Distribution result.', 'voucher-manager' ); ?></p>
+				<h2><?php echo esc_html__( 'One-Time Code inventory', 'mjs-productions-voucher-manager' ); ?></h2>
+				<p><?php echo esc_html__( 'References are masked. Complete One-Time Code values are shown only in the one-time Distribution result.', 'mjs-productions-voucher-manager' ); ?></p>
 			</div>
 			<div class="voucher-manager__inventory-result-meta">
 				<?php $filter_summary = $view->active_filter_summary( $data['filters']['state'], $data['filters']['import_id'], $data['import_options'] ); ?>
@@ -113,10 +113,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<strong><?php echo esc_html( $view->empty_state_title( $data['pool_empty'], $data['filters']['state'], $data['filters']['import_id'] ) ); ?></strong>
 				<p><?php echo esc_html( $view->empty_state_message( $data['pool_empty'], $data['filters']['state'], $data['filters']['import_id'] ) ); ?></p>
 				<?php if ( $view->has_active_filters( $data['filters']['state'], $data['filters']['import_id'] ) ) : ?>
-					<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-inventory', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Reset filters', 'voucher-manager' ); ?></a>
+					<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-inventory', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Reset filters', 'mjs-productions-voucher-manager' ); ?></a>
 				<?php endif; ?>
 				<?php if ( $data['pool_empty'] || 0 === $data['counts']['available'] ) : ?>
-					<a class="button<?php echo $view->has_active_filters( $data['filters']['state'], $data['filters']['import_id'] ) ? '' : ' button-primary'; ?>" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-import', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Import Codes', 'voucher-manager' ); ?></a>
+					<a class="button<?php echo $view->has_active_filters( $data['filters']['state'], $data['filters']['import_id'] ) ? '' : ' button-primary'; ?>" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-import', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Import Codes', 'mjs-productions-voucher-manager' ); ?></a>
 				<?php endif; ?>
 			</div>
 		<?php else : ?>
@@ -124,11 +124,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<table class="widefat striped">
 				<thead>
 					<tr>
-						<th><?php echo esc_html__( 'Reference', 'voucher-manager' ); ?></th>
-						<th><?php echo esc_html_x( 'State', 'Inventory filter or table column', 'voucher-manager' ); ?></th>
-						<th><?php echo esc_html_x( 'Import', 'Inventory source import', 'voucher-manager' ); ?></th>
-						<th><?php echo esc_html__( 'Imported', 'voucher-manager' ); ?></th>
-						<th><?php echo esc_html_x( 'Assigned', 'One-Time Code status or timestamp column', 'voucher-manager' ); ?></th>
+						<th><?php echo esc_html__( 'Reference', 'mjs-productions-voucher-manager' ); ?></th>
+						<th><?php echo esc_html_x( 'State', 'Inventory filter or table column', 'mjs-productions-voucher-manager' ); ?></th>
+						<th><?php echo esc_html_x( 'Import', 'Inventory source import', 'mjs-productions-voucher-manager' ); ?></th>
+						<th><?php echo esc_html__( 'Imported', 'mjs-productions-voucher-manager' ); ?></th>
+						<th><?php echo esc_html_x( 'Assigned', 'One-Time Code status or timestamp column', 'mjs-productions-voucher-manager' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -145,14 +145,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 									echo esc_html(
 										sprintf(
 											/* translators: %d: internal One-Time Code record ID */
-											__( 'Code #%d', 'voucher-manager' ),
+											__( 'Code #%d', 'mjs-productions-voucher-manager' ),
 											$record->id()
 										)
 									);
 									?>
 								</small>
 								<?php if ( '' !== $note ) : ?>
-									<p class="voucher-manager__integrity-note"><strong><?php echo esc_html__( 'Attention:', 'voucher-manager' ); ?></strong> <?php echo esc_html( $note ); ?></p>
+									<p class="voucher-manager__integrity-note"><strong><?php echo esc_html__( 'Attention:', 'mjs-productions-voucher-manager' ); ?></strong> <?php echo esc_html( $note ); ?></p>
 								<?php endif; ?>
 							</td>
 							<td><span class="voucher-manager__badge voucher-manager__badge--<?php echo esc_attr( $view->status_tone( $record->status() ) ); ?>"><?php echo esc_html( $view->status_label( $record->status() ) ); ?></span></td>
@@ -184,8 +184,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 								'format'    => '',
 								'current'   => $data['page'],
 								'total'     => $data['pages'],
-								'prev_text' => __( 'Previous', 'voucher-manager' ),
-								'next_text' => __( 'Next', 'voucher-manager' ),
+								'prev_text' => __( 'Previous', 'mjs-productions-voucher-manager' ),
+								'next_text' => __( 'Next', 'mjs-productions-voucher-manager' ),
 							)
 						)
 					);

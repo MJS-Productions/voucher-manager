@@ -22,7 +22,7 @@ final class DistributionViewModel {
 	public function pool_option_label( array $row ): string {
 		return sprintf(
 			/* translators: 1: Pool name, 2: available One-Time Code count, 3: total One-Time Code count */
-			__( '%1$s — %2$d available, %3$d total', 'voucher-manager' ),
+			__( '%1$s — %2$d available, %3$d total', 'mjs-productions-voucher-manager' ),
 			$row['pool']->name(),
 			$row['available'],
 			$row['total']
@@ -39,14 +39,14 @@ final class DistributionViewModel {
 	public function pool_message( string $pool_name ): string {
 		return sprintf(
 			/* translators: %s: Pool name */
-			__( 'Pool: %s', 'voucher-manager' ),
+			__( 'Pool: %s', 'mjs-productions-voucher-manager' ),
 			$pool_name
 		);
 	}
 
 	public function remaining_message( ?int $remaining ): string {
 		if ( null === $remaining ) {
-			return __( 'The One-Time Code was assigned successfully. Remaining inventory could not be refreshed.', 'voucher-manager' );
+			return __( 'The One-Time Code was assigned successfully. Remaining inventory could not be refreshed.', 'mjs-productions-voucher-manager' );
 		}
 
 		return sprintf(
@@ -55,7 +55,7 @@ final class DistributionViewModel {
 				'Remaining inventory: %d One-Time Code',
 				'Remaining inventory: %d One-Time Codes',
 				$remaining,
-				'voucher-manager'
+				'mjs-productions-voucher-manager'
 			),
 			$remaining
 		);
