@@ -130,4 +130,4 @@ $assert(
 	'German Translation Experience coverage must run before build.'
 );
 
-echo "German translation experience OK: complete de_DE PO/MO, glossary, plurals and runtime loading verified.\n";
+echo "German translation experience OK: complete de_DE PO/MO, glossary, plurals and WordPress language-pack delivery boundary verified.\n";

@@ -47,9 +47,9 @@ composer translations
 composer quality
 ```
 
-The translation build deterministically compiles the current German PO catalog into the MO artifact used by WordPress. The Quality Gate then verifies translation freshness, PHP syntax, plugin structure, version consistency, autoloading, the core Golden Path, code-state integrity, operational logging, lifecycle boundaries and the complete Distribution safety invariants. It also builds and validates `dist/voucher-manager.zip`.
+The translation build deterministically compiles the current German PO catalog so translation-source quality and artifact freshness remain testable in the repository. The Quality Gate then verifies PHP syntax, plugin structure, version consistency, autoloading, the core Golden Path, code-state integrity, operational logging, lifecycle boundaries and the complete Distribution safety invariants. It also builds and validates `dist/mjs-productions-voucher-manager.zip`. Bundled PO/MO catalogs are excluded from the WordPress.org release package; production translations are delivered through WordPress language packs.
 
-Official WordPress smoke tests should use the `voucher-manager.zip` artifact built and validated by GitHub Actions rather than a manually packed source archive.
+Official WordPress smoke tests should use the `mjs-productions-voucher-manager.zip` artifact built and validated by GitHub Actions rather than a manually packed source archive.
 
 ## Requirements
 
@@ -66,7 +66,7 @@ Official WordPress smoke tests should use the `voucher-manager.zip` artifact bui
 - `docs/adr/` — architecture decision records;
 - `docs/adr/0032-translation-artifact-integrity.md` — deterministic PO-to-MO build and release boundary;
 - `docs/adr/0033-product-identity.md` — official product name, tagline and Free/Pro family;
-- `docs/GERMAN_TRANSLATION.md` — approved German terminology, catalog files and runtime loading;
+- `docs/GERMAN_TRANSLATION.md` — approved German terminology, catalog integrity and WordPress language-pack delivery;
 - `docs/INTERNATIONALIZATION_AUDIT.md` — Sprint 9 Part 3.1 runtime string audit and staged localization boundary;
 - `docs/LOCALIZATION_GUIDE.md` — context, placeholder, plural and escaping rules;
 - `docs/PRODUCT_LANGUAGE.md` — approved English terminology, tone and German target language;

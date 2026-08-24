@@ -2,7 +2,8 @@
 declare(strict_types=1);
 
 $root    = dirname(__DIR__);
-$zipPath = $root . '/dist/voucher-manager.zip';
+$zipPath = $root . '/dist/mjs-productions-voucher-manager.zip';
+$releaseRoot = 'mjs-productions-voucher-manager/';
 
 if (!is_file($zipPath)) {
     fwrite(STDERR, "Release ZIP does not exist. Run the build first." . PHP_EOL);
@@ -50,14 +51,11 @@ if (class_exists(ZipArchive::class)) {
 }
 
 $required = [
-    'voucher-manager/voucher-manager.php',
-    'voucher-manager/src/Core/Plugin.php',
-    'voucher-manager/src/Lifecycle/Activator.php',
-    'voucher-manager/languages/voucher-manager.pot',
-    'voucher-manager/languages/voucher-manager-de_DE.po',
-    'voucher-manager/languages/voucher-manager-de_DE.mo',
-    'voucher-manager/readme.txt',
-    'voucher-manager/uninstall.php',
+    $releaseRoot . 'voucher-manager.php',
+    $releaseRoot . 'src/Core/Plugin.php',
+    $releaseRoot . 'src/Lifecycle/Activator.php',
+    $releaseRoot . 'readme.txt',
+    $releaseRoot . 'uninstall.php',
 ];
 
 foreach ($required as $file) {
@@ -69,7 +67,6 @@ foreach ($required as $file) {
 
 $allowedTopLevel = [
     'assets',
-    'languages',
     'src',
     'templates',
     'CHANGELOG.md',
@@ -82,18 +79,23 @@ $allowedTopLevel = [
 ];
 
 foreach ($names as $name) {
-    if (!str_starts_with($name, 'voucher-manager/')) {
+    if (!str_starts_with($name, $releaseRoot)) {
         fwrite(STDERR, "Invalid release root: {$name}" . PHP_EOL);
         exit(1);
     }
 
-    $relative = substr($name, strlen('voucher-manager/'));
+    $relative = substr($name, strlen($releaseRoot));
 
     if ('' === $relative) {
         continue;
     }
 
     $topLevel = explode('/', $relative, 2)[0];
+
+    if ('languages' === $topLevel || in_array(strtolower(pathinfo($relative, PATHINFO_EXTENSION)), ['po', 'mo'], true)) {
+        fwrite(STDERR, "Bundled translation catalog included in release: {$name}" . PHP_EOL);
+        exit(1);
+    }
 
     if (!in_array($topLevel, $allowedTopLevel, true)) {
         fwrite(STDERR, "Non-production file included in release: {$name}" . PHP_EOL);

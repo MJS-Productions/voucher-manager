@@ -7,20 +7,22 @@ composer install
 composer quality
 ```
 
-The generated plugin package is available at:
+The generated WordPress.org-compatible plugin package is available at:
 
 ```text
-dist/voucher-manager.zip
+dist/mjs-productions-voucher-manager.zip
 ```
 
 ## Manual release smoke test
 
+For the WordPress.org candidate, test the validated package using the `mjs-productions-voucher-manager` plugin directory identity. Pre-directory internal builds that used the old `voucher-manager` directory are not an in-place ZIP upgrade target.
+
 Before publishing:
 
-1. Update an existing WordPress installation.
-2. Confirm WordPress recognizes the package as the same plugin.
+1. Install the validated package on a clean or dedicated WordPress test site.
+2. Confirm WordPress recognizes **MJS-Productions Voucher Manager**.
 3. Activate the plugin.
-4. Confirm existing pools and codes remain.
+4. Confirm the Voucher Manager administration menu opens without errors.
 5. Test pool management.
 6. Test TXT/CSV import.
 7. Test code distribution.
@@ -40,7 +42,7 @@ Run it directly:
 php tests/Integration/GoldenPathTest.php
 ```
 
-This test covers domain behaviour. It does not replace the manual WordPress upgrade and activation smoke test.
+This test covers domain behaviour. It does not replace the manual WordPress activation and workflow smoke test.
 
 ## State integrity
 

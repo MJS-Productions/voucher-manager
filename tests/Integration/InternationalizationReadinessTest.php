@@ -85,7 +85,6 @@ $assert(
 $assert(
 	is_string( $plugin )
 	&& str_contains( $plugin, "Text Domain:       mjs-productions-voucher-manager" )
-	&& str_contains( $plugin, "Domain Path:       /languages" )
 	&& str_contains( $plugin, "VOUCHER_MANAGER_DATABASE_VERSION', '2'" ),
 	'Plugin localization metadata and database boundary must remain stable.'
 );

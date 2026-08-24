@@ -13,8 +13,8 @@ if (0 !== $translationExitCode) {
 }
 
 $dist    = $root . '/dist';
-$build   = $dist . '/voucher-manager';
-$zipPath = $dist . '/voucher-manager.zip';
+$build   = $dist . '/mjs-productions-voucher-manager';
+$zipPath = $dist . '/mjs-productions-voucher-manager.zip';
 
 $remove = static function (string $path) use (&$remove): void {
     if (!file_exists($path)) {
@@ -41,12 +41,12 @@ mkdir($build, 0777, true);
 
 /*
  * Keep the release artifact intentionally small and production-only.
- * Repository, CI, test, tooling, release-note and local-development files
- * remain in GitHub but are not shipped to WordPress installations.
+ * Repository, CI, test, tooling, translation-source, release-note and
+ * local-development files remain in GitHub but are not shipped to WordPress
+ * installations.
  */
 $includedTopLevelDirectories = [
     'assets',
-    'languages',
     'src',
     'templates',
 ];
@@ -124,7 +124,7 @@ if (class_exists(ZipArchive::class)) {
         $relative = substr($file->getPathname(), strlen($build) + 1);
         $zip->addFile(
             $file->getPathname(),
-            'voucher-manager/' . str_replace(DIRECTORY_SEPARATOR, '/', $relative)
+            'mjs-productions-voucher-manager/' . str_replace(DIRECTORY_SEPARATOR, '/', $relative)
         );
     }
 
@@ -138,7 +138,7 @@ if (class_exists(ZipArchive::class)) {
     }
 
     $command = sprintf(
-        'cd %s && %s -qr %s voucher-manager',
+        'cd %s && %s -qr %s mjs-productions-voucher-manager',
         escapeshellarg($dist),
         escapeshellarg($zipBinary),
         escapeshellarg($zipPath)
@@ -152,4 +152,4 @@ if (class_exists(ZipArchive::class)) {
     }
 }
 
-fwrite(STDOUT, "Release artifact created: dist/voucher-manager.zip" . PHP_EOL);
+fwrite(STDOUT, "Release artifact created: dist/mjs-productions-voucher-manager.zip" . PHP_EOL);

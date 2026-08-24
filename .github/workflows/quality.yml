@@ -52,7 +52,7 @@ jobs:
         if: matrix.php == '8.4'
         uses: actions/upload-artifact@v6
         with:
-          name: voucher-manager-${{ github.sha }}
-          path: dist/voucher-manager.zip
+          name: mjs-productions-voucher-manager-${{ github.sha }}
+          path: dist/mjs-productions-voucher-manager.zip
           if-no-files-found: error
           retention-days: 14

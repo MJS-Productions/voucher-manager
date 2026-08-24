@@ -8,7 +8,7 @@ Complete for Sprint 9 Part 3.3.
 
 - `languages/voucher-manager.pot` — source catalog
 - `languages/voucher-manager-de_DE.po` — editable German catalog
-- `languages/voucher-manager-de_DE.mo` — compiled WordPress runtime catalog
+- `languages/voucher-manager-de_DE.mo` — deterministically compiled repository verification artifact
 
 ## Approved terminology
 
@@ -46,9 +46,11 @@ Approved:
 
 `This permanently deletes the pool, %1$s and %2$s.`
 
-## Runtime loading
+## Translation delivery
 
-`Plugin::load_textdomain()` loads the bundled catalog from `/languages` on `plugins_loaded`.
+The repository maintains POT, PO and deterministically compiled MO artifacts for translation review and integrity testing.
+
+The WordPress.org release package does not bundle PO or MO catalogs and does not call `load_plugin_textdomain()`. Production translations are delivered through WordPress language packs.
 
 ## Boundaries
 

@@ -97,7 +97,7 @@ Expected database schema version:
 
 `2`
 
-The Quality Gate must build and validate `dist/voucher-manager.zip`.
+The Quality Gate must build and validate `dist/mjs-productions-voucher-manager.zip`.
 
 ## GitHub gate
 
@@ -108,7 +108,7 @@ All supported PHP jobs must pass:
 - PHP 8.3
 - PHP 8.4
 
-Use the GitHub Actions `voucher-manager.zip` artifact for the WordPress release-candidate test.
+Use the GitHub Actions `mjs-productions-voucher-manager.zip` artifact for the WordPress release-candidate test.
 
 ## WordPress smoke-test matrix
 

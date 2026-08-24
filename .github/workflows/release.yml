@@ -63,8 +63,8 @@ jobs:
         if: matrix.php == '8.4'
         uses: actions/upload-artifact@v6
         with:
-          name: voucher-manager-release-${{ github.sha }}
-          path: dist/voucher-manager.zip
+          name: mjs-productions-voucher-manager-release-${{ github.sha }}
+          path: dist/mjs-productions-voucher-manager.zip
           if-no-files-found: error
           retention-days: 14
 
@@ -80,14 +80,14 @@ jobs:
       - name: Download validated release artifact
         uses: actions/download-artifact@v8
         with:
-          name: voucher-manager-release-${{ github.sha }}
+          name: mjs-productions-voucher-manager-release-${{ github.sha }}
           path: dist
 
       - name: Verify release asset
         shell: bash
         run: |
-          test -f dist/voucher-manager.zip
-          unzip -t dist/voucher-manager.zip
+          test -f dist/mjs-productions-voucher-manager.zip
+          unzip -t dist/mjs-productions-voucher-manager.zip
 
       - name: Create or publish GitHub release
         shell: bash
@@ -96,7 +96,7 @@ jobs:
           TAG: ${{ github.ref_name }}
         run: |
           RELEASE_NOTES="RELEASE-${TAG}.md"
-          RELEASE_TITLE="Voucher Manager ${TAG}"
+          RELEASE_TITLE="MJS-Productions Voucher Manager ${TAG}"
 
           if gh release view "${TAG}" >/dev/null 2>&1; then
             IS_DRAFT="$(gh release view "${TAG}" --json isDraft --jq '.isDraft')"
@@ -110,13 +110,13 @@ jobs:
               --title "${RELEASE_TITLE}" \
               --notes-file "${RELEASE_NOTES}"
 
-            gh release upload "${TAG}" dist/voucher-manager.zip --clobber
+            gh release upload "${TAG}" dist/mjs-productions-voucher-manager.zip --clobber
 
             gh release edit "${TAG}" \
               --draft=false \
               --latest
           else
-            gh release create "${TAG}" dist/voucher-manager.zip \
+            gh release create "${TAG}" dist/mjs-productions-voucher-manager.zip \
               --verify-tag \
               --title "${RELEASE_TITLE}" \
               --notes-file "${RELEASE_NOTES}" \
