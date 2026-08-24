@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use VoucherManager\Admin\Capabilities;
 use VoucherManager\Admin\PoolViewModel;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -30,6 +31,12 @@ $messages = array(
 );
 
 $view_model = new PoolViewModel();
+
+$can_manage_pools    = current_user_can( Capabilities::MANAGE_POOLS );
+$can_delete_pools    = current_user_can( Capabilities::DELETE_POOLS );
+$can_import_codes    = current_user_can( Capabilities::IMPORT_CODES );
+$can_distribute      = current_user_can( Capabilities::DISTRIBUTE_CODES );
+$can_view_inventory  = current_user_can( Capabilities::VIEW_INVENTORY );
 ?>
 <div class="wrap voucher-manager">
 	<header class="voucher-manager__header">
@@ -37,9 +44,11 @@ $view_model = new PoolViewModel();
 			<h1><?php echo esc_html__( 'Pools', 'voucher-manager' ); ?></h1>
 			<p><?php echo esc_html__( 'Organize One-Time Codes into pools for controlled distribution.', 'voucher-manager' ); ?></p>
 		</div>
-		<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'new' ), admin_url( 'admin.php' ) ) ); ?>">
-			<?php echo esc_html__( 'Create Pool', 'voucher-manager' ); ?>
-		</a>
+		<?php if ( $can_manage_pools ) : ?>
+			<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'new' ), admin_url( 'admin.php' ) ) ); ?>">
+				<?php echo esc_html__( 'Create Pool', 'voucher-manager' ); ?>
+			</a>
+		<?php endif; ?>
 	</header>
 
 	<?php if ( isset( $messages[ $notice ] ) ) : ?>
@@ -53,9 +62,11 @@ $view_model = new PoolViewModel();
 			<span class="dashicons dashicons-tickets-alt" aria-hidden="true"></span>
 			<h2><?php echo esc_html__( 'Create the first pool', 'voucher-manager' ); ?></h2>
 			<p><?php echo esc_html__( 'A pool groups One-Time Codes that belong to the same campaign, product or distribution workflow.', 'voucher-manager' ); ?></p>
-			<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'new' ), admin_url( 'admin.php' ) ) ); ?>">
-				<?php echo esc_html__( 'Create Pool', 'voucher-manager' ); ?>
-			</a>
+			<?php if ( $can_manage_pools ) : ?>
+				<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'new' ), admin_url( 'admin.php' ) ) ); ?>">
+					<?php echo esc_html__( 'Create Pool', 'voucher-manager' ); ?>
+				</a>
+			<?php endif; ?>
 		</section>
 	<?php else : ?>
 		<section class="voucher-manager__pool-grid" aria-label="<?php echo esc_attr__( 'Pool overview', 'voucher-manager' ); ?>">
@@ -108,7 +119,13 @@ $view_model = new PoolViewModel();
 				<article class="voucher-manager__pool-card voucher-manager__pool-card--<?php echo esc_attr( $state ); ?>">
 					<div class="voucher-manager__pool-card-header">
 						<div>
-							<h2><a href="<?php echo esc_url( $edit_url ); ?>"><?php echo esc_html( $pool->name() ); ?></a></h2>
+							<h2>
+								<?php if ( $can_manage_pools ) : ?>
+									<a href="<?php echo esc_url( $edit_url ); ?>"><?php echo esc_html( $pool->name() ); ?></a>
+								<?php else : ?>
+									<?php echo esc_html( $pool->name() ); ?>
+								<?php endif; ?>
+							</h2>
 							<?php if ( '' !== $pool->description() ) : ?>
 								<p><?php echo esc_html( $pool->description() ); ?></p>
 							<?php else : ?>
@@ -140,27 +157,37 @@ $view_model = new PoolViewModel();
 					</p>
 
 					<div class="voucher-manager__pool-actions">
-						<?php if ( $pool->is_active() && 0 < $row['available'] ) : ?>
+						<?php if ( $can_distribute && $pool->is_active() && 0 < $row['available'] ) : ?>
 							<a class="button button-primary" href="<?php echo esc_url( $distribution_url ); ?>">
 								<?php echo esc_html__( 'Distribute Code', 'voucher-manager' ); ?>
 							</a>
-						<?php else : ?>
+						<?php elseif ( $can_import_codes ) : ?>
 							<a class="button button-primary" href="<?php echo esc_url( $import_url ); ?>">
 								<?php echo esc_html__( 'Import Codes', 'voucher-manager' ); ?>
 							</a>
 						<?php endif; ?>
-						<a class="button" href="<?php echo esc_url( $inventory_url ); ?>">
-							<?php echo esc_html__( 'View inventory', 'voucher-manager' ); ?>
-						</a>
-						<a class="button" href="<?php echo esc_url( $edit_url ); ?>">
-							<?php echo esc_html__( 'Edit', 'voucher-manager' ); ?>
-						</a>
-						<div class="voucher-manager__pool-secondary-actions">
-							<a href="<?php echo esc_url( $toggle_url ); ?>">
-								<?php echo esc_html( $pool->is_active() ? __( 'Deactivate', 'voucher-manager' ) : __( 'Activate', 'voucher-manager' ) ); ?>
+						<?php if ( $can_view_inventory ) : ?>
+							<a class="button" href="<?php echo esc_url( $inventory_url ); ?>">
+								<?php echo esc_html__( 'View inventory', 'voucher-manager' ); ?>
 							</a>
-							<a class="button-link-delete" href="<?php echo esc_url( $danger_url ); ?>"><?php echo esc_html__( 'Danger Zone', 'voucher-manager' ); ?></a>
-						</div>
+						<?php endif; ?>
+						<?php if ( $can_manage_pools ) : ?>
+							<a class="button" href="<?php echo esc_url( $edit_url ); ?>">
+								<?php echo esc_html__( 'Edit', 'voucher-manager' ); ?>
+							</a>
+						<?php endif; ?>
+						<?php if ( $can_manage_pools || $can_delete_pools ) : ?>
+							<div class="voucher-manager__pool-secondary-actions">
+								<?php if ( $can_manage_pools ) : ?>
+									<a href="<?php echo esc_url( $toggle_url ); ?>">
+										<?php echo esc_html( $pool->is_active() ? __( 'Deactivate', 'voucher-manager' ) : __( 'Activate', 'voucher-manager' ) ); ?>
+									</a>
+								<?php endif; ?>
+								<?php if ( $can_delete_pools ) : ?>
+									<a class="button-link-delete" href="<?php echo esc_url( $danger_url ); ?>"><?php echo esc_html__( 'Danger Zone', 'voucher-manager' ); ?></a>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
 					</div>
 				</article>
 			<?php endforeach; ?>

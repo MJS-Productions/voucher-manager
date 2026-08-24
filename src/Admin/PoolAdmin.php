@@ -33,21 +33,31 @@ final class PoolAdmin {
 		add_action( 'admin_post_voucher_manager_delete_available_codes', array( $this, 'delete_available_codes' ) );
 		add_action( 'admin_post_voucher_manager_delete_pool', array( $this, 'delete' ) );
 	}
-	public function register_menu(): void { add_submenu_page( 'voucher-manager', __( 'Pools', 'voucher-manager' ), __( 'Pools', 'voucher-manager' ), 'manage_options', 'voucher-manager-pools', array( $this, 'render' ) ); }
+	public function register_menu(): void { add_submenu_page( 'voucher-manager', __( 'Pools', 'voucher-manager' ), __( 'Pools', 'voucher-manager' ), Capabilities::VIEW_INVENTORY, 'voucher-manager-pools', array( $this, 'render' ) ); }
 	public function render(): void {
-		$this->guard(); $action = isset( $_GET['action'] ) ? sanitize_key( wp_unslash( $_GET['action'] ) ) : 'list'; $pool_id = isset( $_GET['pool_id'] ) ? absint( $_GET['pool_id'] ) : 0; $pool = 0 < $pool_id ? $this->repository->find( $pool_id ) : null;
-		if ( in_array( $action, array( 'new', 'edit' ), true ) ) { $template = VOUCHER_MANAGER_PATH . 'templates/admin/pool-form.php'; }
-		elseif ( in_array( $action, array( 'danger-zone', 'confirm-delete-available' ), true ) && null !== $pool ) {
+		$action = isset( $_GET['action'] ) ? sanitize_key( wp_unslash( $_GET['action'] ) ) : 'list';
+		$pool_id = isset( $_GET['pool_id'] ) ? absint( $_GET['pool_id'] ) : 0;
+		$pool = 0 < $pool_id ? $this->repository->find( $pool_id ) : null;
+
+		if ( in_array( $action, array( 'new', 'edit' ), true ) ) {
+			$this->guard( Capabilities::MANAGE_POOLS );
+			$template = VOUCHER_MANAGER_PATH . 'templates/admin/pool-form.php';
+		} elseif ( in_array( $action, array( 'danger-zone', 'confirm-delete-available' ), true ) && null !== $pool ) {
+			$this->guard( Capabilities::DELETE_POOLS );
 			$summary = $this->lifecycle_repository->deletion_summary( $pool_id );
 			$template = 'confirm-delete-available' === $action
 				? VOUCHER_MANAGER_PATH . 'templates/admin/pool-delete-available-confirmation.php'
 				: VOUCHER_MANAGER_PATH . 'templates/admin/pool-danger-zone.php';
+		} else {
+			$this->guard( Capabilities::VIEW_INVENTORY );
+			$pools = $this->repository->all();
+			$pool_rows = $this->overview->rows( $pools );
+			$template = VOUCHER_MANAGER_PATH . 'templates/admin/pools.php';
 		}
-		else { $pools = $this->repository->all(); $pool_rows = $this->overview->rows( $pools ); $template = VOUCHER_MANAGER_PATH . 'templates/admin/pools.php'; }
 		if ( is_readable( $template ) ) { require $template; }
 	}
 	public function save(): void {
-		$this->guard();
+		$this->guard( Capabilities::MANAGE_POOLS );
 		check_admin_referer( 'voucher_manager_save_pool' );
 		$id = isset( $_POST['pool_id'] ) ? absint( $_POST['pool_id'] ) : 0;
 		$name = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
@@ -81,7 +91,7 @@ final class PoolAdmin {
 		}
 	}
 	public function toggle(): void {
-		$this->guard();
+		$this->guard( Capabilities::MANAGE_POOLS );
 		$id = isset( $_GET['pool_id'] ) ? absint( $_GET['pool_id'] ) : 0;
 		check_admin_referer( 'voucher_manager_toggle_pool_' . $id );
 		$pool = $this->repository->find( $id );
@@ -96,7 +106,7 @@ final class PoolAdmin {
 		$this->redirect( $success ? 'status' : 'error' );
 	}
 	public function delete_available_codes(): void {
-		$this->guard();
+		$this->guard( Capabilities::DELETE_POOLS );
 		$id = isset( $_POST['pool_id'] ) ? absint( $_POST['pool_id'] ) : 0;
 		check_admin_referer( 'voucher_manager_delete_available_codes_' . $id );
 		$confirmed = isset( $_POST['confirm_delete_available'] ) && '1' === sanitize_text_field( wp_unslash( $_POST['confirm_delete_available'] ) );
@@ -110,7 +120,7 @@ final class PoolAdmin {
 			$this->redirect_delete_available_confirmation( $id, 'delete_failed' );
 		}
 	}
-	public function delete(): void { $this->guard(); $id = isset( $_POST['pool_id'] ) ? absint( $_POST['pool_id'] ) : 0; check_admin_referer( 'voucher_manager_delete_pool_' . $id ); $pool = $this->repository->find( $id ); $confirmation = isset( $_POST['pool_name_confirmation'] ) ? sanitize_text_field( wp_unslash( $_POST['pool_name_confirmation'] ) ) : ''; if ( null === $pool || $confirmation !== $pool->name() ) { $this->redirect_danger( $id, 'confirmation_failed' ); } try { $this->lifecycle->delete_pool( $id, $pool->name() ); $this->redirect( 'deleted' ); } catch ( Throwable ) { $this->redirect_danger( $id, 'delete_failed' ); } }
+	public function delete(): void { $this->guard( Capabilities::DELETE_POOLS ); $id = isset( $_POST['pool_id'] ) ? absint( $_POST['pool_id'] ) : 0; check_admin_referer( 'voucher_manager_delete_pool_' . $id ); $pool = $this->repository->find( $id ); $confirmation = isset( $_POST['pool_name_confirmation'] ) ? sanitize_text_field( wp_unslash( $_POST['pool_name_confirmation'] ) ) : ''; if ( null === $pool || $confirmation !== $pool->name() ) { $this->redirect_danger( $id, 'confirmation_failed' ); } try { $this->lifecycle->delete_pool( $id, $pool->name() ); $this->redirect( 'deleted' ); } catch ( Throwable ) { $this->redirect_danger( $id, 'delete_failed' ); } }
 	private function log_pool_status( int $id, string $name, bool $active ): void {
 		$this->logger->info(
 			$active ? OperationalEvent::POOL_ACTIVATED : OperationalEvent::POOL_DEACTIVATED,
@@ -118,7 +128,7 @@ final class PoolAdmin {
 			array( 'pool_id' => $id, 'pool_name' => $name, 'status' => $active ? 'active' : 'inactive' )
 		);
 	}
-	private function guard(): void { if ( ! current_user_can( 'manage_options' ) ) { wp_die( esc_html__( 'You are not allowed to access this page.', 'voucher-manager' ) ); } }
+	private function guard( string $capability ): void { if ( ! current_user_can( $capability ) ) { wp_die( esc_html__( 'You are not allowed to access this page.', 'voucher-manager' ) ); } }
 	private function redirect( string $notice, int $count = 0 ): void { $args = array( 'page' => 'voucher-manager-pools', 'vm_notice' => $notice ); if ( 0 < $count ) { $args['vm_count'] = $count; } wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php' ) ) ); exit; }
 	private function redirect_danger( int $id, string $notice ): void { wp_safe_redirect( add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'danger-zone', 'pool_id' => $id, 'vm_notice' => $notice ), admin_url( 'admin.php' ) ) ); exit; }
 	private function redirect_delete_available_confirmation( int $id, string $notice ): void { wp_safe_redirect( add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'confirm-delete-available', 'pool_id' => $id, 'vm_notice' => $notice ), admin_url( 'admin.php' ) ) ); exit; }

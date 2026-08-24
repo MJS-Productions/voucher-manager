@@ -64,20 +64,21 @@ final class ImportAdmin {
 			'voucher-manager',
 			__( 'Import Codes', 'voucher-manager' ),
 			_x( 'Import', 'admin menu label', 'voucher-manager' ),
-			'manage_options',
+			Capabilities::IMPORT_CODES,
 			'voucher-manager-import',
 			array( $this, 'render' )
 		);
 	}
 
 	public function render(): void {
-		$this->guard();
-
 		$action = isset( $_GET['action'] ) ? sanitize_key( wp_unslash( $_GET['action'] ) ) : '';
 		if ( 'confirm-rollback' === $action ) {
+			$this->guard( Capabilities::ROLLBACK_IMPORTS );
 			$this->render_rollback_confirmation();
 			return;
 		}
+
+		$this->guard( Capabilities::IMPORT_CODES );
 
 		$pools = $this->boundary->execute(
 			fn(): array => $this->pools->all(),
@@ -123,7 +124,7 @@ final class ImportAdmin {
 	}
 
 	public function import(): void {
-		$this->guard();
+		$this->guard( Capabilities::IMPORT_CODES );
 		check_admin_referer( 'voucher_manager_import_codes' );
 
 		$pool_id = isset( $_POST['pool_id'] ) ? absint( $_POST['pool_id'] ) : 0;
@@ -176,7 +177,7 @@ final class ImportAdmin {
 	}
 
 	public function rollback(): void {
-		$this->guard();
+		$this->guard( Capabilities::ROLLBACK_IMPORTS );
 
 		$import_id = isset( $_POST['import_id'] ) ? absint( $_POST['import_id'] ) : 0;
 		check_admin_referer( 'voucher_manager_rollback_import_' . $import_id );
@@ -289,8 +290,8 @@ final class ImportAdmin {
 		);
 	}
 
-	private function guard(): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
+	private function guard( string $capability ): void {
+		if ( ! current_user_can( $capability ) ) {
 			wp_die(
 				esc_html__( 'You are not allowed to access this page.', 'voucher-manager' )
 			);

@@ -6,8 +6,13 @@
 /** @var int $selected_pool_id */
 /** @var array<int,int> $assigned_counts */
 declare(strict_types=1);
+
+use VoucherManager\Admin\Capabilities;
+
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_notice'] ) ) : '';
+$can_manage_pools = current_user_can( Capabilities::MANAGE_POOLS );
+$can_rollback     = current_user_can( Capabilities::ROLLBACK_IMPORTS );
 ?>
 <div class="wrap voucher-manager">
 	<h1><?php echo esc_html__( 'Import Codes', 'voucher-manager' ); ?></h1>
@@ -82,7 +87,9 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 			<h2 id="voucher-manager-upload-title"><?php echo esc_html__( 'Upload a code file', 'voucher-manager' ); ?></h2>
 			<?php if ( empty( $pools ) ) : ?>
 				<p><?php echo esc_html__( 'Create a pool before importing codes.', 'voucher-manager' ); ?></p>
-				<p><a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'new' ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Create a pool first', 'voucher-manager' ); ?></a></p>
+				<?php if ( $can_manage_pools ) : ?>
+					<p><a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-pools', 'action' => 'new' ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Create a pool first', 'voucher-manager' ); ?></a></p>
+				<?php endif; ?>
 			<?php else : ?>
 			<form method="post" enctype="multipart/form-data" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 				<input type="hidden" name="action" value="voucher_manager_import_codes">
@@ -92,15 +99,15 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 					<?php foreach ( $pool_rows as $row ) : $pool = $row['pool']; ?>
 					<option value="<?php echo esc_attr( (string) $pool->id() ); ?>" <?php selected( $selected_pool_id, (int) $pool->id() ); ?>>
 						<?php
-						echo esc_html(
-							sprintf(
-								/* translators: 1: Pool name, 2: available One-Time Code count, 3: total One-Time Code count */
-								__( '%1$s — %2$d available, %3$d total', 'voucher-manager' ),
-								$pool->name(),
-								$row['available'],
-								$row['total']
-							)
-						);
+							echo esc_html(
+								sprintf(
+									/* translators: 1: Pool name, 2: available One-Time Code count, 3: total One-Time Code count */
+									__( '%1$s — %2$d available, %3$d total', 'voucher-manager' ),
+									$pool->name(),
+									$row['available'],
+									$row['total']
+								)
+							);
 						?>
 					</option>
 					<?php endforeach; ?>
@@ -137,7 +144,7 @@ $notice = isset( $_GET['vm_notice'] ) ? sanitize_key( wp_unslash( $_GET['vm_noti
 		<td><?php echo esc_html( $view_model->result_summary( $import ) ); ?></td>
 		<td><span class="voucher-manager__badge voucher-manager__badge--<?php echo esc_attr( $tone ); ?>"><?php echo esc_html( $view_model->status_label( $import ) ); ?></span></td>
 		<td><?php echo esc_html( mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $import->created_at() . ' UTC', true ) ); ?></td>
-		<td><?php if ( $view_model->can_review_rollback( $import, $assigned_counts[ $import->id() ] ?? 0 ) ) : ?><a class="voucher-manager__delete" href="<?php echo esc_url( $review_url ); ?>"><?php echo esc_html__( 'Undo import', 'voucher-manager' ); ?></a><?php else : ?>—<?php endif; ?></td>
+		<td><?php if ( $can_rollback && $view_model->can_review_rollback( $import, $assigned_counts[ $import->id() ] ?? 0 ) ) : ?><a class="voucher-manager__delete" href="<?php echo esc_url( $review_url ); ?>"><?php echo esc_html__( 'Undo import', 'voucher-manager' ); ?></a><?php else : ?>—<?php endif; ?></td>
 	</tr>
 	<?php endforeach; ?>
 	</tbody></table></div>
