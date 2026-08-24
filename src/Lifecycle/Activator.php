@@ -34,7 +34,7 @@ final class Activator {
 
 		update_option( 'voucher_manager_version', VOUCHER_MANAGER_VERSION, false );
 
-		self::grant_administrator_capabilities();
+		self::ensure_administrator_capabilities();
 
 		( new ActivityRetentionScheduler() )->reconcile();
 
@@ -48,7 +48,7 @@ final class Activator {
 	/**
 	 * Ensure administrators retain access to all Voucher Manager operations.
 	 */
-	private static function grant_administrator_capabilities(): void {
+	public static function ensure_administrator_capabilities(): void {
 		$administrator = get_role( 'administrator' );
 
 		if ( null === $administrator ) {
@@ -56,7 +56,9 @@ final class Activator {
 		}
 
 		foreach ( Capabilities::all() as $capability ) {
-			$administrator->add_cap( $capability );
+			if ( ! $administrator->has_cap( $capability ) ) {
+				$administrator->add_cap( $capability );
+			}
 		}
 	}
 }

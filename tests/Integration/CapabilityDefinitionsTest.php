@@ -27,21 +27,33 @@ if ( $expected !== Capabilities::all() ) {
 	exit( 1 );
 }
 
+$root = dirname(__DIR__, 2);
+
 $activator_source = file_get_contents(
-	dirname(__DIR__, 2) . '/src/Lifecycle/Activator.php'
+	$root . '/src/Lifecycle/Activator.php'
+);
+$plugin_source = file_get_contents(
+	$root . '/src/Core/Plugin.php'
 );
 
-if ( false === $activator_source ) {
-	fwrite( STDERR, "Could not read Activator.php.\n" );
+if ( false === $activator_source || false === $plugin_source ) {
+	fwrite( STDERR, "Could not read capability lifecycle sources.\n" );
 	exit( 1 );
 }
 
 if (
 	! str_contains( $activator_source, "get_role( 'administrator' )" )
 	|| ! str_contains( $activator_source, 'Capabilities::all()' )
+	|| ! str_contains( $activator_source, 'has_cap( $capability )' )
 	|| ! str_contains( $activator_source, 'add_cap( $capability )' )
+	|| ! str_contains( $activator_source, 'ensure_administrator_capabilities()' )
 ) {
 	fwrite( STDERR, "Administrator capability grants are not wired through the stable capability definitions.\n" );
+	exit( 1 );
+}
+
+if ( ! str_contains( $plugin_source, 'Activator::ensure_administrator_capabilities();' ) ) {
+	fwrite( STDERR, "Existing installations do not reconcile administrator capabilities during normal plugin bootstrap.\n" );
 	exit( 1 );
 }
 

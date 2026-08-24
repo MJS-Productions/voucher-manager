@@ -11,6 +11,7 @@ namespace VoucherManager\Core;
 
 use VoucherManager\Admin\Admin;
 use VoucherManager\Database\Migrator;
+use VoucherManager\Lifecycle\Activator;
 use VoucherManager\Lifecycle\ActivityRetentionScheduler;
 
 /** Coordinates plugin services and WordPress hooks. */
@@ -38,6 +39,7 @@ final class Plugin {
 	public function maybe_upgrade_database(): void {
 		( new Migrator() )->migrate();
 		update_option( 'voucher_manager_version', VOUCHER_MANAGER_VERSION, false );
+		Activator::ensure_administrator_capabilities();
 	}
 
 	public function load_textdomain(): void {
