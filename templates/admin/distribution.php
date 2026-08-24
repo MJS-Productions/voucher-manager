@@ -66,26 +66,6 @@ foreach ( $distributable_rows as $row ) {
 					</a>
 				</p>
 			</div>
-			<script>
-			(function () {
-				const button = document.getElementById('vm-copy-distributed-code');
-				const code = document.getElementById('vm-distributed-code');
-				if (!button || !code || !navigator.clipboard) {
-					return;
-				}
-				const copyLabel = button.dataset.copyLabel || button.textContent || '';
-				const copiedLabel = button.dataset.copiedLabel || copyLabel;
-
-				button.addEventListener('click', function () {
-					navigator.clipboard.writeText(code.textContent || '').then(function () {
-						button.textContent = copiedLabel;
-						window.setTimeout(function () {
-							button.textContent = copyLabel;
-						}, 1600);
-					});
-				});
-			}());
-			</script>
 		<?php else : ?>
 			<div class="notice notice-error inline"><p><strong><?php echo esc_html__( 'No One-Time Code was distributed.', 'mjs-productions-voucher-manager' ); ?></strong> <?php echo esc_html( (string) ( $result['message'] ?? __( 'Distribution failed.', 'mjs-productions-voucher-manager' ) ) ); ?></p></div>
 		<?php endif; ?>

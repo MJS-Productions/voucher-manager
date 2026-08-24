@@ -53,6 +53,13 @@ final class Admin {
 			VOUCHER_MANAGER_VERSION
 		);
 
+		if ( str_contains( $hook_suffix, 'voucher-manager-inventory' ) ) {
+			wp_add_inline_style(
+				'voucher-manager-admin',
+				'#toplevel_page_voucher-manager .wp-submenu a[href="admin.php?page=voucher-manager-inventory"] { display: none; }'
+			);
+		}
+
 		wp_enqueue_script(
 			'voucher-manager-admin',
 			VOUCHER_MANAGER_URL . 'assets/js/admin.js',

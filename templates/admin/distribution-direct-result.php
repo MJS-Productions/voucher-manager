@@ -23,6 +23,14 @@ wp_enqueue_style(
 	array(),
 	VOUCHER_MANAGER_VERSION
 );
+
+wp_enqueue_script(
+	'voucher-manager-admin',
+	VOUCHER_MANAGER_URL . 'assets/js/admin.js',
+	array(),
+	VOUCHER_MANAGER_VERSION,
+	true
+);
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -58,17 +66,6 @@ wp_enqueue_style(
 
 		<p><a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-distribution' ) ); ?>"><?php echo esc_html__( 'Return to Distribution', 'mjs-productions-voucher-manager' ); ?></a></p>
 	</div>
-	<script>
-	(function () {
-		const button = document.getElementById('vm-copy-distributed-code');
-		const code = document.getElementById('vm-distributed-code');
-		if (!button || !code || !navigator.clipboard) {
-			return;
-		}
-		button.addEventListener('click', function () {
-			navigator.clipboard.writeText(code.textContent || '');
-		});
-	}());
-	</script>
+	<?php wp_print_footer_scripts(); ?>
 </body>
 </html>

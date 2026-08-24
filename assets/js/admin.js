@@ -23,4 +23,34 @@
 			}
 		);
 	} );
+
+	document.addEventListener( 'click', function ( event ) {
+		var button = event.target.closest( '#vm-copy-distributed-code' );
+		var code;
+		var copyLabel;
+		var copiedLabel;
+
+		if ( ! button || ! navigator.clipboard ) {
+			return;
+		}
+
+		code = document.getElementById( 'vm-distributed-code' );
+		if ( ! code ) {
+			return;
+		}
+
+		copyLabel = button.dataset.copyLabel || button.textContent || '';
+		copiedLabel = button.dataset.copiedLabel || copyLabel;
+
+		navigator.clipboard.writeText( code.textContent || '' ).then( function () {
+			if ( copiedLabel === copyLabel ) {
+				return;
+			}
+
+			button.textContent = copiedLabel;
+			window.setTimeout( function () {
+				button.textContent = copyLabel;
+			}, 1600 );
+		} );
+	} );
 }() );
