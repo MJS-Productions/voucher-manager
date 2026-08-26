@@ -1,6 +1,6 @@
 === MJS-Productions Voucher Manager ===
 Contributors: mjs512
-Tags: one-time codes, vouchers, inventory, code distribution
+Tags: one-time codes, voucher codes, code management, code distribution
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.1
