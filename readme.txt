@@ -26,7 +26,7 @@ Create dedicated pools, import codes from TXT or CSV files, distribute available
 * Activity History - review important operational events without storing distributed One-Time Code values in the activity history.
 * Retention Management - configure automatic activity retention and scheduled cleanup.
 * WordPress Roles and Capabilities - administrative access follows the native WordPress permission system.
-* English and German Interface - integrated with the WordPress localization system.
+* Localization Ready - uses the WordPress localization system and supports translations provided through WordPress.org.
 
 = Data-Minimal by Design =
 
@@ -39,7 +39,7 @@ Voucher Manager stores only the information required for its core functionality.
 3. Distribute one available code.
 4. Review inventory and operational activity.
 
-Voucher Manager Free is a complete, usable edition designed to provide real value for everyday One-Time Code management.
+Voucher Manager is a complete, usable plugin designed to provide real value for everyday One-Time Code management.
 
 == Installation ==
 
@@ -77,9 +77,9 @@ No. Distributed One-Time Code values are not stored in the activity history.
 
 Yes. Voucher Manager provides configurable activity retention and automatic cleanup through WordPress-Cron.
 
-= Does Voucher Manager support multiple languages? =
+= Does Voucher Manager support translations? =
 
-Yes. Voucher Manager includes English and German and uses the WordPress localization system.
+Yes. Voucher Manager uses the WordPress localization system and supports translations provided through WordPress.org.
 
 == Screenshots ==
 
@@ -141,7 +141,7 @@ Yes. Voucher Manager includes English and German and uses the WordPress localiza
 * Updated German translations for the additional Distribution context.
 
 = 1.0.0 =
-* Initial stable release of Voucher Manager Free.
+* Initial stable release of Voucher Manager.
 * Added pool-based One-Time Code management.
 * Added TXT and CSV imports with protected rollback.
 * Added controlled Distribution designed to help prevent duplicate issuance.
