@@ -40,6 +40,8 @@ jobs:
         run: composer validate --strict --no-check-publish
 
       - name: Install development dependencies
+        env:
+          COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ secrets.MJS_QUALITY_READ_TOKEN }}"}}'
         run: composer install --no-interaction --prefer-dist
 
       - name: Run translation build
