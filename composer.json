@@ -29,6 +29,7 @@
     "test:extension-activity-query-api": "php tests/Integration/ExtensionActivityQueryApiTest.php",
     "test:extension-activity-retention-handoff": "php tests/Integration/ExtensionActivityRetentionArchiveHandoffTest.php",
     "test:inventory-changed-event": "php tests/Integration/InventoryChangedEventTest.php",
+    "test:q5-distribution-atomic-claim": "php tests/Integration/DistributionAtomicClaimConcurrencyTest.php",
     "build": "php tools/build-release.php",
     "validate:artifact": "php tools/validate-release.php",
     "quality": [

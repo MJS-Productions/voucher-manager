@@ -58,3 +58,59 @@ jobs:
           path: dist/mjs-productions-voucher-manager.zip
           if-no-files-found: error
           retention-days: 14
+
+  q5-distribution-atomic-claim:
+    name: Q5 atomic distribution claim
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: voucher_manager_q5
+          MYSQL_USER: voucher_manager
+          MYSQL_PASSWORD: voucher_manager
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -u root -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    env:
+      MJS_QUALITY_DB_HOST: 127.0.0.1
+      MJS_QUALITY_DB_PORT: 3306
+      MJS_QUALITY_DB_NAME: voucher_manager_q5
+      MJS_QUALITY_DB_USER: voucher_manager
+      MJS_QUALITY_DB_PASSWORD: voucher_manager
+      WP_VERSION: "6.8.2"
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+          extensions: mysqli,pdo_mysql
+          tools: composer:v2
+
+      - name: Install development dependencies
+        env:
+          COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ secrets.MJS_QUALITY_READ_TOKEN }}"}}'
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Install WordPress test runtime
+        run: |
+          curl --fail --location --silent --show-error             "https://wordpress.org/wordpress-${WP_VERSION}.tar.gz"             --output /tmp/wordpress.tar.gz
+          tar -xzf /tmp/wordpress.tar.gz -C /tmp
+          test -f /tmp/wordpress/wp-includes/class-wpdb.php
+
+      - name: Run Q5 atomic distribution claim test
+        env:
+          MJS_QUALITY_WORDPRESS_PATH: /tmp/wordpress
+        run: composer test:q5-distribution-atomic-claim
