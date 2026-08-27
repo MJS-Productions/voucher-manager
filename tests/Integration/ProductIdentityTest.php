@@ -43,10 +43,11 @@ foreach ( array( $readme, $manifest, $adr, $release ) as $document ) {
 
 $assert(
 	is_string( $adr )
-	&& str_contains( $adr, 'Voucher Manager Pro' )
+	&& str_contains( $adr, '**MJS-Productions Voucher Manager**' )
+	&& str_contains( $adr, '**Voucher Manager PRO**' )
 	&& str_contains( $adr, 'plugin slug: `mjs-productions-voucher-manager`' )
 	&& str_contains( $adr, 'text domain: `mjs-productions-voucher-manager`' ),
-	'ADR 0033 must preserve the stable Free/Pro and technical identity.'
+	'ADR 0033 must preserve the approved base-plugin, PRO-extension and technical identity.'
 );
 
 $assert(
@@ -56,4 +57,4 @@ $assert(
 	'Composer metadata and Quality Gate must use and protect the approved identity.'
 );
 
-echo "Product identity OK: Voucher Manager name, tagline and Free/Pro family verified.\n";
+echo "Product identity OK: base-plugin name, tagline and PRO-extension identity verified.\n";
