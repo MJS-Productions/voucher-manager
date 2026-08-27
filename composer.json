@@ -33,7 +33,6 @@
     "build": "php tools/build-release.php",
     "validate:artifact": "php tools/validate-release.php",
     "quality": [
-      "@translations",
       "@lint",
       "@validate:structure",
       "@validate:header",
