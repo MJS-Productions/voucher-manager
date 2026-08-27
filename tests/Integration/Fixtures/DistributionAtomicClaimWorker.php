@@ -20,8 +20,13 @@ if ( false === $wordpressPath || '' === $wordpressPath ) {
 }
 
 $wordpressIncludes = rtrim( $wordpressPath, '/\\' ) . '/wp-includes';
+$loadFile          = $wordpressIncludes . '/load.php';
 $pluginFile        = $wordpressIncludes . '/plugin.php';
 $wpdbFile          = $wordpressIncludes . '/class-wpdb.php';
+
+if ( ! is_file( $loadFile ) ) {
+	throw new RuntimeException( 'WordPress load runtime is missing.' );
+}
 
 if ( ! is_file( $pluginFile ) ) {
 	throw new RuntimeException( 'WordPress Plugin API runtime is missing.' );
@@ -39,6 +44,7 @@ if ( ! defined( 'WP_DEBUG_DISPLAY' ) ) {
 	define( 'WP_DEBUG_DISPLAY', false );
 }
 
+require_once $loadFile;
 require_once $pluginFile;
 require_once $wpdbFile;
 
