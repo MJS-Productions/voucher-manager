@@ -106,7 +106,9 @@
     "test:german-translation": "php tests/Integration/GermanTranslationExperienceTest.php",
     "test:german-language-polish": "php tests/Integration/GermanLanguagePolishTest.php",
     "test:german-experience-polish": "php tests/Integration/GermanExperiencePolishTest.php",
-    "translations": "php tools/compile-translations.php",
+    "translations": "php tools/localization.php update",
+    "translations:check": "php tools/localization.php check",
+    "translations:validate": "php tools/localization.php validate",
     "test:translation-artifact-integrity": "php tests/Integration/TranslationArtifactIntegrityTest.php",
     "test:product-identity": "php tests/Integration/ProductIdentityTest.php"
   },
@@ -119,6 +121,6 @@
     "url": "https://github.com/MJS-Productions/mjs-quality.git"
   }],
   "require-dev": {
-    "mjs-productions/mjs-quality": "v0.1.0"
+    "mjs-productions/mjs-quality": "v0.2.0"
   }
 }

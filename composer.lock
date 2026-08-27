@@ -4,27 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ac89d2ab4cdb504c8ab2993aac9da78",
+    "content-hash": "7afdf5186067388f6139ba7a43e4eb5e",
     "packages": [],
     "packages-dev": [
         {
             "name": "mjs-productions/mjs-quality",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:MJS-Productions/mjs-quality.git",
-                "reference": "5873f93b5ec19edc0d6263de2cb36e1921714daf"
+                "reference": "3004880a9a3fa31aec008e38652f218f474a420f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MJS-Productions/mjs-quality/zipball/5873f93b5ec19edc0d6263de2cb36e1921714daf",
-                "reference": "5873f93b5ec19edc0d6263de2cb36e1921714daf",
+                "url": "https://api.github.com/repos/MJS-Productions/mjs-quality/zipball/3004880a9a3fa31aec008e38652f218f474a420f",
+                "reference": "3004880a9a3fa31aec008e38652f218f474a420f",
                 "shasum": ""
             },
             "require": {
-                "ext-pdo": "*",
-                "ext-pdo_mysql": "*",
                 "php": ">=8.1"
+            },
+            "suggest": {
+                "ext-pdo": "Required for database quality infrastructure.",
+                "ext-pdo_mysql": "Required for MySQL-backed database quality infrastructure."
             },
             "type": "library",
             "autoload": {
@@ -38,17 +40,32 @@
                 ],
                 "test:concurrency": [
                     "php tests/Integration/RealDatabaseConcurrencyTest.php"
+                ],
+                "test:localization-config": [
+                    "php tests/Integration/LocalizationConfigTest.php"
+                ],
+                "test:localization-workflow": [
+                    "php tests/Integration/LocalizationWorkflowTest.php"
+                ],
+                "test:localization-check": [
+                    "php tests/Integration/LocalizationCheckTest.php"
+                ],
+                "test:localization-wp-cli": [
+                    "php tests/Integration/RealWpCliLocalizationTest.php"
+                ],
+                "test:localization-validation": [
+                    "php tests/Integration/LocalizationValidationTest.php"
                 ]
             },
             "license": [
                 "proprietary"
             ],
-            "description": "Shared software quality infrastructure for MJS-Productions projects.",
+            "description": "Shared WordPress engineering and quality infrastructure for MJS-Productions products.",
             "support": {
-                "source": "https://github.com/MJS-Productions/mjs-quality/tree/v0.1.0",
+                "source": "https://github.com/MJS-Productions/mjs-quality/tree/v0.2.0",
                 "issues": "https://github.com/MJS-Productions/mjs-quality/issues"
             },
-            "time": "2026-08-26T13:18:55+00:00"
+            "time": "2026-08-27T12:22:49+00:00"
         }
     ],
     "aliases": [],

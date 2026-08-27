@@ -44,9 +44,6 @@ jobs:
           COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ secrets.MJS_QUALITY_READ_TOKEN }}"}}'
         run: composer install --no-interaction --prefer-dist
 
-      - name: Run translation build
-        run: composer translations
-
       - name: Run quality gate
         run: composer quality
 
@@ -58,6 +55,41 @@ jobs:
           path: dist/mjs-productions-voucher-manager.zip
           if-no-files-found: error
           retention-days: 14
+
+  localization:
+    name: Localization
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+          tools: composer:v2
+
+      - name: Install development dependencies
+        env:
+          COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ secrets.MJS_QUALITY_READ_TOKEN }}"}}'
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Install WP-CLI
+        run: |
+          curl --fail --location --silent --show-error \
+            https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+            --output wp-cli.phar
+          chmod +x wp-cli.phar
+          sudo mv wp-cli.phar /usr/local/bin/wp
+          wp i18n --help >/dev/null
+
+      - name: Check localization artifacts
+        run: composer translations:check
+
+      - name: Validate translations
+        run: composer translations:validate
 
   q5-distribution-atomic-claim:
     name: Q5 atomic distribution claim
