@@ -19,7 +19,14 @@ if ( false === $wordpressPath || '' === $wordpressPath ) {
 	throw new RuntimeException( 'MJS_QUALITY_WORDPRESS_PATH is required.' );
 }
 
-$wpdbFile = rtrim( $wordpressPath, '/\\' ) . '/wp-includes/class-wpdb.php';
+$wordpressIncludes = rtrim( $wordpressPath, '/\\' ) . '/wp-includes';
+$pluginFile        = $wordpressIncludes . '/plugin.php';
+$wpdbFile          = $wordpressIncludes . '/class-wpdb.php';
+
+if ( ! is_file( $pluginFile ) ) {
+	throw new RuntimeException( 'WordPress Plugin API runtime is missing.' );
+}
+
 if ( ! is_file( $wpdbFile ) ) {
 	throw new RuntimeException( 'WordPress wpdb runtime is missing.' );
 }
@@ -27,10 +34,12 @@ if ( ! is_file( $wpdbFile ) ) {
 if ( ! defined( 'WP_DEBUG' ) ) {
 	define( 'WP_DEBUG', false );
 }
+
 if ( ! defined( 'WP_DEBUG_DISPLAY' ) ) {
 	define( 'WP_DEBUG_DISPLAY', false );
 }
 
+require_once $pluginFile;
 require_once $wpdbFile;
 
 if ( ! function_exists( 'current_time' ) ) {
@@ -59,6 +68,7 @@ $barrier = WorkerBarrier::fromEnvironment();
 $barrier->waitForRelease();
 
 $claimed = ( new WpdbCodeRepository() )->claim_next_available( 1 );
+
 $barrier->writeResult(
 	array(
 		'claimed' => null !== $claimed,
