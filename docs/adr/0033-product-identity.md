@@ -6,7 +6,7 @@ Updated following WordPress.org plugin review.
 
 ## Decision
 
-The official product name is:
+The official base-plugin name is:
 
 **MJS-Productions Voucher Manager**
 
@@ -14,10 +14,11 @@ The official tagline is:
 
 **Professional One-Time Code Management for WordPress**
 
-The product family is:
+The commercial extension is:
 
-- **MJS-Productions Voucher Manager** — Free edition
-- **MJS-Productions Voucher Manager Pro** — commercial extension
+**Voucher Manager PRO**
+
+The `MJS-Productions` prefix is part of the base plugin's public identity following WordPress.org review. It is not a naming prefix for Voucher Manager PRO.
 
 The WordPress.org identity is:
 
@@ -32,12 +33,16 @@ The existing internal technical identity remains stable:
 
 ## Rationale
 
-The original name `Voucher Manager` was considered too generic during WordPress.org plugin review. Prefixing the established MJS-Productions brand creates a distinctive public plugin identity while preserving the familiar Voucher Manager product name.
+The original base-plugin name `Voucher Manager` was considered too generic during WordPress.org plugin review. Prefixing the established MJS-Productions brand creates a distinctive public plugin identity while preserving the familiar Voucher Manager product name.
 
-The WordPress.org slug and text domain follow the new public identity. Internal runtime contracts remain unchanged because they are independent of the WordPress.org directory slug and are already used by the plugin and its extension API.
+This WordPress.org-driven naming requirement applies to the base plugin. The commercial extension retains its official name **Voucher Manager PRO** without the MJS-Productions prefix.
+
+The WordPress.org slug and text domain follow the base plugin's public identity. Internal runtime contracts remain unchanged because they are independent of the WordPress.org directory slug and are already used by the plugin and its extension API.
 
 ## Consequences
 
-Public plugin identity and WordPress.org-facing metadata use **MJS-Productions Voucher Manager** and `mjs-productions-voucher-manager`.
+Public base-plugin identity and WordPress.org-facing metadata use **MJS-Productions Voucher Manager** and `mjs-productions-voucher-manager`.
+
+The commercial extension uses **Voucher Manager PRO**.
 
 Internal PHP namespaces, hooks, capabilities, constants, options, database identifiers, admin page slugs and the GitHub repository name remain unchanged unless a separate compatibility decision explicitly requires otherwise.

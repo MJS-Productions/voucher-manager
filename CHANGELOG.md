@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Added
+- Added `mjs-productions/mjs-quality` v0.1.0 as a versioned Composer development dependency for shared real-database and concurrency quality infrastructure.
+- Added a dedicated Q5 atomic Distribution claim test against MySQL 8.0 using two independent PHP worker processes, synchronized concurrent execution and the production `WpdbCodeRepository::claim_next_available()` path.
+- Added a minimal WordPress `SHORTINIT` test runtime so the Q5 test exercises the real WordPress `wpdb` database layer.
+
+### Validation
+- Verified that two concurrent workers competing for one available One-Time Code result in exactly one successful claim and one miss.
+- Verified the persistent end state contains exactly one assigned code and no remaining available code.
+- Existing PHP 8.1–8.4 Quality Gate remains green alongside the dedicated Q5 CI job.
+
 ## 1.0.8 - 2026-08-21 — WordPress 7.1 and Release Hardening
 
 ### Changed

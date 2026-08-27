@@ -26,6 +26,7 @@ Professional One-Time Code Management for WordPress.
 - centralized code-state transition protection;
 - bounded admin error handling for critical operations;
 - automated Quality Gate across PHP 8.1, 8.2, 8.3 and 8.4;
+- dedicated real-MySQL Q5 verification of the atomic Distribution claim guarantee;
 - validated WordPress release artifacts built by the project quality workflow.
 
 ## Core workflow
@@ -35,7 +36,7 @@ Professional One-Time Code Management for WordPress.
 3. Distribute one available code.
 4. Track inventory and operational activity.
 
-Voucher Manager Free is a complete product. Voucher Manager Pro will add convenience and advanced workflows without weakening the Free edition.
+MJS-Productions Voucher Manager is a complete product. Voucher Manager PRO adds convenience and advanced workflows without weakening the base plugin.
 
 ## Quality and release process
 
@@ -47,7 +48,11 @@ composer translations
 composer quality
 ```
 
-The translation build deterministically compiles the current German PO catalog so translation-source quality and artifact freshness remain testable in the repository. The Quality Gate then verifies PHP syntax, plugin structure, version consistency, autoloading, the core Golden Path, code-state integrity, operational logging, lifecycle boundaries and the complete Distribution safety invariants. It also builds and validates `dist/mjs-productions-voucher-manager.zip`. Bundled PO/MO catalogs are excluded from the WordPress.org release package; production translations are delivered through WordPress language packs.
+The translation build deterministically compiles the current German PO catalog so translation-source quality and artifact freshness remain testable in the repository. The standard Quality Gate verifies PHP syntax, plugin structure, version consistency, autoloading, the core Golden Path, code-state integrity, operational logging, lifecycle boundaries and Distribution safety regressions. It also builds and validates `dist/mjs-productions-voucher-manager.zip`. Bundled PO/MO catalogs are excluded from the WordPress.org release package; production translations are delivered through WordPress language packs.
+
+Higher-confidence concurrency verification runs separately in GitHub Actions. The dedicated Q5 atomic Distribution claim test provisions MySQL 8.0 and a minimal WordPress runtime, starts two independent PHP worker processes with separate database connections and verifies the production `WpdbCodeRepository::claim_next_available()` path under synchronized concurrent execution. With one available One-Time Code, exactly one worker must claim it and the persistent database state must contain exactly one assigned code with no remaining available code.
+
+The shared real-database and concurrency infrastructure is consumed from the versioned private development dependency `mjs-productions/mjs-quality` v0.1.0. Product-specific Distribution behavior and assertions remain in the Voucher Manager repository.
 
 Official WordPress smoke tests should use the `mjs-productions-voucher-manager.zip` artifact built and validated by GitHub Actions rather than a manually packed source archive.
 
@@ -65,7 +70,7 @@ Official WordPress smoke tests should use the `mjs-productions-voucher-manager.z
 - `docs/` — current technical and experience documentation;
 - `docs/adr/` — architecture decision records;
 - `docs/adr/0032-translation-artifact-integrity.md` — deterministic PO-to-MO build and release boundary;
-- `docs/adr/0033-product-identity.md` — official product name, tagline and Free/Pro family;
+- `docs/adr/0033-product-identity.md` — official base-plugin and PRO-extension identity;
 - `docs/GERMAN_TRANSLATION.md` — approved German terminology, catalog integrity and WordPress language-pack delivery;
 - `docs/INTERNATIONALIZATION_AUDIT.md` — Sprint 9 Part 3.1 runtime string audit and staged localization boundary;
 - `docs/LOCALIZATION_GUIDE.md` — context, placeholder, plural and escaping rules;
