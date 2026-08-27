@@ -1,16 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 $root = dirname(__DIR__);
-
-$translationCompiler = $root . '/tools/compile-translations.php';
-$command             = escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg($translationCompiler);
-passthru($command, $translationExitCode);
-
-if (0 !== $translationExitCode) {
-    fwrite(STDERR, "Release build stopped because translation compilation failed." . PHP_EOL);
-    exit(1);
-}
 
 $dist    = $root . '/dist';
 $build   = $dist . '/mjs-productions-voucher-manager';
@@ -26,8 +18,10 @@ $remove = static function (string $path) use (&$remove): void {
             if ('.' === $item || '..' === $item) {
                 continue;
             }
+
             $remove($path . DIRECTORY_SEPARATOR . $item);
         }
+
         rmdir($path);
         return;
     }
@@ -82,6 +76,7 @@ foreach ($includedTopLevelDirectories as $directory) {
             if (!is_dir($target)) {
                 mkdir($target, 0777, true);
             }
+
             continue;
         }
 
@@ -122,6 +117,7 @@ if (class_exists(ZipArchive::class)) {
         }
 
         $relative = substr($file->getPathname(), strlen($build) + 1);
+
         $zip->addFile(
             $file->getPathname(),
             'mjs-productions-voucher-manager/' . str_replace(DIRECTORY_SEPARATOR, '/', $relative)
@@ -152,4 +148,7 @@ if (class_exists(ZipArchive::class)) {
     }
 }
 
-fwrite(STDOUT, "Release artifact created: dist/mjs-productions-voucher-manager.zip" . PHP_EOL);
+fwrite(
+    STDOUT,
+    "Release artifact created: dist/mjs-productions-voucher-manager.zip" . PHP_EOL
+);

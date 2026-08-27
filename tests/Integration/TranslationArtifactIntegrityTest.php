@@ -18,20 +18,12 @@ $assert = static function ( bool $condition, string $message ): void {
 $potPath      = $root . '/languages/voucher-manager.pot';
 $poPath       = $root . '/languages/voucher-manager-de_DE.po';
 $moPath       = $root . '/languages/voucher-manager-de_DE.mo';
-$compilerPath = $root . '/tools/compile-translations.php';
+$localization = $root . '/tools/localization.php';
 
 $assert( is_readable( $potPath ), 'POT catalog must exist.' );
 $assert( is_readable( $poPath ), 'PO catalog must exist.' );
 $assert( is_readable( $moPath ), 'MO catalog must exist.' );
-$assert( is_readable( $compilerPath ), 'Deterministic translation compiler must exist.' );
-
-$command = escapeshellarg( PHP_BINARY ) . ' ' . escapeshellarg( $compilerPath ) . ' --check';
-exec( $command . ' 2>&1', $output, $exitCode );
-
-$assert(
-	0 === $exitCode,
-	'Committed MO must exactly match deterministic PO compilation: ' . implode( ' | ', $output )
-);
+$assert( is_readable( $localization ), 'Shared-localization consumer adapter must exist.' );
 
 $po = file_get_contents( $poPath );
 $mo = file_get_contents( $moPath );
@@ -50,7 +42,10 @@ $assert(
 	'MO must use the little-endian GNU gettext format.'
 );
 
-$header = unpack( 'Vmagic/Vrevision/Vcount/Voriginal/Vtranslation/VhashSize/VhashOffset', substr( $mo, 0, 28 ) );
+$header = unpack(
+	'Vmagic/Vrevision/Vcount/Voriginal/Vtranslation/VhashSize/VhashOffset',
+	substr( $mo, 0, 28 )
+);
 
 $assert(
 	is_array( $header )
@@ -59,15 +54,26 @@ $assert(
 	'MO header must be readable and use revision zero.'
 );
 
-$poLines      = preg_split( '/\R/', $po ) ?: array();
-$catalogKeys  = array();
-$currentId    = null;
-$currentPlural = null;
+$poLines        = preg_split( '/\R/', $po ) ?: array();
+$catalogKeys    = array();
+$currentId      = null;
+$currentPlural  = null;
 $currentContext = null;
 
-$flushKey = static function () use ( &$catalogKeys, &$currentId, &$currentPlural, &$currentContext ): void {
+$flushKey = static function () use (
+	&$catalogKeys,
+	&$currentId,
+	&$currentPlural,
+	&$currentContext
+): void {
 	if ( null !== $currentId ) {
-		$catalogKeys[ (string) $currentContext . "\x04" . $currentId . "\x00" . (string) $currentPlural ] = true;
+		$catalogKeys[
+			(string) $currentContext
+			. "\x04"
+			. $currentId
+			. "\x00"
+			. (string) $currentPlural
+		] = true;
 	}
 
 	$currentId      = null;
@@ -91,6 +97,7 @@ foreach ( $poLines as $line ) {
 		$currentId = stripcslashes( substr( $line, 7, -1 ) );
 	}
 }
+
 $flushKey();
 
 $assert(
@@ -99,31 +106,42 @@ $assert(
 );
 
 $composer = file_get_contents( $root . '/composer.json' );
-$build    = file_get_contents( $root . '/tools/build-release.php' );
 $workflow = file_get_contents( $root . '/.github/workflows/quality.yml' );
 
 $assert(
 	is_string( $composer )
-	&& str_contains( $composer, '"translations": "php tools/compile-translations.php"' )
-	&& str_contains( $composer, '@test:translation-artifact-integrity' )
-	&& strpos( $composer, '@translations' ) < strpos( $composer, '@build' )
-	&& strpos( $composer, '@test:translation-artifact-integrity' ) < strpos( $composer, '@build' ),
-	'Composer Quality Gate must compile and validate translations before build.'
+	&& str_contains(
+		$composer,
+		'"translations": "php tools/localization.php update"'
+	)
+	&& str_contains(
+		$composer,
+		'"translations:check": "php tools/localization.php check"'
+	)
+	&& str_contains(
+		$composer,
+		'"translations:validate": "php tools/localization.php validate"'
+	),
+	'Composer must expose the shared Localization update, check and validation commands.'
 );
 
 $assert(
-	is_string( $build )
-	&& str_contains( $build, "compile-translations.php" )
-	&& str_contains( $build, 'translation compilation failed' ),
-	'Direct release builds must compile translations before copying files.'
+	is_string( $composer )
+	&& str_contains( $composer, '@test:translation-artifact-integrity' )
+	&& ! str_contains( $composer, '"@translations"' )
+	&& strpos( $composer, '@test:translation-artifact-integrity' )
+		< strpos( $composer, '@build' ),
+	'The Quality Gate must validate translation integration before build without regenerating localization artifacts.'
 );
 
 $assert(
 	is_string( $workflow )
-	&& str_contains( $workflow, 'Run translation build' )
-	&& str_contains( $workflow, 'composer translations' )
-	&& strpos( $workflow, 'composer translations' ) < strpos( $workflow, 'composer quality' ),
-	'GitHub Actions must compile translations before the Quality Gate.'
+	&& str_contains( $workflow, 'localization:' )
+	&& str_contains( $workflow, 'Check localization artifacts' )
+	&& str_contains( $workflow, 'composer translations:check' )
+	&& str_contains( $workflow, 'Validate translations' )
+	&& str_contains( $workflow, 'composer translations:validate' ),
+	'GitHub Actions must provide a dedicated Localization quality job.'
 );
 
-echo "Translation artifact integrity OK: deterministic PO-to-MO build, freshness and release inclusion verified.\n";
+echo "Translation artifact integrity OK: catalogs, shared Localization integration and CI gates verified.\n";
