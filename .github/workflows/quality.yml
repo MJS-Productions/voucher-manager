@@ -106,9 +106,11 @@ jobs:
 
       - name: Install WordPress test runtime
         run: |
-          curl --fail --location --silent --show-error             "https://wordpress.org/wordpress-${WP_VERSION}.tar.gz"             --output /tmp/wordpress.tar.gz
+          curl --fail --location --silent --show-error \
+            "https://wordpress.org/wordpress-${WP_VERSION}.tar.gz" \
+            --output /tmp/wordpress.tar.gz
           tar -xzf /tmp/wordpress.tar.gz -C /tmp
-          test -f /tmp/wordpress/wp-includes/class-wpdb.php
+          test -f /tmp/wordpress/wp-settings.php
 
       - name: Run Q5 atomic distribution claim test
         env:

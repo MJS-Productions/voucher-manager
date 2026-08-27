@@ -19,56 +19,36 @@ if ( false === $wordpressPath || '' === $wordpressPath ) {
 	throw new RuntimeException( 'MJS_QUALITY_WORDPRESS_PATH is required.' );
 }
 
-$wordpressIncludes = rtrim( $wordpressPath, '/\\' ) . '/wp-includes';
-$loadFile          = $wordpressIncludes . '/load.php';
-$pluginFile        = $wordpressIncludes . '/plugin.php';
-$wpdbFile          = $wordpressIncludes . '/class-wpdb.php';
-
-if ( ! is_file( $loadFile ) ) {
-	throw new RuntimeException( 'WordPress load runtime is missing.' );
-}
-
-if ( ! is_file( $pluginFile ) ) {
-	throw new RuntimeException( 'WordPress Plugin API runtime is missing.' );
-}
-
-if ( ! is_file( $wpdbFile ) ) {
-	throw new RuntimeException( 'WordPress wpdb runtime is missing.' );
-}
-
-if ( ! defined( 'WP_DEBUG' ) ) {
-	define( 'WP_DEBUG', false );
-}
-
-if ( ! defined( 'WP_DEBUG_DISPLAY' ) ) {
-	define( 'WP_DEBUG_DISPLAY', false );
-}
-
-require_once $loadFile;
-require_once $pluginFile;
-require_once $wpdbFile;
-
-if ( ! function_exists( 'current_time' ) ) {
-	function current_time( string $type, bool $gmt = false ): string { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.typeFound
-		if ( 'mysql' !== $type ) {
-			throw new RuntimeException( 'The Q5 worker supports only current_time("mysql").' );
-		}
-
-		return gmdate( 'Y-m-d H:i:s' );
-	}
+$wpSettings = rtrim( $wordpressPath, '/\\' ) . '/wp-settings.php';
+if ( ! is_file( $wpSettings ) ) {
+	throw new RuntimeException( 'WordPress runtime is missing.' );
 }
 
 $config = DatabaseConfig::fromEnvironment();
-$dbhost = $config->host . ( 3306 === $config->port ? '' : ':' . $config->port );
 
-global $wpdb;
-$wpdb = new wpdb(
-	$config->user,
-	$config->password,
-	$config->database,
-	$dbhost
+if ( ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', rtrim( $wordpressPath, '/\\' ) . '/' );
+}
+
+define( 'DB_NAME', $config->database );
+define( 'DB_USER', $config->user );
+define( 'DB_PASSWORD', $config->password );
+define(
+	'DB_HOST',
+	$config->host . ( 3306 === $config->port ? '' : ':' . $config->port )
 );
-$wpdb->prefix = 'wp_';
+define( 'DB_CHARSET', 'utf8mb4' );
+define( 'DB_COLLATE', '' );
+define( 'SHORTINIT', true );
+define( 'WP_DEBUG', false );
+
+$table_prefix = 'wp_';
+
+require $wpSettings;
+
+if ( ! isset( $wpdb ) || ! $wpdb instanceof wpdb ) {
+	throw new RuntimeException( 'WordPress wpdb bootstrap failed.' );
+}
 
 $barrier = WorkerBarrier::fromEnvironment();
 $barrier->waitForRelease();
