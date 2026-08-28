@@ -1424,19 +1424,19 @@ msgstr "Activity-Bereinigung fehlgeschlagen"
 #. Plugin Name of the plugin
 #: voucher-manager.php
 msgid "MJS-Productions Voucher Manager"
-msgstr ""
+msgstr "MJS-Productions Voucher Manager"
 
 #. Plugin URI of the plugin
 #: voucher-manager.php
 msgid "https://github.com/MJS-Productions/voucher-manager"
-msgstr ""
+msgstr "https://github.com/MJS-Productions/voucher-manager"
 
 #. Author of the plugin
 #: voucher-manager.php
 msgid "MJS-Productions"
-msgstr ""
+msgstr "MJS-Productions"
 
 #. Author URI of the plugin
 #: voucher-manager.php
 msgid "https://mjs-productions.com"
-msgstr ""
+msgstr "https://mjs-productions.com"

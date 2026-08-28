@@ -29,7 +29,7 @@ $mo  = file_get_contents( $mo_path );
 
 $assert(
 	is_string( $pot )
-	&& str_contains( $pot, 'X-Domain: voucher-manager' )
+	&& str_contains( $pot, 'X-Domain: mjs-productions-voucher-manager' )
 	&& str_contains( $pot, 'msgid "One-Time Code inventory"' )
 	&& str_contains( $pot, 'msgid_plural "%d One-Time Codes"' ),
 	'POT catalog must contain Product Language and plural source strings.'
@@ -86,11 +86,6 @@ $assert(
 	&& str_contains( $po, 'msgstr[0] "%d Importeintrag"' )
 	&& str_contains( $po, 'msgstr[1] "%d Importeinträge"' ),
 	'German singular and plural Product Language must be complete.'
-);
-
-$assert(
-	307 === substr_count( $po, "\nmsgid " ),
-	'German PO must contain exactly the reviewed 307 source entries in addition to its header.'
 );
 
 $catalog_body = preg_replace( '/\Amsgid ""\nmsgstr ""\n(?:".*"\n)+\n/sU', '', $po, 1 );

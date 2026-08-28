@@ -120,6 +120,6 @@
     "url": "https://github.com/MJS-Productions/mjs-quality.git"
   }],
   "require-dev": {
-    "mjs-productions/mjs-quality": "v0.2.0"
+    "mjs-productions/mjs-quality": "v0.2.1"
   }
 }

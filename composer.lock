@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7afdf5186067388f6139ba7a43e4eb5e",
+    "content-hash": "1ac8645f71ad50722737dc0a8513feef",
     "packages": [],
     "packages-dev": [
         {
             "name": "mjs-productions/mjs-quality",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:MJS-Productions/mjs-quality.git",
-                "reference": "3004880a9a3fa31aec008e38652f218f474a420f"
+                "reference": "3cf0961c027313a97879c4c3b7fbbfb20cea0135"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MJS-Productions/mjs-quality/zipball/3004880a9a3fa31aec008e38652f218f474a420f",
-                "reference": "3004880a9a3fa31aec008e38652f218f474a420f",
+                "url": "https://api.github.com/repos/MJS-Productions/mjs-quality/zipball/3cf0961c027313a97879c4c3b7fbbfb20cea0135",
+                "reference": "3cf0961c027313a97879c4c3b7fbbfb20cea0135",
                 "shasum": ""
             },
             "require": {
@@ -62,10 +62,10 @@
             ],
             "description": "Shared WordPress engineering and quality infrastructure for MJS-Productions products.",
             "support": {
-                "source": "https://github.com/MJS-Productions/mjs-quality/tree/v0.2.0",
+                "source": "https://github.com/MJS-Productions/mjs-quality/tree/v0.2.1",
                 "issues": "https://github.com/MJS-Productions/mjs-quality/issues"
             },
-            "time": "2026-08-27T12:22:49+00:00"
+            "time": "2026-08-28T16:23:21+00:00"
         }
     ],
     "aliases": [],
