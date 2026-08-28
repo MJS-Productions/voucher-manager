@@ -12,7 +12,7 @@ $root = dirname(__DIR__);
 
 $config = new LocalizationConfig(
     projectRoot: $root,
-    textDomain: 'voucher-manager',
+    textDomain: 'mjs-productions-voucher-manager',
     potFile: 'languages/voucher-manager.pot',
     poFiles: [
         'languages/voucher-manager-de_DE.po',
