@@ -1,0 +1,51 @@
+name: Update Localization Artifacts
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  localization-update:
+    name: Generate localization artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+          tools: composer:v2
+
+      - name: Install development dependencies
+        env:
+          COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ secrets.MJS_QUALITY_READ_TOKEN }}"}}'
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Install WP-CLI
+        run: |
+          curl --fail --location --silent --show-error \
+            https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+            --output wp-cli.phar
+          chmod +x wp-cli.phar
+          sudo mv wp-cli.phar /usr/local/bin/wp
+          wp i18n --help >/dev/null
+
+      - name: Generate localization artifacts
+        run: composer translations
+
+      - name: Upload localization artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: voucher-manager-localization-${{ github.sha }}
+          path: |
+            languages/voucher-manager.pot
+            languages/voucher-manager-de_DE.po
+            languages/voucher-manager-de_DE.mo
+          if-no-files-found: error
+          retention-days: 14
