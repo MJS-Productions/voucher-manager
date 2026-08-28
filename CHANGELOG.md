@@ -3,14 +3,28 @@
 ## Unreleased
 
 ### Added
-- Added `mjs-productions/mjs-quality` v0.1.0 as a versioned Composer development dependency for shared real-database and concurrency quality infrastructure.
+- Added `mjs-productions/mjs-quality` v0.2.1 as the shared WordPress engineering and quality development dependency.
 - Added a dedicated Q5 atomic Distribution claim test against MySQL 8.0 using two independent PHP worker processes, synchronized concurrent execution and the production `WpdbCodeRepository::claim_next_available()` path.
 - Added a minimal WordPress `SHORTINIT` test runtime so the Q5 test exercises the real WordPress `wpdb` database layer.
+- Added shared localization commands for POT generation, PO synchronization, MO compilation, artifact freshness checks and translation completeness validation.
+- Added a dedicated Localization CI job that checks generated translation artifacts and German translation completeness independently from the PHP quality matrix.
+- Added a manually triggered GitHub Actions workflow that generates and uploads the current POT, German PO and German MO localization artifacts.
+
+### Changed
+- Migrated localization maintenance to the shared `mjs-quality` workflow.
+- Corrected the localization workflow to use the plugin's actual `mjs-productions-voucher-manager` text domain.
+- Kept repository localization artifacts available for development and translation maintenance while excluding translation catalogs from the WordPress.org release ZIP.
+
+### Fixed
+- Regenerated the German localization artifacts with the correct plugin text domain.
+- Updated German translation regression coverage to follow the current localization metadata and catalog content without relying on a brittle exact message-count assertion.
 
 ### Validation
 - Verified that two concurrent workers competing for one available One-Time Code result in exactly one successful claim and one miss.
 - Verified the persistent end state contains exactly one assigned code and no remaining available code.
-- Existing PHP 8.1–8.4 Quality Gate remains green alongside the dedicated Q5 CI job.
+- Verified localization artifact freshness and German translation completeness through the shared `mjs-quality` v0.2.1 workflow.
+- Verified the manual localization workflow produces the expected POT, PO and valid GNU gettext MO artifacts.
+- Existing PHP 8.1–8.4 Quality Gate, dedicated Q5 CI job and Localization CI job remain green.
 
 ## 1.0.8 - 2026-08-21 — WordPress 7.1 and Release Hardening
 
