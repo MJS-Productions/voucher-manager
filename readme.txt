@@ -14,18 +14,18 @@ Manage, import and distribute One-Time Codes, voucher codes and unique codes in 
 
 Voucher Manager helps you manage, import and distribute One-Time Codes, voucher codes and unique codes directly in WordPress.
 
-Organize codes in dedicated pools, import existing code lists from TXT or CSV files, keep track of available and distributed codes, and issue each One-Time Code through a controlled workflow.
+Organize codes in dedicated pools, import existing code lists from TXT or CSV files, keep track of available and assigned codes, and issue each One-Time Code through a controlled workflow.
 
 = Key Features =
 
 * Pool Management - organize One-Time Codes in dedicated pools for products, campaigns or other use cases.
-* Inventory Overview - review available and distributed One-Time Codes with filters and pool context.
+* Inventory Overview - review available and assigned One-Time Codes with filters and pool context.
 * TXT and CSV Import - import existing One-Time Code lists from TXT or CSV files directly into selected pools.
 * Import Rollback - undo eligible imports as long as no One-Time Code from the import has been distributed.
 * Controlled Distribution - One-Time Codes are issued through a controlled workflow designed to help prevent duplicate issuance.
 * Activity History - review important operational events without storing distributed One-Time Code values.
 * Retention Management - configure automatic activity retention and scheduled cleanup.
-* WordPress Roles and Capabilities - administrative access follows the native WordPress permission system.
+* Administrator Access - Voucher Manager is designed for WordPress administrators.
 * Localization Ready - uses the WordPress localization system and supports translations provided through WordPress.org.
 
 = Data-Minimal by Design =
