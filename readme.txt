@@ -41,6 +41,12 @@ Distributed One-Time Code values are not stored in the Activity History. Operati
 
 Whether you manage voucher codes for products, campaigns or other use cases, Voucher Manager keeps your One-Time Code workflow organized directly in WordPress.
 
+= Voucher Manager Pro =
+
+Voucher Manager Pro is currently in development as an extension for Voucher Manager. It is planned to add additional capabilities for more advanced requirements while integrating directly into the existing Voucher Manager workflow.
+
+Learn more about the planned Voucher Manager Pro 1.0: https://mjs-productions.com/en/software/voucher-manager-pro/
+
 == Installation ==
 
 1. In your WordPress administration area, go to Plugins → Add Plugin and search for “MJS-Productions Voucher Manager”.
