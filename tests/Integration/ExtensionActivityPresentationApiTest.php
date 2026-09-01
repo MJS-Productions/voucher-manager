@@ -80,10 +80,27 @@ $assert(
 );
 
 $assert(
+	"Pool: Summer\n\nRemaining inventory: 3 One-Time Codes" === $api->detail(
+		'distribution.completed',
+		array(
+			'pool_name' => 'Summer',
+			'remaining' => 3,
+		)
+	),
+	'Context-aware Voucher Manager Activity details must remain available through the supported API.'
+);
+
+$assert(
+	'' === $api->detail( 'extension.future_event' ),
+	'Unknown extension events without supported context must not invent Activity details.'
+);
+
+$assert(
 	is_string( $source )
-	&& str_contains( $source, 'use VoucherManager\Admin\DashboardViewModel;' )
-	&& str_contains( $source, 'return $this->events->activity_label( $event_type, $context );' ),
-	'The supported API must reuse the central Voucher Manager Activity presentation instead of duplicating labels.'
+	&& str_contains( $source, 'use VoucherManager\\Admin\\DashboardViewModel;' )
+	&& str_contains( $source, 'return $this->events->activity_label( $event_type, $context );' )
+	&& str_contains( $source, 'return $this->events->activity_detail( $event_type, $context );' ),
+	'The supported API must reuse the central Voucher Manager Activity presentation instead of duplicating labels or details.'
 );
 
 $assert(

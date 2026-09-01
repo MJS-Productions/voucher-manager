@@ -33,4 +33,13 @@ final class ActivityPresentationApi {
 	public function label( string $event_type, array $context = array() ): string {
 		return $this->events->activity_label( $event_type, $context );
 	}
+
+	/**
+	 * Return the translated human-readable detail for an Activity event.
+	 *
+	 * @param array<string,mixed> $context Operational context.
+	 */
+	public function detail( string $event_type, array $context = array() ): string {
+		return $this->events->activity_detail( $event_type, $context );
+	}
 }
