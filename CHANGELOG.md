@@ -9,6 +9,7 @@
 - Added shared localization commands for POT generation, PO synchronization, MO compilation, artifact freshness checks and translation completeness validation.
 - Added a dedicated Localization CI job that checks generated translation artifacts and German translation completeness independently from the PHP quality matrix.
 - Added a manually triggered GitHub Actions workflow that generates and uploads the current POT, German PO and German MO localization artifacts.
+- Added a supported Activity presentation extension API so extensions can reuse Voucher Manager's human-readable, translatable Activity labels without duplicating presentation logic.
 
 ### Changed
 - Migrated localization maintenance to the shared `mjs-quality` workflow.
