@@ -86,10 +86,11 @@ $assert(
 	'error' === $view->activity_tone( 'admin.action_failed' ),
 	'Unexpected admin failures should have an error tone.'
 );
+$assert( 'Administrative action could not be completed' === $view->activity_label( 'admin.action_failed' ), 'Unexpected admin failures should have a readable label.' );
 $assert( 'Settings updated' === $view->activity_label( 'settings.updated' ), 'Settings updates should have a readable label.' );
 $assert( 'success' === $view->activity_tone( 'settings.updated' ), 'Settings updates should have a success tone.' );
-$assert( 'Activity cleanup completed' === $view->activity_label( 'activity.cleanup_completed' ), 'Successful cleanup should have a readable label.' );
-$assert( 'Activity cleanup failed' === $view->activity_label( 'activity.cleanup_failed' ), 'Failed cleanup should have a readable label.' );
+$assert( 'Activity History cleanup completed' === $view->activity_label( 'activity.cleanup_completed' ), 'Successful cleanup should have a readable label.' );
+$assert( 'Activity History cleanup failed' === $view->activity_label( 'activity.cleanup_failed' ), 'Failed cleanup should have a readable label.' );
 $assert( 'success' === $view->activity_tone( 'activity.cleanup_completed' ), 'Successful cleanup should have a success tone.' );
 $assert( 'error' === $view->activity_tone( 'activity.cleanup_failed' ), 'Failed cleanup should have an error tone.' );
 $assert( 'Voucher Manager installed' === $view->activity_label( 'plugin.installed' ), 'Plugin installation should have a readable label.' );
@@ -190,8 +191,8 @@ $assert(
 );
 
 $assert(
-	'Voucher Manager activity' === $view->activity_label( 'future.event' ),
-	'Unknown events should degrade gracefully.'
+	'future.event' === $view->activity_label( 'future.event' ),
+	'Unknown events should preserve their technical identifier.'
 );
 
 
