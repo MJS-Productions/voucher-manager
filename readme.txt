@@ -45,7 +45,7 @@ Whether you manage voucher codes for products, campaigns or other use cases, Vou
 
 Voucher Manager Pro is currently in development as an extension for Voucher Manager. It is planned to add additional capabilities for more advanced requirements while integrating directly into the existing Voucher Manager workflow.
 
-Learn more about the planned Voucher Manager Pro 1.0: https://mjs-productions.com/en/software/voucher-manager-pro/
+Learn more about the [planned Voucher Manager Pro 1.0](https://mjs-productions.com/en/software/voucher-manager-pro/).
 
 == Installation ==
 
