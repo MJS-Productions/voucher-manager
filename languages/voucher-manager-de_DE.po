@@ -184,10 +184,6 @@ msgstr "Neuen Pool hinzufügen"
 msgid "Administration"
 msgstr "Administration"
 
-#: src/Admin/DashboardViewModel.php:45
-msgid "Administrative action failed"
-msgstr "Administrative Aktion fehlgeschlagen"
-
 #: templates/admin/inventory.php:40
 msgid "All One-Time Code records in this pool"
 msgstr "Alle Einmalcode-Einträge in diesem Pool"
@@ -896,7 +892,7 @@ msgstr "Pool gelöscht."
 
 #: src/Admin/DashboardViewModel.php:59
 msgid "Pool deletion failed"
-msgstr "Löschen des Pools fehlgeschlagen"
+msgstr "Das Löschen des Pools fehlgeschlagen"
 
 #: templates/admin/pool-danger-zone.php:14
 msgid "Pool deletion failed. The destructive operation was rolled back."
@@ -1413,14 +1409,6 @@ msgstr "Voucher Manager deaktiviert"
 msgid "Voucher Manager uninstalled"
 msgstr "Voucher Manager deinstalliert"
 
-#: src/Admin/DashboardViewModel.php:47
-msgid "Activity cleanup completed"
-msgstr "Activity-Bereinigung abgeschlossen"
-
-#: src/Admin/DashboardViewModel.php:48
-msgid "Activity cleanup failed"
-msgstr "Activity-Bereinigung fehlgeschlagen"
-
 #. Plugin Name of the plugin
 #: voucher-manager.php
 msgid "MJS-Productions Voucher Manager"
@@ -1440,3 +1428,15 @@ msgstr "MJS-Productions"
 #: voucher-manager.php
 msgid "https://mjs-productions.com"
 msgstr "https://mjs-productions.com"
+
+#: src/Admin/DashboardViewModel.php:45
+msgid "Administrative action could not be completed"
+msgstr "Administrative Aktion konnte nicht abgeschlossen werden"
+
+#: src/Admin/DashboardViewModel.php:47
+msgid "Activity History cleanup completed"
+msgstr "Bereinigung der Aktivitätshistorie abgeschlossen"
+
+#: src/Admin/DashboardViewModel.php:48
+msgid "Activity History cleanup failed"
+msgstr "Bereinigung der Aktivitätshistorie fehlgeschlagen"
