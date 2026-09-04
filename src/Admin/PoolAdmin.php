@@ -116,6 +116,12 @@ final class PoolAdmin {
 		}
 		try {
 			$deleted = $this->lifecycle->delete_available_codes( $id );
+			if ( 0 < $deleted ) {
+				InventoryChangedEvent::dispatch(
+					$id,
+					InventoryChangedEvent::REASON_DELETION
+				);
+			}
 			$this->redirect( 'available_deleted', $deleted );
 		} catch ( Throwable ) {
 			$this->redirect_delete_available_confirmation( $id, 'delete_failed' );
