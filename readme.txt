@@ -105,6 +105,7 @@ Yes. Voucher Manager uses the WordPress localization system and supports transla
 == Changelog ==
 
 = 1.0.8 =
+* Moved plugin translations to the WordPress.org localization system.
 * Confirmed compatibility with WordPress 7.1 and updated the tested-up-to declaration.
 * Hardened database query preparation and release validation for current WordPress Plugin Check expectations.
 * Tightened release packaging so development-only repository files are excluded from the installable ZIP.
