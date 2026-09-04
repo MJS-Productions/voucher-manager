@@ -9,6 +9,7 @@ use VoucherManager\Domain\Log\OperationalEvent;
 use VoucherManager\Domain\Log\OperationalLogger;
 use VoucherManager\Domain\Pool\PoolLifecycleService;
 use VoucherManager\Domain\Pool\PoolService;
+use VoucherManager\Extension\InventoryChangedEvent;
 use VoucherManager\Infrastructure\WordPress\WpdbLogRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbPoolLifecycleRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbPoolRepository;

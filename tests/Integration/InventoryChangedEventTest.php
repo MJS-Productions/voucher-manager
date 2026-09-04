@@ -18,6 +18,8 @@ $assert = static function ( bool $condition, string $message ): void {
 $event        = file_get_contents( $root . '/src/Extension/InventoryChangedEvent.php' );
 $distribution = file_get_contents( $root . '/src/Extension/DistributionApi.php' );
 $import_admin = file_get_contents( $root . '/src/Admin/ImportAdmin.php' );
+$pool_admin   = file_get_contents( $root . '/src/Admin/PoolAdmin.php' );
+$pool_service = file_get_contents( $root . '/src/Domain/Pool/PoolLifecycleService.php' );
 $composer     = file_get_contents( $root . '/composer.json' );
 
 $assert( is_string( $event ), 'InventoryChangedEvent.php must exist.' );
@@ -25,8 +27,9 @@ $assert(
 	str_contains( $event, "public const HOOK = 'voucher_manager_inventory_changed';" )
 	&& str_contains( $event, "public const REASON_DISTRIBUTION = 'distribution';" )
 	&& str_contains( $event, "public const REASON_IMPORT       = 'import';" )
-	&& str_contains( $event, "public const REASON_ROLLBACK     = 'rollback';" ),
-	'The public event contract must expose the stable hook and approved v1 reasons.'
+	&& str_contains( $event, "public const REASON_ROLLBACK     = 'rollback';" )
+	&& str_contains( $event, "public const REASON_DELETION     = 'deletion';" ),
+	'The public event contract must expose the stable hook and approved semantic reasons.'
 );
 $assert(
 	str_contains( $event, 'do_action( self::HOOK, $pool_id, $reason );' )
@@ -56,6 +59,18 @@ $assert(
 	str_contains( $import_admin, 'if ( 0 < $deleted && $rollback_import instanceof ImportRecord )' )
 	&& str_contains( $import_admin, 'InventoryChangedEvent::REASON_ROLLBACK' ),
 	'Rollback must publish the event only when inventory was actually removed and the pool context is known.'
+);
+$assert(
+	is_string( $pool_admin )
+	&& str_contains( $pool_admin, '$deleted = $this->lifecycle->delete_available_codes( $id );' )
+	&& str_contains( $pool_admin, 'if ( 0 < $deleted )' )
+	&& str_contains( $pool_admin, 'InventoryChangedEvent::REASON_DELETION' ),
+	'Available-code deletion must publish the semantic inventory-change event only after inventory was actually removed.'
+);
+$assert(
+	is_string( $pool_service )
+	&& str_contains( $pool_service, 'OperationalEvent::POOL_AVAILABLE_CODES_DELETED' ),
+	'Existing available-code deletion activity logging must remain in place.'
 );
 
 $assert(

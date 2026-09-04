@@ -19,6 +19,7 @@ final class InventoryChangedEvent {
 	public const REASON_DISTRIBUTION = 'distribution';
 	public const REASON_IMPORT       = 'import';
 	public const REASON_ROLLBACK     = 'rollback';
+	public const REASON_DELETION     = 'deletion';
 
 	/**
 	 * Publishes an inventory-change event without allowing extension failures
@@ -53,6 +54,7 @@ final class InventoryChangedEvent {
 			self::REASON_DISTRIBUTION,
 			self::REASON_IMPORT,
 			self::REASON_ROLLBACK,
+			self::REASON_DELETION,
 		);
 	}
 }
