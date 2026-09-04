@@ -102,12 +102,19 @@ $assert(
 
 $assert(
 	is_string( $admin_source )
-	&& str_contains( $admin_source, "current_user_can( 'manage_options' )" )
+	&& str_contains( $admin_source, 'AccessPolicy::is_administrator()' )
 	&& str_contains( $admin_source, "check_admin_referer( 'voucher_manager_save_settings' )" )
 	&& str_contains( $admin_source, "admin_post_voucher_manager_save_settings" )
 	&& str_contains( $admin_source, "! \$current->delete_data_on_uninstall()" )
 	&& str_contains( $admin_source, 'uninstall_confirmation_required' ),
-	'Settings saves must enforce capability, nonce and explicit OFF-to-ON destructive consent.'
+	'Settings saves must enforce the strict administrator boundary, nonce and explicit OFF-to-ON destructive consent.'
+);
+
+$assert(
+	is_string( $admin_source )
+	&& str_contains( $admin_source, 'public function register_menu(): void' )
+	&& str_contains( $admin_source, "if ( ! AccessPolicy::is_administrator() )" ),
+	'Settings menu visibility must remain strictly administrator-only even if another role has manage_options.'
 );
 
 $assert(
@@ -164,4 +171,4 @@ $assert(
 	'Settings Foundation coverage must run before the release build.'
 );
 
-echo "Settings foundation OK: normalized retention, explicit uninstall consent and Activity coverage verified.\n";
+echo "Settings foundation OK: normalized retention, strict administrator access, explicit uninstall consent and Activity coverage verified.\n";

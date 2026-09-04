@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace VoucherManager\Admin;
 
+use VoucherManager\Authorization\AccessPolicy;
 use VoucherManager\Domain\Log\OperationalEvent;
 use VoucherManager\Domain\Log\OperationalLogger;
 use VoucherManager\Domain\Settings\Settings;
@@ -37,6 +38,10 @@ final class SettingsAdmin {
 	}
 
 	public function register_menu(): void {
+		if ( ! AccessPolicy::is_administrator() ) {
+			return;
+		}
+
 		add_submenu_page(
 			'voucher-manager',
 			__( 'Voucher Manager Settings', 'mjs-productions-voucher-manager' ),
@@ -107,7 +112,7 @@ final class SettingsAdmin {
 	}
 
 	private function guard(): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! AccessPolicy::is_administrator() ) {
 			wp_die( esc_html__( 'You are not allowed to access this page.', 'mjs-productions-voucher-manager' ) );
 		}
 	}

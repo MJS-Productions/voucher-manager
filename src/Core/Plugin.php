@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace VoucherManager\Core;
 
 use VoucherManager\Admin\Admin;
+use VoucherManager\Authorization\AccessPolicy;
 use VoucherManager\Database\Migrator;
 use VoucherManager\Lifecycle\Activator;
 use VoucherManager\Lifecycle\ActivityRetentionScheduler;
@@ -28,6 +29,7 @@ final class Plugin {
 	}
 
 	public function boot(): void {
+		( new AccessPolicy() )->register();
 		add_action( 'plugins_loaded', array( $this, 'maybe_upgrade_database' ), 5 );
 		( new ActivityRetentionScheduler() )->register();
 		if ( is_admin() ) {
