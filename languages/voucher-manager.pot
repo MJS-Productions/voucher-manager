@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-01T11:20:03+00:00\n"
+"POT-Creation-Date: 2026-09-04T09:45:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mjs-productions-voucher-manager\n"
@@ -59,7 +59,7 @@ msgstr ""
 #: src/Admin/InventoryAdmin.php:99
 #: src/Admin/OperationalActivityAdmin.php:34
 #: src/Admin/PoolAdmin.php:131
-#: src/Admin/SettingsAdmin.php:111
+#: src/Admin/SettingsAdmin.php:116
 msgid "You are not allowed to access this page."
 msgstr ""
 
@@ -518,12 +518,12 @@ msgstr ""
 msgid "Available for distribution."
 msgstr ""
 
-#: src/Admin/SettingsAdmin.php:42
+#: src/Admin/SettingsAdmin.php:47
 #: templates/admin/settings.php:19
 msgid "Voucher Manager Settings"
 msgstr ""
 
-#: src/Admin/SettingsAdmin.php:43
+#: src/Admin/SettingsAdmin.php:48
 msgctxt "admin menu label"
 msgid "Settings"
 msgstr ""

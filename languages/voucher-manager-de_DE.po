@@ -1215,7 +1215,7 @@ msgstr "Voucher Manager"
 msgid "Voucher Manager Dashboard"
 msgstr "Voucher Manager Dashboard"
 
-#: src/Admin/SettingsAdmin.php:42
+#: src/Admin/SettingsAdmin.php:47
 #: templates/admin/settings.php:19
 msgid "Voucher Manager Settings"
 msgstr "Voucher Manager Einstellungen"
@@ -1257,7 +1257,7 @@ msgstr "Ja"
 #: src/Admin/InventoryAdmin.php:99
 #: src/Admin/OperationalActivityAdmin.php:34
 #: src/Admin/PoolAdmin.php:131
-#: src/Admin/SettingsAdmin.php:111
+#: src/Admin/SettingsAdmin.php:116
 msgid "You are not allowed to access this page."
 msgstr "Du bist leider nicht berechtigt, auf diese Seite zuzugreifen."
 
@@ -1375,7 +1375,7 @@ msgctxt "admin menu label"
 msgid "Import"
 msgstr "Import"
 
-#: src/Admin/SettingsAdmin.php:43
+#: src/Admin/SettingsAdmin.php:48
 msgctxt "admin menu label"
 msgid "Settings"
 msgstr "Einstellungen"
