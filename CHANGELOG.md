@@ -30,6 +30,7 @@
 ## 1.0.8 - 2026-08-21 — WordPress 7.1 and Release Hardening
 
 ### Changed
+- Moved plugin translations to the WordPress.org localization system.
 - Confirmed Voucher Manager under WordPress 7.1 and updated the WordPress.org `Tested up to` declaration.
 - Hardened WordPress database-query preparation and related Plugin Check compatibility without changing data behavior.
 - Tightened release packaging to ship only production runtime files and strengthened release-artifact validation.

@@ -16,7 +16,7 @@ Voucher Manager 1.0.8 is a maintenance release focused on WordPress 7.1 compatib
 - Updated integration assertions that had encoded older SQL implementation details so they continue to verify the intended privacy and lifecycle boundaries.
 - Tightened the release builder to ship production runtime files only.
 - Strengthened release validation so development-only repository files are rejected from the installable artifact.
-- Preserved deterministic bundled German translation artifacts.
+- Kept German translation artifacts in the repository for maintenance and verification while moving production translation delivery to WordPress.org language packs.
 
 ## Import guidance
 
