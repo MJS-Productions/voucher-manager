@@ -9,6 +9,8 @@
 
 declare(strict_types=1);
 
+use VoucherManager\Admin\Capabilities;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -16,6 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 $notice = isset( $_GET['vm_notice'] )
 	? sanitize_key( wp_unslash( $_GET['vm_notice'] ) )
 	: '';
+
+$can_import_codes = current_user_can( Capabilities::IMPORT_CODES );
 
 $distributable_rows = array_values(
 	array_filter(
@@ -81,8 +85,10 @@ foreach ( $distributable_rows as $row ) {
 				<div class="voucher-manager__empty-state voucher-manager__distribution-empty">
 					<span class="dashicons dashicons-tickets-alt" aria-hidden="true"></span>
 					<h3><?php echo esc_html__( 'No One-Time Codes are ready to distribute', 'mjs-productions-voucher-manager' ); ?></h3>
-					<p><?php echo esc_html__( 'Active pools currently have no available One-Time Codes. Import codes before trying again.', 'mjs-productions-voucher-manager' ); ?></p>
-					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-import' ) ); ?>"><?php echo esc_html__( 'Import Codes', 'mjs-productions-voucher-manager' ); ?></a>
+					<?php if ( $can_import_codes ) : ?>
+						<p><?php echo esc_html__( 'Active pools currently have no available One-Time Codes. Import codes before trying again.', 'mjs-productions-voucher-manager' ); ?></p>
+						<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-import' ) ); ?>"><?php echo esc_html__( 'Import Codes', 'mjs-productions-voucher-manager' ); ?></a>
+					<?php endif; ?>
 				</div>
 			<?php elseif ( '' === $intent_token ) : ?>
 				<div class="notice notice-error inline"><p><?php echo esc_html__( 'A secure distribution request could not be prepared. Reload this page and try again.', 'mjs-productions-voucher-manager' ); ?></p></div>

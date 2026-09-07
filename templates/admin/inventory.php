@@ -9,9 +9,13 @@
 
 declare(strict_types=1);
 
+use VoucherManager\Admin\Capabilities;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+$can_import_codes = current_user_can( Capabilities::IMPORT_CODES );
 ?>
 <div class="wrap voucher-manager">
 	<header class="voucher-manager__header">
@@ -115,7 +119,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php if ( $view->has_active_filters( $data['filters']['state'], $data['filters']['import_id'] ) ) : ?>
 					<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-inventory', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Reset filters', 'mjs-productions-voucher-manager' ); ?></a>
 				<?php endif; ?>
-				<?php if ( $data['pool_empty'] || 0 === $data['counts']['available'] ) : ?>
+				<?php if ( $can_import_codes && ( $data['pool_empty'] || 0 === $data['counts']['available'] ) ) : ?>
 					<a class="button<?php echo $view->has_active_filters( $data['filters']['state'], $data['filters']['import_id'] ) ? '' : ' button-primary'; ?>" href="<?php echo esc_url( add_query_arg( array( 'page' => 'voucher-manager-import', 'pool_id' => $pool->id() ), admin_url( 'admin.php' ) ) ); ?>"><?php echo esc_html__( 'Import Codes', 'mjs-productions-voucher-manager' ); ?></a>
 				<?php endif; ?>
 			</div>

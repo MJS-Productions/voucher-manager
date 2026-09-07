@@ -47,9 +47,25 @@ $plugin_source = file_get_contents(
 $delegation_source = file_get_contents(
 	$root . '/src/Extension/DelegatedAccessApi.php'
 );
+$dashboard_source = file_get_contents(
+	$root . '/templates/admin/dashboard.php'
+);
+$inventory_source = file_get_contents(
+	$root . '/templates/admin/inventory.php'
+);
+$distribution_source = file_get_contents(
+	$root . '/templates/admin/distribution.php'
+);
 
-if ( false === $activator_source || false === $plugin_source || false === $delegation_source ) {
-	fwrite( STDERR, "Could not read capability lifecycle sources.\n" );
+if (
+	false === $activator_source
+	|| false === $plugin_source
+	|| false === $delegation_source
+	|| false === $dashboard_source
+	|| false === $inventory_source
+	|| false === $distribution_source
+) {
+	fwrite( STDERR, "Could not read capability lifecycle or presentation sources.\n" );
 	exit( 1 );
 }
 
@@ -80,6 +96,35 @@ if (
 	|| str_contains( $delegation_source, 'set_transient(' )
 ) {
 	fwrite( STDERR, "Delegated access opt-in must remain runtime-only and non-persistent.\n" );
+	exit( 1 );
+}
+
+if (
+	! str_contains( $dashboard_source, 'current_user_can( Capabilities::MANAGE_POOLS )' )
+	|| ! str_contains( $dashboard_source, 'current_user_can( Capabilities::IMPORT_CODES )' )
+	|| ! str_contains( $dashboard_source, 'current_user_can( Capabilities::DISTRIBUTE_CODES )' )
+	|| ! str_contains( $dashboard_source, 'current_user_can( Capabilities::VIEW_INVENTORY )' )
+	|| ! str_contains( $dashboard_source, 'current_user_can( Capabilities::VIEW_ACTIVITY )' )
+	|| ! str_contains( $dashboard_source, 'if ( $can_view_activity )' )
+	|| ! str_contains( $dashboard_source, 'if ( ! empty( $metrics ) )' )
+) {
+	fwrite( STDERR, "Dashboard actions, metrics and Activity presentation must be capability-aware.\n" );
+	exit( 1 );
+}
+
+if (
+	! str_contains( $inventory_source, 'current_user_can( Capabilities::IMPORT_CODES )' )
+	|| ! str_contains( $inventory_source, '$can_import_codes && ( $data[' )
+) {
+	fwrite( STDERR, "Inventory navigation must not expose the Import Codes action without the import capability.\n" );
+	exit( 1 );
+}
+
+if (
+	! str_contains( $distribution_source, 'current_user_can( Capabilities::IMPORT_CODES )' )
+	|| ! str_contains( $distribution_source, 'if ( $can_import_codes )' )
+) {
+	fwrite( STDERR, "Distribution empty-state navigation must not expose Import Codes without the import capability.\n" );
 	exit( 1 );
 }
 
@@ -138,4 +183,4 @@ if ( ! AccessPolicy::is_administrator() ) {
 	exit( 1 );
 }
 
-echo "Voucher Manager capabilities OK: stable definitions, strict standalone access and runtime delegation are explicit.\n";
+echo "Voucher Manager capabilities OK: stable definitions, strict standalone access, runtime delegation and capability-aware presentation are explicit.\n";

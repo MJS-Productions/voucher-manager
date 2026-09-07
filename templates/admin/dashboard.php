@@ -9,35 +9,47 @@
 
 declare(strict_types=1);
 
+use VoucherManager\Admin\Capabilities;
 use VoucherManager\Admin\DashboardViewModel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$view_model    = new DashboardViewModel();
+$view_model     = new DashboardViewModel();
 $database_label = $data['database_healthy']
 	? __( 'Ready', 'mjs-productions-voucher-manager' )
 	: __( 'Needs attention', 'mjs-productions-voucher-manager' );
 
-$metrics = array(
-	'available' => array(
+$can_manage_pools   = current_user_can( Capabilities::MANAGE_POOLS );
+$can_import_codes   = current_user_can( Capabilities::IMPORT_CODES );
+$can_distribute     = current_user_can( Capabilities::DISTRIBUTE_CODES );
+$can_view_inventory = current_user_can( Capabilities::VIEW_INVENTORY );
+$can_view_activity  = current_user_can( Capabilities::VIEW_ACTIVITY );
+
+$metrics = array();
+
+if ( $can_view_inventory ) {
+	$metrics['available'] = array(
 		'label' => __( 'Available One-Time Codes', 'mjs-productions-voucher-manager' ),
 		'hint'  => __( 'Ready for distribution', 'mjs-productions-voucher-manager' ),
-	),
-	'assigned' => array(
+	);
+	$metrics['assigned'] = array(
 		'label' => __( 'Distributed One-Time Codes', 'mjs-productions-voucher-manager' ),
 		'hint'  => __( 'Successfully assigned', 'mjs-productions-voucher-manager' ),
-	),
-	'pools' => array(
+	);
+	$metrics['pools'] = array(
 		'label' => __( 'Pools', 'mjs-productions-voucher-manager' ),
 		'hint'  => __( 'Code collections', 'mjs-productions-voucher-manager' ),
-	),
-	'imports' => array(
+	);
+}
+
+if ( $can_import_codes ) {
+	$metrics['imports'] = array(
 		'label' => __( 'Imports', 'mjs-productions-voucher-manager' ),
 		'hint'  => __( 'Completed and recorded', 'mjs-productions-voucher-manager' ),
-	),
-);
+	);
+}
 ?>
 <div class="wrap voucher-manager">
 	<header class="voucher-manager__header">
@@ -57,92 +69,104 @@ $metrics = array(
 		</span>
 	</header>
 
-	<nav class="voucher-manager__quick-actions" aria-label="<?php echo esc_attr__( 'Quick actions', 'mjs-productions-voucher-manager' ); ?>">
-		<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-pools&action=new' ) ); ?>">
-			<?php echo esc_html__( 'Create Pool', 'mjs-productions-voucher-manager' ); ?>
-		</a>
-		<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-import' ) ); ?>">
-			<?php echo esc_html__( 'Import Codes', 'mjs-productions-voucher-manager' ); ?>
-		</a>
-		<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-distribution' ) ); ?>">
-			<?php echo esc_html__( 'Distribute Code', 'mjs-productions-voucher-manager' ); ?>
-		</a>
-	</nav>
+	<?php if ( $can_manage_pools || $can_import_codes || $can_distribute ) : ?>
+		<nav class="voucher-manager__quick-actions" aria-label="<?php echo esc_attr__( 'Quick actions', 'mjs-productions-voucher-manager' ); ?>">
+			<?php if ( $can_manage_pools ) : ?>
+				<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-pools&action=new' ) ); ?>">
+					<?php echo esc_html__( 'Create Pool', 'mjs-productions-voucher-manager' ); ?>
+				</a>
+			<?php endif; ?>
+			<?php if ( $can_import_codes ) : ?>
+				<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-import' ) ); ?>">
+					<?php echo esc_html__( 'Import Codes', 'mjs-productions-voucher-manager' ); ?>
+				</a>
+			<?php endif; ?>
+			<?php if ( $can_distribute ) : ?>
+				<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-distribution' ) ); ?>">
+					<?php echo esc_html__( 'Distribute Code', 'mjs-productions-voucher-manager' ); ?>
+				</a>
+			<?php endif; ?>
+		</nav>
+	<?php endif; ?>
 
-	<section class="voucher-manager__metrics voucher-manager__metrics--four" aria-label="<?php echo esc_attr__( 'Inventory overview', 'mjs-productions-voucher-manager' ); ?>">
-		<?php foreach ( $metrics as $key => $metric ) : ?>
-			<article class="voucher-manager__metric">
-				<span><?php echo esc_html( $metric['label'] ); ?></span>
-				<strong><?php echo esc_html( number_format_i18n( $data['counts'][ $key ] ) ); ?></strong>
-				<small><?php echo esc_html( $metric['hint'] ); ?></small>
-			</article>
-		<?php endforeach; ?>
-	</section>
+	<?php if ( ! empty( $metrics ) ) : ?>
+		<section class="voucher-manager__metrics voucher-manager__metrics--four" aria-label="<?php echo esc_attr__( 'Inventory overview', 'mjs-productions-voucher-manager' ); ?>">
+			<?php foreach ( $metrics as $key => $metric ) : ?>
+				<article class="voucher-manager__metric">
+					<span><?php echo esc_html( $metric['label'] ); ?></span>
+					<strong><?php echo esc_html( number_format_i18n( $data['counts'][ $key ] ) ); ?></strong>
+					<small><?php echo esc_html( $metric['hint'] ); ?></small>
+				</article>
+			<?php endforeach; ?>
+		</section>
+	<?php endif; ?>
 
 	<div class="voucher-manager__dashboard-grid">
-		<section class="voucher-manager__card" aria-labelledby="voucher-manager-activity-title">
-			<div class="voucher-manager__card-header">
-				<div>
-					<h2 id="voucher-manager-activity-title">
-						<?php echo esc_html__( 'Recent activity', 'mjs-productions-voucher-manager' ); ?>
-					</h2>
-					<p><?php echo esc_html__( 'The latest operational events.', 'mjs-productions-voucher-manager' ); ?></p>
+		<?php if ( $can_view_activity ) : ?>
+			<section class="voucher-manager__card" aria-labelledby="voucher-manager-activity-title">
+				<div class="voucher-manager__card-header">
+					<div>
+						<h2 id="voucher-manager-activity-title">
+							<?php echo esc_html__( 'Recent activity', 'mjs-productions-voucher-manager' ); ?>
+						</h2>
+						<p><?php echo esc_html__( 'The latest operational events.', 'mjs-productions-voucher-manager' ); ?></p>
+					</div>
+					<div class="voucher-manager__activity-header-actions">
+						<span class="voucher-manager__muted">
+							<?php
+							echo esc_html(
+								sprintf(
+									/* translators: %s: total number of operational log entries */
+									__( '%s total events', 'mjs-productions-voucher-manager' ),
+									number_format_i18n( $data['counts']['logs'] )
+								)
+							);
+							?>
+						</span>
+						<a href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-activity' ) ); ?>">
+							<?php echo esc_html__( 'View all activity', 'mjs-productions-voucher-manager' ); ?>
+						</a>
+					</div>
 				</div>
-				<div class="voucher-manager__activity-header-actions">
-					<span class="voucher-manager__muted">
-						<?php
-						echo esc_html(
-							sprintf(
-								/* translators: %s: total number of operational log entries */
-								__( '%s total events', 'mjs-productions-voucher-manager' ),
-								number_format_i18n( $data['counts']['logs'] )
-							)
-						);
-						?>
-					</span>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=voucher-manager-activity' ) ); ?>">
-						<?php echo esc_html__( 'View all activity', 'mjs-productions-voucher-manager' ); ?>
-					</a>
-				</div>
-			</div>
 
-			<?php if ( empty( $data['activity'] ) ) : ?>
-				<div class="voucher-manager__empty-state">
-					<strong><?php echo esc_html__( 'No activity recorded yet.', 'mjs-productions-voucher-manager' ); ?></strong>
-					<p><?php echo esc_html__( 'Imports and distributions will appear here.', 'mjs-productions-voucher-manager' ); ?></p>
-				</div>
-			<?php else : ?>
-				<ol class="voucher-manager__activity-list">
-					<?php foreach ( $data['activity'] as $activity ) : ?>
-						<?php
-						$event_type = (string) $activity['event_type'];
-						$context    = is_array( $activity['context'] ) ? $activity['context'] : array();
-						$tone       = $view_model->activity_tone( $event_type );
-						$detail     = $view_model->activity_detail( $event_type, $context );
-						$timestamp  = strtotime( (string) $activity['created_at'] );
-						?>
-						<li class="voucher-manager__activity voucher-manager__activity--<?php echo esc_attr( $tone ); ?>">
-							<span class="voucher-manager__activity-marker" aria-hidden="true"></span>
-							<div>
-								<strong><?php echo esc_html( $view_model->activity_label( $event_type, $context ) ); ?></strong>
-								<?php if ( '' !== $detail ) : ?>
-									<span><?php echo esc_html( $detail ); ?></span>
-								<?php endif; ?>
-							</div>
-							<time datetime="<?php echo esc_attr( (string) $activity['created_at'] ); ?>">
-								<?php
-								echo esc_html(
-									false !== $timestamp
-										? wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $timestamp )
-										: ''
-								);
-								?>
-							</time>
-						</li>
-					<?php endforeach; ?>
-				</ol>
-			<?php endif; ?>
-		</section>
+				<?php if ( empty( $data['activity'] ) ) : ?>
+					<div class="voucher-manager__empty-state">
+						<strong><?php echo esc_html__( 'No activity recorded yet.', 'mjs-productions-voucher-manager' ); ?></strong>
+						<p><?php echo esc_html__( 'Imports and distributions will appear here.', 'mjs-productions-voucher-manager' ); ?></p>
+					</div>
+				<?php else : ?>
+					<ol class="voucher-manager__activity-list">
+						<?php foreach ( $data['activity'] as $activity ) : ?>
+							<?php
+							$event_type = (string) $activity['event_type'];
+							$context    = is_array( $activity['context'] ) ? $activity['context'] : array();
+							$tone       = $view_model->activity_tone( $event_type );
+							$detail     = $view_model->activity_detail( $event_type, $context );
+							$timestamp  = strtotime( (string) $activity['created_at'] );
+							?>
+							<li class="voucher-manager__activity voucher-manager__activity--<?php echo esc_attr( $tone ); ?>">
+								<span class="voucher-manager__activity-marker" aria-hidden="true"></span>
+								<div>
+									<strong><?php echo esc_html( $view_model->activity_label( $event_type, $context ) ); ?></strong>
+									<?php if ( '' !== $detail ) : ?>
+										<span><?php echo esc_html( $detail ); ?></span>
+									<?php endif; ?>
+								</div>
+								<time datetime="<?php echo esc_attr( (string) $activity['created_at'] ); ?>">
+									<?php
+									echo esc_html(
+										false !== $timestamp
+											? wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $timestamp )
+											: ''
+									);
+									?>
+								</time>
+							</li>
+						<?php endforeach; ?>
+					</ol>
+				<?php endif; ?>
+			</section>
+		<?php endif; ?>
 
 		<section class="voucher-manager__card" aria-labelledby="voucher-manager-system-title">
 			<h2 id="voucher-manager-system-title"><?php echo esc_html__( 'System status', 'mjs-productions-voucher-manager' ); ?></h2>
