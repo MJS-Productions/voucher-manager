@@ -55,9 +55,6 @@ jobs:
           COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ secrets.MJS_QUALITY_READ_TOKEN }}"}}'
         run: composer install --no-interaction --prefer-dist
 
-      - name: Run translation build
-        run: composer translations
-
       - name: Run quality gate
         run: composer quality
 
