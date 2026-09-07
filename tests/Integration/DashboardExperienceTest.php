@@ -100,14 +100,14 @@ $assert( 'Voucher Manager uninstalled' === $view->activity_label( 'plugin.uninst
 $assert( 'neutral' === $view->activity_tone( 'plugin.installed' ), 'Plugin lifecycle events should remain informational.' );
 $assert( 'neutral' === $view->activity_tone( 'plugin.uninstalled' ), 'Plugin uninstall with retained data should remain informational.' );
 $assert(
-	"Pool: Amazon Vouchers\n\nRemaining inventory: 2 One-Time Codes" === $view->activity_detail(
+	'Pool: Amazon Vouchers · Remaining inventory: 2 One-Time Codes' === $view->activity_detail(
 		'distribution.completed',
 		array( 'remaining' => 2, 'pool_name' => 'Amazon Vouchers', 'code' => 'MUST-NOT-APPEAR' )
 	),
 	'Distribution detail should show Pool context and inventory, not the One-Time Code value.'
 );
 $assert(
-	"Pool: Amazon Vouchers\n\nRemaining inventory: 1 One-Time Code" === $view->activity_detail(
+	'Pool: Amazon Vouchers · Remaining inventory: 1 One-Time Code' === $view->activity_detail(
 		'distribution.completed',
 		array( 'remaining' => 1, 'pool_name' => 'Amazon Vouchers' )
 	),
