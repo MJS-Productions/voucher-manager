@@ -5,10 +5,10 @@ Professional One-Time Code Management for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Stable Release  
-**Current release:** `1.0.8` — WordPress 7.1 and Release Hardening
-**Previous release:** `1.0.7` — Activity History Coverage
+**Current release:** `1.0.9` — Extension APIs and Capability Foundation
+**Previous release:** `1.0.8` — WordPress 7.1 and Release Hardening
 
-`1.0.8` confirms compatibility with WordPress 7.1, hardens WordPress database-query preparation and release validation, tightens production ZIP packaging and aligns Import guidance with blank-row handling.
+`1.0.9` establishes supported extension APIs and granular Voucher Manager capabilities for extension-driven workflows while preserving administrator-only standalone access. It also improves capability-aware administration, Activity presentation consistency and extension notifications for inventory and Pool warning-threshold changes.
 
 ## Current capabilities
 
@@ -25,6 +25,9 @@ Professional One-Time Code Management for WordPress.
 - privacy-aware operational logging with stable dotted event names;
 - centralized code-state transition protection;
 - bounded admin error handling for critical operations;
+- supported extension APIs for Distribution, Pool and Inventory reads, Activity queries and Activity presentation;
+- granular Voucher Manager capabilities with administrator-only standalone access and an explicit extension delegation boundary;
+- extension notifications for inventory changes and Pool warning-threshold changes;
 - automated Quality Gate across PHP 8.1, 8.2, 8.3 and 8.4;
 - dedicated real-MySQL Q5 verification of the atomic Distribution claim guarantee;
 - validated WordPress release artifacts built by the project quality workflow.
@@ -52,7 +55,7 @@ The translation build deterministically compiles the current German PO catalog s
 
 Higher-confidence concurrency verification runs separately in GitHub Actions. The dedicated Q5 atomic Distribution claim test provisions MySQL 8.0 and a minimal WordPress runtime, starts two independent PHP worker processes with separate database connections and verifies the production `WpdbCodeRepository::claim_next_available()` path under synchronized concurrent execution. With one available One-Time Code, exactly one worker must claim it and the persistent database state must contain exactly one assigned code with no remaining available code.
 
-The shared real-database and concurrency infrastructure is consumed from the versioned private development dependency `mjs-productions/mjs-quality` v0.1.0. Product-specific Distribution behavior and assertions remain in the Voucher Manager repository.
+The shared real-database and concurrency infrastructure is consumed from the versioned private development dependency `mjs-productions/mjs-quality` v0.2.1. Product-specific Distribution behavior and assertions remain in the Voucher Manager repository.
 
 Official WordPress smoke tests should use the `mjs-productions-voucher-manager.zip` artifact built and validated by GitHub Actions rather than a manually packed source archive.
 

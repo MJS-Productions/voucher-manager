@@ -1,31 +1,43 @@
 # Changelog
 
-## Unreleased
+## 1.0.9 - 2026-09-07 — Extension APIs and Capability Foundation
 
 ### Added
+- Added dedicated Voucher Manager capabilities as a WordPress-native foundation for granular access control.
+- Added an explicit extension delegation boundary while preserving administrator-only standalone Voucher Manager access.
+- Added supported extension APIs for Distribution, Pool and Inventory reads, Activity queries, Activity presentation and Activity retention archive handoff.
+- Added inventory-change notifications, including successful deletion of available One-Time Codes.
+- Added a Pool warning-threshold change event for extensions that need to react to threshold updates.
 - Added `mjs-productions/mjs-quality` v0.2.1 as the shared WordPress engineering and quality development dependency.
-- Added a dedicated Q5 atomic Distribution claim test against MySQL 8.0 using two independent PHP worker processes, synchronized concurrent execution and the production `WpdbCodeRepository::claim_next_available()` path.
-- Added a minimal WordPress `SHORTINIT` test runtime so the Q5 test exercises the real WordPress `wpdb` database layer.
-- Added shared localization commands for POT generation, PO synchronization, MO compilation, artifact freshness checks and translation completeness validation.
-- Added a dedicated Localization CI job that checks generated translation artifacts and German translation completeness independently from the PHP quality matrix.
-- Added a manually triggered GitHub Actions workflow that generates and uploads the current POT, German PO and German MO localization artifacts.
-- Added a supported Activity presentation extension API so extensions can reuse Voucher Manager's human-readable, translatable Activity labels without duplicating presentation logic.
+- Added a dedicated Q5 atomic Distribution claim test against MySQL 8.0 using two independent PHP worker processes and the WordPress `wpdb` layer.
+- Added shared localization commands, independent Localization CI and a manually triggered localization-artifact workflow.
 
 ### Changed
-- Migrated localization maintenance to the shared `mjs-quality` workflow.
-- Corrected the localization workflow to use the plugin's actual `mjs-productions-voucher-manager` text domain.
+- Made Dashboard actions, metrics, recent Activity and relevant internal navigation capability-aware for extension-delegated access.
+- Unified Activity History detail formatting across event types.
+- Extended the Activity presentation API with reusable human-readable detail presentation.
+- Migrated localization maintenance to the shared `mjs-quality` workflow and corrected the workflow to use the plugin's `mjs-productions-voucher-manager` text domain.
 - Kept repository localization artifacts available for development and translation maintenance while excluding translation catalogs from the WordPress.org release ZIP.
+- Refined WordPress.org discovery tags, product terminology and Voucher Manager Pro development information.
+- Corrected the documented 1.0.8 translation-delivery history to reflect WordPress.org language-pack distribution.
 
 ### Fixed
-- Regenerated the German localization artifacts with the correct plugin text domain.
-- Updated German translation regression coverage to follow the current localization metadata and catalog content without relying on a brittle exact message-count assertion.
+- Dispatch inventory-change notifications after successful deletion of available One-Time Codes.
+- Notify extensions when an existing Pool warning threshold actually changes.
+- Prevent capability-restricted users from seeing Dashboard data, actions or internal Import links outside their granted Voucher Manager capabilities.
+- Regenerated German localization artifacts with the correct plugin text domain and made translation regression coverage independent of an exact message count.
 
 ### Validation
 - Verified that two concurrent workers competing for one available One-Time Code result in exactly one successful claim and one miss.
 - Verified the persistent end state contains exactly one assigned code and no remaining available code.
+- Added integration coverage for extension APIs, capability boundaries, Activity presentation, inventory-change notifications and Pool warning-threshold notifications.
 - Verified localization artifact freshness and German translation completeness through the shared `mjs-quality` v0.2.1 workflow.
-- Verified the manual localization workflow produces the expected POT, PO and valid GNU gettext MO artifacts.
 - Existing PHP 8.1–8.4 Quality Gate, dedicated Q5 CI job and Localization CI job remain green.
+
+### Upgrade boundary
+- No database schema migration is required.
+- Existing pools, imports, inventory, Activity history, retention settings and One-Time Codes remain unchanged.
+- Voucher Manager remains administrator-only when no authorized extension enables delegated access.
 
 ## 1.0.8 - 2026-08-21 — WordPress 7.1 and Release Hardening
 
