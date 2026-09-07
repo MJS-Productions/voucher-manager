@@ -10,6 +10,7 @@ use VoucherManager\Domain\Log\OperationalLogger;
 use VoucherManager\Domain\Pool\PoolLifecycleService;
 use VoucherManager\Domain\Pool\PoolService;
 use VoucherManager\Extension\InventoryChangedEvent;
+use VoucherManager\Extension\PoolWarningThresholdChangedEvent;
 use VoucherManager\Infrastructure\WordPress\WpdbLogRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbPoolLifecycleRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbPoolRepository;
@@ -73,6 +74,9 @@ final class PoolAdmin {
 					$this->logger->info( OperationalEvent::POOL_UPDATED, 'Pool settings were updated.', array( 'pool_id' => $id, 'pool_name' => $name ) );
 					if ( null !== $existing && $existing->is_active() !== $active ) {
 						$this->log_pool_status( $id, $name, $active );
+					}
+					if ( null !== $existing && $existing->warning_threshold() !== $threshold ) {
+						PoolWarningThresholdChangedEvent::dispatch( $id );
 					}
 				}
 				$this->redirect( $success ? 'updated' : 'error' );
