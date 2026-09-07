@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-07T05:22:14+00:00\n"
+"POT-Creation-Date: 2026-09-07T06:40:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mjs-productions-voucher-manager\n"
@@ -49,7 +49,7 @@ msgid "Voucher Manager Dashboard"
 msgstr ""
 
 #: src/Admin/Admin.php:38
-#: templates/admin/dashboard.php:45
+#: templates/admin/dashboard.php:57
 msgid "Dashboard"
 msgstr ""
 
@@ -224,7 +224,7 @@ msgstr ""
 #: src/Admin/DistributionAdmin.php:55
 #: src/Admin/OperationalActivityViewModel.php:75
 #: templates/admin/distribution-direct-result.php:48
-#: templates/admin/distribution.php:40
+#: templates/admin/distribution.php:44
 msgid "Distribution"
 msgstr ""
 
@@ -244,11 +244,11 @@ msgid "The One-Time Code was assigned successfully. Remaining inventory could no
 msgstr ""
 
 #: src/Admin/ImportAdmin.php:65
-#: templates/admin/dashboard.php:65
-#: templates/admin/distribution.php:85
+#: templates/admin/dashboard.php:81
+#: templates/admin/distribution.php:90
 #: templates/admin/import.php:18
 #: templates/admin/import.php:116
-#: templates/admin/inventory.php:119
+#: templates/admin/inventory.php:123
 #: templates/admin/pools.php:166
 msgid "Import Codes"
 msgstr ""
@@ -288,15 +288,15 @@ msgstr ""
 #. translators: %d: internal code ID
 #. translators: %d: internal One-Time Code record ID
 #: src/Admin/InventoryViewModel.php:26
-#: templates/admin/inventory.php:148
+#: templates/admin/inventory.php:152
 #, php-format
 msgid "Code #%d"
 msgstr ""
 
 #: src/Admin/InventoryViewModel.php:36
 #: src/Admin/InventoryViewModel.php:91
-#: templates/admin/inventory.php:43
-#: templates/admin/inventory.php:63
+#: templates/admin/inventory.php:47
+#: templates/admin/inventory.php:67
 #: templates/admin/pool-danger-zone.php:16
 #: templates/admin/pools.php:143
 msgctxt "One-Time Code status"
@@ -319,7 +319,7 @@ msgstr ""
 #. translators: 1: import ID, 2: source filename
 #: src/Admin/InventoryViewModel.php:101
 #: src/Admin/InventoryViewModel.php:180
-#: templates/admin/inventory.php:78
+#: templates/admin/inventory.php:82
 #, php-format
 msgid "Import #%1$d — %2$s"
 msgstr ""
@@ -459,14 +459,14 @@ msgid "No One-Time Code values were retained in Activity."
 msgstr ""
 
 #: src/Admin/OperationalActivityViewModel.php:74
-#: templates/admin/dashboard.php:37
+#: templates/admin/dashboard.php:49
 #: templates/admin/pool-danger-zone.php:16
 msgid "Imports"
 msgstr ""
 
 #: src/Admin/OperationalActivityViewModel.php:76
 #: src/Admin/PoolAdmin.php:38
-#: templates/admin/dashboard.php:33
+#: templates/admin/dashboard.php:42
 #: templates/admin/pools.php:44
 msgid "Pools"
 msgstr ""
@@ -496,7 +496,7 @@ msgid "Low stock"
 msgstr ""
 
 #: src/Admin/PoolViewModel.php:46
-#: templates/admin/dashboard.php:20
+#: templates/admin/dashboard.php:21
 msgid "Ready"
 msgstr ""
 
@@ -622,8 +622,8 @@ msgid "Filter activity"
 msgstr ""
 
 #: templates/admin/activity.php:74
-#: templates/admin/inventory.php:91
-#: templates/admin/inventory.php:116
+#: templates/admin/inventory.php:95
+#: templates/admin/inventory.php:120
 msgid "Reset filters"
 msgstr ""
 
@@ -632,7 +632,7 @@ msgid "Activity history"
 msgstr ""
 
 #: templates/admin/activity.php:83
-#: templates/admin/distribution.php:113
+#: templates/admin/distribution.php:119
 msgid "One-Time Code values are not stored in Activity history."
 msgstr ""
 
@@ -643,7 +643,7 @@ msgid "%s matching events"
 msgstr ""
 
 #: templates/admin/activity.php:101
-#: templates/admin/dashboard.php:111
+#: templates/admin/dashboard.php:134
 msgid "No activity recorded yet."
 msgstr ""
 
@@ -660,116 +660,116 @@ msgid "Adjust the filters to display more activity."
 msgstr ""
 
 #: templates/admin/activity.php:165
-#: templates/admin/inventory.php:187
+#: templates/admin/inventory.php:191
 msgid "Previous"
 msgstr ""
 
 #: templates/admin/activity.php:166
-#: templates/admin/inventory.php:188
+#: templates/admin/inventory.php:192
 msgid "Next"
 msgstr ""
 
-#: templates/admin/dashboard.php:21
+#: templates/admin/dashboard.php:22
 msgid "Needs attention"
 msgstr ""
 
-#: templates/admin/dashboard.php:25
+#: templates/admin/dashboard.php:34
 msgid "Available One-Time Codes"
 msgstr ""
 
-#: templates/admin/dashboard.php:26
-#: templates/admin/inventory.php:45
+#: templates/admin/dashboard.php:35
+#: templates/admin/inventory.php:49
 msgid "Ready for distribution"
 msgstr ""
 
-#: templates/admin/dashboard.php:29
+#: templates/admin/dashboard.php:38
 msgid "Distributed One-Time Codes"
 msgstr ""
 
-#: templates/admin/dashboard.php:30
+#: templates/admin/dashboard.php:39
 msgid "Successfully assigned"
 msgstr ""
 
-#: templates/admin/dashboard.php:34
+#: templates/admin/dashboard.php:43
 msgid "Code collections"
 msgstr ""
 
-#: templates/admin/dashboard.php:38
+#: templates/admin/dashboard.php:50
 msgid "Completed and recorded"
 msgstr ""
 
-#: templates/admin/dashboard.php:48
+#: templates/admin/dashboard.php:60
 msgid "Manage One-Time Code inventory and review recent Activity."
 msgstr ""
 
-#: templates/admin/dashboard.php:60
+#: templates/admin/dashboard.php:73
 msgid "Quick actions"
 msgstr ""
 
-#: templates/admin/dashboard.php:62
+#: templates/admin/dashboard.php:76
 #: templates/admin/pool-form.php:17
 #: templates/admin/pools.php:49
 #: templates/admin/pools.php:67
 msgid "Create Pool"
 msgstr ""
 
-#: templates/admin/dashboard.php:68
-#: templates/admin/distribution.php:103
+#: templates/admin/dashboard.php:86
+#: templates/admin/distribution.php:109
 #: templates/admin/pools.php:162
 msgid "Distribute Code"
 msgstr ""
 
-#: templates/admin/dashboard.php:72
+#: templates/admin/dashboard.php:93
 msgid "Inventory overview"
 msgstr ""
 
-#: templates/admin/dashboard.php:87
+#: templates/admin/dashboard.php:110
 msgid "Recent activity"
 msgstr ""
 
-#: templates/admin/dashboard.php:89
+#: templates/admin/dashboard.php:112
 msgid "The latest operational events."
 msgstr ""
 
 #. translators: %s: total number of operational log entries
-#: templates/admin/dashboard.php:97
+#: templates/admin/dashboard.php:120
 #, php-format
 msgid "%s total events"
 msgstr ""
 
-#: templates/admin/dashboard.php:104
+#: templates/admin/dashboard.php:127
 msgid "View all activity"
 msgstr ""
 
-#: templates/admin/dashboard.php:112
+#: templates/admin/dashboard.php:135
 msgid "Imports and distributions will appear here."
 msgstr ""
 
-#: templates/admin/dashboard.php:148
+#: templates/admin/dashboard.php:172
 msgid "System status"
 msgstr ""
 
-#: templates/admin/dashboard.php:151
+#: templates/admin/dashboard.php:175
 msgid "Database"
 msgstr ""
 
-#: templates/admin/dashboard.php:157
+#: templates/admin/dashboard.php:181
 msgid "Database schema"
 msgstr ""
 
-#: templates/admin/dashboard.php:161
+#: templates/admin/dashboard.php:185
 msgid "WordPress"
 msgstr ""
 
-#: templates/admin/dashboard.php:165
+#: templates/admin/dashboard.php:189
 msgid "PHP"
 msgstr ""
 
-#: templates/admin/dashboard.php:173
+#: templates/admin/dashboard.php:197
 msgid "Made in Austria by MJS-Productions."
 msgstr ""
 
-#: templates/admin/dashboard.php:174
+#: templates/admin/dashboard.php:198
 msgid "Every great project starts with a single line."
 msgstr ""
 
@@ -782,28 +782,28 @@ msgid "The One-Time Code was assigned successfully, but the normal one-time resu
 msgstr ""
 
 #: templates/admin/distribution-direct-result.php:53
-#: templates/admin/distribution.php:51
+#: templates/admin/distribution.php:55
 msgid "Assigned One-Time Code"
 msgstr ""
 
 #: templates/admin/distribution-direct-result.php:54
-#: templates/admin/distribution.php:53
+#: templates/admin/distribution.php:57
 msgid "Distributed One-Time Code"
 msgstr ""
 
 #: templates/admin/distribution-direct-result.php:56
-#: templates/admin/distribution.php:55
-#: templates/admin/distribution.php:56
+#: templates/admin/distribution.php:59
+#: templates/admin/distribution.php:60
 msgid "Copy code"
 msgstr ""
 
 #: templates/admin/distribution-direct-result.php:64
-#: templates/admin/distribution.php:70
+#: templates/admin/distribution.php:74
 msgid "No One-Time Code was distributed."
 msgstr ""
 
 #: templates/admin/distribution-direct-result.php:64
-#: templates/admin/distribution.php:70
+#: templates/admin/distribution.php:74
 msgid "Distribution failed."
 msgstr ""
 
@@ -811,68 +811,68 @@ msgstr ""
 msgid "Return to Distribution"
 msgstr ""
 
-#: templates/admin/distribution.php:41
+#: templates/admin/distribution.php:45
 msgid "Assign one available One-Time Code from an active pool. Each successful distribution immediately marks the code as assigned."
 msgstr ""
 
-#: templates/admin/distribution.php:44
+#: templates/admin/distribution.php:48
 msgid "This distribution request was already used or expired. No additional One-Time Code was distributed."
 msgstr ""
 
-#: templates/admin/distribution.php:52
+#: templates/admin/distribution.php:56
 msgid "Copy the One-Time Code now and deliver it through the intended channel. For privacy, the complete value is shown only in this one-time result."
 msgstr ""
 
-#: templates/admin/distribution.php:55
+#: templates/admin/distribution.php:59
 msgid "Copied"
 msgstr ""
 
-#: templates/admin/distribution.php:65
+#: templates/admin/distribution.php:69
 msgid "Distribute another One-Time Code"
 msgstr ""
 
-#: templates/admin/distribution.php:77
+#: templates/admin/distribution.php:81
 msgid "Distribute next available One-Time Code"
 msgstr ""
 
-#: templates/admin/distribution.php:78
+#: templates/admin/distribution.php:82
 msgid "Choose a pool with available inventory. Voucher Manager automatically assigns the next available One-Time Code. Concurrent requests never receive the same code."
 msgstr ""
 
-#: templates/admin/distribution.php:83
+#: templates/admin/distribution.php:87
 msgid "No One-Time Codes are ready to distribute"
 msgstr ""
 
-#: templates/admin/distribution.php:84
+#: templates/admin/distribution.php:89
 msgid "Active pools currently have no available One-Time Codes. Import codes before trying again."
 msgstr ""
 
-#: templates/admin/distribution.php:88
+#: templates/admin/distribution.php:94
 msgid "A secure distribution request could not be prepared. Reload this page and try again."
 msgstr ""
 
-#: templates/admin/distribution.php:95
+#: templates/admin/distribution.php:101
 msgctxt "Distribution form field label"
 msgid "Pool"
 msgstr ""
 
-#: templates/admin/distribution.php:102
+#: templates/admin/distribution.php:108
 msgid "One-Time Code assignment occurs immediately after confirmation."
 msgstr ""
 
-#: templates/admin/distribution.php:109
+#: templates/admin/distribution.php:115
 msgid "Distribution safety"
 msgstr ""
 
-#: templates/admin/distribution.php:111
+#: templates/admin/distribution.php:117
 msgid "Only active pools with available inventory can be selected."
 msgstr ""
 
-#: templates/admin/distribution.php:112
+#: templates/admin/distribution.php:118
 msgid "A successful distribution changes the One-Time Code from available to assigned immediately."
 msgstr ""
 
-#: templates/admin/distribution.php:114
+#: templates/admin/distribution.php:120
 msgid "Refreshing the page does not distribute another One-Time Code. Every distribution requires a new form submission."
 msgstr ""
 
@@ -1053,7 +1053,7 @@ msgid "Status"
 msgstr ""
 
 #: templates/admin/import.php:135
-#: templates/admin/inventory.php:130
+#: templates/admin/inventory.php:134
 msgid "Imported"
 msgstr ""
 
@@ -1071,86 +1071,86 @@ msgid "Deleted pool"
 msgstr ""
 
 #. translators: %s: Pool name
-#: templates/admin/inventory.php:24
+#: templates/admin/inventory.php:28
 #, php-format
 msgid "%s Inventory"
 msgstr ""
 
-#: templates/admin/inventory.php:30
+#: templates/admin/inventory.php:34
 msgid "Review pool-scoped inventory without exposing complete One-Time Code values."
 msgstr ""
 
-#: templates/admin/inventory.php:32
+#: templates/admin/inventory.php:36
 #: templates/admin/pool-danger-zone.php:12
 msgid "Back to Pools"
 msgstr ""
 
-#: templates/admin/inventory.php:35
+#: templates/admin/inventory.php:39
 msgid "Pool totals"
 msgstr ""
 
-#: templates/admin/inventory.php:36
+#: templates/admin/inventory.php:40
 msgid "Pool inventory summary"
 msgstr ""
 
-#: templates/admin/inventory.php:38
+#: templates/admin/inventory.php:42
 #: templates/admin/pool-danger-zone.php:16
 #: templates/admin/pools.php:151
 msgid "Total One-Time Codes"
 msgstr ""
 
-#: templates/admin/inventory.php:40
+#: templates/admin/inventory.php:44
 msgid "All One-Time Code records in this pool"
 msgstr ""
 
-#: templates/admin/inventory.php:48
-#: templates/admin/inventory.php:64
-#: templates/admin/inventory.php:131
+#: templates/admin/inventory.php:52
+#: templates/admin/inventory.php:68
+#: templates/admin/inventory.php:135
 msgctxt "One-Time Code status or timestamp column"
 msgid "Assigned"
 msgstr ""
 
-#: templates/admin/inventory.php:50
+#: templates/admin/inventory.php:54
 msgid "Already distributed"
 msgstr ""
 
-#: templates/admin/inventory.php:60
-#: templates/admin/inventory.php:128
+#: templates/admin/inventory.php:64
+#: templates/admin/inventory.php:132
 msgctxt "Inventory filter or table column"
 msgid "State"
 msgstr ""
 
-#: templates/admin/inventory.php:62
+#: templates/admin/inventory.php:66
 msgid "All states"
 msgstr ""
 
-#: templates/admin/inventory.php:69
-#: templates/admin/inventory.php:129
+#: templates/admin/inventory.php:73
+#: templates/admin/inventory.php:133
 msgctxt "Inventory source import"
 msgid "Import"
 msgstr ""
 
-#: templates/admin/inventory.php:71
+#: templates/admin/inventory.php:75
 msgid "All imports"
 msgstr ""
 
-#: templates/admin/inventory.php:89
+#: templates/admin/inventory.php:93
 msgid "Filter inventory"
 msgstr ""
 
-#: templates/admin/inventory.php:99
+#: templates/admin/inventory.php:103
 msgid "One-Time Code inventory"
 msgstr ""
 
-#: templates/admin/inventory.php:100
+#: templates/admin/inventory.php:104
 msgid "References are masked. Complete One-Time Code values are shown only in the one-time Distribution result."
 msgstr ""
 
-#: templates/admin/inventory.php:127
+#: templates/admin/inventory.php:131
 msgid "Reference"
 msgstr ""
 
-#: templates/admin/inventory.php:155
+#: templates/admin/inventory.php:159
 msgid "Attention:"
 msgstr ""
 

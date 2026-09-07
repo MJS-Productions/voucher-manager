@@ -111,7 +111,7 @@ msgstr[0] "%d übersprungen"
 msgstr[1] "%d übersprungen"
 
 #. translators: %s: Pool name
-#: templates/admin/inventory.php:24
+#: templates/admin/inventory.php:28
 #, php-format
 msgid "%s Inventory"
 msgstr "Bestand: %s"
@@ -123,7 +123,7 @@ msgid "%s matching events"
 msgstr "%s passende Ereignisse"
 
 #. translators: %s: total number of operational log entries
-#: templates/admin/dashboard.php:97
+#: templates/admin/dashboard.php:120
 #, php-format
 msgid "%s total events"
 msgstr "%s Ereignisse insgesamt"
@@ -148,11 +148,11 @@ msgstr "90 Tage"
 msgid "A pool groups One-Time Codes that belong to the same campaign, product or distribution workflow."
 msgstr "Ein Pool gruppiert Einmalcodes, die zur selben Kampagne, zum selben Produkt oder Ausgabeprozess gehören."
 
-#: templates/admin/distribution.php:88
+#: templates/admin/distribution.php:94
 msgid "A secure distribution request could not be prepared. Reload this page and try again."
 msgstr "Eine sichere Ausgabeanfrage konnte nicht vorbereitet werden. Diese Seite neu laden und erneut versuchen."
 
-#: templates/admin/distribution.php:112
+#: templates/admin/distribution.php:118
 msgid "A successful distribution changes the One-Time Code from available to assigned immediately."
 msgstr "Eine erfolgreiche Ausgabe ändert den Einmalcode sofort von verfügbar zu ausgegeben."
 
@@ -160,7 +160,7 @@ msgstr "Eine erfolgreiche Ausgabe ändert den Einmalcode sofort von verfügbar z
 msgid "Activate"
 msgstr "Aktivieren"
 
-#: templates/admin/distribution.php:84
+#: templates/admin/distribution.php:89
 msgid "Active pools currently have no available One-Time Codes. Import codes before trying again."
 msgstr "Aktive Pools enthalten derzeit keine verfügbaren Einmalcodes. Vor dem nächsten Versuch Codes importieren."
 
@@ -184,7 +184,7 @@ msgstr "Neuen Pool hinzufügen"
 msgid "Administration"
 msgstr "Administration"
 
-#: templates/admin/inventory.php:40
+#: templates/admin/inventory.php:44
 msgid "All One-Time Code records in this pool"
 msgstr "Alle Einmalcode-Einträge in diesem Pool"
 
@@ -200,7 +200,7 @@ msgstr "Alle Aktivitäten"
 msgid "All events"
 msgstr "Alle Ereignisse"
 
-#: templates/admin/inventory.php:71
+#: templates/admin/inventory.php:75
 msgid "All imports"
 msgstr "Alle"
 
@@ -208,20 +208,20 @@ msgstr "Alle"
 msgid "All outcomes"
 msgstr "Alle Ergebnisse"
 
-#: templates/admin/inventory.php:62
+#: templates/admin/inventory.php:66
 msgid "All states"
 msgstr "Alle"
 
-#: templates/admin/inventory.php:50
+#: templates/admin/inventory.php:54
 msgid "Already distributed"
 msgstr "Bereits ausgegeben"
 
-#: templates/admin/distribution.php:41
+#: templates/admin/distribution.php:45
 msgid "Assign one available One-Time Code from an active pool. Each successful distribution immediately marks the code as assigned."
 msgstr "Einen verfügbaren Einmalcode aus einem aktiven Pool ausgeben. Jede erfolgreiche Ausgabe markiert den Code sofort als ausgegeben."
 
 #: templates/admin/distribution-direct-result.php:53
-#: templates/admin/distribution.php:51
+#: templates/admin/distribution.php:55
 msgid "Assigned One-Time Code"
 msgstr "Ausgegebener Einmalcode"
 
@@ -235,11 +235,11 @@ msgstr "Ausgabezeit nicht verfügbar"
 msgid "Attention"
 msgstr "Achtung"
 
-#: templates/admin/inventory.php:155
+#: templates/admin/inventory.php:159
 msgid "Attention:"
 msgstr "Achtung:"
 
-#: templates/admin/dashboard.php:25
+#: templates/admin/dashboard.php:34
 msgid "Available One-Time Codes"
 msgstr "Verfügbare Einmalcodes"
 
@@ -267,7 +267,7 @@ msgstr "Das Löschen verfügbarer Einmalcodes ist fehlgeschlagen. Es wurde keine
 msgid "Back to Pool Danger Zone"
 msgstr "Zurück zum Gefahrenbereich des Pools"
 
-#: templates/admin/inventory.php:32
+#: templates/admin/inventory.php:36
 #: templates/admin/pool-danger-zone.php:12
 msgid "Back to Pools"
 msgstr "Zurück zu Pools"
@@ -284,7 +284,7 @@ msgstr "Filter anpassen, um weitere Aktivitäten anzuzeigen."
 msgid "Check whether the file only contained duplicates, empty rows, or invalid values."
 msgstr "Prüfen, ob die Datei nur Duplikate, leere Zeilen oder ungültige Werte enthalten hat."
 
-#: templates/admin/distribution.php:78
+#: templates/admin/distribution.php:82
 msgid "Choose a pool with available inventory. Voucher Manager automatically assigns the next available One-Time Code. Concurrent requests never receive the same code."
 msgstr "Einen Pool mit verfügbarem Bestand auswählen. Voucher Manager gibt automatisch den nächsten verfügbaren Einmalcode aus. Gleichzeitige Anfragen erhalten niemals denselben Code."
 
@@ -295,12 +295,12 @@ msgstr "Die Bereinigung erfolgt automatisch über WordPress-Cron. Beim Speichern
 #. translators: %d: internal code ID
 #. translators: %d: internal One-Time Code record ID
 #: src/Admin/InventoryViewModel.php:26
-#: templates/admin/inventory.php:148
+#: templates/admin/inventory.php:152
 #, php-format
 msgid "Code #%d"
 msgstr "Code Nr. %d"
 
-#: templates/admin/dashboard.php:34
+#: templates/admin/dashboard.php:43
 msgid "Code collections"
 msgstr "Code-Sammlungen"
 
@@ -308,7 +308,7 @@ msgstr "Code-Sammlungen"
 msgid "Completed"
 msgstr "Abgeschlossen"
 
-#: templates/admin/dashboard.php:38
+#: templates/admin/dashboard.php:50
 msgid "Completed and recorded"
 msgstr "Abgeschlossen und protokolliert"
 
@@ -328,21 +328,21 @@ msgstr "Vor dem Fortfahren bestätigen, dass der Import rückgängig gemacht wer
 msgid "Control operational data retention and the explicit uninstall boundary."
 msgstr "Aufbewahrungsdauer und Verhalten bei der Deinstallation verwalten."
 
-#: templates/admin/distribution.php:55
+#: templates/admin/distribution.php:59
 msgid "Copied"
 msgstr "Kopiert"
 
 #: templates/admin/distribution-direct-result.php:56
-#: templates/admin/distribution.php:55
-#: templates/admin/distribution.php:56
+#: templates/admin/distribution.php:59
+#: templates/admin/distribution.php:60
 msgid "Copy code"
 msgstr "Code kopieren"
 
-#: templates/admin/distribution.php:52
+#: templates/admin/distribution.php:56
 msgid "Copy the One-Time Code now and deliver it through the intended channel. For privacy, the complete value is shown only in this one-time result."
 msgstr "Den Einmalcode jetzt kopieren und über den vorgesehenen Kanal übermitteln. Aus Datenschutzgründen wird der vollständige Wert nur in diesem einmaligen Ergebnis angezeigt."
 
-#: templates/admin/dashboard.php:62
+#: templates/admin/dashboard.php:76
 #: templates/admin/pool-form.php:17
 #: templates/admin/pools.php:49
 #: templates/admin/pools.php:67
@@ -366,15 +366,15 @@ msgid "Danger Zone"
 msgstr "Gefahrenbereich"
 
 #: src/Admin/Admin.php:38
-#: templates/admin/dashboard.php:45
+#: templates/admin/dashboard.php:57
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: templates/admin/dashboard.php:151
+#: templates/admin/dashboard.php:175
 msgid "Database"
 msgstr "Datenbank"
 
-#: templates/admin/dashboard.php:157
+#: templates/admin/dashboard.php:181
 msgid "Database schema"
 msgstr "Datenbankschema"
 
@@ -419,7 +419,7 @@ msgstr "Gelöschter Pool"
 msgid "Description"
 msgstr "Beschreibung"
 
-#: templates/admin/dashboard.php:173
+#: templates/admin/dashboard.php:197
 msgid "Made in Austria by MJS-Productions."
 msgstr "Made in Austria by MJS-Productions."
 
@@ -427,17 +427,17 @@ msgstr "Made in Austria by MJS-Productions."
 msgid "Destination pool"
 msgstr "Ziel-Pool"
 
-#: templates/admin/dashboard.php:68
-#: templates/admin/distribution.php:103
+#: templates/admin/dashboard.php:86
+#: templates/admin/distribution.php:109
 #: templates/admin/pools.php:162
 msgid "Distribute Code"
 msgstr "Code ausgeben"
 
-#: templates/admin/distribution.php:65
+#: templates/admin/distribution.php:69
 msgid "Distribute another One-Time Code"
 msgstr "Weiteren Einmalcode ausgeben"
 
-#: templates/admin/distribution.php:77
+#: templates/admin/distribution.php:81
 msgid "Distribute next available One-Time Code"
 msgstr "Nächsten verfügbaren Einmalcode ausgeben"
 
@@ -447,11 +447,11 @@ msgid "Distributed"
 msgstr "Ausgegeben"
 
 #: templates/admin/distribution-direct-result.php:54
-#: templates/admin/distribution.php:53
+#: templates/admin/distribution.php:57
 msgid "Distributed One-Time Code"
 msgstr "Ausgegebener Einmalcode"
 
-#: templates/admin/dashboard.php:29
+#: templates/admin/dashboard.php:38
 msgid "Distributed One-Time Codes"
 msgstr "Ausgegebene Einmalcodes"
 
@@ -463,7 +463,7 @@ msgstr "Ausgegebene Einmalcodes bleiben erhalten"
 #: src/Admin/DistributionAdmin.php:55
 #: src/Admin/OperationalActivityViewModel.php:75
 #: templates/admin/distribution-direct-result.php:48
-#: templates/admin/distribution.php:40
+#: templates/admin/distribution.php:44
 msgid "Distribution"
 msgstr "Ausgabe"
 
@@ -476,7 +476,7 @@ msgid "Distribution failed"
 msgstr "Ausgabe fehlgeschlagen"
 
 #: templates/admin/distribution-direct-result.php:64
-#: templates/admin/distribution.php:70
+#: templates/admin/distribution.php:74
 msgid "Distribution failed."
 msgstr "Ausgabe fehlgeschlagen."
 
@@ -488,7 +488,7 @@ msgstr "Die Ausgabe ist pausiert."
 msgid "Distribution result"
 msgstr "Ausgabeergebnis"
 
-#: templates/admin/distribution.php:109
+#: templates/admin/distribution.php:115
 msgid "Distribution safety"
 msgstr "Ausgabesicherheit"
 
@@ -521,7 +521,7 @@ msgstr "Fehler"
 msgid "Errors"
 msgstr "Fehler"
 
-#: templates/admin/dashboard.php:174
+#: templates/admin/dashboard.php:198
 msgid "Every great project starts with a single line."
 msgstr "Jedes großartige Projekt beginnt mit einer einzigen Zeile."
 
@@ -537,7 +537,7 @@ msgstr "Fehlgeschlagene Vorgänge"
 msgid "Filter activity"
 msgstr "Aktivitäten filtern"
 
-#: templates/admin/inventory.php:89
+#: templates/admin/inventory.php:93
 msgid "Filter inventory"
 msgstr "Bestand filtern"
 
@@ -566,7 +566,7 @@ msgstr "Ich verstehe, dass die Deinstallation des Plugins alle Pools, Importe, E
 #. translators: 1: import ID, 2: source filename
 #: src/Admin/InventoryViewModel.php:101
 #: src/Admin/InventoryViewModel.php:180
-#: templates/admin/inventory.php:78
+#: templates/admin/inventory.php:82
 #, php-format
 msgid "Import #%1$d — %2$s"
 msgstr "Import Nr. %1$d — %2$s"
@@ -584,11 +584,11 @@ msgid "Import #%d unavailable"
 msgstr "Import Nr. %d nicht verfügbar"
 
 #: src/Admin/ImportAdmin.php:65
-#: templates/admin/dashboard.php:65
-#: templates/admin/distribution.php:85
+#: templates/admin/dashboard.php:81
+#: templates/admin/distribution.php:90
 #: templates/admin/import.php:18
 #: templates/admin/import.php:116
-#: templates/admin/inventory.php:119
+#: templates/admin/inventory.php:123
 #: templates/admin/pools.php:166
 msgid "Import Codes"
 msgstr "Codes importieren"
@@ -650,17 +650,17 @@ msgid "Import unavailable"
 msgstr "Import nicht verfügbar"
 
 #: templates/admin/import.php:135
-#: templates/admin/inventory.php:130
+#: templates/admin/inventory.php:134
 msgid "Imported"
 msgstr "Importiert"
 
 #: src/Admin/OperationalActivityViewModel.php:74
-#: templates/admin/dashboard.php:37
+#: templates/admin/dashboard.php:49
 #: templates/admin/pool-danger-zone.php:16
 msgid "Imports"
 msgstr "Importe"
 
-#: templates/admin/dashboard.php:112
+#: templates/admin/dashboard.php:135
 msgid "Imports and distributions will appear here."
 msgstr "Importe und Ausgaben werden hier angezeigt."
 
@@ -672,7 +672,7 @@ msgstr "Inaktiv"
 msgid "Information"
 msgstr "Information"
 
-#: templates/admin/dashboard.php:72
+#: templates/admin/dashboard.php:93
 msgid "Inventory overview"
 msgstr "Bestandsübersicht"
 
@@ -696,7 +696,7 @@ msgstr "Niedriger Bestand"
 msgid "Low-stock warning threshold"
 msgstr "Warnschwelle für niedrigen Bestand"
 
-#: templates/admin/dashboard.php:48
+#: templates/admin/dashboard.php:60
 msgid "Manage One-Time Code inventory and review recent Activity."
 msgstr "Bestand verwalten"
 
@@ -708,7 +708,7 @@ msgstr "Maximale Dateigröße: 10 MB."
 msgid "Name"
 msgstr "Name"
 
-#: templates/admin/dashboard.php:21
+#: templates/admin/dashboard.php:22
 msgid "Needs attention"
 msgstr "Erfordert Aufmerksamkeit"
 
@@ -717,21 +717,21 @@ msgid "Need attention"
 msgstr "Erfordern Aufmerksamkeit"
 
 #: templates/admin/activity.php:166
-#: templates/admin/inventory.php:188
+#: templates/admin/inventory.php:192
 msgid "Next"
 msgstr "Weiter"
 
 #: templates/admin/distribution-direct-result.php:64
-#: templates/admin/distribution.php:70
+#: templates/admin/distribution.php:74
 msgid "No One-Time Code was distributed."
 msgstr "Es wurde kein Einmalcode ausgegeben."
 
-#: templates/admin/distribution.php:83
+#: templates/admin/distribution.php:87
 msgid "No One-Time Codes are ready to distribute"
 msgstr "Keine Einmalcodes zur Ausgabe bereit"
 
 #: templates/admin/activity.php:101
-#: templates/admin/dashboard.php:111
+#: templates/admin/dashboard.php:134
 msgid "No activity recorded yet."
 msgstr "Noch keine Aktivitäten protokolliert."
 
@@ -779,7 +779,7 @@ msgstr "Nicht ausgegeben"
 msgid "Notifications will use this value in the Pro extension."
 msgstr "Benachrichtigungen verwenden diesen Wert in der Pro-Erweiterung."
 
-#: templates/admin/distribution.php:102
+#: templates/admin/distribution.php:108
 msgid "One-Time Code assignment occurs immediately after confirmation."
 msgstr "Der Einmalcode wird unmittelbar nach der Bestätigung ausgegeben."
 
@@ -791,11 +791,11 @@ msgstr "Einmalcode ausgegeben"
 msgid "One-Time Code distributed."
 msgstr "Einmalcode ausgegeben."
 
-#: templates/admin/inventory.php:99
+#: templates/admin/inventory.php:103
 msgid "One-Time Code inventory"
 msgstr "Einmalcode-Bestand"
 
-#: templates/admin/distribution.php:111
+#: templates/admin/distribution.php:117
 msgid "Only active pools with available inventory can be selected."
 msgstr "Es können nur aktive Pools mit verfügbarem Bestand ausgewählt werden."
 
@@ -826,7 +826,7 @@ msgstr "Einmalcodes für eine kontrollierte Ausgabe in Pools organisieren."
 msgid "Originally added"
 msgstr "Ursprünglich hinzugefügt"
 
-#: templates/admin/dashboard.php:165
+#: templates/admin/dashboard.php:189
 msgid "PHP"
 msgstr "PHP"
 
@@ -902,7 +902,7 @@ msgstr "Das Löschen des Pools ist fehlgeschlagen. Der destruktive Vorgang wurde
 msgid "Pool has no available One-Time Codes"
 msgstr "Pool enthält keine verfügbaren Einmalcodes"
 
-#: templates/admin/inventory.php:36
+#: templates/admin/inventory.php:40
 msgid "Pool inventory summary"
 msgstr "Zusammenfassung des Pool-Bestands"
 
@@ -926,7 +926,7 @@ msgstr "Pool bleibt erhalten"
 msgid "Pool status updated."
 msgstr "Poolstatus aktualisiert."
 
-#: templates/admin/inventory.php:35
+#: templates/admin/inventory.php:39
 msgid "Pool totals"
 msgstr "Pool-Summen"
 
@@ -936,13 +936,13 @@ msgstr "Pool aktualisiert."
 
 #: src/Admin/OperationalActivityViewModel.php:76
 #: src/Admin/PoolAdmin.php:38
-#: templates/admin/dashboard.php:33
+#: templates/admin/dashboard.php:42
 #: templates/admin/pools.php:44
 msgid "Pools"
 msgstr "Pools"
 
 #: templates/admin/activity.php:165
-#: templates/admin/inventory.php:187
+#: templates/admin/inventory.php:191
 msgid "Previous"
 msgstr "Zurück"
 
@@ -950,21 +950,21 @@ msgstr "Zurück"
 msgid "Processing"
 msgstr "Wird verarbeitet"
 
-#: templates/admin/dashboard.php:60
+#: templates/admin/dashboard.php:73
 msgid "Quick actions"
 msgstr "Schnellaktionen"
 
 #: src/Admin/PoolViewModel.php:46
-#: templates/admin/dashboard.php:20
+#: templates/admin/dashboard.php:21
 msgid "Ready"
 msgstr "Bereit"
 
-#: templates/admin/dashboard.php:26
-#: templates/admin/inventory.php:45
+#: templates/admin/dashboard.php:35
+#: templates/admin/inventory.php:49
 msgid "Ready for distribution"
 msgstr "Zur Ausgabe bereit"
 
-#: templates/admin/dashboard.php:87
+#: templates/admin/dashboard.php:110
 msgid "Recent activity"
 msgstr "Letzte Aktivitäten"
 
@@ -976,21 +976,21 @@ msgstr "Letzte Importe"
 msgid "Recorded"
 msgstr "Protokolliert"
 
-#: templates/admin/inventory.php:127
+#: templates/admin/inventory.php:131
 msgid "Reference"
 msgstr "Referenz"
 
-#: templates/admin/inventory.php:100
+#: templates/admin/inventory.php:104
 msgid "References are masked. Complete One-Time Code values are shown only in the one-time Distribution result."
 msgstr "Referenzen sind maskiert. Vollständige Einmalcode-Werte werden nur im einmaligen Ausgabeergebnis angezeigt."
 
-#: templates/admin/distribution.php:114
+#: templates/admin/distribution.php:120
 msgid "Refreshing the page does not distribute another One-Time Code. Every distribution requires a new form submission."
 msgstr "Das Aktualisieren der Seite gibt keinen weiteren Einmalcode aus. Jede Ausgabe erfordert ein neues Absenden des Formulars."
 
 #: templates/admin/activity.php:74
-#: templates/admin/inventory.php:91
-#: templates/admin/inventory.php:116
+#: templates/admin/inventory.php:95
+#: templates/admin/inventory.php:120
 msgid "Reset filters"
 msgstr "Filter zurücksetzen"
 
@@ -1015,7 +1015,7 @@ msgstr "Zurück zur Ausgabe"
 msgid "Review available-code deletion"
 msgstr "Löschen verfügbarer Codes prüfen"
 
-#: templates/admin/inventory.php:30
+#: templates/admin/inventory.php:34
 msgid "Review pool-scoped inventory without exposing complete One-Time Code values."
 msgstr "Poolbezogenen Bestand prüfen, ohne vollständige Einmalcode-Werte offenzulegen."
 
@@ -1063,11 +1063,11 @@ msgstr "%1$d–%2$d von %3$d passenden Einträgen werden angezeigt"
 msgid "Success"
 msgstr "Erfolg"
 
-#: templates/admin/dashboard.php:30
+#: templates/admin/dashboard.php:39
 msgid "Successfully assigned"
 msgstr "Erfolgreich ausgegeben"
 
-#: templates/admin/dashboard.php:148
+#: templates/admin/dashboard.php:172
 msgid "System status"
 msgstr "Systemstatus"
 
@@ -1080,7 +1080,7 @@ msgid "TXT: place one code on each line."
 msgstr "TXT: Einen Code pro Zeile eintragen."
 
 #: templates/admin/activity.php:83
-#: templates/admin/distribution.php:113
+#: templates/admin/distribution.php:119
 msgid "One-Time Code values are not stored in Activity history."
 msgstr "Einmalcode-Werte werden nicht in der Aktivitätshistorie gespeichert."
 
@@ -1104,7 +1104,7 @@ msgstr "Der erste Pool wurde erstellt."
 msgid "The import could not be completed. Check the pool and file, then try again."
 msgstr "Der Import konnte nicht abgeschlossen werden. Pool und Datei prüfen und erneut versuchen."
 
-#: templates/admin/dashboard.php:89
+#: templates/admin/dashboard.php:112
 msgid "The latest operational events."
 msgstr "Die letzten Aktivitäten."
 
@@ -1128,7 +1128,7 @@ msgstr "Diese Aktion kann nicht rückgängig gemacht werden."
 msgid "This action permanently deletes unused codes."
 msgstr "Diese Aktion löscht ungenutzte Codes dauerhaft."
 
-#: templates/admin/distribution.php:44
+#: templates/admin/distribution.php:48
 msgid "This distribution request was already used or expired. No additional One-Time Code was distributed."
 msgstr "Diese Ausgabeanfrage wurde bereits verwendet oder ist abgelaufen. Es wurde kein zusätzlicher Einmalcode ausgegeben."
 
@@ -1166,7 +1166,7 @@ msgstr "Dieser Pool enthält noch keinen Bestand."
 msgid "No One-Time Code values were retained in Activity."
 msgstr "In der Aktivitätshistorie wurden keine Einmalcode-Werte gespeichert."
 
-#: templates/admin/inventory.php:38
+#: templates/admin/inventory.php:42
 #: templates/admin/pool-danger-zone.php:16
 #: templates/admin/pools.php:151
 msgid "Total One-Time Codes"
@@ -1198,7 +1198,7 @@ msgstr "Pool aktualisieren"
 msgid "Upload a code file"
 msgstr "Code-Datei hochladen"
 
-#: templates/admin/dashboard.php:104
+#: templates/admin/dashboard.php:127
 msgid "View all activity"
 msgstr "Alle Aktivitäten anzeigen"
 
@@ -1242,7 +1242,7 @@ msgstr "Was beim Import geschieht"
 msgid "When enabled, uninstalling Voucher Manager will permanently delete all Pools, Imports, One-Time Codes, Activity and plugin settings. Deactivation never deletes data."
 msgstr "Wenn diese Option aktiviert ist, löscht die Deinstallation von Voucher Manager dauerhaft alle Pools, Importe, Einmalcodes, Aktivitäten und Plugin-Einstellungen. Beim Deaktivieren werden niemals Daten gelöscht."
 
-#: templates/admin/dashboard.php:161
+#: templates/admin/dashboard.php:185
 msgid "WordPress"
 msgstr "WordPress"
 
@@ -1285,7 +1285,7 @@ msgctxt "Cancel import rollback action"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: templates/admin/distribution.php:95
+#: templates/admin/distribution.php:101
 msgctxt "Distribution form field label"
 msgid "Pool"
 msgstr "Pool"
@@ -1300,14 +1300,14 @@ msgctxt "Import source file label"
 msgid "File"
 msgstr "Datei"
 
-#: templates/admin/inventory.php:60
-#: templates/admin/inventory.php:128
+#: templates/admin/inventory.php:64
+#: templates/admin/inventory.php:132
 msgctxt "Inventory filter or table column"
 msgid "State"
 msgstr "Status"
 
-#: templates/admin/inventory.php:69
-#: templates/admin/inventory.php:129
+#: templates/admin/inventory.php:73
+#: templates/admin/inventory.php:133
 msgctxt "Inventory source import"
 msgid "Import"
 msgstr "Import"
@@ -1320,8 +1320,8 @@ msgstr "Ausgegeben"
 
 #: src/Admin/InventoryViewModel.php:36
 #: src/Admin/InventoryViewModel.php:91
-#: templates/admin/inventory.php:43
-#: templates/admin/inventory.php:63
+#: templates/admin/inventory.php:47
+#: templates/admin/inventory.php:67
 #: templates/admin/pool-danger-zone.php:16
 #: templates/admin/pools.php:143
 msgctxt "One-Time Code status"
@@ -1333,9 +1333,9 @@ msgctxt "One-Time Code status"
 msgid "Other"
 msgstr "Sonstiger"
 
-#: templates/admin/inventory.php:48
-#: templates/admin/inventory.php:64
-#: templates/admin/inventory.php:131
+#: templates/admin/inventory.php:52
+#: templates/admin/inventory.php:68
+#: templates/admin/inventory.php:135
 msgctxt "One-Time Code status or timestamp column"
 msgid "Assigned"
 msgstr "Ausgegeben"
