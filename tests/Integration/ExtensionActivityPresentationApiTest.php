@@ -80,14 +80,22 @@ $assert(
 );
 
 $assert(
-	"Pool: Summer\n\nRemaining inventory: 3 One-Time Codes" === $api->detail(
+	'Pool: Summer · Remaining inventory: 3 One-Time Codes' === $api->detail(
 		'distribution.completed',
 		array(
 			'pool_name' => 'Summer',
 			'remaining' => 3,
 		)
 	),
-	'Context-aware Voucher Manager Activity details must remain available through the supported API.'
+	'Comparable structured Activity details must use a consistent concise separator.'
+);
+
+$assert(
+	'Remaining inventory: 3 One-Time Codes' === $api->detail(
+		'distribution.completed',
+		array( 'remaining' => 3 )
+	),
+	'Distribution details without a pool name must not invent missing pool context.'
 );
 
 $assert(

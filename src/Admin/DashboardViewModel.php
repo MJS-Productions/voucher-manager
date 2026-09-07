@@ -118,7 +118,7 @@ final class DashboardViewModel {
 				$pool_name
 			);
 
-			return $pool . "\n\n" . $inventory;
+			return $pool . ' · ' . $inventory;
 		}
 
 		if ( 'import.completed' === $event_type ) {
