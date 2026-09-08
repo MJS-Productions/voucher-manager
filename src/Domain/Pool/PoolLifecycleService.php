@@ -14,9 +14,9 @@ final class PoolLifecycleService {
 		private readonly OperationalLogger $logger
 	) {}
 
-	public function delete_available_codes( int $pool_id ): int {
+	public function delete_available_codes( int $pool_id, string $pool_name = '' ): int {
 		$deleted = $this->repository->delete_available_codes( $pool_id );
-		$this->logger->info( OperationalEvent::POOL_AVAILABLE_CODES_DELETED, 'Available pool codes were permanently deleted.', array( 'pool_id' => $pool_id, 'deleted_available_count' => $deleted ) );
+		$this->logger->info( OperationalEvent::POOL_AVAILABLE_CODES_DELETED, 'Available pool codes were permanently deleted.', array( 'pool_id' => $pool_id, 'pool_name' => $pool_name, 'deleted_available_count' => $deleted ) );
 		return $deleted;
 	}
 

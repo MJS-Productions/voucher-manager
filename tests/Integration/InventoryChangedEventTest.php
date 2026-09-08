@@ -62,7 +62,7 @@ $assert(
 );
 $assert(
 	is_string( $pool_admin )
-	&& str_contains( $pool_admin, '$deleted = $this->lifecycle->delete_available_codes( $id );' )
+	&& str_contains( $pool_admin, '$deleted = $this->lifecycle->delete_available_codes( $id, $pool->name() );' )
 	&& str_contains( $pool_admin, 'if ( 0 < $deleted )' )
 	&& str_contains( $pool_admin, 'InventoryChangedEvent::REASON_DELETION' ),
 	'Available-code deletion must publish the semantic inventory-change event only after inventory was actually removed.'

@@ -76,9 +76,15 @@ $assert(
 	'Failed pool deletion must explain integrity-preserving rollback.'
 );
 $assert(
-	'Pool #12' === $view->detail( 'distribution.empty', array( 'pool_id' => 12, 'code' => 'MUST-NOT-APPEAR' ) ),
-	'Activity detail must remain privacy-safe.'
+	'Pool: Amazon Vouchers' === $view->detail( 'distribution.empty', array( 'pool_id' => 12, 'pool_name' => 'Amazon Vouchers', 'code' => 'MUST-NOT-APPEAR' ) ),
+	'Activity detail must prefer the stored Pool name and remain privacy-safe.'
 );
+$assert(
+	'Pool #12' === $view->detail( 'distribution.empty', array( 'pool_id' => 12, 'code' => 'MUST-NOT-APPEAR' ) ),
+	'Legacy Activity detail must retain the internal Pool ID fallback.'
+);
+$assert( '' === $view->guidance( 'pool.available_codes_deleted' ), 'Available-code deletion must not repeat the global Activity privacy notice.' );
+$assert( '' === $view->guidance( 'pool.deleted' ), 'Pool deletion must not repeat the global Activity privacy notice.' );
 $assert( 'Imports' === $view->family_label( 'import' ), 'Activity families must use readable labels.' );
 $assert( ! $view->has_active_filters( 'all', 'all' ), 'Default Activity view must not show a redundant Reset action.' );
 $assert( $view->has_active_filters( 'import', 'all' ), 'Area filtering must activate Activity Reset guidance.' );
@@ -90,6 +96,7 @@ $admin_source     = file_get_contents( $root . '/src/Admin/OperationalActivityAd
 $root_admin       = file_get_contents( $root . '/src/Admin/Admin.php' );
 $template_source  = file_get_contents( $root . '/templates/admin/activity.php' );
 $dashboard_source = file_get_contents( $root . '/templates/admin/dashboard.php' );
+$distribution_source = file_get_contents( $root . '/src/Domain/Distribution/DistributionService.php' );
 $composer_source  = file_get_contents( $root . '/composer.json' );
 
 $assert(
@@ -127,6 +134,12 @@ $assert(
 $assert(
 	is_string( $dashboard_source ) && str_contains( $dashboard_source, 'View all activity' ),
 	'The dashboard must expose a deliberate path to complete operational history.'
+);
+$assert(
+	is_string( $distribution_source )
+	&& str_contains( $distribution_source, 'OperationalEvent::DISTRIBUTION_EMPTY->value' )
+	&& str_contains( $distribution_source, "array( 'pool_id' => \$pool_id, 'pool_name' => \$pool->name() )" ),
+	'Empty-distribution Activity must preserve the already loaded Pool name.'
 );
 $assert(
 	is_string( $composer_source )

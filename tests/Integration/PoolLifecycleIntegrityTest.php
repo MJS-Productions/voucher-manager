@@ -12,9 +12,10 @@ final class LifecycleMemoryRepository implements VoucherManager\Domain\Pool\Pool
 }
 final class LifecycleLogRepository implements VoucherManager\Domain\Log\LogRepository { public array $entries=[]; public function add(string $event_type,string $message,array $context=[]):void{$this->entries[]=compact('event_type','message','context');} }
 $repo=new LifecycleMemoryRepository(); $logs=new LifecycleLogRepository(); $service=new VoucherManager\Domain\Pool\PoolLifecycleService($repo,new VoucherManager\Domain\Log\OperationalLogger($logs));
-$assert(1===$service->delete_available_codes(7),'Delete-available must report affected available rows.');
+$assert(1===$service->delete_available_codes(7,'Retired Campaign'),'Delete-available must report affected available rows.');
 $assert(1===count($repo->codes) && 'assigned'===$repo->codes[0]['status'],'Assigned codes must survive delete-available.');
 $assert('pool.available_codes_deleted'===$logs->entries[0]['event_type'],'Delete-available event vocabulary changed.');
+$assert('Retired Campaign'===($logs->entries[0]['context']['pool_name']??''),'Delete-available Activity must preserve the Pool name.');
 $assert(!str_contains(json_encode($logs->entries,JSON_THROW_ON_ERROR),'SECRET-'),'Lifecycle logs must not contain One-Time Code values.');
 $repo=new LifecycleMemoryRepository(); $service=new VoucherManager\Domain\Pool\PoolLifecycleService($repo,new VoucherManager\Domain\Log\OperationalLogger($logs)); $deleted=$service->delete_pool(7,'Retired Campaign');
 $assert(!$repo->pool && []===$repo->codes && []===$repo->imports,'Full deletion must remove pool, codes and imports.'); $assert(2===$deleted['deleted_code_count'] && 2===$deleted['deleted_import_count'],'Full deletion counts must be retained for logging.');
@@ -24,6 +25,7 @@ $events=array_column($logs->entries,'event_type'); $assert(in_array('pool.delete
 $poolEvents=array_values(array_filter($logs->entries,static fn(array $entry):bool=>in_array($entry['event_type'],array('pool.deleted','pool.delete_failed'),true))); $assert('Retired Campaign'===($poolEvents[0]['context']['pool_name']??'') && 'Retired Campaign'===($poolEvents[1]['context']['pool_name']??''),'Full-deletion Activity must preserve the Pool name on success and failure.');
 $admin=file_get_contents($root.'/src/Admin/PoolAdmin.php'); $template=file_get_contents($root.'/templates/admin/pool-danger-zone.php'); $confirmation=file_get_contents($root.'/templates/admin/pool-delete-available-confirmation.php'); $pools=file_get_contents($root.'/templates/admin/pools.php');
 $assert(str_contains($admin,'delete_pool( $id, $pool->name() )'),'Full deletion must capture the Pool name before data removal.');
+$assert(str_contains($admin,'delete_available_codes( $id, $pool->name() )'),'Available-code deletion must capture the Pool name before data removal.');
 $assert(str_contains($admin,'guard( Capabilities::DELETE_POOLS )') && str_contains($admin,'check_admin_referer'),'Destructive admin actions must retain dedicated capability and nonce protection.');
 $assert(str_contains($admin,'guard( Capabilities::MANAGE_POOLS )') && str_contains($admin,'Capabilities::VIEW_INVENTORY'),'Pool viewing, management and deletion must remain separate capability boundaries.');
 $assert(str_contains($pools,'current_user_can( Capabilities::MANAGE_POOLS )') && str_contains($pools,'current_user_can( Capabilities::DELETE_POOLS )'),'Pool actions must be hidden when the current role lacks their dedicated capability.');

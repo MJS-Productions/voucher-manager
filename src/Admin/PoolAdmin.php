@@ -118,8 +118,12 @@ final class PoolAdmin {
 		if ( ! $confirmed ) {
 			$this->redirect_delete_available_confirmation( $id, 'confirmation_required' );
 		}
+		$pool = $this->repository->find( $id );
+		if ( null === $pool ) {
+			$this->redirect_delete_available_confirmation( $id, 'delete_failed' );
+		}
 		try {
-			$deleted = $this->lifecycle->delete_available_codes( $id );
+			$deleted = $this->lifecycle->delete_available_codes( $id, $pool->name() );
 			if ( 0 < $deleted ) {
 				InventoryChangedEvent::dispatch(
 					$id,

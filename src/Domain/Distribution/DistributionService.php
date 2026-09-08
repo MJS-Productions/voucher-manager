@@ -26,7 +26,7 @@ final class DistributionService {
 			$this->log_safely(
 				OperationalEvent::DISTRIBUTION_EMPTY->value,
 				'No available code could be distributed.',
-				array( 'pool_id' => $pool_id )
+				array( 'pool_id' => $pool_id, 'pool_name' => $pool->name() )
 			);
 			return new DistributionResult( false, null, __( 'No available One-Time Codes remain in this pool.', 'mjs-productions-voucher-manager' ), 0 );
 		}

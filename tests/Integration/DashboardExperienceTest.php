@@ -114,11 +114,18 @@ $assert(
 	'Distribution detail should use singular inventory grammar.'
 );
 $assert(
+	'Pool: Amazon Vouchers' === $view->activity_detail(
+		'distribution.empty',
+		array( 'pool_id' => 12, 'pool_name' => 'Amazon Vouchers' )
+	),
+	'Pool-related events should prefer the stored Pool name.'
+);
+$assert(
 	'Pool #12' === $view->activity_detail(
 		'distribution.empty',
 		array( 'pool_id' => 12 )
 	),
-	'Pool-related events should identify the internal pool.'
+	'Legacy Pool-related events should retain the internal Pool ID fallback.'
 );
 
 $assert(
@@ -127,6 +134,13 @@ $assert(
 		array( 'deleted_available_count' => 4, 'code' => 'MUST-NOT-APPEAR' )
 	),
 	'Available-code deletion should show the affected count without exposing One-Time Code values.'
+);
+$assert(
+	'Pool: Campaign Pool' === $view->activity_detail(
+		'pool.available_codes_deleted',
+		array( 'pool_id' => 12, 'pool_name' => 'Campaign Pool' )
+	),
+	'Available-code deletion detail should preserve the Pool name.'
 );
 $assert( 'Pool created' === $view->activity_label( 'pool.created' ), 'Pool creation should have a readable label.' );
 $assert( 'Pool updated' === $view->activity_label( 'pool.updated' ), 'Pool updates should have a readable label.' );

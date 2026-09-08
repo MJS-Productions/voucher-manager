@@ -57,9 +57,6 @@ final class OperationalActivityViewModel {
 				__( 'Retry the administrative action. If it fails again, review the WordPress error log.', 'mjs-productions-voucher-manager' ),
 			'pool.delete_failed' =>
 				__( 'The deletion was rolled back. The pool data should remain intact; retry or review the WordPress error log.', 'mjs-productions-voucher-manager' ),
-			'pool.available_codes_deleted',
-			'pool.deleted' =>
-				__( 'No One-Time Code values were retained in Activity.', 'mjs-productions-voucher-manager' ),
 			default => '',
 		};
 	}
