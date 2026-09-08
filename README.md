@@ -5,10 +5,10 @@ Professional One-Time Code Management for WordPress.
 > Simple for users. Reliable for businesses.
 
 **Status:** Stable Release  
-**Current release:** `1.0.9` — Extension APIs and Capability Foundation
-**Previous release:** `1.0.8` — WordPress 7.1 and Release Hardening
+**Current release:** `1.0.10` — Activity History Context Refinement
+**Previous release:** `1.0.9` — Extension APIs and Capability Foundation
 
-`1.0.9` establishes supported extension APIs and granular Voucher Manager capabilities for extension-driven workflows while preserving administrator-only standalone access. It also improves capability-aware administration, Activity presentation consistency and extension notifications for inventory and Pool warning-threshold changes.
+`1.0.10` improves Activity History context by preserving available Pool names for additional Pool-related events, while retaining the existing Pool ID fallback for legacy and failure entries. It also removes redundant per-event privacy guidance where the global Activity privacy notice already provides that information.
 
 ## Current capabilities
 

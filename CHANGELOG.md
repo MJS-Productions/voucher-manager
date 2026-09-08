@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.0.10 - 2026-09-08 — Activity History Context Refinement
+
+### Changed
+- Improved Activity History context by recording and displaying available Pool names for additional Pool-related events.
+- Kept Activity details concise and on one line.
+- Removed redundant per-event privacy guidance where the global Activity privacy notice already provides that information.
+
+### Fixed
+- Preserved the Pool name when available One-Time Codes are deleted from a Pool.
+- Added the already-loaded Pool name to empty-Distribution Activity context.
+- Preserved the existing Pool ID fallback for legacy and failure entries where a Pool name is not reliably available.
+
+### Validation
+- Added regression coverage for Pool-name context, legacy Pool ID fallback and privacy-guidance presentation.
+- Verified available-code deletion and full Pool deletion in WordPress using the GitHub CI-built artifact.
+
+### Upgrade boundary
+- No database schema migration is required.
+- Existing pools, imports, inventory, Activity history, retention settings and One-Time Codes remain unchanged.
+
 ## 1.0.9 - 2026-09-07 — Extension APIs and Capability Foundation
 
 ### Added

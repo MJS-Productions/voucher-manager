@@ -4,7 +4,7 @@ Tags: one-time codes, voucher codes, unique codes, code import, code pool
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,6 +103,13 @@ Yes. Voucher Manager uses the WordPress localization system and supports transla
 7. Settings for activity retention and uninstall behavior.
 
 == Changelog ==
+
+= 1.0.10 =
+* Improved Activity History context by recording and displaying available Pool names for additional Pool-related events.
+* Preserved the existing Pool ID fallback for legacy and failure entries where a Pool name is not available.
+* Removed redundant per-event privacy guidance while retaining the global Activity privacy notice.
+* Kept Activity details concise and on one line.
+* No database schema migration is required.
 
 = 1.0.9 =
 * Added supported extension APIs for Distribution, Pool and Inventory reads, Activity queries, Activity presentation and Activity retention integration.
