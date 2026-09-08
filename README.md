@@ -39,7 +39,7 @@ Professional One-Time Code Management for WordPress.
 3. Distribute one available code.
 4. Track inventory and operational activity.
 
-MJS-Productions Voucher Manager is a complete product. Voucher Manager PRO adds convenience and advanced workflows without weakening the base plugin.
+MJS-Productions Voucher Manager is a complete product. Voucher Manager Pro adds convenience and advanced workflows without weakening the base plugin.
 
 ## Quality and release process
 
@@ -73,7 +73,7 @@ Official WordPress smoke tests should use the `mjs-productions-voucher-manager.z
 - `docs/` — current technical and experience documentation;
 - `docs/adr/` — architecture decision records;
 - `docs/adr/0032-translation-artifact-integrity.md` — deterministic PO-to-MO build and release boundary;
-- `docs/adr/0033-product-identity.md` — official base-plugin and PRO-extension identity;
+- `docs/adr/0033-product-identity.md` — official base-plugin and Pro-extension identity;
 - `docs/GERMAN_TRANSLATION.md` — approved German terminology, catalog integrity and WordPress language-pack delivery;
 - `docs/INTERNATIONALIZATION_AUDIT.md` — Sprint 9 Part 3.1 runtime string audit and staged localization boundary;
 - `docs/LOCALIZATION_GUIDE.md` — context, placeholder, plural and escaping rules;
