@@ -935,7 +935,7 @@ msgid "Pool updated."
 msgstr "Pool aktualisiert."
 
 #: src/Admin/OperationalActivityViewModel.php:73
-#: src/Admin/PoolAdmin.php:38
+#: src/Admin/PoolAdmin.php:39
 #: templates/admin/dashboard.php:42
 #: templates/admin/pools.php:44
 msgid "Pools"
@@ -1252,7 +1252,7 @@ msgstr "Ja"
 #: src/Admin/ImportAdmin.php:296
 #: src/Admin/InventoryAdmin.php:99
 #: src/Admin/OperationalActivityAdmin.php:34
-#: src/Admin/PoolAdmin.php:146
+#: src/Admin/PoolAdmin.php:147
 #: src/Admin/SettingsAdmin.php:116
 msgid "You are not allowed to access this page."
 msgstr "Du bist leider nicht berechtigt, auf diese Seite zuzugreifen."
