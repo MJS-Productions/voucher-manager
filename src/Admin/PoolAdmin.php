@@ -10,6 +10,7 @@ use VoucherManager\Domain\Log\OperationalLogger;
 use VoucherManager\Domain\Pool\PoolLifecycleService;
 use VoucherManager\Domain\Pool\PoolService;
 use VoucherManager\Extension\InventoryChangedEvent;
+use VoucherManager\Extension\PoolDeletedEvent;
 use VoucherManager\Extension\PoolWarningThresholdChangedEvent;
 use VoucherManager\Infrastructure\WordPress\WpdbLogRepository;
 use VoucherManager\Infrastructure\WordPress\WpdbPoolLifecycleRepository;
@@ -135,7 +136,7 @@ final class PoolAdmin {
 			$this->redirect_delete_available_confirmation( $id, 'delete_failed' );
 		}
 	}
-	public function delete(): void { $this->guard( Capabilities::DELETE_POOLS ); $id = isset( $_POST['pool_id'] ) ? absint( $_POST['pool_id'] ) : 0; check_admin_referer( 'voucher_manager_delete_pool_' . $id ); $pool = $this->repository->find( $id ); $confirmation = isset( $_POST['pool_name_confirmation'] ) ? sanitize_text_field( wp_unslash( $_POST['pool_name_confirmation'] ) ) : ''; if ( null === $pool || $confirmation !== $pool->name() ) { $this->redirect_danger( $id, 'confirmation_failed' ); } try { $this->lifecycle->delete_pool( $id, $pool->name() ); $this->redirect( 'deleted' ); } catch ( Throwable ) { $this->redirect_danger( $id, 'delete_failed' ); } }
+	public function delete(): void { $this->guard( Capabilities::DELETE_POOLS ); $id = isset( $_POST['pool_id'] ) ? absint( $_POST['pool_id'] ) : 0; check_admin_referer( 'voucher_manager_delete_pool_' . $id ); $pool = $this->repository->find( $id ); $confirmation = isset( $_POST['pool_name_confirmation'] ) ? sanitize_text_field( wp_unslash( $_POST['pool_name_confirmation'] ) ) : ''; if ( null === $pool || $confirmation !== $pool->name() ) { $this->redirect_danger( $id, 'confirmation_failed' ); } try { $this->lifecycle->delete_pool( $id, $pool->name() ); PoolDeletedEvent::dispatch( $id ); $this->redirect( 'deleted' ); } catch ( Throwable ) { $this->redirect_danger( $id, 'delete_failed' ); } }
 	private function log_pool_status( int $id, string $name, bool $active ): void {
 		$this->logger->info(
 			$active ? OperationalEvent::POOL_ACTIVATED : OperationalEvent::POOL_DEACTIVATED,
