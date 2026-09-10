@@ -36,7 +36,7 @@ msgstr[1] "%d Einmalcodes"
 
 #. translators: %d: number of imported codes
 #. translators: %d: number of One-Time Codes added by the import
-#: src/Admin/DashboardViewModel.php:146
+#: src/Admin/DashboardViewModel.php:129
 #: templates/admin/import.php:30
 #, php-format
 msgid "%d One-Time Code added"
@@ -45,7 +45,7 @@ msgstr[0] "%d Einmalcode hinzugefügt"
 msgstr[1] "%d Einmalcodes hinzugefügt"
 
 #. translators: %d: number of available One-Time Codes remaining in the pool
-#: src/Admin/DashboardViewModel.php:107
+#: src/Admin/DashboardViewModel.php:90
 #: src/Admin/DistributionViewModel.php:54
 #, php-format
 msgid "Remaining inventory: %d One-Time Code"
@@ -54,9 +54,9 @@ msgstr[0] "Verbleibender Bestand: %d Einmalcode"
 msgstr[1] "Verbleibender Bestand: %d Einmalcodes"
 
 #. translators: %s: Pool name
-#: src/Admin/DashboardViewModel.php:117
-#: src/Admin/DashboardViewModel.php:133
-#: src/Admin/DashboardViewModel.php:166
+#: src/Admin/DashboardViewModel.php:100
+#: src/Admin/DashboardViewModel.php:116
+#: src/Admin/DashboardViewModel.php:155
 #: src/Admin/DistributionViewModel.php:42
 #, php-format
 msgid "Pool: %s"
@@ -71,7 +71,7 @@ msgstr[0] "%d Importeintrag"
 msgstr[1] "%d Importeinträge"
 
 #. translators: %d: number of invalid rows
-#: src/Admin/DashboardViewModel.php:156
+#: src/Admin/DashboardViewModel.php:139
 #, php-format
 msgid "%d invalid"
 msgid_plural "%d invalid"
@@ -103,7 +103,7 @@ msgstr[0] "%d Zeile übersprungen"
 msgstr[1] "%d Zeilen übersprungen"
 
 #. translators: %d: number of skipped rows
-#: src/Admin/DashboardViewModel.php:151
+#: src/Admin/DashboardViewModel.php:134
 #, php-format
 msgid "%d skipped"
 msgid_plural "%d skipped"
@@ -243,7 +243,7 @@ msgstr "Achtung:"
 msgid "Available One-Time Codes"
 msgstr "Verfügbare Einmalcodes"
 
-#: src/Admin/DashboardViewModel.php:57
+#: src/Admin/DashboardViewModel.php:59
 msgid "Available One-Time Codes deleted"
 msgstr "Verfügbare Einmalcodes gelöscht"
 
@@ -404,7 +404,7 @@ msgid "Delete pool and all associated data"
 msgstr "Pool und alle zugehörigen Daten löschen"
 
 #. translators: %d: number of permanently deleted available codes
-#: src/Admin/DashboardViewModel.php:31
+#: src/Admin/DashboardViewModel.php:33
 #, php-format
 msgid "Deleted %d available One-Time Code"
 msgid_plural "Deleted %d available One-Time Codes"
@@ -471,7 +471,7 @@ msgstr "Ausgabe"
 msgid "Distribution could not be completed. Please try again."
 msgstr "Die Ausgabe konnte nicht abgeschlossen werden. Erneut versuchen."
 
-#: src/Admin/DashboardViewModel.php:44
+#: src/Admin/DashboardViewModel.php:46
 msgid "Distribution failed"
 msgstr "Ausgabe fehlgeschlagen"
 
@@ -572,7 +572,7 @@ msgid "Import #%1$d — %2$s"
 msgstr "Import Nr. %1$d — %2$s"
 
 #. translators: %d: internal import ID
-#: src/Admin/DashboardViewModel.php:182
+#: src/Admin/DashboardViewModel.php:171
 #, php-format
 msgid "Import #%d"
 msgstr "Import Nr. %d"
@@ -609,7 +609,7 @@ msgstr "Codes importieren, um die Ausgabe fortzusetzen."
 msgid "Import codes to make this pool ready for distribution."
 msgstr "Codes importieren, um diesen Pool für die Ausgabe vorzubereiten."
 
-#: src/Admin/DashboardViewModel.php:38
+#: src/Admin/DashboardViewModel.php:40
 msgid "Import completed"
 msgstr "Import abgeschlossen"
 
@@ -621,15 +621,15 @@ msgstr "Import abgeschlossen, ohne Codes hinzuzufügen."
 msgid "Import completed."
 msgstr "Import abgeschlossen."
 
-#: src/Admin/DashboardViewModel.php:39
+#: src/Admin/DashboardViewModel.php:41
 msgid "Import failed"
 msgstr "Import fehlgeschlagen"
 
-#: src/Admin/DashboardViewModel.php:41
+#: src/Admin/DashboardViewModel.php:43
 msgid "Import rollback blocked"
 msgstr "Import konnte nicht rückgängig gemacht werden"
 
-#: src/Admin/DashboardViewModel.php:40
+#: src/Admin/DashboardViewModel.php:42
 msgid "Import rolled back"
 msgstr "Import erfolgreich rückgängig gemacht"
 
@@ -783,7 +783,7 @@ msgstr "Benachrichtigungen verwenden diesen Wert in der Pro-Erweiterung."
 msgid "One-Time Code assignment occurs immediately after confirmation."
 msgstr "Der Einmalcode wird unmittelbar nach der Bestätigung ausgegeben."
 
-#: src/Admin/DashboardViewModel.php:42
+#: src/Admin/DashboardViewModel.php:44
 msgid "One-Time Code distributed"
 msgstr "Einmalcode ausgegeben"
 
@@ -851,8 +851,8 @@ msgid "Please enter a pool name."
 msgstr "Einen Poolnamen eingeben."
 
 #. translators: %d: internal pool ID
-#: src/Admin/DashboardViewModel.php:139
-#: src/Admin/DashboardViewModel.php:174
+#: src/Admin/DashboardViewModel.php:122
+#: src/Admin/DashboardViewModel.php:163
 #, php-format
 msgid "Pool #%d"
 msgstr "Pool Nr. %d"
@@ -866,23 +866,23 @@ msgstr "Gefahrenbereich des Pools"
 msgid "Pool Inventory"
 msgstr "Pool-Bestand"
 
-#: src/Admin/DashboardViewModel.php:53
+#: src/Admin/DashboardViewModel.php:55
 msgid "Pool created"
 msgstr "Pool erstellt"
 
-#: src/Admin/DashboardViewModel.php:54
+#: src/Admin/DashboardViewModel.php:56
 msgid "Pool updated"
 msgstr "Pool aktualisiert"
 
-#: src/Admin/DashboardViewModel.php:55
+#: src/Admin/DashboardViewModel.php:57
 msgid "Pool activated"
 msgstr "Pool aktiviert"
 
-#: src/Admin/DashboardViewModel.php:56
+#: src/Admin/DashboardViewModel.php:58
 msgid "Pool deactivated"
 msgstr "Pool deaktiviert"
 
-#: src/Admin/DashboardViewModel.php:58
+#: src/Admin/DashboardViewModel.php:60
 msgid "Pool deleted"
 msgstr "Pool gelöscht"
 
@@ -890,7 +890,7 @@ msgstr "Pool gelöscht"
 msgid "Pool deleted."
 msgstr "Pool gelöscht."
 
-#: src/Admin/DashboardViewModel.php:59
+#: src/Admin/DashboardViewModel.php:61
 msgid "Pool deletion failed"
 msgstr "Das Löschen des Pools fehlgeschlagen"
 
@@ -898,7 +898,7 @@ msgstr "Das Löschen des Pools fehlgeschlagen"
 msgid "Pool deletion failed. The destructive operation was rolled back."
 msgstr "Das Löschen des Pools ist fehlgeschlagen. Der destruktive Vorgang wurde zurückgerollt."
 
-#: src/Admin/DashboardViewModel.php:43
+#: src/Admin/DashboardViewModel.php:45
 msgid "Pool has no available One-Time Codes"
 msgstr "Pool enthält keine verfügbaren Einmalcodes"
 
@@ -1216,7 +1216,7 @@ msgstr "Voucher Manager Dashboard"
 msgid "Voucher Manager Settings"
 msgstr "Voucher Manager Einstellungen"
 
-#: src/Admin/DashboardViewModel.php:60
+#: src/Admin/DashboardViewModel.php:63
 msgid "Voucher Manager activity"
 msgstr "Voucher Manager Aktivität"
 
@@ -1385,23 +1385,23 @@ msgstr "Professionelle Verwaltung von Einmalcodes für WordPress."
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: src/Admin/DashboardViewModel.php:46
+#: src/Admin/DashboardViewModel.php:48
 msgid "Settings updated"
 msgstr "Einstellungen aktualisiert"
 
-#: src/Admin/DashboardViewModel.php:49
+#: src/Admin/DashboardViewModel.php:51
 msgid "Voucher Manager installed"
 msgstr "Voucher Manager installiert"
 
-#: src/Admin/DashboardViewModel.php:50
+#: src/Admin/DashboardViewModel.php:52
 msgid "Voucher Manager activated"
 msgstr "Voucher Manager aktiviert"
 
-#: src/Admin/DashboardViewModel.php:51
+#: src/Admin/DashboardViewModel.php:53
 msgid "Voucher Manager deactivated"
 msgstr "Voucher Manager deaktiviert"
 
-#: src/Admin/DashboardViewModel.php:52
+#: src/Admin/DashboardViewModel.php:54
 msgid "Voucher Manager uninstalled"
 msgstr "Voucher Manager deinstalliert"
 
@@ -1425,14 +1425,14 @@ msgstr "MJS-Productions"
 msgid "https://mjs-productions.com"
 msgstr "https://mjs-productions.com"
 
-#: src/Admin/DashboardViewModel.php:45
+#: src/Admin/DashboardViewModel.php:47
 msgid "Administrative action could not be completed"
 msgstr "Administrative Aktion konnte nicht abgeschlossen werden"
 
-#: src/Admin/DashboardViewModel.php:47
+#: src/Admin/DashboardViewModel.php:49
 msgid "Activity History cleanup completed"
 msgstr "Bereinigung der Aktivitätshistorie abgeschlossen"
 
-#: src/Admin/DashboardViewModel.php:48
+#: src/Admin/DashboardViewModel.php:50
 msgid "Activity History cleanup failed"
 msgstr "Bereinigung der Aktivitätshistorie fehlgeschlagen"
