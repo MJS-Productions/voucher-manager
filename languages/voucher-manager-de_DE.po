@@ -36,7 +36,7 @@ msgstr[1] "%d Einmalcodes"
 
 #. translators: %d: number of imported codes
 #. translators: %d: number of One-Time Codes added by the import
-#: src/Admin/DashboardViewModel.php:129
+#: src/Admin/DashboardViewModel.php:130
 #: templates/admin/import.php:30
 #, php-format
 msgid "%d One-Time Code added"
@@ -45,7 +45,7 @@ msgstr[0] "%d Einmalcode hinzugefügt"
 msgstr[1] "%d Einmalcodes hinzugefügt"
 
 #. translators: %d: number of available One-Time Codes remaining in the pool
-#: src/Admin/DashboardViewModel.php:90
+#: src/Admin/DashboardViewModel.php:91
 #: src/Admin/DistributionViewModel.php:54
 #, php-format
 msgid "Remaining inventory: %d One-Time Code"
@@ -54,9 +54,9 @@ msgstr[0] "Verbleibender Bestand: %d Einmalcode"
 msgstr[1] "Verbleibender Bestand: %d Einmalcodes"
 
 #. translators: %s: Pool name
-#: src/Admin/DashboardViewModel.php:100
-#: src/Admin/DashboardViewModel.php:116
-#: src/Admin/DashboardViewModel.php:155
+#: src/Admin/DashboardViewModel.php:101
+#: src/Admin/DashboardViewModel.php:117
+#: src/Admin/DashboardViewModel.php:156
 #: src/Admin/DistributionViewModel.php:42
 #, php-format
 msgid "Pool: %s"
@@ -71,7 +71,7 @@ msgstr[0] "%d Importeintrag"
 msgstr[1] "%d Importeinträge"
 
 #. translators: %d: number of invalid rows
-#: src/Admin/DashboardViewModel.php:139
+#: src/Admin/DashboardViewModel.php:140
 #, php-format
 msgid "%d invalid"
 msgid_plural "%d invalid"
@@ -103,7 +103,7 @@ msgstr[0] "%d Zeile übersprungen"
 msgstr[1] "%d Zeilen übersprungen"
 
 #. translators: %d: number of skipped rows
-#: src/Admin/DashboardViewModel.php:134
+#: src/Admin/DashboardViewModel.php:135
 #, php-format
 msgid "%d skipped"
 msgid_plural "%d skipped"
@@ -243,7 +243,7 @@ msgstr "Achtung:"
 msgid "Available One-Time Codes"
 msgstr "Verfügbare Einmalcodes"
 
-#: src/Admin/DashboardViewModel.php:59
+#: src/Admin/DashboardViewModel.php:60
 msgid "Available One-Time Codes deleted"
 msgstr "Verfügbare Einmalcodes gelöscht"
 
@@ -572,7 +572,7 @@ msgid "Import #%1$d — %2$s"
 msgstr "Import Nr. %1$d — %2$s"
 
 #. translators: %d: internal import ID
-#: src/Admin/DashboardViewModel.php:171
+#: src/Admin/DashboardViewModel.php:172
 #, php-format
 msgid "Import #%d"
 msgstr "Import Nr. %d"
@@ -747,7 +747,7 @@ msgstr "Keine ausgegebenen Einmalcodes entsprechen diesem Filter."
 msgid "No available One-Time Codes match this filter."
 msgstr "Keine verfügbaren Einmalcodes entsprechen diesem Filter."
 
-#: src/Domain/Distribution/DistributionService.php:31
+#: src/Domain/Distribution/DistributionService.php:33
 msgid "No available One-Time Codes remain in this pool."
 msgstr "In diesem Pool sind keine verfügbaren Einmalcodes mehr vorhanden."
 
@@ -787,7 +787,7 @@ msgstr "Der Einmalcode wird unmittelbar nach der Bestätigung ausgegeben."
 msgid "One-Time Code distributed"
 msgstr "Einmalcode ausgegeben"
 
-#: src/Domain/Distribution/DistributionService.php:49
+#: src/Domain/Distribution/DistributionService.php:62
 msgid "One-Time Code distributed."
 msgstr "Einmalcode ausgegeben."
 
@@ -851,8 +851,8 @@ msgid "Please enter a pool name."
 msgstr "Einen Poolnamen eingeben."
 
 #. translators: %d: internal pool ID
-#: src/Admin/DashboardViewModel.php:122
-#: src/Admin/DashboardViewModel.php:163
+#: src/Admin/DashboardViewModel.php:123
+#: src/Admin/DashboardViewModel.php:164
 #, php-format
 msgid "Pool #%d"
 msgstr "Pool Nr. %d"
@@ -882,7 +882,7 @@ msgstr "Pool aktiviert"
 msgid "Pool deactivated"
 msgstr "Pool deaktiviert"
 
-#: src/Admin/DashboardViewModel.php:60
+#: src/Admin/DashboardViewModel.php:61
 msgid "Pool deleted"
 msgstr "Pool gelöscht"
 
@@ -890,7 +890,7 @@ msgstr "Pool gelöscht"
 msgid "Pool deleted."
 msgstr "Pool gelöscht."
 
-#: src/Admin/DashboardViewModel.php:61
+#: src/Admin/DashboardViewModel.php:62
 msgid "Pool deletion failed"
 msgstr "Das Löschen des Pools fehlgeschlagen"
 
@@ -1216,7 +1216,7 @@ msgstr "Voucher Manager Dashboard"
 msgid "Voucher Manager Settings"
 msgstr "Voucher Manager Einstellungen"
 
-#: src/Admin/DashboardViewModel.php:63
+#: src/Admin/DashboardViewModel.php:64
 msgid "Voucher Manager activity"
 msgstr "Voucher Manager Aktivität"
 
@@ -1436,3 +1436,7 @@ msgstr "Bereinigung der Aktivitätshistorie abgeschlossen"
 #: src/Admin/DashboardViewModel.php:50
 msgid "Activity History cleanup failed"
 msgstr "Bereinigung der Aktivitätshistorie fehlgeschlagen"
+
+#: src/Admin/DashboardViewModel.php:59
+msgid "Pool became empty"
+msgstr "Pool wurde leer"

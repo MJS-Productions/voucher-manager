@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-10T07:03:33+00:00\n"
+"POT-Creation-Date: 2026-09-10T20:23:57+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mjs-productions-voucher-manager\n"
@@ -148,23 +148,27 @@ msgid "Pool deactivated"
 msgstr ""
 
 #: src/Admin/DashboardViewModel.php:59
-msgid "Available One-Time Codes deleted"
+msgid "Pool became empty"
 msgstr ""
 
 #: src/Admin/DashboardViewModel.php:60
-msgid "Pool deleted"
+msgid "Available One-Time Codes deleted"
 msgstr ""
 
 #: src/Admin/DashboardViewModel.php:61
+msgid "Pool deleted"
+msgstr ""
+
+#: src/Admin/DashboardViewModel.php:62
 msgid "Pool deletion failed"
 msgstr ""
 
-#: src/Admin/DashboardViewModel.php:63
+#: src/Admin/DashboardViewModel.php:64
 msgid "Voucher Manager activity"
 msgstr ""
 
 #. translators: %d: number of available One-Time Codes remaining in the pool
-#: src/Admin/DashboardViewModel.php:90
+#: src/Admin/DashboardViewModel.php:91
 #: src/Admin/DistributionViewModel.php:54
 #, php-format
 msgid "Remaining inventory: %d One-Time Code"
@@ -173,24 +177,24 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: Pool name
-#: src/Admin/DashboardViewModel.php:100
-#: src/Admin/DashboardViewModel.php:116
-#: src/Admin/DashboardViewModel.php:155
+#: src/Admin/DashboardViewModel.php:101
+#: src/Admin/DashboardViewModel.php:117
+#: src/Admin/DashboardViewModel.php:156
 #: src/Admin/DistributionViewModel.php:42
 #, php-format
 msgid "Pool: %s"
 msgstr ""
 
 #. translators: %d: internal pool ID
-#: src/Admin/DashboardViewModel.php:122
-#: src/Admin/DashboardViewModel.php:163
+#: src/Admin/DashboardViewModel.php:123
+#: src/Admin/DashboardViewModel.php:164
 #, php-format
 msgid "Pool #%d"
 msgstr ""
 
 #. translators: %d: number of imported codes
 #. translators: %d: number of One-Time Codes added by the import
-#: src/Admin/DashboardViewModel.php:129
+#: src/Admin/DashboardViewModel.php:130
 #: templates/admin/import.php:30
 #, php-format
 msgid "%d One-Time Code added"
@@ -199,7 +203,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of skipped rows
-#: src/Admin/DashboardViewModel.php:134
+#: src/Admin/DashboardViewModel.php:135
 #, php-format
 msgid "%d skipped"
 msgid_plural "%d skipped"
@@ -207,7 +211,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of invalid rows
-#: src/Admin/DashboardViewModel.php:139
+#: src/Admin/DashboardViewModel.php:140
 #, php-format
 msgid "%d invalid"
 msgid_plural "%d invalid"
@@ -215,7 +219,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: internal import ID
-#: src/Admin/DashboardViewModel.php:171
+#: src/Admin/DashboardViewModel.php:172
 #, php-format
 msgid "Import #%d"
 msgstr ""
@@ -558,11 +562,11 @@ msgstr ""
 msgid "Pool is unavailable."
 msgstr ""
 
-#: src/Domain/Distribution/DistributionService.php:31
+#: src/Domain/Distribution/DistributionService.php:33
 msgid "No available One-Time Codes remain in this pool."
 msgstr ""
 
-#: src/Domain/Distribution/DistributionService.php:49
+#: src/Domain/Distribution/DistributionService.php:62
 msgid "One-Time Code distributed."
 msgstr ""
 
