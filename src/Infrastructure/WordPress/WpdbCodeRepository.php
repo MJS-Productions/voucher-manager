@@ -120,8 +120,27 @@ final class WpdbCodeRepository implements CodeRepository {
 				$wpdb->query( 'ROLLBACK' );
 				return null;
 			}
+
+			// Determine the empty transition while the same transactional lock order
+			// is still authoritative. Locking the next available row (or its range
+			// when none exists) serializes competing claims for this Pool without
+			// moving Activity logging into the repository transaction.
+			$next_available_id = $wpdb->get_var(
+				$wpdb->prepare(
+					'SELECT id FROM %i WHERE pool_id = %d AND status = %s ORDER BY id ASC LIMIT 1 FOR UPDATE',
+					$table,
+					$pool_id,
+					CodeStatus::AVAILABLE->value
+				)
+			);
+			$emptied_pool = null === $next_available_id && '' === $wpdb->last_error;
+
 			$wpdb->query( 'COMMIT' );
-			return array( 'id' => (int) $row['id'], 'code' => (string) $row['code'] );
+			return array(
+				'id'           => (int) $row['id'],
+				'code'         => (string) $row['code'],
+				'emptied_pool' => $emptied_pool,
+			);
 		} catch ( \Throwable $exception ) {
 			$wpdb->query( 'ROLLBACK' );
 			throw $exception;

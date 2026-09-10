@@ -37,13 +37,32 @@ final class DistributionApi {
 	public function distribute( int $pool_id ): DistributionResult {
 		$result = $this->service->distribute( $pool_id );
 
+		$this->dispatch_inventory_change( $pool_id, $result );
+
+		return $result;
+	}
+
+	/**
+	 * Distributes while treating an already-empty pool as an expected result.
+	 *
+	 * This preserves successful distribution Activity, including the transition
+	 * when the last available One-Time Code is consumed, while suppressing the
+	 * distribution.empty Activity entry for an already-empty pool.
+	 */
+	public function distribute_with_expected_empty_result( int $pool_id ): DistributionResult {
+		$result = $this->service->distribute( $pool_id, false );
+
+		$this->dispatch_inventory_change( $pool_id, $result );
+
+		return $result;
+	}
+
+	private function dispatch_inventory_change( int $pool_id, DistributionResult $result ): void {
 		if ( $result->success() ) {
 			InventoryChangedEvent::dispatch(
 				$pool_id,
 				InventoryChangedEvent::REASON_DISTRIBUTION
 			);
 		}
-
-		return $result;
 	}
 }

@@ -23,7 +23,7 @@ $assert = static function ( bool $condition, string $message ): void {
 $config = DatabaseConfig::fromEnvironment();
 $pdo    = ( new PdoConnectionFactory() )->create( $config );
 $table  = 'wp_vm_codes';
-$code   = 'Q5-ONLY-ONE-CODE';
+$worker = $root . '/tests/Integration/Fixtures/DistributionAtomicClaimWorker.php';
 
 $pdo->exec( "DROP TABLE IF EXISTS `{$table}`" );
 $pdo->exec(
@@ -45,16 +45,21 @@ $insert = $pdo->prepare(
 	"INSERT INTO `{$table}` (`pool_id`, `import_id`, `code_hash`, `code`, `status`, `imported_at`)
 	 VALUES (:pool_id, NULL, :code_hash, :code, 'available', UTC_TIMESTAMP())"
 );
-$insert->execute(
-	array(
-		'pool_id'   => 1,
-		'code_hash' => hash( 'sha256', $code ),
-		'code'      => $code,
-	)
-);
 
-try {
-	$worker  = $root . '/tests/Integration/Fixtures/DistributionAtomicClaimWorker.php';
+$seed = static function ( array $codes ) use ( $pdo, $table, $insert ): void {
+	$pdo->exec( "TRUNCATE TABLE `{$table}`" );
+	foreach ( $codes as $code ) {
+		$insert->execute(
+			array(
+				'pool_id'   => 1,
+				'code_hash' => hash( 'sha256', $code ),
+				'code'      => $code,
+			)
+		);
+	}
+};
+
+$run_two = static function () use ( $root, $worker, $assert ): array {
 	$runner  = new ConcurrentProcessRunner();
 	$results = $runner->run(
 		array(
@@ -62,7 +67,6 @@ try {
 			array( PHP_BINARY, $worker ),
 		)
 	);
-
 	$assert( 2 === count( $results ), 'Exactly two worker results must be collected.' );
 
 	$payloads = array();
@@ -70,6 +74,13 @@ try {
 		$assert( 0 === $result->exitCode, 'Every worker process must exit successfully. Stderr: ' . trim( $result->stderr ) );
 		$payloads[] = $result->payload;
 	}
+	return $payloads;
+};
+
+try {
+	$single_code = 'Q5-ONLY-ONE-CODE';
+	$seed( array( $single_code ) );
+	$payloads = $run_two();
 
 	$claims = array_values(
 		array_filter(
@@ -86,11 +97,12 @@ try {
 
 	$assert( 1 === count( $claims ), 'Exactly one concurrent worker must claim the only available code.' );
 	$assert( 1 === count( $misses ), 'Exactly one concurrent worker must observe no remaining claim opportunity.' );
-	$assert( $code === ( $claims[0]['code'] ?? null ), 'The successful worker must receive the seeded One-Time Code.' );
+	$assert( $single_code === ( $claims[0]['code'] ?? null ), 'The successful worker must receive the seeded One-Time Code.' );
+	$assert( true === ( $claims[0]['emptied_pool'] ?? false ), 'The only successful one-code claim must identify the Pool-empty transition.' );
 
 	$rows = $pdo->query( "SELECT `id`, `code`, `status`, `assigned_at` FROM `{$table}` ORDER BY `id`" )->fetchAll();
 	$assert( 1 === count( $rows ), 'The test table must still contain exactly one code row.' );
-	$assert( $code === $rows[0]['code'], 'Persistent state must contain the same code returned by the successful worker.' );
+	$assert( $single_code === $rows[0]['code'], 'Persistent state must contain the same code returned by the successful worker.' );
 	$assert( 'assigned' === $rows[0]['status'], 'The only code must be assigned after the competing claims.' );
 	$assert( null !== $rows[0]['assigned_at'], 'The successful claim must persist an assigned timestamp.' );
 
@@ -98,8 +110,37 @@ try {
 	$assigned  = (int) $pdo->query( "SELECT COUNT(*) FROM `{$table}` WHERE `status` = 'assigned'" )->fetchColumn();
 	$assert( 0 === $available, 'No available code may remain after the successful claim.' );
 	$assert( 1 === $assigned, 'Exactly one persistent assigned code must exist after the race.' );
+
+	$two_codes = array( 'Q5-FIRST-OF-TWO', 'Q5-LAST-OF-TWO' );
+	$seed( $two_codes );
+	$payloads = $run_two();
+	$claims = array_values(
+		array_filter(
+			$payloads,
+			static fn ( array $payload ): bool => true === ( $payload['claimed'] ?? false )
+		)
+	);
+	$empty_transitions = array_values(
+		array_filter(
+			$claims,
+			static fn ( array $payload ): bool => true === ( $payload['emptied_pool'] ?? false )
+		)
+	);
+
+	$assert( 2 === count( $claims ), 'Both concurrent workers must claim distinct codes when two are available.' );
+	$assert( 1 === count( $empty_transitions ), 'Exactly one of two concurrent successful claims must identify the Pool-empty transition.' );
+	$claimed_codes = array_map( static fn ( array $payload ): mixed => $payload['code'] ?? null, $claims );
+	sort( $claimed_codes );
+	$expected_codes = $two_codes;
+	sort( $expected_codes );
+	$assert( $expected_codes === $claimed_codes, 'Concurrent successful claims must return both seeded codes exactly once.' );
+
+	$available = (int) $pdo->query( "SELECT COUNT(*) FROM `{$table}` WHERE `status` = 'available'" )->fetchColumn();
+	$assigned  = (int) $pdo->query( "SELECT COUNT(*) FROM `{$table}` WHERE `status` = 'assigned'" )->fetchColumn();
+	$assert( 0 === $available, 'No available code may remain after both successful claims.' );
+	$assert( 2 === $assigned, 'Exactly two persistent assigned codes must exist after the two-code race.' );
 } finally {
 	$pdo->exec( "DROP TABLE IF EXISTS `{$table}`" );
 }
 
-echo "Distribution atomic claim concurrency OK.\n";
+echo "Distribution atomic claim concurrency OK: unique claims and exact Pool-empty transition are protected.\n";

@@ -56,6 +56,7 @@ final class DashboardViewModel {
 			'pool.updated'                 => __( 'Pool updated', 'mjs-productions-voucher-manager' ),
 			'pool.activated'               => __( 'Pool activated', 'mjs-productions-voucher-manager' ),
 			'pool.deactivated'             => __( 'Pool deactivated', 'mjs-productions-voucher-manager' ),
+			'pool.became_empty'            => __( 'Pool became empty', 'mjs-productions-voucher-manager' ),
 			'pool.available_codes_deleted' => __( 'Available One-Time Codes deleted', 'mjs-productions-voucher-manager' ),
 			'pool.deleted'                 => __( 'Pool deleted', 'mjs-productions-voucher-manager' ),
 			'pool.delete_failed'           => __( 'Pool deletion failed', 'mjs-productions-voucher-manager' ),

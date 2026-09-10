@@ -33,6 +33,7 @@ enum OperationalEvent: string {
 	case POOL_UPDATED              = 'pool.updated';
 	case POOL_ACTIVATED            = 'pool.activated';
 	case POOL_DEACTIVATED          = 'pool.deactivated';
+	case POOL_BECAME_EMPTY         = 'pool.became_empty';
 	case POOL_AVAILABLE_CODES_DELETED = 'pool.available_codes_deleted';
 	case POOL_DELETED              = 'pool.deleted';
 	case POOL_DELETE_FAILED        = 'pool.delete_failed';

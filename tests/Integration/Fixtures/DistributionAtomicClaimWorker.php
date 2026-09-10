@@ -57,8 +57,9 @@ $claimed = ( new WpdbCodeRepository() )->claim_next_available( 1 );
 
 $barrier->writeResult(
 	array(
-		'claimed' => null !== $claimed,
-		'id'      => $claimed['id'] ?? null,
-		'code'    => $claimed['code'] ?? null,
+		'claimed'      => null !== $claimed,
+		'id'           => $claimed['id'] ?? null,
+		'code'         => $claimed['code'] ?? null,
+		'emptied_pool' => true === ( $claimed['emptied_pool'] ?? false ),
 	)
 );
