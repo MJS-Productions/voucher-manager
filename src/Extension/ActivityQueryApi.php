@@ -9,27 +9,13 @@ declare(strict_types=1);
 
 namespace VoucherManager\Extension;
 
+use VoucherManager\Activity\ActivityMetadata;
 use VoucherManager\Database\TableStatus;
 
 /**
  * Provides supported read-only access to active Activity History records.
  */
 final class ActivityQueryApi {
-
-	private const ERROR_EVENTS = array(
-		'import.failed',
-		'distribution.failed',
-		'admin.action_failed',
-		'activity.cleanup_failed',
-		'pool.delete_failed',
-	);
-
-	private const WARNING_EVENTS = array(
-		'import.rollback_blocked',
-		'distribution.empty',
-		'pool.available_codes_deleted',
-		'pool.deleted',
-	);
 
 	/**
 	 * Returns one cursor-based batch of active Activity History records.
@@ -62,8 +48,8 @@ final class ActivityQueryApi {
 	): array {
 		global $wpdb;
 
-		$family    = $this->normalize_family( $family );
-		$tone      = $this->normalize_tone( $tone );
+		$family    = ActivityMetadata::normalize_family( $family );
+		$tone      = ActivityMetadata::normalize_filter_tone( $tone );
 		$before_id = max( 0, $before_id );
 		$limit     = min( 1000, max( 1, $limit ) );
 
@@ -95,23 +81,15 @@ final class ActivityQueryApi {
 			$args[]  = $before_id;
 		}
 
-		if ( 'all' !== $family ) {
-			if ( 'admin' === $family ) {
-				$where[] = 'event_type = %s';
-				$args[]  = 'admin.action_failed';
-			} else {
-				$where[] = 'event_type LIKE %s';
-				$args[]  = $wpdb->esc_like( $family ) . '.%';
-			}
-		}
+		$this->add_family_filter( $where, $args, $family );
 
-		$tone_events = $this->events_for_tone( $tone );
+		$tone_events = ActivityMetadata::event_types_for_tone( $tone );
 		if ( array() !== $tone_events ) {
 			$where[] = 'event_type IN (' . implode( ',', array_fill( 0, count( $tone_events ), '%s' ) ) . ')';
 			$args     = array_merge( $args, $tone_events );
 		}
 
-		$where_sql = implode( ' AND ', $where );
+		$where_sql  = implode( ' AND ', $where );
 		$query_args = array_merge( $args, array( $limit + 1 ) );
 
 		$sql = "SELECT id, event_type, message, context, created_at
@@ -159,37 +137,35 @@ final class ActivityQueryApi {
 		);
 	}
 
-	private function normalize_family( string $family ): string {
-		return in_array( $family, array( 'all', 'import', 'distribution', 'pool', 'settings', 'admin' ), true )
-			? $family
-			: 'all';
-	}
-
-	private function normalize_tone( string $tone ): string {
-		return in_array( $tone, array( 'all', 'success', 'warning', 'error' ), true )
-			? $tone
-			: 'all';
-	}
 
 	/**
-	 * @return array<string>
+	 * Add the existing core family filter plus explicitly registered extension events.
+	 *
+	 * @param array<int,string> $where SQL clauses.
+	 * @param array<int,string> $args  Prepared SQL arguments.
 	 */
-	private function events_for_tone( string $tone ): array {
-		return match ( $tone ) {
-			'error'   => self::ERROR_EVENTS,
-			'warning' => self::WARNING_EVENTS,
-			'success' => array(
-				'import.completed',
-				'import.rolled_back',
-				'distribution.completed',
-				'settings.updated',
-				'activity.cleanup_completed',
-				'pool.created',
-				'pool.updated',
-				'pool.activated',
-				'pool.deactivated',
-			),
-			default   => array(),
-		};
+	private function add_family_filter( array &$where, array &$args, string $family ): void {
+		global $wpdb;
+
+		if ( 'all' === $family ) {
+			return;
+		}
+
+		$filter = ActivityMetadata::family_filter( $family );
+		$parts  = array();
+
+		if ( null !== $filter['prefix'] ) {
+			$parts[] = 'event_type LIKE %s';
+			$args[]  = $wpdb->esc_like( $filter['prefix'] ) . '%';
+		}
+
+		if ( array() !== $filter['event_types'] ) {
+			$parts[] = 'event_type IN (' . implode( ',', array_fill( 0, count( $filter['event_types'] ), '%s' ) ) . ')';
+			$args     = array_merge( $args, $filter['event_types'] );
+		}
+
+		if ( array() !== $parts ) {
+			$where[] = '(' . implode( ' OR ', $parts ) . ')';
+		}
 	}
 }

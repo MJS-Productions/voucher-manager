@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace VoucherManager\Admin;
 
+use VoucherManager\Activity\ActivityMetadata;
+
 /**
  * Converts operational event names into human-readable dashboard content.
  */
@@ -57,7 +59,8 @@ final class DashboardViewModel {
 			'pool.available_codes_deleted' => __( 'Available One-Time Codes deleted', 'mjs-productions-voucher-manager' ),
 			'pool.deleted'                 => __( 'Pool deleted', 'mjs-productions-voucher-manager' ),
 			'pool.delete_failed'           => __( 'Pool deletion failed', 'mjs-productions-voucher-manager' ),
-			default                        => '' !== trim( $event_type ) ? $event_type : __( 'Voucher Manager activity', 'mjs-productions-voucher-manager' ),
+			default                        => ActivityMetadata::extension_label( $event_type, $context )
+				?? ( '' !== trim( $event_type ) ? $event_type : __( 'Voucher Manager activity', 'mjs-productions-voucher-manager' ) ),
 		};
 	}
 
@@ -65,27 +68,7 @@ final class DashboardViewModel {
 	 * Return the visual tone for an operational event.
 	 */
 	public function activity_tone( string $event_type ): string {
-		return match ( $event_type ) {
-			'import.completed',
-			'import.rolled_back',
-			'distribution.completed',
-			'settings.updated',
-			'activity.cleanup_completed',
-			'pool.created',
-			'pool.updated',
-			'pool.activated',
-			'pool.deactivated' => 'success',
-			'distribution.empty',
-			'import.rollback_blocked',
-			'pool.available_codes_deleted',
-			'pool.deleted' => 'warning',
-			'import.failed',
-			'distribution.failed',
-			'admin.action_failed',
-			'activity.cleanup_failed',
-			'pool.delete_failed' => 'error',
-			default => 'neutral',
-		};
+		return ActivityMetadata::tone( $event_type );
 	}
 
 	/**
@@ -158,6 +141,12 @@ final class DashboardViewModel {
 			);
 
 			return implode( ' · ', $parts );
+		}
+
+		$extension_detail = ActivityMetadata::extension_detail( $event_type, $context );
+
+		if ( null !== $extension_detail ) {
+			return $extension_detail;
 		}
 
 		if ( '' !== $pool_name ) {

@@ -9,27 +9,13 @@ declare(strict_types=1);
 
 namespace VoucherManager\Admin;
 
+use VoucherManager\Activity\ActivityMetadata;
 use VoucherManager\Database\TableStatus;
 
 /**
  * Loads a filtered, paginated operational event history.
  */
 final class OperationalActivityData {
-
-	private const ERROR_EVENTS = array(
-		'import.failed',
-		'distribution.failed',
-		'admin.action_failed',
-		'activity.cleanup_failed',
-		'pool.delete_failed',
-	);
-
-	private const WARNING_EVENTS = array(
-		'import.rollback_blocked',
-		'distribution.empty',
-		'pool.available_codes_deleted',
-		'pool.deleted',
-	);
 
 	/**
 	 * @return array{
@@ -68,17 +54,9 @@ final class OperationalActivityData {
 		$where = array( '1=1' );
 		$args  = array();
 
-		if ( 'all' !== $family ) {
-			if ( 'admin' === $family ) {
-				$where[] = 'event_type = %s';
-				$args[]  = 'admin.action_failed';
-			} else {
-				$where[] = 'event_type LIKE %s';
-				$args[]  = $wpdb->esc_like( $family ) . '.%';
-			}
-		}
+		$this->add_family_filter( $where, $args, $family );
 
-		$tone_events = $this->events_for_tone( $tone );
+		$tone_events = ActivityMetadata::event_types_for_tone( $tone );
 		if ( array() !== $tone_events ) {
 			$where[] = 'event_type IN (' . implode( ',', array_fill( 0, count( $tone_events ), '%s' ) ) . ')';
 			$args     = array_merge( $args, $tone_events );
@@ -116,9 +94,11 @@ final class OperationalActivityData {
 			);
 		}
 
-		$all_count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$error     = $this->count_events( $table, self::ERROR_EVENTS );
-		$attention = $this->count_events( $table, array_merge( self::ERROR_EVENTS, self::WARNING_EVENTS ) );
+		$error_events   = ActivityMetadata::event_types_for_tone( 'error' );
+		$warning_events = ActivityMetadata::event_types_for_tone( 'warning' );
+		$all_count      = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$error          = $this->count_events( $table, $error_events );
+		$attention      = $this->count_events( $table, array_merge( $error_events, $warning_events ) );
 
 		return array(
 			'events'   => $events,
@@ -131,36 +111,44 @@ final class OperationalActivityData {
 		);
 	}
 
+
 	private function normalize_family( string $family ): string {
-		return in_array( $family, array( 'all', 'import', 'distribution', 'pool', 'settings', 'admin' ), true )
-			? $family
-			: 'all';
+		return ActivityMetadata::normalize_family( $family );
 	}
 
 	private function normalize_tone( string $tone ): string {
-		return in_array( $tone, array( 'all', 'success', 'warning', 'error' ), true )
-			? $tone
-			: 'all';
+		return ActivityMetadata::normalize_filter_tone( $tone );
 	}
 
-	/** @return array<string> */
-	private function events_for_tone( string $tone ): array {
-		return match ( $tone ) {
-			'error'   => self::ERROR_EVENTS,
-			'warning' => self::WARNING_EVENTS,
-			'success' => array(
-				'import.completed',
-				'import.rolled_back',
-				'distribution.completed',
-				'settings.updated',
-				'activity.cleanup_completed',
-				'pool.created',
-				'pool.updated',
-				'pool.activated',
-				'pool.deactivated',
-			),
-			default   => array(),
-		};
+	/**
+	 * Add the existing core family filter plus explicitly registered extension events.
+	 *
+	 * @param array<int,string> $where SQL clauses.
+	 * @param array<int,string> $args  Prepared SQL arguments.
+	 */
+	private function add_family_filter( array &$where, array &$args, string $family ): void {
+		global $wpdb;
+
+		if ( 'all' === $family ) {
+			return;
+		}
+
+		$filter = ActivityMetadata::family_filter( $family );
+		$parts  = array();
+
+		if ( null !== $filter['prefix'] ) {
+			$parts[] = 'event_type LIKE %s';
+			$args[]  = $wpdb->esc_like( $filter['prefix'] ) . '%';
+		}
+
+		if ( array() !== $filter['event_types'] ) {
+			$parts[] = 'event_type IN (' . implode( ',', array_fill( 0, count( $filter['event_types'] ), '%s' ) ) . ')';
+			$args     = array_merge( $args, $filter['event_types'] );
+		}
+
+		if ( array() !== $parts ) {
+			$where[] = '(' . implode( ' OR ', $parts ) . ')';
+		}
 	}
 
 	/**
@@ -168,6 +156,10 @@ final class OperationalActivityData {
 	 */
 	private function count_events( string $table, array $events ): int {
 		global $wpdb;
+
+		if ( array() === $events ) {
+			return 0;
+		}
 
 		$placeholders = implode( ',', array_fill( 0, count( $events ), '%s' ) );
 		$sql          = "SELECT COUNT(*) FROM {$table} WHERE event_type IN ({$placeholders})";

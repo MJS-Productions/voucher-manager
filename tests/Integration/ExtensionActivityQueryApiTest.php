@@ -17,6 +17,7 @@ $assert = static function ( bool $condition, string $message ): void {
 
 $api      = file_get_contents( $root . '/src/Extension/ActivityQueryApi.php' );
 $activity = file_get_contents( $root . '/src/Admin/OperationalActivityData.php' );
+$metadata = file_get_contents( $root . '/src/Activity/ActivityMetadata.php' );
 $composer = file_get_contents( $root . '/composer.json' );
 
 $assert( is_string( $api ), 'ActivityQueryApi.php must exist.' );
@@ -37,7 +38,7 @@ $assert(
 );
 
 $assert(
-	str_contains( $api, "id < %d" )
+	str_contains( $api, 'id < %d' )
 	&& str_contains( $api, 'ORDER BY id DESC' )
 	&& str_contains( $api, '$limit + 1' )
 	&& str_contains( $api, "'has_more'" )
@@ -54,45 +55,40 @@ $assert(
 
 $assert(
 	is_string( $activity )
-	&& str_contains( $activity, "array( 'all', 'import', 'distribution', 'pool', 'settings', 'admin' )" )
-	&& str_contains( $api, "array( 'all', 'import', 'distribution', 'pool', 'settings', 'admin' )" ),
-	'The extension API must preserve the current Activity family filter semantics.'
+	&& is_string( $metadata )
+	&& str_contains( $activity, 'use VoucherManager\\Activity\\ActivityMetadata;' )
+	&& str_contains( $api, 'use VoucherManager\\Activity\\ActivityMetadata;' )
+	&& str_contains( $activity, 'ActivityMetadata::family_filter( $family )' )
+	&& str_contains( $api, 'ActivityMetadata::family_filter( $family )' )
+	&& str_contains( $activity, 'ActivityMetadata::event_types_for_tone( $tone )' )
+	&& str_contains( $api, 'ActivityMetadata::event_types_for_tone( $tone )' ),
+	'The active Activity UI and public query API must consume the same extension classification source.'
 );
 
-foreach (
-	array(
-		'import.failed',
-		'distribution.failed',
-		'admin.action_failed',
-		'activity.cleanup_failed',
-		'pool.delete_failed',
-		'import.rollback_blocked',
-		'distribution.empty',
-		'pool.available_codes_deleted',
-		'pool.deleted',
-		'import.completed',
-		'import.rolled_back',
-		'distribution.completed',
-		'settings.updated',
-		'activity.cleanup_completed',
-		'pool.created',
-		'pool.updated',
-		'pool.activated',
-		'pool.deactivated',
-	) as $event
-) {
-	$assert(
-		str_contains( $activity, "'" . $event . "'" )
-		&& str_contains( $api, "'" . $event . "'" ),
-		'The extension API must preserve Activity tone semantics for ' . $event . '.'
-	);
-}
+$assert(
+	str_contains( $activity, "\$wpdb->esc_like( \$filter['prefix'] ) . '%'" )
+	&& str_contains( $api, "\$wpdb->esc_like( \$filter['prefix'] ) . '%'" )
+	&& str_contains( $metadata, "'admin.action_failed'" )
+	&& str_contains( $metadata, "'prefix'      => 'admin' === \$family ? null : \$family . '.'" ),
+	'Existing core family-prefix and administration filter semantics must remain centralized and intact.'
+);
+
+$assert(
+	! str_contains( $activity, 'private const ERROR_EVENTS' )
+	&& ! str_contains( $activity, 'private const WARNING_EVENTS' )
+	&& ! str_contains( $api, 'private const ERROR_EVENTS' )
+	&& ! str_contains( $api, 'private const WARNING_EVENTS' )
+	&& str_contains( $metadata, "'distribution.failed'" )
+	&& str_contains( $metadata, "'pool.deleted'" )
+	&& str_contains( $metadata, "'distribution.completed'" ),
+	'Core outcome classification must no longer be duplicated between the active UI and query API.'
+);
 
 $assert(
 	is_string( $composer )
 	&& str_contains( $composer, '"test:extension-activity-query-api": "php tests/Integration/ExtensionActivityQueryApiTest.php"' )
 	&& str_contains( $composer, '"@test:extension-activity-query-api"' ),
-	'The extension Activity query API test must be registered in the quality gate.'
+	'The extension Activity query API test must remain registered in the quality gate.'
 );
 
 echo "Extension Activity query API contract OK.\n";

@@ -87,6 +87,7 @@ $repository      = file_get_contents( $root . '/src/Infrastructure/WordPress/WpS
 $template_source = file_get_contents( $root . '/templates/admin/settings.php' );
 $activity_source = file_get_contents( $root . '/templates/admin/activity.php' );
 $activity_data   = file_get_contents( $root . '/src/Admin/OperationalActivityData.php' );
+$activity_meta   = file_get_contents( $root . '/src/Activity/ActivityMetadata.php' );
 $activity_view   = file_get_contents( $root . '/src/Admin/OperationalActivityViewModel.php' );
 $root_admin      = file_get_contents( $root . '/src/Admin/Admin.php' );
 $uninstall       = file_get_contents( $root . '/uninstall.php' );
@@ -130,11 +131,15 @@ $assert(
 	is_string( $activity_source )
 	&& str_contains( $activity_source, "'settings'" )
 	&& is_string( $activity_data )
-	&& str_contains( $activity_data, "'settings.updated'" )
-	&& str_contains( $activity_data, "'settings'" )
+	&& str_contains( $activity_data, 'ActivityMetadata::event_types_for_tone' )
+	&& str_contains( $activity_data, 'ActivityMetadata::family_filter( $family )' )
+	&& is_string( $activity_meta )
+	&& str_contains( $activity_meta, "'settings.updated'" )
+	&& str_contains( $activity_meta, "'family' => 'settings'" )
+	&& str_contains( $activity_meta, "'tone' => 'success'" )
 	&& is_string( $activity_view )
 	&& str_contains( $activity_view, "'settings'     => __( 'Settings'" ),
-	'Settings Activity must be selectable as its own family and participate in success filtering.'
+	'Settings Activity must remain selectable as its own family and participate in shared success classification.'
 );
 
 $assert(

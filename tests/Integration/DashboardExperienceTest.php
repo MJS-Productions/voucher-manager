@@ -28,7 +28,6 @@ if ( ! function_exists( 'esc_html_x' ) ) {
 	}
 }
 
-
 if ( ! function_exists( '_n' ) ) {
 	function _n(
 		string $single,
@@ -209,7 +208,6 @@ $assert(
 	'Unknown events should preserve their technical identifier.'
 );
 
-
 $data_source = file_get_contents( $root . '/src/Admin/DashboardData.php' );
 $assert(
 	is_string( $data_source )
@@ -218,10 +216,11 @@ $assert(
 	'Dashboard data loading must preserve dots in stable event names.'
 );
 
-$admin_source = file_get_contents( $root . '/src/Admin/Admin.php' );
-$pool_admin_source = file_get_contents( $root . '/src/Admin/PoolAdmin.php' );
-$activity_data_source = file_get_contents( $root . '/src/Admin/OperationalActivityData.php' );
-$template_source = file_get_contents( $root . '/templates/admin/dashboard.php' );
+$admin_source          = file_get_contents( $root . '/src/Admin/Admin.php' );
+$pool_admin_source     = file_get_contents( $root . '/src/Admin/PoolAdmin.php' );
+$activity_data_source  = file_get_contents( $root . '/src/Admin/OperationalActivityData.php' );
+$activity_meta_source  = file_get_contents( $root . '/src/Activity/ActivityMetadata.php' );
+$template_source       = file_get_contents( $root . '/templates/admin/dashboard.php' );
 
 $assert(
 	is_string( $pool_admin_source )
@@ -234,15 +233,16 @@ $assert(
 );
 $assert(
 	is_string( $activity_data_source )
-	&& str_contains( $activity_data_source, "'settings.updated'" )
-	&& str_contains( $activity_data_source, "'activity.cleanup_completed'" )
-	&& str_contains( $activity_data_source, "'activity.cleanup_failed'" )
-	&& str_contains( $activity_data_source, "'settings'" )
-	&& str_contains( $activity_data_source, "'pool.created'" )
-	&& str_contains( $activity_data_source, "'pool.updated'" )
-	&& str_contains( $activity_data_source, "'pool.activated'" )
-	&& str_contains( $activity_data_source, "'pool.deactivated'" ),
-	'Settings, maintenance and Pool lifecycle events must participate in Activity outcome filtering.'
+	&& is_string( $activity_meta_source )
+	&& str_contains( $activity_data_source, 'ActivityMetadata::event_types_for_tone' )
+	&& str_contains( $activity_meta_source, "'settings.updated'" )
+	&& str_contains( $activity_meta_source, "'activity.cleanup_completed'" )
+	&& str_contains( $activity_meta_source, "'activity.cleanup_failed'" )
+	&& str_contains( $activity_meta_source, "'pool.created'" )
+	&& str_contains( $activity_meta_source, "'pool.updated'" )
+	&& str_contains( $activity_meta_source, "'pool.activated'" )
+	&& str_contains( $activity_meta_source, "'pool.deactivated'" ),
+	'Settings, maintenance and Pool lifecycle events must participate in shared Activity outcome classification.'
 );
 $assert(
 	is_string( $admin_source ) && str_contains( $admin_source, "__( 'Dashboard', 'mjs-productions-voucher-manager' )" ),
