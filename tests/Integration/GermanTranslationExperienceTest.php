@@ -17,15 +17,12 @@ $assert = static function ( bool $condition, string $message ): void {
 
 $pot_path = $root . '/languages/voucher-manager.pot';
 $po_path  = $root . '/languages/voucher-manager-de_DE.po';
-$mo_path  = $root . '/languages/voucher-manager-de_DE.mo';
 
 $assert( is_readable( $pot_path ), 'POT source catalog must exist.' );
 $assert( is_readable( $po_path ), 'German PO catalog must exist.' );
-$assert( is_readable( $mo_path ) && 0 < filesize( $mo_path ), 'Compiled German MO catalog must exist.' );
 
 $pot = file_get_contents( $pot_path );
 $po  = file_get_contents( $po_path );
-$mo  = file_get_contents( $mo_path );
 
 $assert(
 	is_string( $pot )
@@ -96,10 +93,8 @@ $assert(
 );
 
 $assert(
-	is_string( $mo )
-	&& 4 <= strlen( $mo )
-	&& "\xDE\x12\x04\x95" === substr( $mo, 0, 4 ),
-	'German MO must use the valid little-endian GNU gettext magic header.'
+	! file_exists( $root . '/languages/voucher-manager-de_DE.mo' ),
+	'Compiled German MO catalog must not be tracked by Voucher Manager.'
 );
 
 $plugin = file_get_contents( $root . '/src/Core/Plugin.php' );
@@ -125,4 +120,4 @@ $assert(
 	'German Translation Experience coverage must run before build.'
 );
 
-echo "German translation experience OK: complete de_DE PO/MO, glossary, plurals and WordPress language-pack delivery boundary verified.\n";
+echo "German translation experience OK: complete de_DE PO, glossary, plurals and WordPress language-pack delivery boundary verified.\n";
