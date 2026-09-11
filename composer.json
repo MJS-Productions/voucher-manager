@@ -129,7 +129,7 @@
   "repositories": [{
     "name": "mjs-quality",
     "type": "vcs",
-    "url": "https://github.com/MJS-Productions/mjs-quality.git"
+    "url": "https://github.com/MJS-Productions/toolkit.git"
   }],
   "require-dev": {
     "mjs-productions/mjs-quality": "v0.2.1"
