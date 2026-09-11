@@ -46,6 +46,5 @@ jobs:
           path: |
             languages/voucher-manager.pot
             languages/voucher-manager-de_DE.po
-            languages/voucher-manager-de_DE.mo
           if-no-files-found: error
           retention-days: 14

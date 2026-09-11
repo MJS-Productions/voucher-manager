@@ -132,6 +132,6 @@
     "url": "https://github.com/MJS-Productions/toolkit.git"
   }],
   "require-dev": {
-    "mjs-productions/mjs-quality": "v0.2.1"
+    "mjs-productions/mjs-quality": "v0.3.0"
   }
 }

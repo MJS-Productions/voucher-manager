@@ -17,6 +17,7 @@ $config = new LocalizationConfig(
     poFiles: [
         'languages/voucher-manager-de_DE.po',
     ],
+    generateMoFiles: false,
 );
 
 $command = $argv[1] ?? 'update';

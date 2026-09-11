@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "973820c60564a8a23a04ba8f89d191bc",
+    "content-hash": "9e36265f445cf96257f3e661779475e5",
     "packages": [],
     "packages-dev": [
         {
             "name": "mjs-productions/mjs-quality",
-            "version": "v0.2.1",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:MJS-Productions/toolkit.git",
-                "reference": "3cf0961c027313a97879c4c3b7fbbfb20cea0135"
+                "reference": "987ee352159cf553890be0f8ac5cac173642d4fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MJS-Productions/toolkit/zipball/3cf0961c027313a97879c4c3b7fbbfb20cea0135",
-                "reference": "3cf0961c027313a97879c4c3b7fbbfb20cea0135",
+                "url": "https://api.github.com/repos/MJS-Productions/toolkit/zipball/987ee352159cf553890be0f8ac5cac173642d4fb",
+                "reference": "987ee352159cf553890be0f8ac5cac173642d4fb",
                 "shasum": ""
             },
             "require": {
@@ -60,12 +60,12 @@
             "license": [
                 "proprietary"
             ],
-            "description": "Shared WordPress engineering and quality infrastructure for MJS-Productions products.",
+            "description": "Shared software engineering and quality infrastructure for MJS-Productions products.",
             "support": {
-                "source": "https://github.com/MJS-Productions/toolkit/tree/v0.2.1",
+                "source": "https://github.com/MJS-Productions/toolkit/tree/v0.3.0",
                 "issues": "https://github.com/MJS-Productions/toolkit/issues"
             },
-            "time": "2026-08-28T16:23:21+00:00"
+            "time": "2026-09-11T08:57:30+00:00"
         }
     ],
     "aliases": [],

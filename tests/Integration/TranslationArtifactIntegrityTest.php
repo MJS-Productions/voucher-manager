@@ -17,16 +17,13 @@ $assert = static function ( bool $condition, string $message ): void {
 
 $potPath      = $root . '/languages/voucher-manager.pot';
 $poPath       = $root . '/languages/voucher-manager-de_DE.po';
-$moPath       = $root . '/languages/voucher-manager-de_DE.mo';
 $localization = $root . '/tools/localization.php';
 
 $assert( is_readable( $potPath ), 'POT catalog must exist.' );
 $assert( is_readable( $poPath ), 'PO catalog must exist.' );
-$assert( is_readable( $moPath ), 'MO catalog must exist.' );
 $assert( is_readable( $localization ), 'Shared-localization consumer adapter must exist.' );
 
 $po = file_get_contents( $poPath );
-$mo = file_get_contents( $moPath );
 
 $assert(
 	is_string( $po )
@@ -35,74 +32,12 @@ $assert(
 	'German PO metadata must remain valid.'
 );
 
-$assert(
-	is_string( $mo )
-	&& 28 <= strlen( $mo )
-	&& "\xDE\x12\x04\x95" === substr( $mo, 0, 4 ),
-	'MO must use the little-endian GNU gettext format.'
-);
-
-$header = unpack(
-	'Vmagic/Vrevision/Vcount/Voriginal/Vtranslation/VhashSize/VhashOffset',
-	substr( $mo, 0, 28 )
-);
+$localizationSource = file_get_contents( $localization );
 
 $assert(
-	is_array( $header )
-	&& 0x950412de === $header['magic']
-	&& 0 === $header['revision'],
-	'MO header must be readable and use revision zero.'
-);
-
-$poLines        = preg_split( '/\R/', $po ) ?: array();
-$catalogKeys    = array();
-$currentId      = null;
-$currentPlural  = null;
-$currentContext = null;
-
-$flushKey = static function () use (
-	&$catalogKeys,
-	&$currentId,
-	&$currentPlural,
-	&$currentContext
-): void {
-	if ( null !== $currentId ) {
-		$catalogKeys[
-			(string) $currentContext
-			. "\x04"
-			. $currentId
-			. "\x00"
-			. (string) $currentPlural
-		] = true;
-	}
-
-	$currentId      = null;
-	$currentPlural  = null;
-	$currentContext = null;
-};
-
-foreach ( $poLines as $line ) {
-	$line = trim( $line );
-
-	if ( '' === $line ) {
-		$flushKey();
-		continue;
-	}
-
-	if ( str_starts_with( $line, 'msgctxt "' ) ) {
-		$currentContext = stripcslashes( substr( $line, 9, -1 ) );
-	} elseif ( str_starts_with( $line, 'msgid_plural "' ) ) {
-		$currentPlural = stripcslashes( substr( $line, 14, -1 ) );
-	} elseif ( str_starts_with( $line, 'msgid "' ) ) {
-		$currentId = stripcslashes( substr( $line, 7, -1 ) );
-	}
-}
-
-$flushKey();
-
-$assert(
-	count( $catalogKeys ) === $header['count'],
-	'MO entry count must equal the unique PO catalog keys, including metadata.'
+	is_string( $localizationSource )
+	&& str_contains( $localizationSource, 'generateMoFiles: false' ),
+	'Voucher Manager localization must explicitly disable MO generation.'
 );
 
 $composer = file_get_contents( $root . '/composer.json' );
@@ -144,4 +79,4 @@ $assert(
 	'GitHub Actions must provide a dedicated Localization quality job.'
 );
 
-echo "Translation artifact integrity OK: catalogs, shared Localization integration and CI gates verified.\n";
+echo "Translation artifact integrity OK: POT/PO catalogs, PO-only shared Localization integration and CI gates verified.\n";
